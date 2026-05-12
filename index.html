@@ -18,23 +18,7 @@
 <div id="screen-loading" class="screen screen-loading">
   <div class="loading-container">
     <div class="loading-logo">
-      <!-- UOS crest (replace src with official logo image if available) -->
-      <svg class="logo-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-label="수원대학교 로고">
-        <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(200,149,42,.25)" stroke-width="1.5"/>
-        <circle cx="60" cy="60" r="48" fill="none" stroke="#C8952A" stroke-width="2"/>
-        <circle cx="60" cy="60" r="42" fill="none" stroke="rgba(200,149,42,.35)" stroke-width="1"/>
-        <!-- Pegasus / 천마 simplified silhouette -->
-        <path d="M52 74 Q56 60 60 54 Q64 60 68 74" fill="none" stroke="#C8952A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M54 62 Q44 52 34 56" fill="none" stroke="#C8952A" stroke-width="2" stroke-linecap="round"/>
-        <path d="M66 62 Q76 52 86 56" fill="none" stroke="#C8952A" stroke-width="2" stroke-linecap="round"/>
-        <path d="M54 62 Q46 55 38 58" fill="none" stroke="#C8952A" stroke-width="1.2" stroke-linecap="round"/>
-        <path d="M66 62 Q74 55 82 58" fill="none" stroke="#C8952A" stroke-width="1.2" stroke-linecap="round"/>
-        <circle cx="60" cy="29" r="2.5" fill="#C8952A"/>
-        <circle cx="44" cy="37" r="1.5" fill="#C8952A" opacity=".7"/>
-        <circle cx="76" cy="37" r="1.5" fill="#C8952A" opacity=".7"/>
-        <!-- UOS text inside circle -->
-        <text x="60" y="92" text-anchor="middle" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#C8952A" letter-spacing="3">UOS</text>
-      </svg>
+      <img src="assets/f_logo.png" class="logo-img" alt="수원대학교 로고">
       <div class="loading-uni-name">수원대학교</div>
       <div class="loading-uni-en">UNIVERSITY OF SUWON</div>
     </div>
@@ -51,17 +35,7 @@
 <div id="screen-language" class="screen screen-language screen-hidden">
   <div class="lang-page-header">
     <div class="lang-page-logo">
-      <svg class="logo-svg-sm" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(200,149,42,.25)" stroke-width="1.5"/>
-        <circle cx="60" cy="60" r="48" fill="none" stroke="#C8952A" stroke-width="2"/>
-        <path d="M52 74 Q56 60 60 54 Q64 60 68 74" fill="none" stroke="#C8952A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M54 62 Q44 52 34 56" fill="none" stroke="#C8952A" stroke-width="2" stroke-linecap="round"/>
-        <path d="M66 62 Q76 52 86 56" fill="none" stroke="#C8952A" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="60" cy="29" r="2.5" fill="#C8952A"/>
-        <circle cx="44" cy="37" r="1.5" fill="#C8952A" opacity=".7"/>
-        <circle cx="76" cy="37" r="1.5" fill="#C8952A" opacity=".7"/>
-        <text x="60" y="92" text-anchor="middle" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#C8952A" letter-spacing="3">UOS</text>
-      </svg>
+      <img src="assets/f_logo.png" class="logo-img-sm" alt="수원대학교">
       <div class="lang-page-uni-name">수원대학교</div>
       <div class="lang-page-uni-en">UNIVERSITY OF SUWON</div>
     </div>
@@ -111,21 +85,8 @@
   <header class="header" id="mainHeader">
     <div class="header-inner">
       <div class="header-logo" role="banner">
-        <svg class="header-logo-icon" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(0,45,114,.2)" stroke-width="1.5"/>
-          <circle cx="60" cy="60" r="48" fill="none" stroke="#002D72" stroke-width="2"/>
-          <path d="M52 74 Q56 60 60 54 Q64 60 68 74" fill="none" stroke="#002D72" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M54 62 Q44 52 34 56" fill="none" stroke="#002D72" stroke-width="2" stroke-linecap="round"/>
-          <path d="M66 62 Q76 52 86 56" fill="none" stroke="#002D72" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="60" cy="29" r="2.5" fill="#002D72"/>
-          <circle cx="44" cy="37" r="1.5" fill="#002D72" opacity=".5"/>
-          <circle cx="76" cy="37" r="1.5" fill="#002D72" opacity=".5"/>
-          <text x="60" y="92" text-anchor="middle" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#002D72" letter-spacing="3">UOS</text>
-        </svg>
-        <div class="header-title">
-          <span class="header-uni-ko">수원대학교</span>
-          <span class="header-uni-en">International Portal</span>
-        </div>
+        <img src="assets/logo3.png" class="header-logo-img" alt="수원대학교">
+        <span class="header-portal-label">International Portal</span>
       </div>
 
       <div class="header-actions">
@@ -355,7 +316,9 @@
   <div id="chatWindow" class="chat-window hidden" role="dialog" aria-label="천마 도우미 챗봇">
     <div class="chat-header">
       <div class="chat-header-left">
-        <div class="chat-avatar" aria-hidden="true">🐎</div>
+        <div class="chat-avatar">
+          <img src="assets/mascot-face.png" alt="천마" class="chat-avatar-img">
+        </div>
         <div class="chat-header-info">
           <div class="chat-name" data-i18n="chatbot_title">천마 도우미</div>
           <div class="chat-status">● Online</div>
@@ -385,8 +348,7 @@
 
   <!-- FAB -->
   <button id="chatFab" class="chat-fab" aria-label="천마 도우미 열기">
-    <div class="chat-fab-mascot" aria-hidden="true">🐎</div>
-    <div class="chat-fab-label" data-i18n="chatbot_title">천마</div>
+    <img src="assets/mascot-face.png" alt="천마" class="chat-fab-img">
   </button>
 
 </div>
