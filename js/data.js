@@ -34,7 +34,7 @@ function getNextShuttle() {
 /* dayOfWeek: 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri */
 const cafeteriaMenu = {
   1: {
-    main: { ko: '김치찌개', en: 'Kimchi Jjigae', zh: '泡菜汤', ja: 'キムチチゲ' },
+    main: { ko: '김치찌개', en: 'Kimchi Jjigae', zh: '泡菜汤', ja: 'キムチチゲ', vi: 'Canh Kim Chi', th: 'แกงกิมจิ' },
     side: {
       ko: ['흰밥', '계란말이', '콩나물무침', '배추김치'],
       en: ['Steamed Rice', 'Rolled Omelette', 'Bean Sprout', 'Kimchi'],
@@ -44,7 +44,7 @@ const cafeteriaMenu = {
     price: '3,500원',
   },
   2: {
-    main: { ko: '된장찌개', en: 'Doenjang Jjigae', zh: '大酱汤', ja: 'テンジャンチゲ' },
+    main: { ko: '된장찌개', en: 'Doenjang Jjigae', zh: '大酱汤', ja: 'テンジャンチゲ', vi: 'Canh Tương', th: 'แกงเต้าเจี้ยว' },
     side: {
       ko: ['흰밥', '돼지불고기', '깍두기', '시금치나물'],
       en: ['Steamed Rice', 'Pork Bulgogi', 'Radish Kimchi', 'Spinach'],
@@ -54,7 +54,7 @@ const cafeteriaMenu = {
     price: '3,500원',
   },
   3: {
-    main: { ko: '부대찌개', en: 'Budae Jjigae', zh: '部队汤', ja: 'プデチゲ' },
+    main: { ko: '부대찌개', en: 'Budae Jjigae', zh: '部队汤', ja: 'プデチゲ', vi: 'Canh Budae', th: 'แกงบูแด' },
     side: {
       ko: ['흰밥', '생선가스', '열무김치', '멸치볶음'],
       en: ['Steamed Rice', 'Fish Cutlet', 'Radish Leaf Kimchi', 'Stir-fried Anchovy'],
@@ -64,7 +64,7 @@ const cafeteriaMenu = {
     price: '4,000원',
   },
   4: {
-    main: { ko: '순두부찌개', en: 'Sundubu Jjigae', zh: '嫩豆腐汤', ja: 'スンドゥブチゲ' },
+    main: { ko: '순두부찌개', en: 'Sundubu Jjigae', zh: '嫩豆腐汤', ja: 'スンドゥブチゲ', vi: 'Canh Đậu Hũ Non', th: 'แกงเต้าหู้อ่อน' },
     side: {
       ko: ['흰밥', '제육볶음', '배추김치', '도라지무침'],
       en: ['Steamed Rice', 'Spicy Pork', 'Kimchi', 'Bellflower Root'],
@@ -74,7 +74,7 @@ const cafeteriaMenu = {
     price: '3,500원',
   },
   5: {
-    main: { ko: '육개장', en: 'Yukgaejang', zh: '辣牛肉汤', ja: 'ユッケジャン' },
+    main: { ko: '육개장', en: 'Yukgaejang', zh: '辣牛肉汤', ja: 'ユッケジャン', vi: 'Canh Thịt Bò Cay', th: 'แกงเนื้อเผ็ด' },
     side: {
       ko: ['흰밥', '잡채', '오이소박이', '두부조림'],
       en: ['Steamed Rice', 'Japchae', 'Cucumber Kimchi', 'Braised Tofu'],
@@ -98,30 +98,40 @@ const notices = [
     en: { title: '2026-1 Special Korean Language Program for Int\'l Students', category: 'Program', date: '2026.05.10' },
     zh: { title: '2026-1学期留学生特别韩语教育项目', category: '项目', date: '2026.05.10' },
     ja: { title: '2026-1学期留学生向け特別韓国語教育プログラム', category: 'プログラム', date: '2026.05.10' },
+    vi: { title: 'Chương trình đặc biệt tiếng Hàn cho sinh viên quốc tế HK1-2026', category: 'Chương trình', date: '2026.05.10' },
+    th: { title: 'โปรแกรมภาษาเกาหลีพิเศษสำหรับนักศึกษาต่างชาติ ภาค 1/2026', category: 'โปรแกรม', date: '2026.05.10' },
   },
   {
     ko: { title: '도서관 하절기 운영시간 변경 안내 (6월~8월)', category: '시설', date: '2026.05.08' },
     en: { title: 'Library Summer Hours Change (Jun–Aug)', category: 'Facility', date: '2026.05.08' },
     zh: { title: '图书馆夏季开放时间变更通知（6月～8月）', category: '设施', date: '2026.05.08' },
     ja: { title: '図書館夏期利用時間変更のお知らせ（6月～8月）', category: '施設', date: '2026.05.08' },
+    vi: { title: 'Thay đổi giờ mở cửa thư viện mùa hè (Tháng 6–8)', category: 'Cơ sở vật chất', date: '2026.05.08' },
+    th: { title: 'การเปลี่ยนแปลงเวลาเปิดห้องสมุดในฤดูร้อน (มิ.ย.–ส.ค.)', category: 'สิ่งอำนวยความสะดวก', date: '2026.05.08' },
   },
   {
     ko: { title: '비교과 프로그램 튜터링·에프킬라 2분기 신청 안내', category: '비교과', date: '2026.05.06' },
     en: { title: 'Q2 Tutoring & AFK Learning Support Program Registration', category: 'Extracurricular', date: '2026.05.06' },
     zh: { title: '课外项目辅导·AFK第二季度报名指南', category: '课外', date: '2026.05.06' },
     ja: { title: '課外プログラム チュータリング・AFK 第2四半期申請案内', category: '課外', date: '2026.05.06' },
+    vi: { title: 'Đăng ký chương trình hỗ trợ học tập Q2 (Gia sư & AFK)', category: 'Ngoại khóa', date: '2026.05.06' },
+    th: { title: 'ลงทะเบียนโปรแกรมสนับสนุนการเรียนไตรมาส 2 (ติวเตอร์ & AFK)', category: 'กิจกรรมนอกหลักสูตร', date: '2026.05.06' },
   },
   {
     ko: { title: '2026학년도 1학기 수강신청 정정기간 안내', category: '학사', date: '2026.05.01' },
     en: { title: '2026-1 Course Registration Correction Period Notice', category: 'Academic', date: '2026.05.01' },
     zh: { title: '2026年度第一学期选课修改期间通知', category: '学业', date: '2026.05.01' },
     ja: { title: '2026年度前期履修登録訂正期間のお知らせ', category: '学業', date: '2026.05.01' },
+    vi: { title: 'Thông báo thời gian chỉnh sửa đăng ký môn học HK1-2026', category: 'Học vụ', date: '2026.05.01' },
+    th: { title: 'ประกาศช่วงแก้ไขการลงทะเบียนเรียน ภาค 1 ปีการศึกษา 2026', category: 'วิชาการ', date: '2026.05.01' },
   },
   {
     ko: { title: '글로벌 교환학생 프로그램 참가자 모집 (2026 후기)', category: '국제교류', date: '2026.04.28' },
     en: { title: 'Global Exchange Student Program 2026 Fall Recruitment', category: 'International', date: '2026.04.28' },
     zh: { title: '全球交换生项目招募（2026年秋季）', category: '国际交流', date: '2026.04.28' },
     ja: { title: 'グローバル交換留学プログラム参加者募集（2026年後期）', category: '国際交流', date: '2026.04.28' },
+    vi: { title: 'Tuyển sinh viên trao đổi toàn cầu học kỳ mùa thu 2026', category: 'Quốc tế', date: '2026.04.28' },
+    th: { title: 'รับสมัครนักศึกษาแลกเปลี่ยนระดับโลก ภาคการศึกษาฤดูใบไม้ร่วง 2026', category: 'นานาชาติ', date: '2026.04.28' },
   },
 ];
 
@@ -263,6 +273,74 @@ const chatbotResponses = {
       response: '🌏 国際交流課\n場所: 本館2F\n営業: 平日 09:00 – 18:00\n電話: 031-220-2×××\nメール: international@suwon.ac.kr\n\nビザ・外国人登録・奨学金など全てお任せください。',
     },
   ],
+  vi: [
+    {
+      keywords: ['thư viện', 'sách', 'mượn', 'trả', 'đọc'],
+      response: '📚 Giờ mở cửa thư viện\nThứ 2–6: 09:00 – 22:00\nThứ 7: 09:00 – 18:00\nChủ nhật & ngày lễ: Đóng cửa\n\nMượn sách: Cần thẻ sinh viên (10 cuốn / 30 ngày)\nVị trí: Thư viện trung tâm',
+    },
+    {
+      keywords: ['xe buýt', 'xe', 'shuttle', 'lịch', 'ga suwon'],
+      response: '🚌 Xe buýt (Trường ↔ Ga Suwon)\nThứ 2–6: 07:00 – 21:00 (30–60 phút/chuyến)\nThứ 7: 09:00, 12:00, 17:00\nChủ nhật: Không hoạt động\n\nXem giờ khởi hành tiếp theo ở trang chủ!',
+    },
+    {
+      keywords: ['căng tin', 'ăn', 'thực đơn', 'bữa trưa', 'bữa tối'],
+      response: '🍱 Căng tin sinh viên\nGiờ mở: Thứ 2–6, 11:00 – 14:00\nGiá: ₩3.500 – ₩4.000\nVị trí: Tầng 1, Nhà sinh viên\n\nXem thực đơn hôm nay ở trang chủ!',
+    },
+    {
+      keywords: ['máy in', 'in', 'sao chép', 'photocopy'],
+      response: '🖨️ Vị trí máy in\n① Tầng 1 Thư viện trung tâm (Trắng đen & Màu)\n② Tầng 1 Nhà sinh viên\n③ Phòng hành chính các khoa\n\nGiá: Trắng đen ₩50/trang · Màu ₩200/trang\nThanh toán: Thẻ sinh viên (cần nạp tiền)',
+    },
+    {
+      keywords: ['đăng ký', 'môn học', 'khóa học', 'lịch học', 'canvas'],
+      response: '📝 Đăng ký môn học\n① Truy cập suwon.ac.kr → Đăng nhập cổng thông tin\n② Hệ thống học vụ → Đăng ký môn\n③ Tài liệu học tập: canvas.suwon.ac.kr\n\nXem thông báo đầu học kỳ để biết thời gian đăng ký!',
+    },
+    {
+      keywords: ['ký túc xá', 'ký túc', 'phòng', 'nhà ở'],
+      response: '🏠 Đăng ký ký túc xá\nsuwon.ac.kr → Ký túc xá → Đăng ký\n\nSinh viên quốc tế được ưu tiên!\nLiên hệ: VP ký túc xá 031-220-2×××\n\nSố phòng có hạn – đăng ký sớm!',
+    },
+    {
+      keywords: ['sức khỏe', 'bệnh viện', 'thuốc', 'ốm', 'y tế'],
+      response: '🏥 Trung tâm y tế trường\nVị trí: Tầng 2 Nhà sinh viên\nGiờ: Thứ 2–6, 09:00 – 17:00\n\nClinics & nhà thuốc gần đây: xem bản đồ khuôn viên.\nKhẩn cấp: 119 / Bảo vệ trường 031-220-2000',
+    },
+    {
+      keywords: ['visa', 'nước ngoài', 'quốc tế', 'văn phòng', 'học bổng'],
+      response: '🌏 Phòng Quan hệ quốc tế\nVị trí: Tầng 2 Tòa nhà chính\nGiờ: Thứ 2–6, 09:00 – 18:00\nĐT: 031-220-2×××\nEmail: international@suwon.ac.kr\n\nXử lý visa, đăng ký người nước ngoài, học bổng & nhiều hơn nữa.',
+    },
+  ],
+  th: [
+    {
+      keywords: ['ห้องสมุด', 'หนังสือ', 'ยืม', 'คืน', 'อ่าน'],
+      response: '📚 เวลาเปิดห้องสมุด\nจ–ศ: 09:00 – 22:00\nเสาร์: 09:00 – 18:00\nอาทิตย์ & วันหยุด: ปิด\n\nยืมหนังสือ: ต้องใช้บัตรนักศึกษา (10 เล่ม / 30 วัน)\nสถานที่: ห้องสมุดกลาง',
+    },
+    {
+      keywords: ['รถรับส่ง', 'รถบัส', 'รถ', 'ตาราง', 'สถานีซูวอน'],
+      response: '🚌 รถรับส่ง (มหาวิทยาลัย ↔ สถานีซูวอน)\nจ–ศ: 07:00 – 21:00 (ทุก 30–60 นาที)\nเสาร์: 09:00, 12:00, 17:00\nอาทิตย์: ไม่มีบริการ\n\nดูเวลาออกเดินทางครั้งถัดไปได้ที่หน้าหลัก!',
+    },
+    {
+      keywords: ['โรงอาหาร', 'อาหาร', 'เมนู', 'กลางวัน', 'เย็น'],
+      response: '🍱 โรงอาหารนักศึกษา\nเปิด: จ–ศ 11:00 – 14:00\nราคา: ₩3,500 – ₩4,000\nสถานที่: ชั้น 1 อาคารนักศึกษา\n\nดูเมนูวันนี้ได้ที่หน้าหลัก!',
+    },
+    {
+      keywords: ['เครื่องพิมพ์', 'พิมพ์', 'ถ่ายเอกสาร', 'ปริ้น'],
+      response: '🖨️ ตำแหน่งเครื่องพิมพ์\n① ชั้น 1 ห้องสมุดกลาง (ขาวดำ & สี)\n② ชั้น 1 อาคารนักศึกษา\n③ สำนักงานธุรการของแต่ละคณะ\n\nราคา: ขาวดำ ₩50/แผ่น · สี ₩200/แผ่น\nชำระเงิน: บัตรนักศึกษา (ต้องเติมเงิน)',
+    },
+    {
+      keywords: ['ลงทะเบียน', 'วิชา', 'หลักสูตร', 'ตารางเรียน', 'canvas'],
+      response: '📝 การลงทะเบียนวิชา\n① เข้า suwon.ac.kr → เข้าสู่ระบบพอร์ทัล\n② ระบบวิชาการ → ลงทะเบียนวิชา\n③ เอกสารการเรียน: canvas.suwon.ac.kr\n\nตรวจสอบประกาศต้นภาคสำหรับวันที่ลงทะเบียน!',
+    },
+    {
+      keywords: ['หอพัก', 'หอ', 'ห้อง', 'ที่พัก'],
+      response: '🏠 การสมัครหอพัก\nsuwon.ac.kr → หอพัก → สมัคร\n\nนักศึกษาต่างชาติได้รับสิทธิ์พิเศษ!\nติดต่อ: สำนักงานหอพัก 031-220-2×××\n\nที่พักมีจำกัด – สมัครเร็ว!',
+    },
+    {
+      keywords: ['สุขภาพ', 'โรงพยาบาล', 'ยา', 'ป่วย', 'คลินิก'],
+      response: '🏥 ศูนย์สุขภาพในมหาวิทยาลัย\nสถานที่: ชั้น 2 อาคารนักศึกษา\nเวลา: จ–ศ 09:00 – 17:00\n\nคลินิกและร้านขายยาใกล้เคียง: ดูแผนที่มหาวิทยาลัย\nฉุกเฉิน: 119 / รักษาความปลอดภัย 031-220-2000',
+    },
+    {
+      keywords: ['วีซ่า', 'ต่างชาติ', 'นานาชาติ', 'สำนักงาน', 'ทุนการศึกษา'],
+      response: '🌏 สำนักงานกิจการนานาชาติ\nสถานที่: ชั้น 2 อาคารหลัก\nเวลา: จ–ศ 09:00 – 18:00\nโทร: 031-220-2×××\nอีเมล: international@suwon.ac.kr\n\nดูแลวีซ่า การลงทะเบียนคนต่างด้าว ทุนการศึกษา และอื่นๆ',
+    },
+  ],
 };
 
 function getChatbotResponse(input) {
@@ -280,6 +358,8 @@ function getChatbotResponse(input) {
     en: 'Sorry, I didn\'t understand 😅\nTry asking about:\n📚 Library   🚌 Shuttle Bus   🍱 Cafeteria\n🖨️ Printer   📝 Registration   🏠 Dormitory\n🏥 Health Center   🌏 Int\'l Office',
     zh: '抱歉，我没有理解您的问题 😅\n请尝试询问：\n📚 图书馆   🚌 校车   🍱 食堂\n🖨️ 打印机   📝 选课   🏠 宿舍\n🏥 医务室   🌏 国际交流处',
     ja: '申し訳ありません、理解できませんでした 😅\n以下についてお聞きください：\n📚 図書館   🚌 シャトル   🍱 学食\n🖨️ プリンター   📝 履修   🏠 寮\n🏥 保健室   🌏 国際交流課',
+    vi: 'Xin lỗi, tôi chưa hiểu câu hỏi của bạn 😅\nHãy thử hỏi về:\n📚 Thư viện   🚌 Xe buýt   🍱 Căng tin\n🖨️ Máy in   📝 Đăng ký   🏠 Ký túc xá\n🏥 Y tế   🌏 Phòng quốc tế',
+    th: 'ขอโทษ ฉันไม่เข้าใจคำถามของคุณ 😅\nลองถามเกี่ยวกับ:\n📚 ห้องสมุด   🚌 รถรับส่ง   🍱 โรงอาหาร\n🖨️ เครื่องพิมพ์   📝 ลงทะเบียน   🏠 หอพัก\n🏥 ศูนย์สุขภาพ   🌏 สำนักงานนานาชาติ',
   };
   return defaults[lang] || defaults.ko;
 }
