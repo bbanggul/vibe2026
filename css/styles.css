@@ -1903,3 +1903,11 @@ img, svg { display: block; }
 .lib-guide-list { display: flex; flex-direction: column; gap: 8px; }
 .lib-guide-item { display: flex; gap: 8px; font-size: 0.84rem; color: var(--text-2); line-height: 1.5; }
 .lib-guide-dot { color: var(--navy); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+/* ── Campus Map Modal ── */
+.map-modal { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center; }
+.map-modal.hidden { display: none; }
+.map-modal-bg { position: absolute; inset: 0; background: rgba(0,0,0,.75); }
+.map-modal-content { position: relative; z-index: 1; max-width: 95vw; max-height: 90vh; display: flex; flex-direction: column; align-items: flex-end; }
+.map-modal-close { background: rgba(255,255,255,.9); border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1rem; cursor: pointer; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; }
+.map-modal-img { max-width: 95vw; max-height: 82vh; border-radius: 10px; object-fit: contain; box-shadow: 0 8px 40px rgba(0,0,0,.5); }

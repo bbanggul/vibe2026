@@ -251,7 +251,7 @@
           </div>
           <div class="link-text" data-i18n="link_canvas">Canvas LMS</div>
         </a>
-        <a href="#" class="link-card">
+        <a href="#" class="link-card" id="campusMapBtn">
           <div class="link-icon-wrap" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
@@ -758,6 +758,15 @@
 
 </div>
 
+
+<!-- MAP MODAL -->
+<div id="mapModal" class="map-modal hidden" role="dialog" aria-label="캠퍼스 지도">
+  <div class="map-modal-bg" id="mapModalBg"></div>
+  <div class="map-modal-content">
+    <button class="map-modal-close" id="mapModalClose" aria-label="닫기">✕</button>
+    <img src="assets/suwon_map.jpg" alt="수원대학교 캠퍼스 지도" class="map-modal-img">
+  </div>
+</div>
 
 <script src="js/i18n.js"></script>
 <script src="js/data.js"></script>

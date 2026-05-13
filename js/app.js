@@ -875,6 +875,30 @@ function initLoading() {
   }, loadingDuration);
 }
 
+/* Campus Map Modal */
+function initMapModal() {
+  const btn = document.getElementById('campusMapBtn');
+  const modal = document.getElementById('mapModal');
+  const bg = document.getElementById('mapModalBg');
+  const closeBtn = document.getElementById('mapModalClose');
+  if (!btn || !modal) return;
+
+  function openMap(e) {
+    e.preventDefault();
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMap() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', openMap);
+  bg?.addEventListener('click', closeMap);
+  closeBtn?.addEventListener('click', closeMap);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMap(); });
+}
+
 /* ─── Init ─── */
 document.addEventListener('DOMContentLoaded', async () => {
   applyTranslations();
@@ -889,6 +913,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initLibraryScreen();
   initSchoolScreen();
   initChatbot();
+  initMapModal();
   initHeaderScroll();
   updateNotices();
   await loadCafeteriaData();
