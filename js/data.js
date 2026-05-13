@@ -13,10 +13,15 @@ function getNextShuttle() {
   const cur = now.getHours() * 60 + now.getMinutes();
   for (const time of campusShuttleTimes) {
     const [h, m] = time.split(':').map(Number);
-    const t = h * 60 + m;
-    if (t > cur) return { time, minutesLeft: t - cur };
+    const mins = h * 60 + m;
+    if (mins > cur) return { time, minutesLeft: mins - cur };
   }
-  return { done: true };
+
+  // Calculate minutes until next weekday's first shuttle (09:10)
+  const firstShuttle = 9 * 60 + 10;
+  const daysUntilNext = day === 5 ? 3 : 1; // Fri → Mon, else tomorrow
+  const minutesUntilNext = (24 * 60 - cur) + (daysUntilNext - 1) * 24 * 60 + firstShuttle;
+  return { done: true, minutesUntilNext };
 }
 
 /* ─── Cafeteria Menu ─── */

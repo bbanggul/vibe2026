@@ -45,6 +45,19 @@ function updateNavLangButtons(activeLang) {
 }
 
 /* Shuttle display */
+function formatMinutesUntilNext(total) {
+  const h = Math.floor(total / 60);
+  const m = total % 60;
+  const lang = window.currentLang || 'ko';
+  if (lang === 'ko') return h > 0 ? `${h}시간 ${m}분 후` : `${m}분 후`;
+  if (lang === 'en') return h > 0 ? `in ${h}h ${m}m` : `in ${m}m`;
+  if (lang === 'zh') return h > 0 ? `${h}小时${m}分后` : `${m}分后`;
+  if (lang === 'ja') return h > 0 ? `${h}時間${m}分後` : `${m}分後`;
+  if (lang === 'vi') return h > 0 ? `${h}g ${m}ph nữa` : `${m}ph nữa`;
+  if (lang === 'th') return h > 0 ? `อีก ${h} ชม. ${m} น.` : `อีก ${m} น.`;
+  return h > 0 ? `${h}h ${m}m` : `${m}m`;
+}
+
 function updateShuttle() {
   const result = getNextShuttle();
   const timeEl = document.getElementById('nextShuttleTime');
@@ -59,7 +72,7 @@ function updateShuttle() {
   }
   if (result.done) {
     timeEl.textContent = t('shuttle_done');
-    etaEl.textContent = t('shuttle_tomorrow');
+    etaEl.textContent = formatMinutesUntilNext(result.minutesUntilNext);
     etaEl.style.color = '';
     return;
   }
