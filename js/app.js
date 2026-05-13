@@ -78,9 +78,8 @@ function updateMenu() {
     priceEl.textContent = '';
     return;
   }
-  const lang = window.currentLang;
-  mainEl.textContent = menu.main[lang] || menu.main.ko;
-  priceEl.textContent = menu.price;
+  mainEl.textContent = menu.items.slice(0, 2).join(' · ');
+  priceEl.textContent = menu.items.slice(2).join('  ·  ');
 }
 
 function updateHomeData() {
@@ -301,7 +300,7 @@ function initLoading() {
 }
 
 /* ─── Init ─── */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   applyTranslations();
   updateHeaderLang(window.currentLang);
 
@@ -312,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initChatbot();
   initHeaderScroll();
   updateNotices();
+  await loadCafeteriaData();
   updateHomeData();
   updateNavLangButtons(window.currentLang);
   startShuttleTimer();

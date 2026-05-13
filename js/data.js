@@ -31,64 +31,25 @@ function getNextShuttle() {
 }
 
 /* ─── Cafeteria Menu ─── */
-/* dayOfWeek: 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri */
-const cafeteriaMenu = {
-  1: {
-    main: { ko: '김치찌개', en: 'Kimchi Jjigae', zh: '泡菜汤', ja: 'キムチチゲ', vi: 'Canh Kim Chi', th: 'แกงกิมจิ' },
-    side: {
-      ko: ['흰밥', '계란말이', '콩나물무침', '배추김치'],
-      en: ['Steamed Rice', 'Rolled Omelette', 'Bean Sprout', 'Kimchi'],
-      zh: ['米饭', '蛋卷', '豆芽菜', '泡菜'],
-      ja: ['ご飯', '玉子焼き', 'もやし和え', 'キムチ'],
-    },
-    price: '3,500원',
-  },
-  2: {
-    main: { ko: '된장찌개', en: 'Doenjang Jjigae', zh: '大酱汤', ja: 'テンジャンチゲ', vi: 'Canh Tương', th: 'แกงเต้าเจี้ยว' },
-    side: {
-      ko: ['흰밥', '돼지불고기', '깍두기', '시금치나물'],
-      en: ['Steamed Rice', 'Pork Bulgogi', 'Radish Kimchi', 'Spinach'],
-      zh: ['米饭', '猪肉烤肉', '萝卜泡菜', '菠菜'],
-      ja: ['ご飯', '豚プルコギ', 'カクテキ', 'ほうれん草'],
-    },
-    price: '3,500원',
-  },
-  3: {
-    main: { ko: '부대찌개', en: 'Budae Jjigae', zh: '部队汤', ja: 'プデチゲ', vi: 'Canh Budae', th: 'แกงบูแด' },
-    side: {
-      ko: ['흰밥', '생선가스', '열무김치', '멸치볶음'],
-      en: ['Steamed Rice', 'Fish Cutlet', 'Radish Leaf Kimchi', 'Stir-fried Anchovy'],
-      zh: ['米饭', '炸鱼', '萝卜叶泡菜', '炒小鱼'],
-      ja: ['ご飯', 'フィッシュカツ', 'ヨルムキムチ', 'いりこ炒め'],
-    },
-    price: '4,000원',
-  },
-  4: {
-    main: { ko: '순두부찌개', en: 'Sundubu Jjigae', zh: '嫩豆腐汤', ja: 'スンドゥブチゲ', vi: 'Canh Đậu Hũ Non', th: 'แกงเต้าหู้อ่อน' },
-    side: {
-      ko: ['흰밥', '제육볶음', '배추김치', '도라지무침'],
-      en: ['Steamed Rice', 'Spicy Pork', 'Kimchi', 'Bellflower Root'],
-      zh: ['米饭', '辣炒猪肉', '泡菜', '桔梗'],
-      ja: ['ご飯', 'チェユクポックム', 'キムチ', 'キキョウ和え'],
-    },
-    price: '3,500원',
-  },
-  5: {
-    main: { ko: '육개장', en: 'Yukgaejang', zh: '辣牛肉汤', ja: 'ユッケジャン', vi: 'Canh Thịt Bò Cay', th: 'แกงเนื้อเผ็ด' },
-    side: {
-      ko: ['흰밥', '잡채', '오이소박이', '두부조림'],
-      en: ['Steamed Rice', 'Japchae', 'Cucumber Kimchi', 'Braised Tofu'],
-      zh: ['米饭', '杂菜', '黄瓜泡菜', '红烧豆腐'],
-      ja: ['ご飯', 'チャプチェ', 'キュウリキムチ', '豆腐煮'],
-    },
-    price: '4,000원',
-  },
-};
+let cafeteriaData = null;
+
+async function loadCafeteriaData() {
+  try {
+    const resp = await fetch('cafeteria_data.json?v=' + Date.now());
+    if (!resp.ok) throw new Error('fetch failed');
+    cafeteriaData = await resp.json();
+  } catch (_) {
+    cafeteriaData = null;
+  }
+}
 
 function getTodayMenu() {
+  if (!cafeteriaData) return null;
   const day = new Date().getDay();
   if (day === 0 || day === 6) return null;
-  return cafeteriaMenu[day] || null;
+  const entries = cafeteriaData.menu[String(day)];
+  if (!entries || entries.length === 0) return null;
+  return entries.find(e => e.type === '중식') || entries[0];
 }
 
 /* ─── Notices ─── */
