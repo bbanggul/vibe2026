@@ -51,9 +51,16 @@ function updateShuttle() {
   const etaEl = document.getElementById('shuttleEta');
   if (!timeEl || !etaEl) return;
 
-  if (!result) {
+  if (result.none) {
     timeEl.textContent = t('shuttle_none');
     etaEl.textContent = '';
+    etaEl.style.color = '';
+    return;
+  }
+  if (result.done) {
+    timeEl.textContent = t('shuttle_done');
+    etaEl.textContent = t('shuttle_tomorrow');
+    etaEl.style.color = '';
     return;
   }
   timeEl.textContent = result.time;
@@ -167,8 +174,16 @@ function initNav() {
   document.querySelectorAll('.nav-menu-item').forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault();
+      const target = item.dataset.screen;
       closeNav();
+      if (target) setTimeout(() => showScreen(target), 360);
     });
+  });
+}
+
+function initShuttleScreen() {
+  document.getElementById('shuttleBackBtn')?.addEventListener('click', () => {
+    showScreen('screen-home');
   });
 }
 
@@ -317,6 +332,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initLangToggle();
   initNavLangButtons();
   initNav();
+  initShuttleScreen();
   initChatbot();
   initHeaderScroll();
   updateNotices();

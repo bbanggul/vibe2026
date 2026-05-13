@@ -1,33 +1,22 @@
-/* ─── Shuttle Schedule ─── */
-/* Times in 'HH:MM' 24h format. Direction: school→station (toStation) */
-const shuttleSchedule = {
-  weekday: [
-    '07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30',
-    '11:00','12:00','13:00','14:00','15:00','16:00','17:00','17:30',
-    '18:00','18:30','19:00','20:00','21:00',
-  ],
-  saturday: ['09:00','12:00','17:00'],
-  sunday: [],
-};
+/* ─── Campus Shuttle Schedule (교내 순환) ─── */
+/* 평일 09:10 – 15:20, 10회 운행 */
+const campusShuttleTimes = [
+  '09:10','09:20','10:10','10:20','11:10',
+  '11:20','12:10','13:20','14:20','15:20',
+];
 
 function getNextShuttle() {
   const now = new Date();
-  const dayOfWeek = now.getDay(); // 0=Sun,1=Mon,...,6=Sat
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  const day = now.getDay();
+  if (day === 0 || day === 6) return { none: true };
 
-  let schedule;
-  if (dayOfWeek === 0) schedule = shuttleSchedule.sunday;
-  else if (dayOfWeek === 6) schedule = shuttleSchedule.saturday;
-  else schedule = shuttleSchedule.weekday;
-
-  for (const time of schedule) {
+  const cur = now.getHours() * 60 + now.getMinutes();
+  for (const time of campusShuttleTimes) {
     const [h, m] = time.split(':').map(Number);
-    const shuttleMinutes = h * 60 + m;
-    if (shuttleMinutes > currentMinutes) {
-      return { time, minutesLeft: shuttleMinutes - currentMinutes };
-    }
+    const t = h * 60 + m;
+    if (t > cur) return { time, minutesLeft: t - cur };
   }
-  return null; // no more shuttles today
+  return { done: true };
 }
 
 /* ─── Cafeteria Menu ─── */
@@ -104,8 +93,8 @@ const chatbotResponses = {
       response: '도서관 이용시간\n평일: 09:00 – 22:00\n토요일: 09:00 – 18:00\n일요일·공휴일 휴관\n\n대출: 학생증 필요 (10권 / 30일)\n위치: 중앙도서관 (캠퍼스 지도 참고)',
     },
     {
-      keywords: ['셔틀', '버스', '교통', '시간표', '수원역'],
-      response: '셔틀버스 (학교↔수원역)\n평일: 07:00 – 21:00 (30분~1시간 간격)\n토요일: 09:00, 12:00, 17:00\n일요일: 운행 없음\n\n홈 화면에서 다음 출발 시간을 확인하세요!',
+      keywords: ['셔틀', '버스', '교통', '시간표', '통학'],
+      response: '교내 셔틀버스 (캠퍼스 순환)\n운행: 평일 09:10 – 15:20 (10회)\n노선: 인문대 → 학생회관 → ICT융합대학 → 음악대학 → 제1공학관 → 후문 → 미술대학 → 인문대\n\n홈 화면에서 다음 출발 시간을 확인하세요!\n통학버스 정보는 메뉴 > 셔틀버스 에서 확인하세요.',
     },
     {
       keywords: ['학식', '밥', '메뉴', '식당', '점심', '저녁'],
@@ -138,8 +127,8 @@ const chatbotResponses = {
       response: 'Library Hours\nWeekdays: 09:00 – 22:00\nSaturday: 09:00 – 18:00\nClosed Sundays & holidays\n\nBorrowing: Student ID required (10 books / 30 days)\nLocation: Central Library',
     },
     {
-      keywords: ['shuttle', 'bus', 'transport', 'schedule', 'station'],
-      response: 'Shuttle Bus (Campus ↔ Suwon Station)\nWeekdays: 07:00 – 21:00 (every 30–60 min)\nSaturday: 09:00, 12:00, 17:00\nSunday: No service\n\nCheck the home screen for the next departure!',
+      keywords: ['shuttle', 'bus', 'transport', 'schedule', 'commuter'],
+      response: 'Campus Shuttle (Loop)\nOperates: Weekdays 09:10 – 15:20 (10 trips)\nRoute: Humanities → Student Hall → ICT → Music → Engineering 1 → Back Gate → Fine Arts → Humanities\n\nCheck the home screen for next departure!\nFor commuter bus info, see Menu > Shuttle Bus.',
     },
     {
       keywords: ['cafeteria', 'food', 'meal', 'lunch', 'dinner', 'menu'],
@@ -172,8 +161,8 @@ const chatbotResponses = {
       response: '图书馆开放时间\n平日: 09:00 – 22:00\n周六: 09:00 – 18:00\n周日及节假日休馆\n\n借书需学生证（10本 / 30天）\n位置：中央图书馆',
     },
     {
-      keywords: ['校车', '班车', '巴士', '交通', '水原站'],
-      response: '校车（学校↔水原站）\n平日: 07:00 – 21:00（每30~60分钟）\n周六: 09:00, 12:00, 17:00\n周日: 不运行\n\n首页可查看下一班出发时间！',
+      keywords: ['校车', '班车', '巴士', '交通', '通勤'],
+      response: '校内循环巴士\n运行：工作日 09:10 – 15:20（共10班）\n路线：人文学院→学生会馆→ICT大楼→音乐学院→工学馆→后门→美术学院→人文学院\n\n首页可查看下一班出发时间！\n通勤巴士信息请查看菜单 > 班车信息。',
     },
     {
       keywords: ['食堂', '菜单', '午饭', '晚饭', '吃饭'],
@@ -206,8 +195,8 @@ const chatbotResponses = {
       response: '図書館利用時間\n平日: 09:00 – 22:00\n土曜: 09:00 – 18:00\n日曜・祝日休館\n\n貸し出し: 学生証が必要（10冊 / 30日）\n場所: 中央図書館',
     },
     {
-      keywords: ['シャトル', 'バス', '交通', '時刻表', '水原駅'],
-      response: 'シャトルバス（学校↔水原駅）\n平日: 07:00 – 21:00（30~60分間隔）\n土曜: 09:00, 12:00, 17:00\n日曜: 運行なし\n\nホーム画面で次の出発時刻を確認できます！',
+      keywords: ['シャトル', 'バス', '交通', '時刻表', '通学'],
+      response: 'キャンパス循環シャトル\n運行：平日 09:10 – 15:20（10便）\nルート：人文大学前→学生会館→ICT→音楽大学→工学館→裏門→美術大学→人文大学前\n\nホーム画面で次の出発時刻を確認できます！\n通学バス情報はメニュー > シャトルバスでご確認ください。',
     },
     {
       keywords: ['学食', '食堂', 'メニュー', '昼食', '夕食'],
@@ -240,8 +229,8 @@ const chatbotResponses = {
       response: 'Giờ mở cửa thư viện\nThứ 2–6: 09:00 – 22:00\nThứ 7: 09:00 – 18:00\nChủ nhật & ngày lễ: Đóng cửa\n\nMượn sách: Cần thẻ sinh viên (10 cuốn / 30 ngày)\nVị trí: Thư viện trung tâm',
     },
     {
-      keywords: ['xe buýt', 'xe', 'shuttle', 'lịch', 'ga suwon'],
-      response: 'Xe buýt (Trường ↔ Ga Suwon)\nThứ 2–6: 07:00 – 21:00 (30–60 phút/chuyến)\nThứ 7: 09:00, 12:00, 17:00\nChủ nhật: Không hoạt động\n\nXem giờ khởi hành tiếp theo ở trang chủ!',
+      keywords: ['xe buýt', 'xe', 'shuttle', 'lịch', 'đưa đón'],
+      response: 'Xe đưa đón nội khu (Vòng quanh campus)\nHoạt động: Thứ 2–6, 09:10 – 15:20 (10 chuyến)\nTuyến: Nhân văn → Nhà SV → ICT → Âm nhạc → Kỹ thuật 1 → Cổng sau → Mỹ thuật → Nhân văn\n\nXem giờ khởi hành tiếp theo ở trang chủ!\nXem thông tin xe đưa đón liên tỉnh tại Menu > Xe buýt.',
     },
     {
       keywords: ['căng tin', 'ăn', 'thực đơn', 'bữa trưa', 'bữa tối'],
@@ -274,8 +263,8 @@ const chatbotResponses = {
       response: 'เวลาเปิดห้องสมุด\nจ–ศ: 09:00 – 22:00\nเสาร์: 09:00 – 18:00\nอาทิตย์ & วันหยุด: ปิด\n\nยืมหนังสือ: ต้องใช้บัตรนักศึกษา (10 เล่ม / 30 วัน)\nสถานที่: ห้องสมุดกลาง',
     },
     {
-      keywords: ['รถรับส่ง', 'รถบัส', 'รถ', 'ตาราง', 'สถานีซูวอน'],
-      response: 'รถรับส่ง (มหาวิทยาลัย ↔ สถานีซูวอน)\nจ–ศ: 07:00 – 21:00 (ทุก 30–60 นาที)\nเสาร์: 09:00, 12:00, 17:00\nอาทิตย์: ไม่มีบริการ\n\nดูเวลาออกเดินทางครั้งถัดไปได้ที่หน้าหลัก!',
+      keywords: ['รถรับส่ง', 'รถบัส', 'รถ', 'ตาราง', 'รถชัตเติ้ล'],
+      response: 'รถชัตเติ้ลในวิทยาเขต (วนรอบ)\nให้บริการ: จ–ศ 09:10 – 15:20 (10 รอบ)\nเส้นทาง: มนุษย์ฯ → หอนักศึกษา → ICT → ดนตรี → วิศวะ 1 → ประตูหลัง → ศิลปกรรม → มนุษย์ฯ\n\nดูเวลาถัดไปได้ที่หน้าหลัก!\nดูข้อมูลรถรับส่งประจำทางได้ที่เมนู > รถชัตเติ้ล',
     },
     {
       keywords: ['โรงอาหาร', 'อาหาร', 'เมนู', 'กลางวัน', 'เย็น'],

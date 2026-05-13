@@ -263,6 +263,130 @@
 
 
 <!-- ══════════════════════════════════════
+     SHUTTLE SCREEN
+══════════════════════════════════════ -->
+<div id="screen-shuttle" class="screen screen-shuttle screen-hidden">
+  <div class="shuttle-screen-header">
+    <button class="shuttle-back-btn" id="shuttleBackBtn" aria-label="뒤로가기">‹</button>
+    <span data-i18n="nav_shuttle">셔틀버스</span>
+  </div>
+  <div class="shuttle-screen-body">
+
+    <!-- 교내 순환 셔틀 -->
+    <div class="shuttle-section">
+      <div class="shuttle-section-badge">교내셔틀</div>
+      <h2 class="shuttle-section-title">교내 순환 셔틀버스</h2>
+      <p class="shuttle-section-desc">평일 운행 · 10회 · 무료</p>
+      <div class="shuttle-route-tag">인문대 앞 → 학생회관 사거리 → ICT융합대학 → 음악대학 → 제1공학관 → 후문(제4공학관) → 미술대학(조형관) → 인문대 앞</div>
+      <div class="shuttle-times-grid">
+        <div class="shuttle-time-chip">09:10</div>
+        <div class="shuttle-time-chip">09:20</div>
+        <div class="shuttle-time-chip">10:10</div>
+        <div class="shuttle-time-chip">10:20</div>
+        <div class="shuttle-time-chip">11:10</div>
+        <div class="shuttle-time-chip">11:20</div>
+        <div class="shuttle-time-chip">12:10</div>
+        <div class="shuttle-time-chip">13:20</div>
+        <div class="shuttle-time-chip">14:20</div>
+        <div class="shuttle-time-chip">15:20</div>
+      </div>
+    </div>
+
+    <!-- 통학버스 -->
+    <div class="shuttle-section">
+      <div class="shuttle-section-badge commuter">통학버스</div>
+      <h2 class="shuttle-section-title">통학버스</h2>
+      <p class="shuttle-section-desc">평일 운행 · 모바일 승차권 필수 (현금 불가)</p>
+
+      <!-- 학교 방향 -->
+      <div class="shuttle-direction-label">→ 학교 방향</div>
+
+      <div class="shuttle-route-card">
+        <div class="shuttle-route-name">🚉 송내역 <span class="shuttle-fare">2,300원</span></div>
+        <div class="shuttle-route-stop">고려한증막 앞 승차</div>
+        <div class="shuttle-route-times">
+          <span class="shuttle-time-chip sm">07:50 <em>2대</em></span>
+          <span class="shuttle-time-chip sm">09:00 <em>2대</em></span>
+          <span class="shuttle-time-chip sm">10:20</span>
+        </div>
+      </div>
+
+      <div class="shuttle-route-card">
+        <div class="shuttle-route-name">🚉 고색역 <span class="shuttle-fare free">무료</span></div>
+        <div class="shuttle-route-stop">3번 출구 / 새마을금고 앞 승차</div>
+        <div class="shuttle-route-times">
+          <span class="shuttle-time-chip sm">08:50 <em>3대</em></span>
+          <span class="shuttle-time-chip sm">10:00</span>
+        </div>
+      </div>
+
+      <div class="shuttle-route-card">
+        <div class="shuttle-route-name">🚉 강남역 <span class="shuttle-fare">2,000원</span></div>
+        <div class="shuttle-route-stop">7번 출구 산업은행 앞 승차</div>
+        <div class="shuttle-route-times">
+          <span class="shuttle-time-chip sm">07:50</span>
+        </div>
+      </div>
+
+      <div class="shuttle-route-card">
+        <div class="shuttle-route-name">🚉 사당역 <span class="shuttle-fare">2,000원</span></div>
+        <div class="shuttle-route-stop">홈플러스 앞 (4번 출구→300m 직진) 승차</div>
+        <div class="shuttle-route-times">
+          <span class="shuttle-time-chip sm">08:00</span>
+        </div>
+      </div>
+
+      <div class="shuttle-route-card">
+        <div class="shuttle-route-name">🚉 병점역 <span class="shuttle-fare free">무료</span></div>
+        <div class="shuttle-route-stop">후문 2·3번 출구 / 버스정류장 앞 승차</div>
+        <div class="shuttle-route-times">
+          <span class="shuttle-time-chip sm">08:50 <em>3대</em></span>
+          <span class="shuttle-time-chip sm">10:00</span>
+          <span class="shuttle-time-chip sm">11:00</span>
+        </div>
+      </div>
+
+      <!-- 학교 출발 -->
+      <div class="shuttle-direction-label outbound">← 학교 출발</div>
+
+      <div class="shuttle-route-card">
+        <div class="shuttle-route-name">🚉 → 송내역 <span class="shuttle-fare">2,300원</span></div>
+        <div class="shuttle-route-stop">정문 앞 승차</div>
+        <div class="shuttle-route-times">
+          <span class="shuttle-time-chip sm">15:50</span>
+          <span class="shuttle-time-chip sm">16:50</span>
+          <span class="shuttle-time-chip sm">17:50</span>
+        </div>
+      </div>
+
+      <div class="shuttle-route-card">
+        <div class="shuttle-route-name">🚉 → 사당역 <span class="shuttle-fare">2,000원</span></div>
+        <div class="shuttle-route-stop">인문대 승차장 앞</div>
+        <div class="shuttle-route-times">
+          <span class="shuttle-time-chip sm">17:40</span>
+        </div>
+      </div>
+
+      <div class="shuttle-route-card">
+        <div class="shuttle-route-name">🚉 → 병점역 <span class="shuttle-fare free">무료</span></div>
+        <div class="shuttle-route-stop">인문대 승차장 앞</div>
+        <div class="shuttle-route-times">
+          <span class="shuttle-time-chip sm">16:40</span>
+        </div>
+      </div>
+
+      <div class="shuttle-notice">
+        <p>· 학기 중 평일 운행 (방학·공휴일 없음)</p>
+        <p>· 탑승자 15명 이하 시 운행 잠정 중단 가능</p>
+        <p>· 모바일 승차권: 수원대 홈페이지에서 구매</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
      NAV OVERLAY
 ══════════════════════════════════════ -->
 <div id="navOverlay" class="nav-overlay hidden" role="dialog" aria-modal="true" aria-label="사이트 메뉴">
@@ -299,7 +423,7 @@
         <span class="nav-menu-text" data-i18n="nav_cafeteria">학식당</span>
         <span class="nav-menu-arrow" aria-hidden="true">›</span>
       </a>
-      <a href="#" class="nav-menu-item">
+      <a href="#" class="nav-menu-item" data-screen="screen-shuttle">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 19v2M18 19v2M6 10V5M18 10V5"/></svg>
         </div>
