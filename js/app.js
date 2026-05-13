@@ -76,9 +76,19 @@ function updateMenu() {
     mainEl.innerHTML = `<span class="menu-item-empty">${t('menu_none')}</span>`;
     return;
   }
-  mainEl.innerHTML = menu.items
-    .map(item => `<div class="menu-item">${item}</div>`)
-    .join('');
+
+  const lang = window.currentLang || 'ko';
+  mainEl.innerHTML = menu.items.map(item => {
+    const ko = item.ko || item;
+    if (lang === 'ko' || typeof item === 'string') {
+      return `<div class="menu-item">${ko}</div>`;
+    }
+    const translated = item[lang];
+    if (!translated || translated === ko) {
+      return `<div class="menu-item">${ko}</div>`;
+    }
+    return `<div class="menu-item">${translated} <span class="menu-item-ko">(${ko})</span></div>`;
+  }).join('');
 }
 
 function updateHomeData() {

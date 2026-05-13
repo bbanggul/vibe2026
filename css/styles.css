@@ -640,6 +640,11 @@ img, svg { display: block; }
   font-size: 0.9rem;
   color: var(--text-3);
 }
+.menu-item-ko {
+  font-size: 0.8em;
+  color: var(--text-3);
+  font-weight: 400;
+}
 
 /* ─── Sections ─── */
 .section { padding: 28px 16px 0; }
