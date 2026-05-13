@@ -949,6 +949,28 @@ img, svg { display: block; }
 }
 .nav-menu-text { flex: 1; }
 .nav-menu-arrow { font-size: 1rem; color: var(--text-3); font-weight: 300; }
+.nav-sub-arrow { display: inline-block; transition: transform 0.25s; }
+.nav-sub-arrow-open { transform: rotate(90deg); }
+.nav-sub-menu {
+  background: rgba(0,45,114,.04);
+  border-left: 3px solid var(--gold);
+  margin: 0 16px 6px 56px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  overflow: hidden;
+}
+.nav-sub-menu.hidden { display: none; }
+.nav-sub-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  font-size: 0.88rem;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-sub-item:hover { background: rgba(0,45,114,.08); color: var(--navy); }
+.nav-sub-dot { color: var(--gold); font-size: 0.75rem; }
 .nav-lang-section {
   padding: 16px 20px;
   border-top: 1px solid var(--border);

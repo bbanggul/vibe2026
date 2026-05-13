@@ -244,6 +244,8 @@ function initNav() {
   function closeNav() {
     navOverlay.classList.remove('nav-open');
     document.body.style.overflow = '';
+    document.getElementById('schoolSubMenu')?.classList.add('hidden');
+    document.querySelector('.nav-sub-arrow')?.classList.remove('nav-sub-arrow-open');
     setTimeout(() => navOverlay.classList.add('hidden'), 350);
   }
 
@@ -254,9 +256,25 @@ function initNav() {
   document.querySelectorAll('.nav-menu-item').forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault();
+      if (item.classList.contains('nav-has-sub')) {
+        const subMenu = document.getElementById('schoolSubMenu');
+        const arrow = item.querySelector('.nav-sub-arrow');
+        subMenu?.classList.toggle('hidden');
+        arrow?.classList.toggle('nav-sub-arrow-open');
+        return;
+      }
       const target = item.dataset.screen;
       closeNav();
       if (target) setTimeout(() => showScreen(target), 360);
+    });
+  });
+
+  document.querySelectorAll('.nav-sub-item').forEach(sub => {
+    sub.addEventListener('click', e => {
+      e.preventDefault();
+      const pane = sub.dataset.schoolPane;
+      closeNav();
+      setTimeout(() => openSchoolPane(pane), 360);
     });
   });
 }
@@ -353,6 +371,16 @@ function initCafeteriaScreen() {
 }
 
 /* School Info Screen */
+function openSchoolPane(pane) {
+  showScreen('screen-school');
+  document.querySelectorAll('.school-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.pane === pane);
+  });
+  document.querySelectorAll('.school-tab-pane').forEach(p => {
+    p.classList.toggle('hidden', p.id !== pane);
+  });
+}
+
 function renderSchoolFacilities() {
   const lang = window.currentLang || 'ko';
   const container = document.getElementById('schoolFacilities');

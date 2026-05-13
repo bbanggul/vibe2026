@@ -587,13 +587,23 @@
         <span class="nav-menu-text" data-i18n="nav_home">홈</span>
         <span class="nav-menu-arrow" aria-hidden="true">›</span>
       </a>
-      <a href="#" class="nav-menu-item" data-screen="screen-school">
+      <a href="#" class="nav-menu-item nav-has-sub" id="schoolNavItem">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><rect x="2" y="9" width="20" height="13"/><path d="M7 9V4h10v5"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg>
         </div>
         <span class="nav-menu-text" data-i18n="nav_school">학교정보</span>
-        <span class="nav-menu-arrow" aria-hidden="true">›</span>
+        <span class="nav-menu-arrow nav-sub-arrow" aria-hidden="true">›</span>
       </a>
+      <div class="nav-sub-menu hidden" id="schoolSubMenu">
+        <a href="#" class="nav-sub-item" data-school-pane="schoolFacilities">
+          <span class="nav-sub-dot">›</span>
+          <span data-i18n="school_tab_facilities">학교시설</span>
+        </a>
+        <a href="#" class="nav-sub-item" data-school-pane="schoolDepts">
+          <span class="nav-sub-dot">›</span>
+          <span data-i18n="school_tab_depts">학과정보</span>
+        </a>
+      </div>
       <a href="#" class="nav-menu-item" data-screen="screen-cafeteria">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
