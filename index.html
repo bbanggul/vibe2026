@@ -457,6 +457,84 @@
 
 
 <!-- ══════════════════════════════════════
+     CAFETERIA SCREEN
+══════════════════════════════════════ -->
+<div id="screen-cafeteria" class="screen screen-cafeteria screen-hidden">
+  <div class="caf-screen-header">
+    <button class="caf-back-btn" id="cafBackBtn" aria-label="뒤로가기">‹</button>
+    <span data-i18n="nav_cafeteria">학식당</span>
+  </div>
+  <div class="caf-screen-body">
+
+    <!-- Day tabs -->
+    <div class="caf-day-tabs">
+      <button class="caf-day-tab" data-day="1"><span data-i18n="mon">월</span></button>
+      <button class="caf-day-tab" data-day="2"><span data-i18n="tue">화</span></button>
+      <button class="caf-day-tab" data-day="3"><span data-i18n="wed">수</span></button>
+      <button class="caf-day-tab" data-day="4"><span data-i18n="thu">목</span></button>
+      <button class="caf-day-tab" data-day="5"><span data-i18n="fri">금</span></button>
+    </div>
+
+    <!-- Menu content (JS-filled) -->
+    <div id="cafeteriaMenuContent" class="caf-menu-content"></div>
+
+    <!-- Cafeteria info -->
+    <div class="caf-section">
+      <div class="caf-section-badge">Info</div>
+      <h2 class="caf-section-title" data-i18n="caf_info_title">식당 정보</h2>
+      <div class="caf-info-table">
+        <div class="caf-info-row">
+          <span class="caf-info-label" data-i18n="caf_info_location_label">위치</span>
+          <span class="caf-info-value" data-i18n="caf_info_location">학생회관 1층</span>
+        </div>
+        <div class="caf-info-row">
+          <span class="caf-info-label" data-i18n="caf_info_hours_label">운영시간</span>
+          <div class="caf-info-value">
+            <div data-i18n="caf_info_hours_lunch">중식  11:00 ~ 14:00</div>
+            <div data-i18n="caf_info_hours_dinner">석식  17:00 ~ 18:30</div>
+            <div class="caf-info-closed" data-i18n="caf_info_closed">토·일·공휴일 휴무</div>
+          </div>
+        </div>
+        <div class="caf-info-row">
+          <span class="caf-info-label" data-i18n="caf_info_price_label">가격</span>
+          <span class="caf-info-value" data-i18n="caf_info_price">3,500원 ~ 4,000원</span>
+        </div>
+        <div class="caf-info-row">
+          <span class="caf-info-label" data-i18n="caf_info_payment_label">결제수단</span>
+          <span class="caf-info-value" data-i18n="caf_info_payment">학생증 · 현금 · 카드</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Usage guide -->
+    <div class="caf-section">
+      <div class="caf-section-badge">Guide</div>
+      <h2 class="caf-section-title" data-i18n="caf_guide_title">이용안내</h2>
+      <div class="caf-guide-list">
+        <div class="caf-guide-item">
+          <span class="caf-guide-dot">·</span>
+          <span data-i18n="caf_guide_1">식사 후 식판은 반납 코너에 반납해 주세요.</span>
+        </div>
+        <div class="caf-guide-item">
+          <span class="caf-guide-dot">·</span>
+          <span data-i18n="caf_guide_2">음식물은 남기지 않도록 해 주세요.</span>
+        </div>
+        <div class="caf-guide-item">
+          <span class="caf-guide-dot">·</span>
+          <span data-i18n="caf_guide_3">줄서기 순서를 지켜 주세요.</span>
+        </div>
+        <div class="caf-guide-item">
+          <span class="caf-guide-dot">·</span>
+          <span data-i18n="caf_guide_4">식당 내에서는 금연입니다.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
      NAV OVERLAY
 ══════════════════════════════════════ -->
 <div id="navOverlay" class="nav-overlay hidden" role="dialog" aria-modal="true" aria-label="사이트 메뉴">
@@ -486,7 +564,7 @@
         <span class="nav-menu-text" data-i18n="nav_school">학교정보</span>
         <span class="nav-menu-arrow" aria-hidden="true">›</span>
       </a>
-      <a href="#" class="nav-menu-item">
+      <a href="#" class="nav-menu-item" data-screen="screen-cafeteria">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
         </div>

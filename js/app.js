@@ -30,6 +30,8 @@ function onLanguageChange(lang) {
   updateHomeData();
   updateNotices();
   updateNavLangButtons(lang);
+  const activeTab = document.querySelector('.caf-day-tab.active');
+  if (activeTab) renderCafeteriaDay(parseInt(activeTab.dataset.day));
 }
 
 function updateHeaderLang(lang) {
@@ -200,6 +202,86 @@ function initShuttleScreen() {
   });
 }
 
+/* Cafeteria Screen */
+const mealTypeLabels = {
+  '조식': { ko:'조식', en:'Breakfast', zh:'早餐', ja:'朝食', vi:'Bữa sáng', th:'อาหารเช้า' },
+  '중식': { ko:'중식', en:'Lunch',     zh:'午餐', ja:'昼食', vi:'Bữa trưa', th:'อาหารกลางวัน' },
+  '석식': { ko:'석식', en:'Dinner',    zh:'晚餐', ja:'夕食', vi:'Bữa tối',  th:'อาหารเย็น' },
+};
+
+function renderCafeteriaDay(dayNum) {
+  const container = document.getElementById('cafeteriaMenuContent');
+  if (!container) return;
+  const lang = window.currentLang || 'ko';
+
+  if (!cafeteriaData || !cafeteriaData.menu) {
+    container.innerHTML = `<div class="caf-empty">${t('menu_none')}</div>`;
+    return;
+  }
+  const entries = cafeteriaData.menu[String(dayNum)];
+  if (!entries || entries.length === 0) {
+    container.innerHTML = `<div class="caf-empty">${t('caf_no_menu')}</div>`;
+    return;
+  }
+
+  const typeOrder = ['조식', '중식', '석식'];
+  const grouped = {};
+  entries.forEach(e => { if (!grouped[e.type]) grouped[e.type] = []; grouped[e.type].push(e); });
+  const sortedTypes = typeOrder.filter(tp => grouped[tp])
+    .concat(Object.keys(grouped).filter(tp => !typeOrder.includes(tp)));
+
+  container.innerHTML = sortedTypes.map(type => {
+    const label = (mealTypeLabels[type] && mealTypeLabels[type][lang]) || type;
+    return `
+      <div class="caf-meal-section">
+        <div class="caf-meal-type-label">${label}</div>
+        ${grouped[type].map(corner => `
+          <div class="caf-corner-card">
+            <div class="caf-corner-name">${corner.corner}</div>
+            <div class="caf-items">
+              ${corner.items.map(item => {
+                const ko = item.ko || item;
+                if (lang === 'ko' || typeof item === 'string') return `<div class="caf-item">${ko}</div>`;
+                const tr = item[lang];
+                if (!tr || tr === ko) return `<div class="caf-item">${ko}</div>`;
+                return `<div class="caf-item">${tr} <span class="caf-item-ko">(${ko})</span></div>`;
+              }).join('')}
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
+  }).join('');
+
+  if (cafeteriaData.weekRange) {
+    const rangeEl = document.getElementById('cafWeekRange');
+    if (rangeEl) rangeEl.textContent = cafeteriaData.weekRange;
+  }
+}
+
+function openCafeteriaScreen() {
+  showScreen('screen-cafeteria');
+  const today = new Date().getDay();
+  const targetDay = (today === 0 || today === 6) ? 1 : today;
+  document.querySelectorAll('.caf-day-tab').forEach(tb => tb.classList.remove('active'));
+  const activeTab = document.querySelector(`.caf-day-tab[data-day="${targetDay}"]`);
+  if (activeTab) activeTab.classList.add('active');
+  renderCafeteriaDay(targetDay);
+}
+
+function initCafeteriaScreen() {
+  document.getElementById('cafBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
+  document.getElementById('menuCard')?.addEventListener('click', openCafeteriaScreen);
+  document.getElementById('menuCard')?.setAttribute('style', 'cursor:pointer');
+
+  document.querySelectorAll('.caf-day-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.caf-day-tab').forEach(tb => tb.classList.remove('active'));
+      tab.classList.add('active');
+      renderCafeteriaDay(parseInt(tab.dataset.day));
+    });
+  });
+}
+
 /* Language Toggle (header dropdown) */
 function initLangToggle() {
   const btn = document.getElementById('langToggleBtn');
@@ -346,6 +428,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initNavLangButtons();
   initNav();
   initShuttleScreen();
+  initCafeteriaScreen();
   initChatbot();
   initHeaderScroll();
   updateNotices();
