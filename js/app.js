@@ -244,8 +244,8 @@ function initNav() {
   function closeNav() {
     navOverlay.classList.remove('nav-open');
     document.body.style.overflow = '';
-    document.getElementById('schoolSubMenu')?.classList.add('hidden');
-    document.querySelector('.nav-sub-arrow')?.classList.remove('nav-sub-arrow-open');
+    document.querySelectorAll('.nav-sub-menu').forEach(m => m.classList.add('hidden'));
+    document.querySelectorAll('.nav-sub-arrow').forEach(a => a.classList.remove('nav-sub-arrow-open'));
     setTimeout(() => navOverlay.classList.add('hidden'), 350);
   }
 
@@ -257,8 +257,12 @@ function initNav() {
     item.addEventListener('click', e => {
       e.preventDefault();
       if (item.classList.contains('nav-has-sub')) {
-        const subMenu = document.getElementById('schoolSubMenu');
+        const subId = item.id === 'shuttleNavItem' ? 'shuttleSubMenu' : 'schoolSubMenu';
+        const subMenu = document.getElementById(subId);
         const arrow = item.querySelector('.nav-sub-arrow');
+        // close other open submenus
+        document.querySelectorAll('.nav-sub-menu').forEach(m => { if (m.id !== subId) m.classList.add('hidden'); });
+        document.querySelectorAll('.nav-sub-arrow').forEach(a => { if (a !== arrow) a.classList.remove('nav-sub-arrow-open'); });
         subMenu?.classList.toggle('hidden');
         arrow?.classList.toggle('nav-sub-arrow-open');
         return;
@@ -272,9 +276,26 @@ function initNav() {
   document.querySelectorAll('.nav-sub-item').forEach(sub => {
     sub.addEventListener('click', e => {
       e.preventDefault();
-      const pane = sub.dataset.schoolPane;
-      closeNav();
-      setTimeout(() => openSchoolPane(pane), 360);
+      if (sub.dataset.schoolPane) {
+        const pane = sub.dataset.schoolPane;
+        closeNav();
+        setTimeout(() => openSchoolPane(pane), 360);
+      } else if (sub.dataset.shuttleSection) {
+        const section = sub.dataset.shuttleSection;
+        closeNav();
+        setTimeout(() => openShuttleSection(section), 360);
+      }
+    });
+  });
+}
+
+function openShuttleSection(sectionId) {
+  showScreen('screen-shuttle');
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const el = document.getElementById(sectionId);
+      const body = document.querySelector('.shuttle-screen-body');
+      if (el && body) body.scrollTo({ top: el.offsetTop - 12, behavior: 'smooth' });
     });
   });
 }

@@ -273,7 +273,7 @@
   <div class="shuttle-screen-body">
 
     <!-- 교내 순환 셔틀 -->
-    <div class="shuttle-section">
+    <div class="shuttle-section" id="section-campus">
       <div class="shuttle-section-badge" data-i18n="shuttle_campus_badge">교내셔틀</div>
       <h2 class="shuttle-section-title" data-i18n="shuttle_campus_title">교내 순환 셔틀버스</h2>
       <p class="shuttle-section-desc" data-i18n="shuttle_campus_desc">평일 운행 · 10회 · 무료</p>
@@ -293,7 +293,7 @@
     </div>
 
     <!-- 통학버스 -->
-    <div class="shuttle-section">
+    <div class="shuttle-section" id="section-commuter">
       <div class="shuttle-section-badge commuter" data-i18n="shuttle_commuter_badge">통학버스</div>
       <h2 class="shuttle-section-title" data-i18n="shuttle_commuter_title">통학버스</h2>
       <p class="shuttle-section-desc" data-i18n="shuttle_commuter_desc">평일 운행 · 모바일 승차권 필수 (현금 불가)</p>
@@ -611,13 +611,23 @@
         <span class="nav-menu-text" data-i18n="nav_cafeteria">학식당</span>
         <span class="nav-menu-arrow" aria-hidden="true">›</span>
       </a>
-      <a href="#" class="nav-menu-item" data-screen="screen-shuttle">
+      <a href="#" class="nav-menu-item nav-has-sub" id="shuttleNavItem">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 19v2M18 19v2M6 10V5M18 10V5"/></svg>
         </div>
         <span class="nav-menu-text" data-i18n="nav_shuttle">셔틀버스</span>
-        <span class="nav-menu-arrow" aria-hidden="true">›</span>
+        <span class="nav-menu-arrow nav-sub-arrow" aria-hidden="true">›</span>
       </a>
+      <div class="nav-sub-menu hidden" id="shuttleSubMenu">
+        <a href="#" class="nav-sub-item" data-shuttle-section="section-campus">
+          <span class="nav-sub-dot">›</span>
+          <span data-i18n="shuttle_campus_badge">교내셔틀</span>
+        </a>
+        <a href="#" class="nav-sub-item" data-shuttle-section="section-commuter">
+          <span class="nav-sub-dot">›</span>
+          <span data-i18n="shuttle_commuter_badge">통학버스</span>
+        </a>
+      </div>
       <a href="#" class="nav-menu-item">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
