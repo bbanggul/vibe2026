@@ -576,8 +576,17 @@ function initChatbot() {
 }
 
 /* Auto-update shuttle every minute */
+function updateCampusChips() {
+  const now = new Date();
+  const cur = now.getHours() * 60 + now.getMinutes();
+  document.querySelectorAll('.shuttle-times-grid .shuttle-time-chip').forEach(chip => {
+    const [h, m] = chip.textContent.trim().split(':').map(Number);
+    chip.classList.toggle('chip-past', cur > h * 60 + m);
+  });
+}
+
 function startShuttleTimer() {
-  setInterval(updateHomeData, 60000);
+  setInterval(() => { updateHomeData(); updateCampusChips(); }, 60000);
 }
 
 /* Loading → Language / Home */
@@ -614,6 +623,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateNotices();
   await loadCafeteriaData();
   updateHomeData();
+  updateCampusChips();
   updateNavLangButtons(window.currentLang);
   startShuttleTimer();
   initLoading();

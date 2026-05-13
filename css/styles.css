@@ -1328,7 +1328,9 @@ img, svg { display: block; }
   font-weight: 600;
   padding: 6px 14px;
   border-radius: 99px;
+  transition: opacity 0.4s;
 }
+.shuttle-time-chip.chip-past { opacity: 0.28; }
 .shuttle-time-chip.sm {
   font-size: 0.78rem;
   padding: 4px 10px;
