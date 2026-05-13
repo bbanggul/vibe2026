@@ -946,6 +946,7 @@ img, svg { display: block; }
 .nav-panel-footer {
   padding: 16px 20px;
   border-top: 1px solid var(--border);
+  flex-shrink: 0;
 }
 .nav-contact-info { font-size: 0.75rem; color: var(--text-2); line-height: 1.9; margin-bottom: 14px; }
 .nav-login-section { display: flex; gap: 8px; }
