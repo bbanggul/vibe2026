@@ -124,34 +124,25 @@
     <!-- HERO -->
     <section class="hero-section" aria-label="현황 정보">
       <div class="hero-bg">
-        <h1 class="hero-greeting" data-i18n="welcome">안녕하세요</h1>
         <p class="hero-subtitle" data-i18n="welcome_sub">수원대학교 국제학생 포털</p>
         <div class="hero-date" id="heroDate"></div>
+        <div class="hero-shuttle-row">
+          <svg viewBox="0 0 24 24" class="hero-shuttle-icon"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 19v2M18 19v2M6 10V5M18 10V5"/></svg>
+          <span class="hero-shuttle-label" data-i18n="next_shuttle">다음 셔틀</span>
+          <span class="hero-shuttle-time" id="nextShuttleTime">--:--</span>
+          <span class="hero-shuttle-eta" id="shuttleEta"></span>
+        </div>
       </div>
 
       <div class="quick-info-cards">
-        <div class="quick-card shuttle-quick-card" id="shuttleCard" role="button" tabindex="0" aria-label="셔틀버스 정보">
-          <div class="quick-card-icon-wrap shuttle-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 19v2M18 19v2M6 10V5M18 10V5"/></svg>
+        <div class="menu-card" id="menuCard" role="button" tabindex="0" aria-label="오늘의 학식">
+          <div class="menu-card-header">
+            <div class="quick-card-icon-wrap menu-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            </div>
+            <span class="menu-card-title" data-i18n="todays_menu">오늘의 학식</span>
           </div>
-          <div class="quick-card-body">
-            <div class="quick-card-label" data-i18n="next_shuttle">다음 셔틀</div>
-            <div class="quick-card-value" id="nextShuttleTime">--:--</div>
-            <div class="quick-card-sub" id="shuttleEta"></div>
-          </div>
-          <div class="quick-card-arrow" aria-hidden="true">›</div>
-        </div>
-
-        <div class="quick-card menu-quick-card" id="menuCard" role="button" tabindex="0" aria-label="오늘의 학식">
-          <div class="quick-card-icon-wrap menu-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-          </div>
-          <div class="quick-card-body">
-            <div class="quick-card-label" data-i18n="todays_menu">오늘의 학식</div>
-            <div class="quick-card-value" id="todayMenuMain">--</div>
-            <div class="quick-card-sub" id="todayMenuPrice"></div>
-          </div>
-          <div class="quick-card-arrow" aria-hidden="true">›</div>
+          <div class="menu-item-list" id="todayMenuMain">--</div>
         </div>
       </div>
     </section>

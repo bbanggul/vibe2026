@@ -70,16 +70,15 @@ function updateShuttle() {
 function updateMenu() {
   const menu = getTodayMenu();
   const mainEl = document.getElementById('todayMenuMain');
-  const priceEl = document.getElementById('todayMenuPrice');
-  if (!mainEl || !priceEl) return;
+  if (!mainEl) return;
 
-  if (!menu) {
-    mainEl.textContent = t('menu_none');
-    priceEl.textContent = '';
+  if (!menu || !menu.items || menu.items.length === 0) {
+    mainEl.innerHTML = `<span class="menu-item-empty">${t('menu_none')}</span>`;
     return;
   }
-  mainEl.textContent = menu.items.slice(0, 2).join(' · ');
-  priceEl.textContent = menu.items.slice(2).join('  ·  ');
+  mainEl.innerHTML = menu.items
+    .map(item => `<div class="menu-item">${item}</div>`)
+    .join('');
 }
 
 function updateHomeData() {
