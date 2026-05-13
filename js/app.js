@@ -24,6 +24,100 @@ function initHeaderScroll() {
   });
 }
 
+/* ─── Library Data ─── */
+const libraryContent = {
+  ko: {
+    infoTitle: '기본 정보',
+    hoursLabel: '운영시간', hours: '평일 09:00~22:00 · 토 09:00~18:00',
+    closedLabel: '휴관일', closed: '일요일 · 공휴일',
+    locLabel: '위치', loc: '학관동 (학생회관 옆)',
+    phoneLabel: '전화', phone: '031-220-2072',
+    borrowTitle: '도서 대출',
+    borrow: ['학생증 지참 필수', '대출 한도: 학부생 10권/30일 · 대학원생 20권/60일', '연체 시 연체 일수만큼 대출 정지', '반납은 무인 반납함 24시간 이용 가능'],
+    studyTitle: '스터디룸 예약',
+    studyBadge: '무료',
+    study: ['도서관 홈페이지(lib.suwon.ac.kr)에서 온라인 예약', '1회 2시간 단위 예약, 1일 최대 4시간', '4~8인 소규모 그룹 학습 공간', '잔여석 있을 경우 현장 이용도 가능'],
+    readingTitle: '열람실 이용',
+    readingBadge: '무료',
+    reading: ['무료 자유 이용 — 별도 신청 불필요', '음식물·음료 반입 금지 (음수대 비치)', '노트북·개인 학습 자료 지참 가능', '취침 및 과도한 소음 금지', '소지품 자리 장기 보존 금지'],
+  },
+  en: {
+    infoTitle: 'Basic Info',
+    hoursLabel: 'Hours', hours: 'Weekdays 09:00~22:00 · Sat 09:00~18:00',
+    closedLabel: 'Closed', closed: 'Sundays & public holidays',
+    locLabel: 'Location', loc: 'Hakgwan Bldg (next to Student Hall)',
+    phoneLabel: 'Phone', phone: '031-220-2072',
+    borrowTitle: 'Book Borrowing',
+    borrow: ['Student ID required', 'Limit: Undergrad 10 books/30 days · Grad 20/60 days', 'Borrowing suspended for overdue days', '24-hr drop box available for returns'],
+    studyTitle: 'Study Room Reservation',
+    studyBadge: 'Free',
+    study: ['Book online at lib.suwon.ac.kr', '2 hrs per session, max 4 hrs/day', 'Small group rooms for 4~8 people', 'Walk-in available if seats remain'],
+    readingTitle: 'Reading Room',
+    readingBadge: 'Free',
+    reading: ['Free admission — no sign-up needed', 'No food or drinks (water fountains available)', 'Laptops and personal study materials allowed', 'No sleeping or excessive noise', 'Do not reserve seats with belongings'],
+  },
+  zh: {
+    infoTitle: '基本信息',
+    hoursLabel: '营业时间', hours: '平日 09:00~22:00 · 周六 09:00~18:00',
+    closedLabel: '休馆', closed: '周日 · 节假日',
+    locLabel: '位置', loc: '学馆栋（学生会馆旁）',
+    phoneLabel: '电话', phone: '031-220-2072',
+    borrowTitle: '图书借阅',
+    borrow: ['需携带学生证', '借阅限额：本科生10册/30天 · 研究生20册/60天', '逾期还书期间暂停借阅权限', '24小时无人还书箱可随时还书'],
+    studyTitle: '研讨室预约',
+    studyBadge: '免费',
+    study: ['在图书馆主页(lib.suwon.ac.kr)在线预约', '每次2小时，每日最多4小时', '4~8人小组学习空间', '有余位时可直接到场使用'],
+    readingTitle: '阅览室使用',
+    readingBadge: '免费',
+    reading: ['免费开放，无需申请', '禁止携带食物和饮料（设有饮水机）', '可携带笔记本电脑及个人学习资料', '禁止睡觉及大声喧哗', '禁止长时间占座'],
+  },
+  ja: {
+    infoTitle: '基本情報',
+    hoursLabel: '営業時間', hours: '平日 09:00~22:00 · 土 09:00~18:00',
+    closedLabel: '休館', closed: '日曜日 · 祝日',
+    locLabel: '場所', loc: '学館棟（学生会館の隣）',
+    phoneLabel: '電話', phone: '031-220-2072',
+    borrowTitle: '図書貸出',
+    borrow: ['学生証必携', '貸出限度：学部生10冊/30日 · 大学院生20冊/60日', '延滞中は貸出停止', '24時間無人返却ボックス利用可'],
+    studyTitle: 'スタディルーム予約',
+    studyBadge: '無料',
+    study: ['図書館HP(lib.suwon.ac.kr)でオンライン予約', '1回2時間、1日最大4時間', '4~8人の小グループ学習スペース', '空きがあれば当日利用も可'],
+    readingTitle: '閲覧室利用',
+    readingBadge: '無料',
+    reading: ['無料·申請不要', '飲食物の持ち込み禁止（給水機あり）', 'ノートPC·個人学習資料の持込可', '睡眠・過度な騒音禁止', '長時間の席取り禁止'],
+  },
+  vi: {
+    infoTitle: 'Thông tin cơ bản',
+    hoursLabel: 'Giờ mở cửa', hours: 'T2~6: 09:00~22:00 · T7: 09:00~18:00',
+    closedLabel: 'Đóng cửa', closed: 'Chủ nhật & ngày lễ',
+    locLabel: 'Địa điểm', loc: 'Tòa Hakgwan (cạnh Nhà SV)',
+    phoneLabel: 'Điện thoại', phone: '031-220-2072',
+    borrowTitle: 'Mượn sách',
+    borrow: ['Yêu cầu thẻ sinh viên', 'Hạn mức: ĐH 10 cuốn/30 ngày · SĐH 20/60 ngày', 'Tạm ngừng mượn khi có sách quá hạn', 'Hộp trả sách 24/7 tại cửa thư viện'],
+    studyTitle: 'Đặt phòng học nhóm',
+    studyBadge: 'Miễn phí',
+    study: ['Đặt trực tuyến tại lib.suwon.ac.kr', '2 tiếng/lần, tối đa 4 tiếng/ngày', 'Phòng 4~8 người', 'Có thể dùng trực tiếp nếu còn chỗ'],
+    readingTitle: 'Phòng đọc sách',
+    readingBadge: 'Miễn phí',
+    reading: ['Miễn phí, không cần đăng ký', 'Không mang đồ ăn/uống vào (có máy nước)', 'Được mang laptop và tài liệu cá nhân', 'Không ngủ hoặc gây ồn', 'Không giữ chỗ bằng đồ vật'],
+  },
+  th: {
+    infoTitle: 'ข้อมูลทั่วไป',
+    hoursLabel: 'เวลาทำการ', hours: 'จ~ศ 09:00~22:00 · เสาร์ 09:00~18:00',
+    closedLabel: 'ปิดทำการ', closed: 'อาทิตย์ & วันหยุดนักขัตฤกษ์',
+    locLabel: 'ที่ตั้ง', loc: 'อาคารฮักกวาน (ข้างอาคารนักศึกษา)',
+    phoneLabel: 'โทรศัพท์', phone: '031-220-2072',
+    borrowTitle: 'การยืมหนังสือ',
+    borrow: ['ต้องใช้บัตรนักศึกษา', 'จำกัด: ป.ตรี 10 เล่ม/30 วัน · บัณฑิต 20/60 วัน', 'ระงับการยืมหากมีหนังสือเกินกำหนด', 'ตู้คืนหนังสืออัตโนมัติ 24 ชั่วโมง'],
+    studyTitle: 'จองห้องสตัดดี้',
+    studyBadge: 'ฟรี',
+    study: ['จองออนไลน์ที่ lib.suwon.ac.kr', '2 ชม./ครั้ง สูงสุด 4 ชม./วัน', 'ห้องกลุ่ม 4~8 คน', 'Walk-in ได้หากมีที่ว่าง'],
+    readingTitle: 'ห้องอ่านหนังสือ',
+    readingBadge: 'ฟรี',
+    reading: ['ฟรี ไม่ต้องสมัคร', 'ห้ามนำอาหาร/เครื่องดื่มเข้า (มีน้ำดื่ม)', 'นำแล็ปท็อปและเอกสารส่วนตัวได้', 'ห้ามนอนหรือส่งเสียงดัง', 'ห้ามจองที่นั่งด้วยสิ่งของ'],
+  },
+};
+
 /* ─── School Info Data ─── */
 const facilityList = [
   {
@@ -95,6 +189,7 @@ function onLanguageChange(lang) {
   updateNavLangButtons(lang);
   const activeTab = document.querySelector('.caf-day-tab.active');
   if (activeTab) renderCafeteriaDay(parseInt(activeTab.dataset.day));
+  renderLibrary();
   renderSchoolFacilities();
   renderSchoolDepts();
 }
@@ -395,6 +490,54 @@ function initCafeteriaScreen() {
   });
 }
 
+/* Library Screen */
+function renderLibrary() {
+  const lang = window.currentLang || 'ko';
+  const d = libraryContent[lang] || libraryContent.ko;
+  const container = document.getElementById('libScreenBody');
+  if (!container) return;
+
+  const guideItem = (text) => `<div class="lib-guide-item"><span class="lib-guide-dot">·</span><span>${text}</span></div>`;
+
+  container.innerHTML = `
+    <div class="lib-section">
+      <div class="lib-section-title">${d.infoTitle}</div>
+      <div class="lib-info-table">
+        <div class="lib-info-row"><span class="lib-info-label">${d.hoursLabel}</span><span class="lib-info-value">${d.hours}</span></div>
+        <div class="lib-info-row"><span class="lib-info-label">${d.closedLabel}</span><span class="lib-info-value lib-info-closed">${d.closed}</span></div>
+        <div class="lib-info-row"><span class="lib-info-label">${d.locLabel}</span><span class="lib-info-value">${d.loc}</span></div>
+        <div class="lib-info-row"><span class="lib-info-label">${d.phoneLabel}</span><span class="lib-info-value"><a href="tel:${d.phone}" class="lib-phone-link">${d.phone}</a></span></div>
+      </div>
+    </div>
+
+    <div class="lib-section">
+      <div class="lib-section-title">${d.borrowTitle}</div>
+      <div class="lib-guide-list">${d.borrow.map(guideItem).join('')}</div>
+    </div>
+
+    <div class="lib-section">
+      <div class="lib-section-header">
+        <div class="lib-section-title">${d.studyTitle}</div>
+        <span class="lib-free-badge">${d.studyBadge}</span>
+      </div>
+      <div class="lib-guide-list">${d.study.map(guideItem).join('')}</div>
+    </div>
+
+    <div class="lib-section">
+      <div class="lib-section-header">
+        <div class="lib-section-title">${d.readingTitle}</div>
+        <span class="lib-free-badge">${d.readingBadge}</span>
+      </div>
+      <div class="lib-guide-list">${d.reading.map(guideItem).join('')}</div>
+    </div>
+  `;
+}
+
+function initLibraryScreen() {
+  document.getElementById('libBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
+  renderLibrary();
+}
+
 /* School Info Screen */
 function openSchoolPane(pane) {
   showScreen('screen-school');
@@ -617,6 +760,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initNav();
   initShuttleScreen();
   initCafeteriaScreen();
+  initLibraryScreen();
   initSchoolScreen();
   initChatbot();
   initHeaderScroll();

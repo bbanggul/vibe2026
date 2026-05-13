@@ -466,6 +466,21 @@
 
 
 <!-- ══════════════════════════════════════
+     LIBRARY SCREEN
+══════════════════════════════════════ -->
+<div id="screen-library" class="screen screen-library screen-hidden">
+  <div class="lib-screen-header">
+    <button class="lib-back-btn" id="libBackBtn" aria-label="뒤로가기">‹</button>
+    <span data-i18n="nav_library">중앙도서관</span>
+    <a href="https://lib.suwon.ac.kr" target="_blank" rel="noopener" class="lib-web-btn" id="libWebBtn">↗</a>
+  </div>
+  <div class="lib-screen-body" id="libScreenBody">
+    <!-- JS rendered -->
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
      SCHOOL INFO SCREEN
 ══════════════════════════════════════ -->
 <div id="screen-school" class="screen screen-school screen-hidden">
@@ -637,6 +652,13 @@
           <span data-i18n="shuttle_commuter_badge">통학버스</span>
         </a>
       </div>
+      <a href="#" class="nav-menu-item" data-screen="screen-library">
+        <div class="nav-menu-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <span class="nav-menu-text" data-i18n="nav_library">중앙도서관</span>
+        <span class="nav-menu-arrow" aria-hidden="true">›</span>
+      </a>
       <a href="#" class="nav-menu-item">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
