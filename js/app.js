@@ -200,6 +200,11 @@ function initShuttleScreen() {
   document.getElementById('shuttleBackBtn')?.addEventListener('click', () => {
     showScreen('screen-home');
   });
+  const shuttleRow = document.querySelector('.hero-shuttle-row');
+  if (shuttleRow) {
+    shuttleRow.style.cursor = 'pointer';
+    shuttleRow.addEventListener('click', () => showScreen('screen-shuttle'));
+  }
 }
 
 /* Cafeteria Screen */
