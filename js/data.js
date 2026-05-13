@@ -94,206 +94,206 @@ const notices = [
 const chatbotResponses = {
   ko: [
     {
-      keywords: ['도서관', '책', '열람', '대출', '반납'],
-      response: '도서관 이용시간\n평일: 09:00 – 22:00\n토요일: 09:00 – 18:00\n일요일·공휴일 휴관\n\n대출: 학생증 필요 (10권 / 30일)\n위치: 중앙도서관 (캠퍼스 지도 참고)',
+      keywords: ['도서관', '책', '열람', '대출', '반납', '스터디룸', '컨퍼런스'],
+      response: '📚 중앙도서관\n운영: 학기중 09:30~19:00 · 방학중 09:30~17:00\n휴관: 토·일, 공휴일, 개교기념일, 장서점검일\n전화: 031-220-2393\n\n대출 한도: 학부생 7권/10일\n연체료: 1일 1책당 100원 (연체 시 대출·증명서 발급 중지)\n연장: 1회 가능 (홈페이지 My Library)\n\n스터디룸(컨퍼런스룸): 무료 — lib.suwon.ac.kr에서 온라인 예약\n열람실: 무료 자유 이용',
     },
     {
       keywords: ['셔틀', '버스', '교통', '시간표', '통학'],
-      response: '교내 셔틀버스 (캠퍼스 순환)\n운행: 평일 09:10 – 15:20 (10회)\n노선: 인문대 → 학생회관 → ICT융합대학 → 음악대학 → 제1공학관 → 후문 → 미술대학 → 인문대\n\n홈 화면에서 다음 출발 시간을 확인하세요!\n통학버스 정보는 메뉴 > 셔틀버스 에서 확인하세요.',
+      response: '🚌 셔틀버스\n\n[교내셔틀] 평일 09:10~15:20 (10회, 무료)\n인문대→학생회관→ICT→음악대→제1공학관→후문→미술대→인문대\n\n[통학버스] 송내역·고색역·강남역·사당역·병점역\n모바일 승차권 필수 (현금 불가)\n예약: sb.suwon.ac.kr\n\n홈 화면에서 다음 출발 시간 확인 가능!',
     },
     {
-      keywords: ['학식', '밥', '메뉴', '식당', '점심', '저녁'],
-      response: '학생식당\n운영: 평일 11:00 – 14:00\n가격: 3,500원 – 4,000원\n위치: 학생회관 1층\n\n오늘의 메뉴는 홈 화면에서 바로 확인 가능합니다!',
+      keywords: ['학식', '밥', '메뉴', '식당', '점심', '저녁', '학생식당'],
+      response: '🍱 학생식당\n위치: 학생회관 1층\n\n가격\n· 일품 (돈까스·덮밥): 6,500원\n· 샐러드: 5,800원\n· 라면: 4,500원\n결제: 학식당 앞 키오스크\n\n오늘의 메뉴는 홈 화면 또는 메뉴 > 학식당에서 확인!',
     },
     {
       keywords: ['프린터', '출력', '인쇄', '복사'],
-      response: '프린터 위치\n① 중앙도서관 1층 (흑백·컬러)\n② 학생회관 1층\n③ 각 단과대학 행정실\n\n요금: 흑백 50원/장 · 컬러 200원/장\n결제: 학생증 (충전 필요)',
+      response: '🖨 프린터\n위치\n① 중앙도서관 1층 (흑백·컬러)\n② 학생회관 1층\n③ 각 단과대학 행정실\n\n요금: 흑백 50원/장 · 컬러 200원/장\n결제: 학생증 충전 후 사용',
     },
     {
-      keywords: ['수강신청', '강의', '수업', '과목', '캔버스', 'canvas', '강좌'],
-      response: '수강신청\n① suwon.ac.kr → 포털 로그인\n② 학사시스템 → 수강신청\n③ 강의자료: canvas.suwon.ac.kr\n\n신청 기간은 학기 초 공지를 확인하세요!',
+      keywords: ['수강신청', '강의', '수업', '과목', '캔버스', 'canvas', '강좌', '수업자료'],
+      response: '📋 수강신청\n① suwon.ac.kr → 포털 로그인\n② 학사시스템 → 수강신청\n강의자료: canvas.suwon.ac.kr\n\n신청 기간은 학기 초 공지 확인!',
     },
     {
-      keywords: ['기숙사', '생활관', '숙소', '방'],
-      response: '기숙사 신청\nsuwon.ac.kr → 생활관 → 입사신청\n\n외국인 유학생 우선 배정 제도 있음\n문의: 생활관 행정실 031-220-2×××\n\n정원 한정! 빠른 신청 권장',
+      keywords: ['기숙사', '생활관', '숙소', '방', '도미토리'],
+      response: '🏠 기숙사\n홈페이지: swudorm.suwon.ac.kr\n신청: suwon.ac.kr → 생활관 → 입사신청\n전화: 031-229-8202\n\n외국인 유학생 우선 배정 제도 있음\n정원 한정 — 빠른 신청 권장!',
     },
     {
-      keywords: ['건강', '병원', '약', '아프', '보건', '의료'],
-      response: '교내 보건실\n위치: 학생회관 2층\n운영: 평일 09:00 – 17:00\n\n근처 병원·약국 정보는 캠퍼스 지도를 확인하세요.\n응급: 119 / 학교 보안실 031-220-2000',
+      keywords: ['건강', '병원', '약', '아프', '보건', '의료', '보건실'],
+      response: '🏥 보건실\n위치: 학생회관 2층\n운영: 평일 09:00~17:00 (토·일·공휴일 휴무)\n전화: 031-220-2114\n\n응급: 119\n학교 보안실: 031-220-2000',
     },
     {
-      keywords: ['비자', '외국인', '등록', '국제교류', '유학생 사무'],
-      response: '국제교류처\n위치: 본관 2층\n운영: 평일 09:00 – 18:00\n전화: 031-220-2×××\n이메일: international@suwon.ac.kr\n\n비자·외국인 등록·장학금 등 담당',
+      keywords: ['비자', '외국인', '등록', '국제교류', '유학생', '장학금'],
+      response: '🌐 국제교류처\n위치: 본관 2층\n운영: 평일 09:00~18:00\n전화: 031-220-2114\n이메일: international@suwon.ac.kr\n\n비자·외국인 등록·장학금·교환학생 등 담당',
     },
   ],
   en: [
     {
-      keywords: ['library', 'book', 'borrow', 'return', 'reading'],
-      response: 'Library Hours\nWeekdays: 09:00 – 22:00\nSaturday: 09:00 – 18:00\nClosed Sundays & holidays\n\nBorrowing: Student ID required (10 books / 30 days)\nLocation: Central Library',
+      keywords: ['library', 'book', 'borrow', 'return', 'reading', 'study room', 'conference'],
+      response: '📚 Central Library\nHours: Semester 09:30~19:00 · Vacation 09:30~17:00\nClosed: Sat·Sun, holidays, Foundation Day, inventory days\nPhone: 031-220-2393\n\nBorrow limit: Undergrad 7 books / 10 days\nOverdue fee: ₩100/book/day (borrowing & certificates suspended)\nRenewal: once via My Library on the website\n\nConference study rooms: Free — book at lib.suwon.ac.kr\nReading room: Free walk-in',
     },
     {
       keywords: ['shuttle', 'bus', 'transport', 'schedule', 'commuter'],
-      response: 'Campus Shuttle (Loop)\nOperates: Weekdays 09:10 – 15:20 (10 trips)\nRoute: Humanities → Student Hall → ICT → Music → Engineering 1 → Back Gate → Fine Arts → Humanities\n\nCheck the home screen for next departure!\nFor commuter bus info, see Menu > Shuttle Bus.',
+      response: '🚌 Shuttle Bus\n\n[Campus Loop] Weekdays 09:10~15:20 (10 trips, free)\nHumanities→Student Hall→ICT→Music→Eng.1→Back Gate→Fine Arts→Humanities\n\n[Commuter Bus] Songnae·Gosaek·Gangnam·Sadang·Byeongjeom stations\nMobile ticket required (no cash)\nApp: sb.suwon.ac.kr\n\nCheck next departure on the home screen!',
     },
     {
       keywords: ['cafeteria', 'food', 'meal', 'lunch', 'dinner', 'menu'],
-      response: 'Student Cafeteria\nHours: Weekdays 11:00 – 14:00\nPrice: ₩3,500 – ₩4,000\nLocation: Student Hall 1F\n\nToday\'s menu is on the home screen!',
+      response: '🍱 Student Cafeteria\nLocation: Student Hall 1F\n\nPrices\n· Set meal (Cutlet/Rice bowl): ₩6,500\n· Salad: ₩5,800\n· Ramen: ₩4,500\nPayment: Kiosk in front of the cafeteria\n\nSee today\'s full menu on home screen or Menu > Cafeteria!',
     },
     {
       keywords: ['printer', 'print', 'copy'],
-      response: 'Printer Locations\n① Central Library 1F (B&W · Color)\n② Student Hall 1F\n③ College admin offices\n\nPrice: B&W ₩50/page · Color ₩200/page\nPayment: Student ID card (top-up required)',
+      response: '🖨 Printers\nLocations\n① Central Library 1F (B&W · Color)\n② Student Hall 1F\n③ College admin offices\n\nPrice: B&W ₩50/page · Color ₩200/page\nPayment: Student ID (top-up required)',
     },
     {
       keywords: ['registration', 'course', 'class', 'canvas', 'lecture'],
-      response: 'Course Registration\n① Visit suwon.ac.kr → Portal Login\n② Academic System → Course Registration\n③ Materials: canvas.suwon.ac.kr\n\nCheck announcements for registration dates!',
+      response: '📋 Course Registration\n① suwon.ac.kr → Portal Login\n② Academic System → Course Registration\nMaterials: canvas.suwon.ac.kr\n\nCheck announcements for registration dates!',
     },
     {
       keywords: ['dormitory', 'dorm', 'housing', 'room', 'residence'],
-      response: 'Dormitory Application\nsuwon.ac.kr → Dormitory → Apply\n\nInternational students have priority admission!\nContact: Dormitory Office 031-220-2×××\n\nLimited spots – apply early!',
+      response: '🏠 Dormitory\nWebsite: swudorm.suwon.ac.kr\nApply: suwon.ac.kr → Dormitory → Apply\nPhone: 031-229-8202\n\nInternational students have priority!\nLimited spots — apply early!',
     },
     {
       keywords: ['health', 'hospital', 'sick', 'medicine', 'clinic'],
-      response: 'Campus Health Center\nLocation: Student Hall 2F\nHours: Weekdays 09:00 – 17:00\n\nNearby clinics & pharmacies: see Campus Map.\nEmergency: 119 / Campus Security 031-220-2000',
+      response: '🏥 Health Center\nLocation: Student Hall 2F\nHours: Weekdays 09:00~17:00 (closed Sat·Sun·holidays)\nPhone: 031-220-2114\n\nEmergency: 119\nCampus Security: 031-220-2000',
     },
     {
-      keywords: ['visa', 'alien', 'foreign', 'international', 'office'],
-      response: 'International Affairs Office\nLocation: Main Building 2F\nHours: Weekdays 09:00 – 18:00\nPhone: 031-220-2×××\nEmail: international@suwon.ac.kr\n\nHandles visa, alien registration, scholarships & more.',
+      keywords: ['visa', 'alien', 'foreign', 'international', 'office', 'scholarship'],
+      response: '🌐 International Affairs Office\nLocation: Main Building 2F\nHours: Weekdays 09:00~18:00\nPhone: 031-220-2114\nEmail: international@suwon.ac.kr\n\nHandles visa, alien registration, scholarships & exchange programs.',
     },
   ],
   zh: [
     {
-      keywords: ['图书馆', '书', '借书', '还书', '阅览'],
-      response: '图书馆开放时间\n平日: 09:00 – 22:00\n周六: 09:00 – 18:00\n周日及节假日休馆\n\n借书需学生证（10本 / 30天）\n位置：中央图书馆',
+      keywords: ['图书馆', '书', '借书', '还书', '阅览', '自习室'],
+      response: '📚 中央图书馆\n开放时间: 学期中 09:30~19:00 · 假期 09:30~17:00\n休馆: 周六·周日、公休日、建校纪念日、藏书清点日\n电话: 031-220-2393\n\n借阅限额: 本科生7册/10天\n逾期费: 每册每天₩100（逾期暂停借阅及证明申请）\n续借: 1次（官网 My Library）\n\n研讨室: 免费 — lib.suwon.ac.kr 在线预约\n阅览室: 免费自由使用',
     },
     {
       keywords: ['校车', '班车', '巴士', '交通', '通勤'],
-      response: '校内循环巴士\n运行：工作日 09:10 – 15:20（共10班）\n路线：人文学院→学生会馆→ICT大楼→音乐学院→工学馆→后门→美术学院→人文学院\n\n首页可查看下一班出发时间！\n通勤巴士信息请查看菜单 > 班车信息。',
+      response: '🚌 校车信息\n\n[校内循环] 工作日 09:10~15:20（10班，免费）\n人文→学生会馆→ICT→音乐→工学馆→后门→美术→人文\n\n[通勤巴士] 松内站·古色站·江南站·四堂站·饼店站\n须使用移动乘车券（不可现金）\n预约: sb.suwon.ac.kr\n\n首页可查看下一班出发时间！',
     },
     {
       keywords: ['食堂', '菜单', '午饭', '晚饭', '吃饭'],
-      response: '学生食堂\n营业: 平日 11:00 – 14:00\n价格: ₩3,500 – ₩4,000\n位置：学生会馆1楼\n\n今日菜单请查看首页！',
+      response: '🍱 学生食堂\n位置: 学生会馆1楼\n\n价格\n· 套餐（炸猪排/盖饭）: ₩6,500\n· 沙拉: ₩5,800\n· 拉面: ₩4,500\n结账: 食堂门口自助机\n\n今日菜单请查看首页或菜单 > 食堂！',
     },
     {
       keywords: ['打印机', '打印', '复印', '输出'],
-      response: '打印机位置\n① 中央图书馆1楼（黑白·彩色）\n② 学生会馆1楼\n③ 各学院行政室\n\n费用: 黑白₩50/张 · 彩色₩200/张\n支付: 学生证（需充值）',
+      response: '🖨 打印机\n位置\n① 图书馆1楼（黑白·彩色）\n② 学生会馆1楼\n③ 各学院行政室\n\n费用: 黑白₩50/张 · 彩色₩200/张\n支付: 学生证充值后使用',
     },
     {
       keywords: ['选课', '课程', '注册', '学习', 'canvas'],
-      response: '选课方法\n① 登录 suwon.ac.kr 门户\n② 学籍管理系统 → 选课\n③ 课程资料: canvas.suwon.ac.kr\n\n请关注学期初公告了解选课时间！',
+      response: '📋 选课\n① 登录 suwon.ac.kr 门户\n② 学籍管理系统 → 选课\n课程资料: canvas.suwon.ac.kr\n\n请关注学期初公告了解选课时间！',
     },
     {
       keywords: ['宿舍', '住宿', '生活馆', '房间'],
-      response: '宿舍申请\nsuwon.ac.kr → 生活馆 → 入住申请\n\n留学生可优先分配！\n联系: 生活馆行政室 031-220-2×××\n\n名额有限，建议尽早申请！',
+      response: '🏠 宿舍\n官网: swudorm.suwon.ac.kr\n申请: suwon.ac.kr → 生活馆 → 入住申请\n电话: 031-229-8202\n\n留学生可优先分配！名额有限，建议尽早申请！',
     },
     {
       keywords: ['健康', '医院', '药', '生病', '医务'],
-      response: '校内医务室\n位置: 学生会馆2楼\n营业: 平日 09:00 – 17:00\n\n附近医院·药店信息请查看校园地图。\n紧急情况: 119 / 校园保安 031-220-2000',
+      response: '🏥 医务室\n位置: 学生会馆2楼\n营业: 平日 09:00~17:00（周六·日·节假日休）\n电话: 031-220-2114\n\n紧急: 119\n校园保安: 031-220-2000',
     },
     {
-      keywords: ['签证', '留学生', '外国人', '国际交流'],
-      response: '国际交流处\n位置: 本馆2楼\n营业: 平日 09:00 – 18:00\n电话: 031-220-2×××\n邮箱: international@suwon.ac.kr\n\n负责签证、外国人登录、奖学金等事务。',
+      keywords: ['签证', '留学生', '外国人', '国际交流', '奖学金'],
+      response: '🌐 国际交流处\n位置: 本馆2楼\n营业: 平日 09:00~18:00\n电话: 031-220-2114\n邮箱: international@suwon.ac.kr\n\n负责签证、外国人登录、奖学金、交换生项目等。',
     },
   ],
   ja: [
     {
-      keywords: ['図書館', '本', '借りる', '返却', '閲覧'],
-      response: '図書館利用時間\n平日: 09:00 – 22:00\n土曜: 09:00 – 18:00\n日曜・祝日休館\n\n貸し出し: 学生証が必要（10冊 / 30日）\n場所: 中央図書館',
+      keywords: ['図書館', '本', '借りる', '返却', '閲覧', 'スタディ', '自習'],
+      response: '📚 中央図書館\n開館時間: 学期中 09:30~19:00 · 休暇中 09:30~17:00\n休館: 土·日、祝日、開校記念日、蔵書点検日\n電話: 031-220-2393\n\n貸出限度: 学部生7冊/10日\n延滞料: 1冊1日₩100（延滞中は貸出·証明書発行停止）\n延長: 1回（HPのMy Library）\n\nカンファレンスルーム: 無料 — lib.suwon.ac.kr で予約\n閲覧室: 無料・申請不要',
     },
     {
       keywords: ['シャトル', 'バス', '交通', '時刻表', '通学'],
-      response: 'キャンパス循環シャトル\n運行：平日 09:10 – 15:20（10便）\nルート：人文大学前→学生会館→ICT→音楽大学→工学館→裏門→美術大学→人文大学前\n\nホーム画面で次の出発時刻を確認できます！\n通学バス情報はメニュー > シャトルバスでご確認ください。',
+      response: '🚌 シャトルバス\n\n[キャンパス循環] 平日 09:10~15:20（10便、無料）\n人文大→学生会館→ICT→音楽大→工学館→裏門→美術大→人文大\n\n[通学バス] 宋内·古色·江南·舍堂·餅店駅\nモバイル乗車券必須（現金不可）\n予約: sb.suwon.ac.kr\n\n次の出発時刻はホーム画面で確認！',
     },
     {
       keywords: ['学食', '食堂', 'メニュー', '昼食', '夕食'],
-      response: '学生食堂\n営業: 平日 11:00 – 14:00\n価格: ₩3,500 – ₩4,000\n場所: 学生会館1F\n\n本日のメニューはホーム画面でご確認ください！',
+      response: '🍱 学生食堂\n場所: 学生会館1F\n\n価格\n· 一品（カツ·丼）: ₩6,500\n· サラダ: ₩5,800\n· ラーメン: ₩4,500\n支払い: 食堂前のキオスク\n\n本日のメニューはホーム画面またはメニュー > 食堂で確認！',
     },
     {
       keywords: ['プリンター', '印刷', 'コピー', '出力'],
-      response: 'プリンターの場所\n① 中央図書館1F（白黒・カラー）\n② 学生会館1F\n③ 各学部事務室\n\n料金: 白黒₩50/枚 · カラー₩200/枚\n支払い: 学生証（チャージ必要）',
+      response: '🖨 プリンター\n場所\n① 図書館1F（白黒・カラー）\n② 学生会館1F\n③ 各学部事務室\n\n料金: 白黒₩50/枚 · カラー₩200/枚\n支払い: 学生証チャージ後使用',
     },
     {
       keywords: ['履修', '授業', '講義', '登録', 'キャンバス'],
-      response: '履修登録方法\n① suwon.ac.kr にログイン\n② 学籍システム → 履修登録\n③ 教材: canvas.suwon.ac.kr\n\n登録期間は学期初めのお知らせをご確認ください！',
+      response: '📋 履修登録\n① suwon.ac.kr にログイン\n② 学籍システム → 履修登録\n教材: canvas.suwon.ac.kr\n\n登録期間は学期初めのお知らせを確認！',
     },
     {
-      keywords: ['寮', '宿舎', '生活館', '部屋'],
-      response: '寮の申請\nsuwon.ac.kr → 生活館 → 入寮申請\n\n留学生優先入寮制度あり！\n問い合わせ: 生活館事務室 031-220-2×××\n\n定員限定 – お早めに！',
+      keywords: ['寮', '宿舎', '生活館', '部屋', 'ドミトリー'],
+      response: '🏠 学生寮\nHP: swudorm.suwon.ac.kr\n申請: suwon.ac.kr → 生活館 → 入寮申請\n電話: 031-229-8202\n\n留学生優先入寮制度あり！定員限定 — お早めに！',
     },
     {
       keywords: ['健康', '病院', '薬', '体調', '保健'],
-      response: '校内保健室\n場所: 学生会館2F\n営業: 平日 09:00 – 17:00\n\n近くの病院・薬局はキャンパスマップをご確認ください。\n緊急: 119 / 学校警備室 031-220-2000',
+      response: '🏥 保健室\n場所: 学生会館2F\n営業: 平日 09:00~17:00（土·日·祝日休）\n電話: 031-220-2114\n\n緊急: 119\n警備室: 031-220-2000',
     },
     {
-      keywords: ['ビザ', '留学生', '外国人', '国際交流'],
-      response: '国際交流課\n場所: 本館2F\n営業: 平日 09:00 – 18:00\n電話: 031-220-2×××\nメール: international@suwon.ac.kr\n\nビザ・外国人登録・奨学金など全てお任せください。',
+      keywords: ['ビザ', '留学生', '外国人', '国際交流', '奨学金'],
+      response: '🌐 国際交流課\n場所: 本館2F\n営業: 平日 09:00~18:00\n電話: 031-220-2114\nメール: international@suwon.ac.kr\n\nビザ·外国人登録·奨学金·交換留学など担当。',
     },
   ],
   vi: [
     {
-      keywords: ['thư viện', 'sách', 'mượn', 'trả', 'đọc'],
-      response: 'Giờ mở cửa thư viện\nThứ 2–6: 09:00 – 22:00\nThứ 7: 09:00 – 18:00\nChủ nhật & ngày lễ: Đóng cửa\n\nMượn sách: Cần thẻ sinh viên (10 cuốn / 30 ngày)\nVị trí: Thư viện trung tâm',
+      keywords: ['thư viện', 'sách', 'mượn', 'trả', 'đọc', 'phòng học nhóm'],
+      response: '📚 Thư viện Trung tâm\nGiờ mở: Học kỳ 09:30~19:00 · Nghỉ hè 09:30~17:00\nĐóng: T7·CN, ngày lễ, ngày kỷ niệm, ngày kiểm kê\nĐT: 031-220-2393\n\nHạn mức: ĐH 7 cuốn / 10 ngày\nPhí trễ hạn: ₩100/cuốn/ngày (khóa mượn & cấp giấy tờ)\nGia hạn: 1 lần qua My Library trên website\n\nPhòng học nhóm (conference): Miễn phí — đặt tại lib.suwon.ac.kr\nPhòng đọc sách: Miễn phí, tự do vào',
     },
     {
       keywords: ['xe buýt', 'xe', 'shuttle', 'lịch', 'đưa đón'],
-      response: 'Xe đưa đón nội khu (Vòng quanh campus)\nHoạt động: Thứ 2–6, 09:10 – 15:20 (10 chuyến)\nTuyến: Nhân văn → Nhà SV → ICT → Âm nhạc → Kỹ thuật 1 → Cổng sau → Mỹ thuật → Nhân văn\n\nXem giờ khởi hành tiếp theo ở trang chủ!\nXem thông tin xe đưa đón liên tỉnh tại Menu > Xe buýt.',
+      response: '🚌 Xe buýt\n\n[Xe nội khu] T2~6, 09:10~15:20 (10 chuyến, miễn phí)\nNhân văn→Nhà SV→ICT→Âm nhạc→KT1→Cổng sau→Mỹ thuật→Nhân văn\n\n[Xe đưa đón] Ga Songnae·Gosaek·Gangnam·Sadang·Byeongjeom\nBắt buộc vé di động (không nhận tiền mặt)\nApp: sb.suwon.ac.kr\n\nXem giờ khởi hành tiếp theo ở trang chủ!',
     },
     {
       keywords: ['căng tin', 'ăn', 'thực đơn', 'bữa trưa', 'bữa tối'],
-      response: 'Căng tin sinh viên\nGiờ mở: Thứ 2–6, 11:00 – 14:00\nGiá: ₩3.500 – ₩4.000\nVị trí: Tầng 1, Nhà sinh viên\n\nXem thực đơn hôm nay ở trang chủ!',
+      response: '🍱 Căng tin sinh viên\nVị trí: Tầng 1, Nhà sinh viên\n\nGiá\n· Suất ăn (Cutlet/Cơm): ₩6,500\n· Salad: ₩5,800\n· Mì ramen: ₩4,500\nThanh toán: Kiosk trước căng tin\n\nXem thực đơn hôm nay ở trang chủ hoặc Menu > Căng tin!',
     },
     {
       keywords: ['máy in', 'in', 'sao chép', 'photocopy'],
-      response: 'Vị trí máy in\n① Tầng 1 Thư viện trung tâm (Trắng đen & Màu)\n② Tầng 1 Nhà sinh viên\n③ Phòng hành chính các khoa\n\nGiá: Trắng đen ₩50/trang · Màu ₩200/trang\nThanh toán: Thẻ sinh viên (cần nạp tiền)',
+      response: '🖨 Máy in\nVị trí\n① T.1 Thư viện TT (Trắng đen & Màu)\n② T.1 Nhà sinh viên\n③ VP hành chính các khoa\n\nGiá: Trắng đen ₩50 · Màu ₩200/trang\nThanh toán: Nạp tiền vào thẻ SV',
     },
     {
       keywords: ['đăng ký', 'môn học', 'khóa học', 'lịch học', 'canvas'],
-      response: 'Đăng ký môn học\n① Truy cập suwon.ac.kr → Đăng nhập cổng thông tin\n② Hệ thống học vụ → Đăng ký môn\n③ Tài liệu học tập: canvas.suwon.ac.kr\n\nXem thông báo đầu học kỳ để biết thời gian đăng ký!',
+      response: '📋 Đăng ký môn học\n① suwon.ac.kr → Đăng nhập cổng thông tin\n② Hệ thống học vụ → Đăng ký môn\nTài liệu: canvas.suwon.ac.kr\n\nXem thông báo đầu học kỳ để biết thời gian đăng ký!',
     },
     {
       keywords: ['ký túc xá', 'ký túc', 'phòng', 'nhà ở'],
-      response: 'Đăng ký ký túc xá\nsuwon.ac.kr → Ký túc xá → Đăng ký\n\nSinh viên quốc tế được ưu tiên!\nLiên hệ: VP ký túc xá 031-220-2×××\n\nSố phòng có hạn – đăng ký sớm!',
+      response: '🏠 Ký túc xá\nWebsite: swudorm.suwon.ac.kr\nĐăng ký: suwon.ac.kr → Ký túc xá → Đăng ký\nĐT: 031-229-8202\n\nSinh viên quốc tế được ưu tiên!\nSố phòng có hạn — đăng ký sớm!',
     },
     {
       keywords: ['sức khỏe', 'bệnh viện', 'thuốc', 'ốm', 'y tế'],
-      response: 'Trung tâm y tế trường\nVị trí: Tầng 2 Nhà sinh viên\nGiờ: Thứ 2–6, 09:00 – 17:00\n\nClinics & nhà thuốc gần đây: xem bản đồ khuôn viên.\nKhẩn cấp: 119 / Bảo vệ trường 031-220-2000',
+      response: '🏥 Phòng y tế\nVị trí: Tầng 2 Nhà sinh viên\nGiờ: T2~6, 09:00~17:00 (đóng T7·CN·ngày lễ)\nĐT: 031-220-2114\n\nKhẩn cấp: 119\nBảo vệ trường: 031-220-2000',
     },
     {
       keywords: ['visa', 'nước ngoài', 'quốc tế', 'văn phòng', 'học bổng'],
-      response: 'Phòng Quan hệ quốc tế\nVị trí: Tầng 2 Tòa nhà chính\nGiờ: Thứ 2–6, 09:00 – 18:00\nĐT: 031-220-2×××\nEmail: international@suwon.ac.kr\n\nXử lý visa, đăng ký người nước ngoài, học bổng & nhiều hơn nữa.',
+      response: '🌐 Phòng Quan hệ quốc tế\nVị trí: Tầng 2 Tòa nhà chính\nGiờ: T2~6, 09:00~18:00\nĐT: 031-220-2114\nEmail: international@suwon.ac.kr\n\nXử lý visa, đăng ký nước ngoài, học bổng, trao đổi sinh viên.',
     },
   ],
   th: [
     {
-      keywords: ['ห้องสมุด', 'หนังสือ', 'ยืม', 'คืน', 'อ่าน'],
-      response: 'เวลาเปิดห้องสมุด\nจ–ศ: 09:00 – 22:00\nเสาร์: 09:00 – 18:00\nอาทิตย์ & วันหยุด: ปิด\n\nยืมหนังสือ: ต้องใช้บัตรนักศึกษา (10 เล่ม / 30 วัน)\nสถานที่: ห้องสมุดกลาง',
+      keywords: ['ห้องสมุด', 'หนังสือ', 'ยืม', 'คืน', 'อ่าน', 'ห้องกลุ่ม'],
+      response: '📚 ห้องสมุดกลาง\nเวลา: ภาคเรียน 09:30~19:00 · ปิดภาค 09:30~17:00\nปิด: เสาร์·อาทิตย์, วันหยุด, วันก่อตั้ง, วันตรวจนับ\nโทร: 031-220-2393\n\nจำกัด: ป.ตรี 7 เล่ม / 10 วัน\nค่าปรับ: ₩100/เล่ม/วัน (ระงับการยืมและออกเอกสาร)\nต่ออายุ: 1 ครั้ง ผ่าน My Library\n\nห้องสตัดดี้ (conference): ฟรี — จองที่ lib.suwon.ac.kr\nห้องอ่านหนังสือ: ฟรี เข้าได้เลย',
     },
     {
       keywords: ['รถรับส่ง', 'รถบัส', 'รถ', 'ตาราง', 'รถชัตเติ้ล'],
-      response: 'รถชัตเติ้ลในวิทยาเขต (วนรอบ)\nให้บริการ: จ–ศ 09:10 – 15:20 (10 รอบ)\nเส้นทาง: มนุษย์ฯ → หอนักศึกษา → ICT → ดนตรี → วิศวะ 1 → ประตูหลัง → ศิลปกรรม → มนุษย์ฯ\n\nดูเวลาถัดไปได้ที่หน้าหลัก!\nดูข้อมูลรถรับส่งประจำทางได้ที่เมนู > รถชัตเติ้ล',
+      response: '🚌 รถรับส่ง\n\n[วนรอบวิทยาเขต] จ~ศ 09:10~15:20 (10 รอบ, ฟรี)\nมนุษย์ฯ→หอนักศึกษา→ICT→ดนตรี→วิศวะ1→ประตูหลัง→ศิลปกรรม→มนุษย์ฯ\n\n[รถประจำทาง] สถานีซงแน·โกแซก·กังนัม·ซาดัง·พยองจอม\nต้องมีตั๋วมือถือ (ไม่รับเงินสด)\nApp: sb.suwon.ac.kr\n\nดูเวลาถัดไปที่หน้าหลัก!',
     },
     {
       keywords: ['โรงอาหาร', 'อาหาร', 'เมนู', 'กลางวัน', 'เย็น'],
-      response: 'โรงอาหารนักศึกษา\nเปิด: จ–ศ 11:00 – 14:00\nราคา: ₩3,500 – ₩4,000\nสถานที่: ชั้น 1 อาคารนักศึกษา\n\nดูเมนูวันนี้ได้ที่หน้าหลัก!',
+      response: '🍱 โรงอาหารนักศึกษา\nสถานที่: ชั้น 1 อาคารนักศึกษา\n\nราคา\n· อาหารจานเดียว (คัตสึ/ข้าวหน้า): ₩6,500\n· สลัด: ₩5,800\n· ราเมน: ₩4,500\nชำระ: คีออสก์หน้าโรงอาหาร\n\nดูเมนูวันนี้ที่หน้าหลักหรือเมนู > โรงอาหาร!',
     },
     {
       keywords: ['เครื่องพิมพ์', 'พิมพ์', 'ถ่ายเอกสาร', 'ปริ้น'],
-      response: 'ตำแหน่งเครื่องพิมพ์\n① ชั้น 1 ห้องสมุดกลาง (ขาวดำ & สี)\n② ชั้น 1 อาคารนักศึกษา\n③ สำนักงานธุรการของแต่ละคณะ\n\nราคา: ขาวดำ ₩50/แผ่น · สี ₩200/แผ่น\nชำระเงิน: บัตรนักศึกษา (ต้องเติมเงิน)',
+      response: '🖨 เครื่องพิมพ์\nตำแหน่ง\n① ชั้น 1 ห้องสมุด (ขาวดำ & สี)\n② ชั้น 1 อาคารนักศึกษา\n③ สนง.ธุรการแต่ละคณะ\n\nราคา: ขาวดำ ₩50 · สี ₩200/แผ่น\nชำระ: เติมเงินบัตรนักศึกษา',
     },
     {
       keywords: ['ลงทะเบียน', 'วิชา', 'หลักสูตร', 'ตารางเรียน', 'canvas'],
-      response: 'การลงทะเบียนวิชา\n① เข้า suwon.ac.kr → เข้าสู่ระบบพอร์ทัล\n② ระบบวิชาการ → ลงทะเบียนวิชา\n③ เอกสารการเรียน: canvas.suwon.ac.kr\n\nตรวจสอบประกาศต้นภาคสำหรับวันที่ลงทะเบียน!',
+      response: '📋 ลงทะเบียนวิชา\n① suwon.ac.kr → เข้าสู่ระบบ\n② ระบบวิชาการ → ลงทะเบียน\nเอกสาร: canvas.suwon.ac.kr\n\nตรวจสอบประกาศต้นภาคสำหรับวันที่ลงทะเบียน!',
     },
     {
       keywords: ['หอพัก', 'หอ', 'ห้อง', 'ที่พัก'],
-      response: 'การสมัครหอพัก\nsuwon.ac.kr → หอพัก → สมัคร\n\nนักศึกษาต่างชาติได้รับสิทธิ์พิเศษ!\nติดต่อ: สำนักงานหอพัก 031-220-2×××\n\nที่พักมีจำกัด – สมัครเร็ว!',
+      response: '🏠 หอพัก\nเว็บไซต์: swudorm.suwon.ac.kr\nสมัคร: suwon.ac.kr → หอพัก → สมัคร\nโทร: 031-229-8202\n\nนักศึกษาต่างชาติได้รับสิทธิ์พิเศษ!\nที่พักมีจำกัด — สมัครเร็ว!',
     },
     {
       keywords: ['สุขภาพ', 'โรงพยาบาล', 'ยา', 'ป่วย', 'คลินิก'],
-      response: 'ศูนย์สุขภาพในมหาวิทยาลัย\nสถานที่: ชั้น 2 อาคารนักศึกษา\nเวลา: จ–ศ 09:00 – 17:00\n\nคลินิกและร้านขายยาใกล้เคียง: ดูแผนที่มหาวิทยาลัย\nฉุกเฉิน: 119 / รักษาความปลอดภัย 031-220-2000',
+      response: '🏥 ศูนย์สุขภาพ\nสถานที่: ชั้น 2 อาคารนักศึกษา\nเวลา: จ~ศ 09:00~17:00 (ปิดเสาร์·อาทิตย์·วันหยุด)\nโทร: 031-220-2114\n\nฉุกเฉิน: 119\nรปภ.: 031-220-2000',
     },
     {
       keywords: ['วีซ่า', 'ต่างชาติ', 'นานาชาติ', 'สำนักงาน', 'ทุนการศึกษา'],
-      response: 'สำนักงานกิจการนานาชาติ\nสถานที่: ชั้น 2 อาคารหลัก\nเวลา: จ–ศ 09:00 – 18:00\nโทร: 031-220-2×××\nอีเมล: international@suwon.ac.kr\n\nดูแลวีซ่า การลงทะเบียนคนต่างด้าว ทุนการศึกษา และอื่นๆ',
+      response: '🌐 สำนักงานนานาชาติ\nสถานที่: ชั้น 2 อาคารหลัก\nเวลา: จ~ศ 09:00~18:00\nโทร: 031-220-2114\nอีเมล: international@suwon.ac.kr\n\nดูแลวีซ่า การลงทะเบียนต่างด้าว ทุนการศึกษา และโปรแกรมแลกเปลี่ยน',
     },
   ],
 };
