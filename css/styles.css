@@ -551,6 +551,11 @@ img, svg { display: block; }
   width: fit-content;
   position: relative;
   z-index: 1;
+  transition: background var(--trans), border-color var(--trans);
+}
+.hero-shuttle-row:hover {
+  background: rgba(255,255,255,.22);
+  border-color: rgba(255,255,255,.35);
 }
 .hero-shuttle-icon {
   width: 13px; height: 13px;
