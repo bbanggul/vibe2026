@@ -1404,3 +1404,60 @@ img, svg { display: block; }
 }
 .ticket-refund-badge.full { background: #27ae60; color: white; }
 .ticket-refund-badge.partial { background: #e67e22; color: white; }
+
+.ticket-block-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 16px 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.ticket-block-title:first-of-type { margin-top: 0; }
+.ticket-app-url {
+  font-size: 0.72rem;
+  color: var(--text-2);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+.ticket-app-url a { color: var(--navy-light); text-decoration: underline; }
+.ticket-app-warn {
+  font-size: 0.72rem;
+  color: #e74c3c;
+  margin-top: 6px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.ticket-app-warn a { color: #e74c3c; text-decoration: underline; font-weight: 700; }
+.ticket-note {
+  font-size: 0.68rem;
+  color: var(--text-3);
+  display: block;
+  margin-top: 4px;
+}
+.ticket-charge-box {
+  background: var(--muted);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.ticket-charge-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-1);
+  line-height: 1.4;
+}
+.ticket-charge-row:last-child { border-bottom: none; }
+.ticket-charge-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-3);
+  white-space: nowrap;
+  min-width: 56px;
+}
