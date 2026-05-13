@@ -954,8 +954,7 @@ img, svg { display: block; }
 .nav-sub-menu {
   background: rgba(0,45,114,.04);
   border-left: 3px solid var(--gold);
-  margin: 0 16px 6px 56px;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: 0 0 6px 0;
   overflow: hidden;
 }
 .nav-sub-menu.hidden { display: none; }
@@ -963,7 +962,7 @@ img, svg { display: block; }
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 11px 16px;
+  padding: 11px 20px 11px 60px;
   font-size: 0.88rem;
   color: var(--text-2);
   text-decoration: none;
