@@ -34,9 +34,7 @@ function onLanguageChange(lang) {
 
 function updateHeaderLang(lang) {
   const meta = langMeta[lang] || langMeta.ko;
-  const flagEl = document.getElementById('headerLangFlag');
   const codeEl = document.getElementById('headerLangCode');
-  if (flagEl) flagEl.textContent = meta.flag;
   if (codeEl) codeEl.textContent = meta.code;
 }
 
@@ -98,7 +96,20 @@ function updateHeroDate() {
   const now = new Date();
   const dayKeys = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const dayStr = t(dayKeys[now.getDay()]);
-  const dateStr = `${now.getMonth() + 1}월 ${now.getDate()}일 (${dayStr})`;
+  const lang = window.currentLang;
+  let dateStr;
+  if (lang === 'en') {
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    dateStr = `${months[now.getMonth()]} ${now.getDate()}, ${dayStr}`;
+  } else if (lang === 'zh') {
+    dateStr = `${now.getMonth() + 1}月${now.getDate()}日 ${dayStr}`;
+  } else if (lang === 'vi') {
+    dateStr = `${dayStr}, ${now.getDate()}/${now.getMonth() + 1}`;
+  } else if (lang === 'th') {
+    dateStr = `${dayStr} ${now.getDate()}/${now.getMonth() + 1}`;
+  } else {
+    dateStr = `${now.getMonth() + 1}월 ${now.getDate()}일 ${dayStr}`;
+  }
   el.textContent = dateStr;
 }
 
@@ -113,9 +124,11 @@ function updateNotices() {
     const card = document.createElement('div');
     card.className = 'notice-card';
     card.innerHTML = `
-      <span class="notice-category">${n.category}</span>
-      <p class="notice-title">${n.title}</p>
-      <span class="notice-date">${n.date}</span>
+      <div class="notice-card-inner">
+        <span class="notice-category">${n.category}</span>
+        <p class="notice-title">${n.title}</p>
+        <span class="notice-date">${n.date}</span>
+      </div>
     `;
     container.appendChild(card);
   });
