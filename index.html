@@ -457,6 +457,32 @@
 
 
 <!-- ══════════════════════════════════════
+     SCHOOL INFO SCREEN
+══════════════════════════════════════ -->
+<div id="screen-school" class="screen screen-school screen-hidden">
+  <div class="school-screen-header">
+    <button class="school-back-btn" id="schoolBackBtn" aria-label="뒤로가기">‹</button>
+    <span data-i18n="nav_school">학교정보</span>
+  </div>
+  <div class="school-screen-body">
+
+    <!-- Category tabs -->
+    <div class="school-tabs">
+      <button class="school-tab active" data-pane="schoolFacilities" data-i18n="school_tab_facilities">학교시설</button>
+      <button class="school-tab" data-pane="schoolDepts" data-i18n="school_tab_depts">학과정보</button>
+    </div>
+
+    <!-- Facilities pane (JS-filled) -->
+    <div id="schoolFacilities" class="school-tab-pane school-fac-list"></div>
+
+    <!-- Departments pane (JS-filled) -->
+    <div id="schoolDepts" class="school-tab-pane school-dept-grid hidden"></div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
      CAFETERIA SCREEN
 ══════════════════════════════════════ -->
 <div id="screen-cafeteria" class="screen screen-cafeteria screen-hidden">
@@ -561,7 +587,7 @@
         <span class="nav-menu-text" data-i18n="nav_home">홈</span>
         <span class="nav-menu-arrow" aria-hidden="true">›</span>
       </a>
-      <a href="#" class="nav-menu-item">
+      <a href="#" class="nav-menu-item" data-screen="screen-school">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><rect x="2" y="9" width="20" height="13"/><path d="M7 9V4h10v5"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg>
         </div>
