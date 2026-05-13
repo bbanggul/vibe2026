@@ -119,7 +119,7 @@ const chatbotResponses = {
     },
     {
       keywords: ['건강', '병원', '약', '아프', '보건', '의료', '보건실'],
-      response: '🏥 보건실\n위치: 학생회관 2층\n운영: 평일 09:00~17:00 (토·일·공휴일 휴무)\n전화: 031-220-2114\n\n응급: 119\n학교 보안실: 031-220-2000',
+      response: '🏥 보건실\n위치: 학생회관 2층\n운영: 평일 09:00~17:00 (토·일·공휴일 휴무)\n전화: 031-220-2114\n\n응급: 119',
     },
     {
       keywords: ['비자', '외국인', '등록', '국제교류', '유학생', '장학금'],
@@ -153,7 +153,7 @@ const chatbotResponses = {
     },
     {
       keywords: ['health', 'hospital', 'sick', 'medicine', 'clinic'],
-      response: '🏥 Health Center\nLocation: Student Hall 2F\nHours: Weekdays 09:00~17:00 (closed Sat·Sun·holidays)\nPhone: 031-220-2114\n\nEmergency: 119\nCampus Security: 031-220-2000',
+      response: '🏥 Health Center\nLocation: Student Hall 2F\nHours: Weekdays 09:00~17:00 (closed Sat·Sun·holidays)\nPhone: 031-220-2114\n\nEmergency: 119',
     },
     {
       keywords: ['visa', 'alien', 'foreign', 'international', 'office', 'scholarship'],
@@ -187,7 +187,7 @@ const chatbotResponses = {
     },
     {
       keywords: ['健康', '医院', '药', '生病', '医务'],
-      response: '🏥 医务室\n位置: 学生会馆2楼\n营业: 平日 09:00~17:00（周六·日·节假日休）\n电话: 031-220-2114\n\n紧急: 119\n校园保安: 031-220-2000',
+      response: '🏥 医务室\n位置: 学生会馆2楼\n营业: 平日 09:00~17:00（周六·日·节假日休）\n电话: 031-220-2114\n\n紧急: 119',
     },
     {
       keywords: ['签证', '留学生', '外国人', '国际交流', '奖学金'],
@@ -221,7 +221,7 @@ const chatbotResponses = {
     },
     {
       keywords: ['健康', '病院', '薬', '体調', '保健'],
-      response: '🏥 保健室\n場所: 学生会館2F\n営業: 平日 09:00~17:00（土·日·祝日休）\n電話: 031-220-2114\n\n緊急: 119\n警備室: 031-220-2000',
+      response: '🏥 保健室\n場所: 学生会館2F\n営業: 平日 09:00~17:00（土·日·祝日休）\n電話: 031-220-2114\n\n緊急: 119',
     },
     {
       keywords: ['ビザ', '留学生', '外国人', '国際交流', '奨学金'],
@@ -255,7 +255,7 @@ const chatbotResponses = {
     },
     {
       keywords: ['sức khỏe', 'bệnh viện', 'thuốc', 'ốm', 'y tế'],
-      response: '🏥 Phòng y tế\nVị trí: Tầng 2 Nhà sinh viên\nGiờ: T2~6, 09:00~17:00 (đóng T7·CN·ngày lễ)\nĐT: 031-220-2114\n\nKhẩn cấp: 119\nBảo vệ trường: 031-220-2000',
+      response: '🏥 Phòng y tế\nVị trí: Tầng 2 Nhà sinh viên\nGiờ: T2~6, 09:00~17:00 (đóng T7·CN·ngày lễ)\nĐT: 031-220-2114\n\nKhẩn cấp: 119',
     },
     {
       keywords: ['visa', 'nước ngoài', 'quốc tế', 'văn phòng', 'học bổng'],
@@ -289,7 +289,7 @@ const chatbotResponses = {
     },
     {
       keywords: ['สุขภาพ', 'โรงพยาบาล', 'ยา', 'ป่วย', 'คลินิก'],
-      response: '🏥 ศูนย์สุขภาพ\nสถานที่: ชั้น 2 อาคารนักศึกษา\nเวลา: จ~ศ 09:00~17:00 (ปิดเสาร์·อาทิตย์·วันหยุด)\nโทร: 031-220-2114\n\nฉุกเฉิน: 119\nรปภ.: 031-220-2000',
+      response: '🏥 ศูนย์สุขภาพ\nสถานที่: ชั้น 2 อาคารนักศึกษา\nเวลา: จ~ศ 09:00~17:00 (ปิดเสาร์·อาทิตย์·วันหยุด)\nโทร: 031-220-2114\n\nฉุกเฉิน: 119',
     },
     {
       keywords: ['วีซ่า', 'ต่างชาติ', 'นานาชาติ', 'สำนักงาน', 'ทุนการศึกษา'],
