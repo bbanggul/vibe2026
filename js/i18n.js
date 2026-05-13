@@ -105,6 +105,7 @@ const translations = {
     caf_guide_2: '음식물은 남기지 않도록 해 주세요.',
     caf_guide_3: '줄서기 순서를 지켜 주세요.',
     caf_guide_4: '식당 내에서는 금연입니다.',
+    caf_guide_5: '식당 앞 키오스크에서 결제 후 입장하세요.',
     caf_no_menu: '이 날 메뉴 정보가 없습니다.',
   },
   en: {
@@ -212,6 +213,7 @@ const translations = {
     caf_guide_2: 'Please try to finish your food and minimize food waste.',
     caf_guide_3: 'Please respect the queue order.',
     caf_guide_4: 'Smoking is not permitted in the cafeteria.',
+    caf_guide_5: 'Pay at the kiosk in front of the cafeteria before entering.',
     caf_no_menu: 'No menu available for this day.',
   },
   zh: {
@@ -319,6 +321,7 @@ const translations = {
     caf_guide_2: '请尽量减少剩菜。',
     caf_guide_3: '请遵守排队顺序。',
     caf_guide_4: '食堂内禁止吸烟。',
+    caf_guide_5: '请在食堂门口的自助机付款后入场。',
     caf_no_menu: '该日没有菜单信息。',
   },
   ja: {
@@ -426,6 +429,7 @@ const translations = {
     caf_guide_2: '食べ残しは最小限にしてください。',
     caf_guide_3: '並び順を守ってください。',
     caf_guide_4: '食堂内は禁煙です。',
+    caf_guide_5: '食堂前のキオスクで支払いを済ませてから入場してください。',
     caf_no_menu: 'この日のメニュー情報はありません。',
   },
   vi: {
@@ -533,6 +537,7 @@ const translations = {
     caf_guide_2: 'Hãy cố gắng không để thừa thức ăn.',
     caf_guide_3: 'Vui lòng xếp hàng theo thứ tự.',
     caf_guide_4: 'Cấm hút thuốc trong căng tin.',
+    caf_guide_5: 'Vui lòng thanh toán tại kiosk trước cửa căng tin trước khi vào.',
     caf_no_menu: 'Không có thực đơn cho ngày này.',
   },
   th: {
@@ -640,6 +645,7 @@ const translations = {
     caf_guide_2: 'พยายามทานให้หมด ลดเศษอาหาร',
     caf_guide_3: 'กรุณาเข้าคิวตามลำดับ',
     caf_guide_4: 'ห้ามสูบบุหรี่ในโรงอาหาร',
+    caf_guide_5: 'กรุณาชำระเงินที่คีออสก์หน้าโรงอาหารก่อนเข้า',
     caf_no_menu: 'ไม่มีเมนูสำหรับวันนี้',
   },
 };
