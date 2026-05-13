@@ -1246,11 +1246,36 @@ img, svg { display: block; }
 .shuttle-screen-body {
   flex: 1;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.shuttle-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--border);
+  flex-shrink: 0;
+  background: var(--card);
+}
+.shuttle-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 14px 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: var(--trans);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+}
+.shuttle-tab.active { color: var(--navy); border-bottom-color: var(--navy); }
+.shuttle-tab-pane {
   padding: 16px 16px 40px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
+.shuttle-tab-pane.hidden { display: none; }
 .shuttle-section {
   background: var(--card);
   border-radius: var(--radius);

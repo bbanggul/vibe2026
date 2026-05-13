@@ -272,7 +272,13 @@
   </div>
   <div class="shuttle-screen-body">
 
-    <!-- 교내 순환 셔틀 -->
+    <div class="shuttle-tabs">
+      <button class="shuttle-tab active" data-pane="pane-campus" data-i18n="shuttle_campus_badge">교내셔틀</button>
+      <button class="shuttle-tab" data-pane="pane-commuter" data-i18n="shuttle_commuter_badge">통학버스</button>
+    </div>
+
+    <!-- 교내셔틀 pane -->
+    <div id="pane-campus" class="shuttle-tab-pane">
     <div class="shuttle-section" id="section-campus">
       <div class="shuttle-section-badge" data-i18n="shuttle_campus_badge">교내셔틀</div>
       <h2 class="shuttle-section-title" data-i18n="shuttle_campus_title">교내 순환 셔틀버스</h2>
@@ -291,8 +297,10 @@
         <div class="shuttle-time-chip">15:20</div>
       </div>
     </div>
+    </div><!-- /pane-campus -->
 
-    <!-- 통학버스 -->
+    <!-- 통학버스 pane -->
+    <div id="pane-commuter" class="shuttle-tab-pane hidden">
     <div class="shuttle-section" id="section-commuter">
       <div class="shuttle-section-badge commuter" data-i18n="shuttle_commuter_badge">통학버스</div>
       <h2 class="shuttle-section-title" data-i18n="shuttle_commuter_title">통학버스</h2>
@@ -451,6 +459,7 @@
         <p data-i18n-html="ticket_notice_3">· 문의: <strong>031-220-2414</strong> (학생지원팀)</p>
       </div>
     </div>
+    </div><!-- /pane-commuter -->
 
   </div>
 </div>
@@ -619,11 +628,11 @@
         <span class="nav-menu-arrow nav-sub-arrow" aria-hidden="true">›</span>
       </a>
       <div class="nav-sub-menu hidden" id="shuttleSubMenu">
-        <a href="#" class="nav-sub-item" data-shuttle-section="section-campus">
+        <a href="#" class="nav-sub-item" data-shuttle-section="pane-campus">
           <span class="nav-sub-dot">›</span>
           <span data-i18n="shuttle_campus_badge">교내셔틀</span>
         </a>
-        <a href="#" class="nav-sub-item" data-shuttle-section="section-commuter">
+        <a href="#" class="nav-sub-item" data-shuttle-section="pane-commuter">
           <span class="nav-sub-dot">›</span>
           <span data-i18n="shuttle_commuter_badge">통학버스</span>
         </a>

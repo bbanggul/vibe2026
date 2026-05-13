@@ -289,26 +289,30 @@ function initNav() {
   });
 }
 
-function openShuttleSection(sectionId) {
-  showScreen('screen-shuttle');
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      const el = document.getElementById(sectionId);
-      const body = document.querySelector('.shuttle-screen-body');
-      if (el && body) body.scrollTo({ top: el.offsetTop - 12, behavior: 'smooth' });
-    });
+function switchShuttleTab(pane) {
+  document.querySelectorAll('.shuttle-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.pane === pane);
+  });
+  document.querySelectorAll('.shuttle-tab-pane').forEach(p => {
+    p.classList.toggle('hidden', p.id !== pane);
   });
 }
 
+function openShuttleSection(pane) {
+  showScreen('screen-shuttle');
+  switchShuttleTab(pane);
+}
+
 function initShuttleScreen() {
-  document.getElementById('shuttleBackBtn')?.addEventListener('click', () => {
-    showScreen('screen-home');
-  });
+  document.getElementById('shuttleBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
   const shuttleRow = document.querySelector('.hero-shuttle-row');
   if (shuttleRow) {
     shuttleRow.style.cursor = 'pointer';
     shuttleRow.addEventListener('click', () => showScreen('screen-shuttle'));
   }
+  document.querySelectorAll('.shuttle-tab').forEach(tab => {
+    tab.addEventListener('click', () => switchShuttleTab(tab.dataset.pane));
+  });
 }
 
 /* Cafeteria Screen */
