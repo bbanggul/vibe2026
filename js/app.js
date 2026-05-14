@@ -991,12 +991,12 @@ function startShuttleTimer() {
 
 /* Loading → Home (language splash removed) */
 function initLoading() {
-  const savedLang = localStorage.getItem('uos_lang');
+  const alreadyPicked = sessionStorage.getItem('lang_picked');
   setTimeout(() => {
     showScreen('screen-home');
     initFaqAccordion();
     initScrollReveal();
-    if (!savedLang) {
+    if (!alreadyPicked) {
       document.getElementById('langPicker')?.classList.remove('hidden');
     }
   }, 1800);
@@ -1006,18 +1006,21 @@ function initLangPicker() {
   const picker = document.getElementById('langPicker');
   if (!picker) return;
 
+  function dismissPicker() {
+    picker.classList.add('hidden');
+    sessionStorage.setItem('lang_picked', '1');
+  }
+
   picker.querySelectorAll('.lang-picker-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       setLanguage(btn.dataset.lang);
-      picker.classList.add('hidden');
+      dismissPicker();
     });
   });
 
   document.getElementById('langPickerClose')?.addEventListener('click', () => {
-    picker.classList.add('hidden');
-    if (!localStorage.getItem('uos_lang')) {
-      setLanguage('ko');
-    }
+    if (!localStorage.getItem('uos_lang')) setLanguage('ko');
+    dismissPicker();
   });
 }
 
