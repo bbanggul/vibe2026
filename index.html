@@ -257,7 +257,7 @@
           </div>
           <div class="link-text" data-i18n="link_map">캠퍼스 지도</div>
         </a>
-        <a href="#" class="link-card">
+        <a href="#" class="link-card" id="quickBoardBtn">
           <div class="link-icon-wrap" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
@@ -671,11 +671,19 @@
         <span class="nav-menu-text" data-i18n="nav_library">중앙도서관</span>
         <span class="nav-menu-arrow" aria-hidden="true">›</span>
       </a>
-      <a href="#" class="nav-menu-item">
+      <a href="#" class="nav-menu-item" data-screen="screen-board">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
         <span class="nav-menu-text" data-i18n="nav_anonymous">익명게시판</span>
+        <span class="nav-menu-arrow" aria-hidden="true">›</span>
+      </a>
+      <a href="#" class="nav-menu-item" data-screen="screen-messages">
+        <div class="nav-menu-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <span class="nav-menu-text">쪽지함</span>
+        <span class="nav-menu-badge hidden" id="msgNavBadge"></span>
         <span class="nav-menu-arrow" aria-hidden="true">›</span>
       </a>
       <a href="#" class="nav-menu-item">
@@ -761,6 +769,135 @@
 </div>
 
 
+<!-- ══════════════════════════════════════
+     BOARD SCREEN
+══════════════════════════════════════ -->
+<div id="screen-board" class="screen screen-board screen-hidden">
+  <div class="board-header">
+    <button class="board-back-btn" id="boardBackBtn" aria-label="뒤로가기">‹</button>
+    <span class="board-header-title">익명게시판</span>
+    <button class="board-write-btn" id="boardWriteBtn" aria-label="글쓰기">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    </button>
+  </div>
+  <div class="board-list" id="boardList">
+    <div class="board-loading">불러오는 중...</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     POST DETAIL SCREEN
+══════════════════════════════════════ -->
+<div id="screen-post" class="screen screen-post screen-hidden">
+  <div class="board-header">
+    <button class="board-back-btn" id="postBackBtn" aria-label="뒤로가기">‹</button>
+    <span class="board-header-title">익명게시판</span>
+    <button class="post-msg-btn hidden" id="postMsgBtn" aria-label="쪽지 보내기">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </button>
+  </div>
+  <div class="post-scroll" id="postScroll">
+    <div id="postContentArea"></div>
+    <div id="postCommentsArea"></div>
+  </div>
+  <div class="comment-bar">
+    <input type="text" class="comment-input" id="commentInput" placeholder="댓글 입력 (로그인 필요)" maxlength="300" autocomplete="off">
+    <button class="comment-send-btn" id="commentSendBtn">전송</button>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     MESSAGES SCREEN
+══════════════════════════════════════ -->
+<div id="screen-messages" class="screen screen-messages screen-hidden">
+  <div class="board-header">
+    <button class="board-back-btn" id="msgBackBtn" aria-label="뒤로가기">‹</button>
+    <span class="board-header-title">쪽지함</span>
+    <span></span>
+  </div>
+  <div class="msg-list" id="msgList">
+    <div class="board-loading">불러오는 중...</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     WRITE POST MODAL
+══════════════════════════════════════ -->
+<div id="writeModal" class="auth-modal hidden" role="dialog" aria-label="글쓰기">
+  <div class="auth-modal-bg" data-close="writeModal"></div>
+  <div class="auth-modal-sheet">
+    <div class="auth-modal-header">
+      <span class="auth-modal-title">글쓰기</span>
+      <button class="auth-modal-close" data-close="writeModal" aria-label="닫기">✕</button>
+    </div>
+    <form class="auth-form" id="writeForm" novalidate>
+      <div class="auth-field">
+        <label class="auth-label" for="writeTitle">제목</label>
+        <input class="auth-input" id="writeTitle" type="text" placeholder="제목을 입력하세요" maxlength="100" required>
+      </div>
+      <div class="auth-field">
+        <label class="auth-label" for="writeContent">내용</label>
+        <textarea class="auth-input write-textarea" id="writeContent" placeholder="내용을 입력하세요" maxlength="2000" required></textarea>
+      </div>
+      <p class="auth-error hidden" id="writeError"></p>
+      <button class="auth-submit" type="submit">등록</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SEND MESSAGE MODAL
+══════════════════════════════════════ -->
+<div id="sendMsgModal" class="auth-modal hidden" role="dialog" aria-label="쪽지 보내기">
+  <div class="auth-modal-bg" data-close="sendMsgModal"></div>
+  <div class="auth-modal-sheet">
+    <div class="auth-modal-header">
+      <span class="auth-modal-title">쪽지 보내기</span>
+      <button class="auth-modal-close" data-close="sendMsgModal" aria-label="닫기">✕</button>
+    </div>
+    <form class="auth-form" id="sendMsgForm" novalidate>
+      <div class="auth-field">
+        <label class="auth-label">받는 사람</label>
+        <div class="auth-input auth-input-static">익명 (게시글 작성자)</div>
+      </div>
+      <div class="auth-field">
+        <label class="auth-label" for="sendMsgContent">내용</label>
+        <textarea class="auth-input write-textarea" id="sendMsgContent" placeholder="쪽지 내용을 입력하세요" maxlength="500" required></textarea>
+      </div>
+      <p class="auth-error hidden" id="sendMsgError"></p>
+      <button class="auth-submit" type="submit">보내기</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     MESSAGE DETAIL MODAL
+══════════════════════════════════════ -->
+<div id="msgDetailModal" class="auth-modal hidden" role="dialog" aria-label="쪽지">
+  <div class="auth-modal-bg" data-close="msgDetailModal"></div>
+  <div class="auth-modal-sheet">
+    <div class="auth-modal-header">
+      <span class="auth-modal-title">쪽지</span>
+      <button class="auth-modal-close" data-close="msgDetailModal" aria-label="닫기">✕</button>
+    </div>
+    <div class="msg-detail-body" id="msgDetailBody"></div>
+    <form class="auth-form" id="replyForm" novalidate style="margin-top:20px">
+      <div class="auth-field">
+        <label class="auth-label" for="replyContent">답장</label>
+        <textarea class="auth-input write-textarea" id="replyContent" placeholder="답장 내용을 입력하세요" maxlength="500"></textarea>
+      </div>
+      <p class="auth-error hidden" id="replyError"></p>
+      <button class="auth-submit" type="submit">답장 보내기</button>
+    </form>
+  </div>
+</div>
+
+
 <!-- LOGIN MODAL -->
 <div id="loginModal" class="auth-modal hidden" role="dialog" aria-label="로그인">
   <div class="auth-modal-bg" data-close="loginModal"></div>
@@ -834,6 +971,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/board.js"></script>
 <script src="js/i18n.js"></script>
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>

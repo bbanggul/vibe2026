@@ -12,6 +12,8 @@ function showScreen(id) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => target.classList.add('screen-visible'));
   });
+  if (id === 'screen-board') renderBoardList();
+  if (id === 'screen-messages') renderMessages();
 }
 
 /* Header scroll shadow */
@@ -980,6 +982,258 @@ function updateAuthUI(user) {
   }
 }
 
+/* ─── Board ─── */
+let currentPost = null;
+
+async function renderBoardList() {
+  const list = document.getElementById('boardList');
+  if (!list) return;
+  list.innerHTML = '<div class="board-loading">불러오는 중...</div>';
+  try {
+    const posts = await fetchPosts();
+    if (posts.length === 0) {
+      list.innerHTML = '<div class="board-empty">첫 글을 작성해보세요!</div>';
+      return;
+    }
+    list.innerHTML = posts.map(p => `
+      <div class="board-post-card" data-id="${p.id}">
+        <div class="bpc-title">${escHtml(p.title)}</div>
+        <div class="bpc-preview">${escHtml(p.content)}</div>
+        <div class="bpc-meta">
+          <span class="bpc-anon">익명</span>
+          <span class="bpc-dot">·</span>
+          <span class="bpc-time">${timeAgo(p.created_at)}</span>
+          <span class="bpc-likes">❤ ${p.likes}</span>
+        </div>
+      </div>
+    `).join('');
+    list.querySelectorAll('.board-post-card').forEach(card => {
+      card.addEventListener('click', () => openPostDetail(card.dataset.id));
+    });
+  } catch (e) {
+    list.innerHTML = `<div class="board-empty">불러오기 실패: ${e.message}</div>`;
+  }
+}
+
+async function openPostDetail(id) {
+  showScreen('screen-post');
+  const contentArea = document.getElementById('postContentArea');
+  const commentsArea = document.getElementById('postCommentsArea');
+  contentArea.innerHTML = '<div class="board-loading">불러오는 중...</div>';
+  commentsArea.innerHTML = '';
+  try {
+    const post = await fetchPost(id);
+    currentPost = post;
+    const user = await getUser();
+    const msgBtn = document.getElementById('postMsgBtn');
+    if (user && post.user_id && user.id !== post.user_id) {
+      msgBtn?.classList.remove('hidden');
+    } else {
+      msgBtn?.classList.add('hidden');
+    }
+    contentArea.innerHTML = `
+      <div class="post-detail-inner">
+        <div class="post-meta-row">익명 · ${timeAgo(post.created_at)}</div>
+        <h2 class="post-detail-title">${escHtml(post.title)}</h2>
+        <div class="post-detail-body">${escHtml(post.content).replace(/\n/g, '<br>')}</div>
+        <button class="post-like-btn" id="postLikeBtn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span id="postLikeCount">${post.likes}</span>
+        </button>
+      </div>
+      <div class="post-comments-header">댓글</div>
+    `;
+    document.getElementById('postLikeBtn')?.addEventListener('click', async () => {
+      await likePost(post.id, post.likes);
+      post.likes++;
+      const el = document.getElementById('postLikeCount');
+      if (el) el.textContent = post.likes;
+    });
+    await renderComments(id);
+  } catch (e) {
+    contentArea.innerHTML = `<div class="board-empty">${e.message}</div>`;
+  }
+}
+
+async function renderComments(postId) {
+  const area = document.getElementById('postCommentsArea');
+  if (!area) return;
+  try {
+    const comments = await fetchComments(postId);
+    if (comments.length === 0) {
+      area.innerHTML = '<div class="comments-empty">첫 댓글을 남겨보세요</div>';
+      return;
+    }
+    area.innerHTML = comments.map(c => `
+      <div class="comment-card">
+        <div class="comment-anon">익명</div>
+        <div class="comment-text">${escHtml(c.content)}</div>
+        <div class="comment-time">${timeAgo(c.created_at)}</div>
+      </div>
+    `).join('');
+  } catch (e) {}
+}
+
+function initBoardScreen() {
+  document.getElementById('boardBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
+  document.getElementById('boardWriteBtn')?.addEventListener('click', async () => {
+    const user = await getUser();
+    if (!user) { openModal('loginModal'); return; }
+    openModal('writeModal');
+  });
+  document.getElementById('quickBoardBtn')?.addEventListener('click', e => {
+    e.preventDefault();
+    showScreen('screen-board');
+  });
+}
+
+function initPostScreen() {
+  document.getElementById('postBackBtn')?.addEventListener('click', () => showScreen('screen-board'));
+  document.getElementById('postMsgBtn')?.addEventListener('click', () => openModal('sendMsgModal'));
+
+  const sendComment = async () => {
+    const input = document.getElementById('commentInput');
+    const content = input?.value.trim();
+    if (!content || !currentPost) return;
+    const user = await getUser();
+    if (!user) { openModal('loginModal'); return; }
+    input.disabled = true;
+    try {
+      await createComment(currentPost.id, content);
+      input.value = '';
+      await renderComments(currentPost.id);
+      document.getElementById('postScroll')?.scrollTo({ top: 999999, behavior: 'smooth' });
+    } catch (e) { alert(e.message); }
+    finally { input.disabled = false; input.focus(); }
+  };
+
+  document.getElementById('commentSendBtn')?.addEventListener('click', sendComment);
+  document.getElementById('commentInput')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendComment();
+  });
+}
+
+function initWriteModal() {
+  document.getElementById('writeForm')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const title = document.getElementById('writeTitle').value.trim();
+    const content = document.getElementById('writeContent').value.trim();
+    const errEl = document.getElementById('writeError');
+    const btn = e.target.querySelector('.auth-submit');
+    errEl.classList.add('hidden');
+    if (!title || !content) { errEl.textContent = '제목과 내용을 입력해주세요.'; errEl.classList.remove('hidden'); return; }
+    btn.disabled = true; btn.textContent = '등록 중...';
+    try {
+      await createPost(title, content);
+      closeModal('writeModal');
+      e.target.reset();
+      await renderBoardList();
+    } catch (e) {
+      errEl.textContent = e.message; errEl.classList.remove('hidden');
+    } finally { btn.disabled = false; btn.textContent = '등록'; }
+  });
+}
+
+function initSendMsgModal() {
+  document.getElementById('sendMsgForm')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const content = document.getElementById('sendMsgContent').value.trim();
+    const errEl = document.getElementById('sendMsgError');
+    const btn = e.target.querySelector('.auth-submit');
+    errEl.classList.add('hidden');
+    if (!content) { errEl.textContent = '내용을 입력해주세요.'; errEl.classList.remove('hidden'); return; }
+    if (!currentPost?.user_id) { errEl.textContent = '쪽지를 보낼 수 없는 글입니다.'; errEl.classList.remove('hidden'); return; }
+    btn.disabled = true; btn.textContent = '보내는 중...';
+    try {
+      await sendMessage(currentPost.user_id, currentPost.id, content);
+      closeModal('sendMsgModal');
+      e.target.reset();
+      alert('쪽지를 보냈습니다.');
+    } catch (e) {
+      errEl.textContent = e.message; errEl.classList.remove('hidden');
+    } finally { btn.disabled = false; btn.textContent = '보내기'; }
+  });
+}
+
+/* ─── Messages ─── */
+let currentViewMsg = null;
+
+async function renderMessages() {
+  const list = document.getElementById('msgList');
+  if (!list) return;
+  list.innerHTML = '<div class="board-loading">불러오는 중...</div>';
+  const user = await getUser();
+  if (!user) { list.innerHTML = '<div class="board-empty">로그인이 필요합니다.</div>'; return; }
+  try {
+    const msgs = await fetchMessages();
+    if (msgs.length === 0) { list.innerHTML = '<div class="board-empty">쪽지가 없습니다.</div>'; return; }
+    list.innerHTML = msgs.map(m => {
+      const isMine = m.sender_id === user.id;
+      const unread = !m.is_read && !isMine;
+      return `
+        <div class="msg-card${unread ? ' msg-unread' : ''}" data-id="${m.id}">
+          <div class="msg-card-top">
+            <span class="msg-from">${isMine ? '보낸 쪽지' : '익명'}</span>
+            ${unread ? '<span class="msg-new-dot"></span>' : ''}
+            <span class="msg-time">${timeAgo(m.created_at)}</span>
+          </div>
+          <div class="msg-preview">${escHtml(m.content)}</div>
+        </div>
+      `;
+    }).join('');
+    list.querySelectorAll('.msg-card').forEach(card => {
+      card.addEventListener('click', async () => {
+        const msg = msgs.find(m => m.id === card.dataset.id);
+        if (!msg) return;
+        currentViewMsg = msg;
+        if (!msg.is_read && msg.receiver_id === user.id) {
+          await markRead(msg.id);
+          card.classList.remove('msg-unread');
+          card.querySelector('.msg-new-dot')?.remove();
+        }
+        openMsgDetail(msg, user);
+      });
+    });
+  } catch (e) {
+    list.innerHTML = `<div class="board-empty">${e.message}</div>`;
+  }
+}
+
+function openMsgDetail(msg, user) {
+  const body = document.getElementById('msgDetailBody');
+  if (!body) return;
+  const isMine = msg.sender_id === user.id;
+  body.innerHTML = `
+    <div class="msg-detail-meta">${isMine ? '내가 보낸 쪽지' : '받은 쪽지'} · ${timeAgo(msg.created_at)}</div>
+    <div class="msg-detail-content">${escHtml(msg.content)}</div>
+  `;
+  const replyForm = document.getElementById('replyForm');
+  if (replyForm) replyForm.style.display = isMine ? 'none' : '';
+  openModal('msgDetailModal');
+}
+
+function initMessagesScreen() {
+  document.getElementById('msgBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
+  document.getElementById('replyForm')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const content = document.getElementById('replyContent').value.trim();
+    const errEl = document.getElementById('replyError');
+    const btn = e.target.querySelector('.auth-submit');
+    errEl.classList.add('hidden');
+    if (!content) { errEl.textContent = '내용을 입력해주세요.'; errEl.classList.remove('hidden'); return; }
+    if (!currentViewMsg) return;
+    btn.disabled = true; btn.textContent = '보내는 중...';
+    try {
+      await replyMessage(currentViewMsg, content);
+      closeModal('msgDetailModal');
+      e.target.reset();
+      alert('답장을 보냈습니다.');
+    } catch (e) {
+      errEl.textContent = e.message; errEl.classList.remove('hidden');
+    } finally { btn.disabled = false; btn.textContent = '답장 보내기'; }
+  });
+}
+
 /* Campus Map Modal */
 function initMapModal() {
   const btn = document.getElementById('campusMapBtn');
@@ -1018,6 +1272,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   initLibraryScreen();
   initSchoolScreen();
   initAuthModals();
+  initBoardScreen();
+  initPostScreen();
+  initWriteModal();
+  initSendMsgModal();
+  initMessagesScreen();
   initChatbot();
   initMapModal();
   initHeaderScroll();
