@@ -108,7 +108,9 @@ async function fetchMessages() {
     .or(`receiver_id.eq.${user.id},sender_id.eq.${user.id}`)
     .order('created_at', { ascending: false });
   if (error) throw error;
-  return data;
+  return data.filter(m =>
+    m.sender_id === user.id ? !m.deleted_by_sender : !m.deleted_by_receiver
+  );
 }
 
 async function sendMessage(receiverId, postId, content) {
@@ -137,6 +139,13 @@ async function markRead(id) {
 }
 
 async function deleteMessage(id) {
-  const { error } = await sb.from('messages').delete().eq('id', id);
+  const user = await getUser();
+  if (!user) throw new Error('로그인이 필요합니다.');
+  const { data: msg } = await sb.from('messages').select('sender_id').eq('id', id).single();
+  const isSender = msg?.sender_id === user.id;
+  const { error } = await sb
+    .from('messages')
+    .update(isSender ? { deleted_by_sender: true } : { deleted_by_receiver: true })
+    .eq('id', id);
   if (error) throw error;
 }
