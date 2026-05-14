@@ -1642,6 +1642,41 @@ const campusBuildings = [
 ];
 
 const CAMPUS_PLACEHOLDER = 'https://www.suwon.ac.kr/usr/upload/board/zboardphotogallery188/20200619015742915_7691.0.jpg';
+const CAMPUSMAP_IMG_BASE = 'https://www.suwon.ac.kr/usr/images/suwon/campusmap/';
+
+/* Maps our building id (01-26) → university BULD_CD + floor list */
+const CAMPUS_BULD_DATA = {
+  '01': { buldCd:'02', floors:['B2','B1','01','02','03','04','05'] },
+  '02': { buldCd:'37', floors:['B4','B3','B2','B1','01','02','03','04','05','06','07','08'] },
+  '03': { buldCd:'08', floors:['B2','B1','01','02','03','04','05','06'] },
+  '04': { buldCd:'19', floors:['B2','B1','01','02','03','04','05','06','07','08','09','10','11'] },
+  '05': { buldCd:'09', floors:['B2','B1','01','02','03','04','05'] },
+  '06': { buldCd:'10', floors:['B2','B1','01','02','03','04','05'] },
+  '07': { buldCd:'07', floors:['B1','01','02','03','04','05'] },
+  '08': { buldCd:'17', floors:['B2','B1','01','02','03','04','05','06'] },
+  '09': { buldCd:'06', floors:['B2','B1','01','02','03','04','05'] },
+  '10': { buldCd:'15', floors:['B2','B1','01','02','03','04'] },
+  '11': { buldCd:'14', floors:['B2','B1','01','02','03'] },
+  '12': { buldCd:'05', floors:['B2','B1','01','02','03'] },
+  '13': { buldCd:'40', floors:['B1','01','02','03','04'] },
+  '14': { buldCd:'22', floors:['B1','01','02','03'] },
+  '15': { buldCd:'13', floors:['B2','B1','01','02','03'] },
+  '16': { buldCd:'21', floors:['B2','B1','01','02','03','04','05','06'] },
+  '17': { buldCd:'12', floors:['B2','B1','01','02','03','04','05'] },
+  '18': { buldCd:'04', floors:['B2','B1','01','02','03','04','05'] },
+  '19': { buldCd:'27', floors:['B2','B1','01','02','03','04','05'] },
+  '20': { buldCd:null, floors:[] },
+  '21': { buldCd:null, floors:[] },
+  '22': { buldCd:'16', floors:['B2','B1','01','02','03'] },
+  '23': { buldCd:'18', floors:['B1','01','02','03','04'] },
+  '24': { buldCd:null, floors:[] },
+  '25': { buldCd:'38', floors:['B3','B2','B1','01','02','03','04','05','06','07','08','09','10'] },
+  '26': { buldCd:'23', floors:['01','02'] },
+};
+
+function floorLabel(florCd) {
+  return florCd.startsWith('B') ? florCd : (parseInt(florCd, 10) + 'F');
+}
 
 function renderCampusBuildingList() {
   const lang = window.currentLang;
@@ -1664,24 +1699,134 @@ function renderCampusBuildingList() {
   });
 }
 
-function openBuildingModal(id) {
+async function openBuildingModal(id) {
   const b = campusBuildings.find(x => x.id === id);
   if (!b) return;
+  const bInfo = CAMPUS_BULD_DATA[id] || { buldCd: null, floors: [] };
   const lang = window.currentLang;
   const name = lang === 'ko' ? b.ko : (b.names[lang] || b.names.en || b.ko);
-  document.getElementById('bldgModalNum').textContent = `건물 ${b.id}`;
-  document.getElementById('bldgModalName').textContent = name;
-  const koEl = document.getElementById('bldgModalNameKo');
-  if (lang !== 'ko') { koEl.textContent = b.ko; koEl.style.display = ''; }
-  else { koEl.style.display = 'none'; }
-  document.getElementById('bldgModalFacilities').innerHTML = b.facilities.map(key => {
-    const f = FACILITY_NAMES[key];
-    return `<li class="bldg-facility-tag">${f ? (f[lang] || f.en) : key}</li>`;
-  }).join('');
-  document.getElementById('bldgModalImg').src = CAMPUS_PLACEHOLDER;
-  document.getElementById('bldgModalImg').alt = name;
+  const { buldCd, floors } = bInfo;
+
+  const photoUrl = buldCd
+    ? `${CAMPUSMAP_IMG_BASE}${buldCd}_00.png`
+    : CAMPUS_PLACEHOLDER;
+
+  const sheet = document.getElementById('bldgModalSheet');
+  sheet.innerHTML = `
+    <img class="bldg-modal-img" id="bldgPhotoImg" src="${photoUrl}" alt="${name}">
+    <button class="bldg-modal-close" id="bldgCloseBtn" aria-label="닫기">✕</button>
+    <div class="bldg-modal-body">
+      <div class="bldg-modal-num">건물 ${b.id}</div>
+      <h2 class="bldg-modal-name">${name}</h2>
+      ${lang !== 'ko' ? `<p class="bldg-modal-name-ko">${b.ko}</p>` : ''}
+      ${floors.length ? `
+        <div id="bldgFloorWrap" class="bldg-floor-wrap">
+          <div class="bldg-floor-loading"><span class="bldg-floor-spinner"></span> 층별 정보 로딩 중…</div>
+        </div>
+        <div id="bldgFloorPlanWrap" class="bldg-floorplan-wrap hidden">
+          <div class="bldg-floorplan-header" id="bldgFloorPlanHeader"></div>
+          <img class="bldg-floorplan-img" id="bldgFloorPlanImg" src="" alt="">
+          <div class="bldg-floorplan-noimg hidden" id="bldgFloorPlanEmpty">안내도를 준비 중입니다.</div>
+        </div>
+      ` : `<p class="bldg-no-info">층별 안내 정보가 없습니다.</p>`}
+    </div>`;
+
+  const photoEl = document.getElementById('bldgPhotoImg');
+  photoEl.onerror = () => { photoEl.src = CAMPUS_PLACEHOLDER; };
+  document.getElementById('bldgCloseBtn').addEventListener('click', closeBuildingModal);
+
   document.getElementById('buildingModal').classList.remove('hidden');
   document.body.style.overflow = 'hidden';
+
+  if (buldCd && floors.length) {
+    await loadAndRenderFloors(buldCd, floors);
+  }
+}
+
+async function loadAndRenderFloors(buldCd, floors) {
+  let floorFacilities = null;
+  try {
+    const firstFloor = floors.find(f => !f.startsWith('B')) || floors[0];
+    const res = await fetch('https://www.suwon.ac.kr/mainHp/campusGuide/buldAndRoomInfo.html', {
+      method: 'POST', mode: 'cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `buldCd=${buldCd}&florCd=${firstFloor}`
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.resultListRoom?.length) {
+        floorFacilities = {};
+        data.resultListRoom.forEach(r => {
+          if (!floorFacilities[r.FLOR_CD]) floorFacilities[r.FLOR_CD] = new Set();
+          floorFacilities[r.FLOR_CD].add(r.ROOM_NM.trim());
+        });
+      }
+    }
+  } catch { /* CORS blocked — render without facility column */ }
+
+  renderFloorTable(buldCd, floors, floorFacilities);
+}
+
+function renderFloorTable(buldCd, floors, floorFacilities) {
+  const wrap = document.getElementById('bldgFloorWrap');
+  if (!wrap) return;
+  const hasFac = !!floorFacilities;
+  const rows = [...floors].reverse().map(florCd => {
+    const lbl = floorLabel(florCd);
+    const fac = hasFac && floorFacilities[florCd]
+      ? [...floorFacilities[florCd]].slice(0, 4).join(', ') : '';
+    return `<tr>
+      <td class="ft-num"><span class="ft-floor-tag">${lbl}</span></td>
+      ${hasFac ? `<td class="ft-fac">${fac || '—'}</td>` : ''}
+      <td class="ft-btn">
+        <button class="ft-plan-btn" data-buldcd="${buldCd}" data-florcd="${florCd}" data-lbl="${lbl}">도면보기</button>
+      </td>
+    </tr>`;
+  }).join('');
+
+  wrap.innerHTML = `
+    <table class="bldg-floor-table">
+      <thead><tr>
+        <th>층수</th>
+        ${hasFac ? '<th>주요시설</th>' : ''}
+        <th>안내도</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+
+  wrap.querySelectorAll('.ft-plan-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      wrap.querySelectorAll('.ft-plan-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      showFloorPlan(btn.dataset.buldcd, btn.dataset.florcd, btn.dataset.lbl);
+    });
+  });
+}
+
+function showFloorPlan(buldCd, florCd, label) {
+  const planWrap = document.getElementById('bldgFloorPlanWrap');
+  const planImg  = document.getElementById('bldgFloorPlanImg');
+  const planEmpty = document.getElementById('bldgFloorPlanEmpty');
+  const planHeader = document.getElementById('bldgFloorPlanHeader');
+  if (!planWrap) return;
+
+  planWrap.classList.remove('hidden');
+  planImg.style.display = 'block';
+  planEmpty.classList.add('hidden');
+  planHeader.textContent = `${label} 안내도`;
+
+  const urls = [
+    `${CAMPUSMAP_IMG_BASE}${buldCd}_${florCd}_new.png`,
+    `${CAMPUSMAP_IMG_BASE}${buldCd}_${florCd}.png`,
+  ];
+  let idx = 0;
+  planImg.onerror = () => {
+    idx++;
+    if (idx < urls.length) { planImg.src = urls[idx]; }
+    else { planImg.style.display = 'none'; planEmpty.classList.remove('hidden'); }
+  };
+  planImg.src = urls[0];
+  setTimeout(() => planWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 120);
 }
 
 function closeBuildingModal() {
@@ -1692,7 +1837,6 @@ function closeBuildingModal() {
 function initCampusMap() {
   document.getElementById('mapBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
   document.getElementById('buildingModalBg')?.addEventListener('click', closeBuildingModal);
-  document.getElementById('buildingModalClose')?.addEventListener('click', closeBuildingModal);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBuildingModal(); });
   renderCampusBuildingList();
 }
