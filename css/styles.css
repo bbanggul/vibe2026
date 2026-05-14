@@ -1942,3 +1942,6 @@ img, svg { display: block; }
 .auth-submit:hover { opacity: .88; }
 .auth-switch { margin-top: 16px; text-align: center; font-size: 0.85rem; color: var(--text-3, #888); }
 .auth-switch-btn { background: none; border: none; color: var(--navy, #002D72); font-weight: 700; cursor: pointer; font-size: 0.85rem; padding: 0 2px; }
+
+.nav-user-label { font-size: 0.85rem; font-weight: 600; color: var(--navy, #002D72); padding: 4px 0 8px; }
+.btn-logout { background: none; border: 1.5px solid #e74c3c; color: #e74c3c; border-radius: 8px; padding: 8px 16px; font-size: 0.9rem; font-weight: 600; cursor: pointer; width: 100%; }

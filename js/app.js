@@ -892,6 +892,7 @@ function initAuthModals() {
   /* open buttons */
   document.querySelector('.btn-login')?.addEventListener('click', () => { closeNav(); openModal('loginModal'); });
   document.querySelector('.btn-signup')?.addEventListener('click', () => { closeNav(); openModal('signupModal'); });
+  document.getElementById('logoutBtn')?.addEventListener('click', async () => { await authLogout(); closeNav(); });
 
   /* close via bg click or ✕ button */
   document.querySelectorAll('[data-close]').forEach(el => {
@@ -907,33 +908,76 @@ function initAuthModals() {
     if (e.key === 'Escape') { closeModal('loginModal'); closeModal('signupModal'); }
   });
 
-  /* login form — TODO: 백엔드 연결 */
-  document.getElementById('loginForm')?.addEventListener('submit', e => {
+  /* login form */
+  document.getElementById('loginForm')?.addEventListener('submit', async e => {
     e.preventDefault();
     const email = document.getElementById('loginEmail').value.trim();
     const pw = document.getElementById('loginPassword').value;
     const errEl = document.getElementById('loginError');
+    const btn = e.target.querySelector('.auth-submit');
     errEl.classList.add('hidden');
     if (!email || !pw) { errEl.textContent = '이메일과 비밀번호를 입력해주세요.'; errEl.classList.remove('hidden'); return; }
-    /* TODO: await authLogin(email, pw) */
-    console.log('login:', email);
+    btn.disabled = true; btn.textContent = '로그인 중...';
+    try {
+      await authLogin(email, pw);
+      closeModal('loginModal');
+      e.target.reset();
+    } catch (err) {
+      errEl.textContent = err.message === 'Invalid login credentials' ? '이메일 또는 비밀번호가 올바르지 않습니다.' : err.message;
+      errEl.classList.remove('hidden');
+    } finally {
+      btn.disabled = false; btn.textContent = '로그인';
+    }
   });
 
-  /* signup form — TODO: 백엔드 연결 */
-  document.getElementById('signupForm')?.addEventListener('submit', e => {
+  /* signup form */
+  document.getElementById('signupForm')?.addEventListener('submit', async e => {
     e.preventDefault();
     const name = document.getElementById('signupName').value.trim();
     const email = document.getElementById('signupEmail').value.trim();
     const pw = document.getElementById('signupPassword').value;
     const pw2 = document.getElementById('signupPasswordConfirm').value;
     const errEl = document.getElementById('signupError');
+    const btn = e.target.querySelector('.auth-submit');
     errEl.classList.add('hidden');
     if (!name || !email || !pw) { errEl.textContent = '모든 항목을 입력해주세요.'; errEl.classList.remove('hidden'); return; }
     if (pw !== pw2) { errEl.textContent = '비밀번호가 일치하지 않습니다.'; errEl.classList.remove('hidden'); return; }
     if (pw.length < 8) { errEl.textContent = '비밀번호는 8자 이상이어야 합니다.'; errEl.classList.remove('hidden'); return; }
-    /* TODO: await authSignup(name, email, pw) */
-    console.log('signup:', name, email);
+    btn.disabled = true; btn.textContent = '가입 중...';
+    try {
+      await authSignup(name, email, pw);
+      closeModal('signupModal');
+      e.target.reset();
+      alert('가입 완료! 이메일을 확인해 인증을 완료해주세요.');
+    } catch (err) {
+      errEl.textContent = err.message;
+      errEl.classList.remove('hidden');
+    } finally {
+      btn.disabled = false; btn.textContent = '회원가입';
+    }
   });
+
+  /* auth state → UI 반영 */
+  onAuthStateChange(user => updateAuthUI(user));
+}
+
+function updateAuthUI(user) {
+  const loginBtn = document.querySelector('.btn-login');
+  const signupBtn = document.querySelector('.btn-signup');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const userLabel = document.getElementById('navUserLabel');
+
+  if (user) {
+    if (loginBtn) loginBtn.style.display = 'none';
+    if (signupBtn) signupBtn.style.display = 'none';
+    if (logoutBtn) logoutBtn.style.display = '';
+    if (userLabel) { userLabel.style.display = ''; userLabel.textContent = user.user_metadata?.name || user.email; }
+  } else {
+    if (loginBtn) loginBtn.style.display = '';
+    if (signupBtn) signupBtn.style.display = '';
+    if (logoutBtn) logoutBtn.style.display = 'none';
+    if (userLabel) userLabel.style.display = 'none';
+  }
 }
 
 /* Campus Map Modal */
