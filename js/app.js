@@ -555,6 +555,8 @@ function openShuttleSection(pane) {
 
 function initShuttleScreen() {
   document.getElementById('shuttleBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
+  /* hero shuttle pill (new) + legacy shuttle row (old) */
+  document.querySelector('.hero-shuttle-pill')?.addEventListener('click', () => showScreen('screen-shuttle'));
   const shuttleRow = document.querySelector('.hero-shuttle-row');
   if (shuttleRow) {
     shuttleRow.style.cursor = 'pointer';

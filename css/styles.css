@@ -2375,6 +2375,27 @@ img, svg { display: block; }
   background: rgba(255,255,255,0.07);
 }
 
+/* Menu items inside feature card */
+.feature-card-menu .menu-item {
+  color: rgba(255,255,255,0.82);
+  border-bottom-color: rgba(255,255,255,0.12);
+  font-size: 0.78rem;
+  padding: 3px 0;
+}
+.feature-card-menu .menu-item:last-child { border-bottom: none; }
+.feature-card-menu .menu-item-ko { color: rgba(255,255,255,0.45); }
+.feature-card-menu .menu-item-empty { color: rgba(255,255,255,0.45); }
+
+/* Shuttle pill — clickable */
+.hero-shuttle-pill {
+  cursor: pointer;
+  transition: background var(--trans), border-color var(--trans);
+}
+.hero-shuttle-pill:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.45);
+}
+
 /* ── Main Footer ── */
 .main-footer {
   background: #0d0d0d;
