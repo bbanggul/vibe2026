@@ -883,6 +883,7 @@ function initLangCards() {
   document.querySelectorAll('.splash-lang-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       setLanguage(btn.dataset.lang);
+      sessionStorage.setItem('lang_splash_shown', '1');
       const splash = document.getElementById('screen-language');
       splash?.classList.add('splash-out');
       setTimeout(() => {
@@ -995,9 +996,9 @@ function startShuttleTimer() {
 
 /* Loading → Home (language splash removed) */
 function initLoading() {
-  const savedLang = localStorage.getItem('uos_lang');
+  const splashShown = sessionStorage.getItem('lang_splash_shown');
   setTimeout(() => {
-    if (savedLang) {
+    if (splashShown) {
       showScreen('screen-home');
       initFaqAccordion();
       initScrollReveal();
