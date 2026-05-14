@@ -1794,41 +1794,6 @@ img, svg { display: block; }
   margin: 0 0 3px; line-height: 1.3;
 }
 .bldg-modal-name-ko { font-size: 0.8rem; color: var(--text-3); margin: 0 0 12px; }
-.bldg-no-info { font-size: 0.82rem; color: var(--text-3); margin: 8px 0 0; }
-
-/* Floor loading spinner */
-.bldg-floor-loading {
-  display: flex; align-items: center; gap: 8px;
-  padding: 14px 0; font-size: 0.82rem; color: var(--text-3);
-}
-.bldg-floor-spinner {
-  width: 14px; height: 14px; flex-shrink: 0;
-  border: 2px solid var(--border); border-top-color: var(--navy);
-  border-radius: 50%; animation: bldgSpin 0.8s linear infinite;
-}
-@keyframes bldgSpin { to { transform: rotate(360deg); } }
-
-/* Floor table */
-.bldg-floor-wrap { margin-top: 4px; }
-.bldg-floor-table {
-  width: 100%; border-collapse: collapse; font-size: 0.82rem;
-}
-.bldg-floor-table thead th {
-  background: var(--bg); color: var(--navy);
-  font-weight: 800; font-size: 0.72rem; letter-spacing: 0.04em;
-  padding: 7px 10px; text-align: left;
-  border-bottom: 2px solid var(--navy);
-}
-.bldg-floor-table tbody tr { border-bottom: 1px solid var(--border); }
-.bldg-floor-table tbody tr:last-child { border-bottom: none; }
-.bldg-floor-table tbody td { padding: 7px 10px; vertical-align: middle; }
-.ft-num { width: 52px; white-space: nowrap; }
-.ft-floor-tag {
-  display: inline-block; background: var(--navy); color: #fff;
-  font-size: 0.7rem; font-weight: 800; border-radius: 5px;
-  padding: 2px 7px; letter-spacing: 0.03em;
-}
-.ft-fac { color: var(--text-2); font-size: 0.78rem; line-height: 1.4; }
 
 /* ── Auth Modals ── */
 .auth-modal { position: fixed; inset: 0; z-index: 9100; display: flex; align-items: flex-end; justify-content: center; }

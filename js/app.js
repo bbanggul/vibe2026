@@ -1644,39 +1644,14 @@ const campusBuildings = [
 const CAMPUS_PLACEHOLDER = 'https://www.suwon.ac.kr/usr/upload/board/zboardphotogallery188/20200619015742915_7691.0.jpg';
 const CAMPUSMAP_IMG_BASE = 'https://www.suwon.ac.kr/usr/images/suwon/campusmap/';
 
-/* Maps our building id (01-26) → university BULD_CD + floor list */
+/* Maps our building id (01-26) → university BULD_CD for building photo */
 const CAMPUS_BULD_DATA = {
-  '01': { buldCd:'02', floors:['B2','B1','01','02','03','04','05'] },
-  '02': { buldCd:'37', floors:['B4','B3','B2','B1','01','02','03','04','05','06','07','08'] },
-  '03': { buldCd:'08', floors:['B2','B1','01','02','03','04','05','06'] },
-  '04': { buldCd:'19', floors:['B2','B1','01','02','03','04','05','06','07','08','09','10','11'] },
-  '05': { buldCd:'09', floors:['B2','B1','01','02','03','04','05'] },
-  '06': { buldCd:'10', floors:['B2','B1','01','02','03','04','05'] },
-  '07': { buldCd:'07', floors:['B1','01','02','03','04','05'] },
-  '08': { buldCd:'17', floors:['B2','B1','01','02','03','04','05','06'] },
-  '09': { buldCd:'06', floors:['B2','B1','01','02','03','04','05'] },
-  '10': { buldCd:'15', floors:['B2','B1','01','02','03','04'] },
-  '11': { buldCd:'14', floors:['B2','B1','01','02','03'] },
-  '12': { buldCd:'05', floors:['B2','B1','01','02','03'] },
-  '13': { buldCd:'40', floors:['B1','01','02','03','04'] },
-  '14': { buldCd:'22', floors:['B1','01','02','03'] },
-  '15': { buldCd:'13', floors:['B2','B1','01','02','03'] },
-  '16': { buldCd:'21', floors:['B2','B1','01','02','03','04','05','06'] },
-  '17': { buldCd:'12', floors:['B2','B1','01','02','03','04','05'] },
-  '18': { buldCd:'04', floors:['B2','B1','01','02','03','04','05'] },
-  '19': { buldCd:'27', floors:['B2','B1','01','02','03','04','05'] },
-  '20': { buldCd:null, floors:[] },
-  '21': { buldCd:null, floors:[] },
-  '22': { buldCd:'16', floors:['B2','B1','01','02','03'] },
-  '23': { buldCd:'18', floors:['B1','01','02','03','04'] },
-  '24': { buldCd:null, floors:[] },
-  '25': { buldCd:'38', floors:['B3','B2','B1','01','02','03','04','05','06','07','08','09','10'] },
-  '26': { buldCd:'23', floors:['01','02'] },
+  '01':'02', '02':'37', '03':'08', '04':'19', '05':'09', '06':'10',
+  '07':'07', '08':'17', '09':'06', '10':'15', '11':'14', '12':'05',
+  '13':'40', '14':'22', '15':'13', '16':'21', '17':'12', '18':'04',
+  '19':'27', '20':null, '21':null, '22':'16', '23':'18', '24':null,
+  '25':'38', '26':'23',
 };
-
-function floorLabel(florCd) {
-  return florCd.startsWith('B') ? florCd : (parseInt(florCd, 10) + 'F');
-}
 
 function renderCampusBuildingList() {
   const lang = window.currentLang;
@@ -1699,13 +1674,12 @@ function renderCampusBuildingList() {
   });
 }
 
-async function openBuildingModal(id) {
+function openBuildingModal(id) {
   const b = campusBuildings.find(x => x.id === id);
   if (!b) return;
-  const bInfo = CAMPUS_BULD_DATA[id] || { buldCd: null, floors: [] };
+  const buldCd = CAMPUS_BULD_DATA[id] || null;
   const lang = window.currentLang;
   const name = lang === 'ko' ? b.ko : (b.names[lang] || b.names.en || b.ko);
-  const { buldCd, floors } = bInfo;
 
   const photoUrl = buldCd
     ? `${CAMPUSMAP_IMG_BASE}${buldCd}_00.png`
