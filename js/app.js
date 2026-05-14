@@ -992,16 +992,33 @@ function startShuttleTimer() {
 /* Loading → Home (language splash removed) */
 function initLoading() {
   const savedLang = localStorage.getItem('uos_lang');
-
   setTimeout(() => {
-    if (savedLang) {
-      showScreen('screen-home');
-      initFaqAccordion();
-      initScrollReveal();
-    } else {
-      showScreen('screen-language');
+    showScreen('screen-home');
+    initFaqAccordion();
+    initScrollReveal();
+    if (!savedLang) {
+      document.getElementById('langPicker')?.classList.remove('hidden');
     }
   }, 1800);
+}
+
+function initLangPicker() {
+  const picker = document.getElementById('langPicker');
+  if (!picker) return;
+
+  picker.querySelectorAll('.lang-picker-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setLanguage(btn.dataset.lang);
+      picker.classList.add('hidden');
+    });
+  });
+
+  document.getElementById('langPickerClose')?.addEventListener('click', () => {
+    picker.classList.add('hidden');
+    if (!localStorage.getItem('uos_lang')) {
+      setLanguage('ko');
+    }
+  });
 }
 
 /* ─── Auth Modals ─── */
@@ -1737,6 +1754,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initChatbot();
   initMapModal();
   initMainNav();
+  initLangPicker();
   initHeaderScroll();
   updateNotices();
   await loadCafeteriaData();
