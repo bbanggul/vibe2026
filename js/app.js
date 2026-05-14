@@ -1,7 +1,9 @@
 /* ─── App ─── */
 
 /* Screen transitions */
-function showScreen(id) {
+const SKIP_HISTORY = ['screen-loading', 'screen-language'];
+
+function showScreenInternal(id) {
   document.querySelectorAll('.screen').forEach(s => {
     s.classList.remove('screen-visible');
     s.classList.add('screen-hidden');
@@ -19,6 +21,18 @@ function showScreen(id) {
   const chatbot = document.getElementById('chatbot-container');
   if (chatbot) chatbot.style.display = boardScreens.includes(id) ? 'none' : '';
 }
+
+function showScreen(id) {
+  if (!SKIP_HISTORY.includes(id)) {
+    history.pushState({ screen: id }, '');
+  }
+  showScreenInternal(id);
+}
+
+window.addEventListener('popstate', e => {
+  const screen = e.state?.screen || 'screen-home';
+  showScreenInternal(screen);
+});
 
 /* Header scroll shadow */
 function initHeaderScroll() {
@@ -1355,4 +1369,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* Start on loading screen */
   document.getElementById('screen-loading')?.classList.add('screen-visible');
+  history.replaceState({ screen: 'screen-home' }, '');
 });
