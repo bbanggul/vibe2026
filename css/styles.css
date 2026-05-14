@@ -2536,6 +2536,3 @@ img, svg { display: block; }
   .quick-links-bar { padding: 28px 16px; }
   .ql-item { padding: 10px 16px; font-size: 0.8rem; }
 }
-@media (min-width: 769px) {
-  .screen-home .hamburger-btn { display: none; }
-}
