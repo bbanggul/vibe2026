@@ -449,7 +449,7 @@ function updateHeroDate() {
   el.textContent = dateStr;
 }
 
-/* Notices horizontal scroll */
+/* Notices vertical list */
 function updateNotices() {
   const container = document.getElementById('noticesScroll');
   if (!container) return;
@@ -457,16 +457,22 @@ function updateNotices() {
   container.innerHTML = '';
   notices.forEach(notice => {
     const n = notice[lang] || notice.ko;
-    const card = document.createElement('div');
-    card.className = 'notice-card';
-    card.innerHTML = `
-      <div class="notice-card-inner">
-        <span class="notice-category">${n.category}</span>
-        <p class="notice-title">${n.title}</p>
-        <span class="notice-date">${n.date}</span>
+    const item = document.createElement('div');
+    item.className = 'notice-item';
+    item.setAttribute('role', 'listitem');
+    item.innerHTML = `
+      <div class="notice-item-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+        </svg>
       </div>
+      <div class="notice-item-body">
+        <div class="notice-item-category">${n.category}</div>
+        <div class="notice-item-title">${n.title}</div>
+      </div>
+      <span class="notice-item-date">${n.date}</span>
     `;
-    container.appendChild(card);
+    container.appendChild(item);
   });
 }
 
@@ -841,8 +847,8 @@ function initChatbot() {
   sendBtn?.addEventListener('click', handleSend);
   input?.addEventListener('keydown', e => { if (e.key === 'Enter') handleSend(); });
 
-  /* FAQ card → open chatbot with pre-filled question */
-  document.querySelectorAll('.faq-card').forEach(card => {
+  /* FAQ card / accordion → open chatbot with pre-filled question */
+  document.querySelectorAll('.faq-card, .accordion-item[data-topic]').forEach(card => {
     card.addEventListener('click', () => {
       const topic = card.dataset.topic;
       const questionMap = {
@@ -881,21 +887,24 @@ function startShuttleTimer() {
   setInterval(() => { updateHomeData(); updateCampusChips(); }, 60000);
 }
 
-/* Loading → Language / Home */
+/* Loading → Home (language splash removed) */
 function initLoading() {
   const savedLang = localStorage.getItem('uos_lang');
-  const loadingDuration = 2400;
+
+  if (!savedLang) {
+    const code = (navigator.language || 'ko').split('-')[0].toLowerCase();
+    const supported = { ko: 'ko', en: 'en', zh: 'zh', ja: 'ja', vi: 'vi', th: 'th' };
+    window.currentLang = supported[code] || 'ko';
+    localStorage.setItem('uos_lang', window.currentLang);
+    applyTranslations();
+    updateHeaderLang(window.currentLang);
+  }
 
   setTimeout(() => {
-    if (savedLang) {
-      window.currentLang = savedLang;
-      applyTranslations();
-      updateHeaderLang(savedLang);
-      showScreen('screen-home');
-    } else {
-      showScreen('screen-language');
-    }
-  }, loadingDuration);
+    showScreen('screen-home');
+    initFaqAccordion();
+    initScrollReveal();
+  }, 1800);
 }
 
 /* ─── Auth Modals ─── */
@@ -1459,10 +1468,11 @@ function initMessagesScreen() {
 /* Campus Map Modal */
 function initMapModal() {
   const btn = document.getElementById('campusMapBtn');
+  const headerBtn = document.getElementById('headerMapBtn');
   const modal = document.getElementById('mapModal');
   const bg = document.getElementById('mapModalBg');
   const closeBtn = document.getElementById('mapModalClose');
-  if (!btn || !modal) return;
+  if (!modal) return;
 
   function openMap(e) {
     e.preventDefault();
@@ -1474,10 +1484,138 @@ function initMapModal() {
     document.body.style.overflow = '';
   }
 
-  btn.addEventListener('click', openMap);
+  btn?.addEventListener('click', openMap);
+  headerBtn?.addEventListener('click', openMap);
   bg?.addEventListener('click', closeMap);
   closeBtn?.addEventListener('click', closeMap);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMap(); });
+}
+
+/* Main Nav (desktop) */
+function initMainNav() {
+  document.querySelectorAll('.main-nav-item[data-to-screen]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      showScreen(el.dataset.toScreen);
+    });
+  });
+
+  document.querySelectorAll('[data-scroll-to]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.getElementById(el.dataset.scrollTo);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  document.getElementById('heroScrollBtn')?.addEventListener('click', () => {
+    document.querySelector('.feature-section')?.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  document.querySelectorAll('.feature-card[data-to-screen]').forEach(card => {
+    card.addEventListener('click', () => showScreen(card.dataset.toScreen));
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') showScreen(card.dataset.toScreen); });
+  });
+
+  document.getElementById('quickBoardBtn')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-board'); });
+  document.getElementById('quickBoardBtn2')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-board'); });
+
+  setTimeout(() => document.querySelector('.hero-full')?.classList.add('hero-loaded'), 100);
+}
+
+/* Scroll Reveal (IntersectionObserver) */
+function initScrollReveal() {
+  const sections = document.querySelectorAll('#screen-home .reveal-section');
+  if (!sections.length) return;
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  sections.forEach(s => observer.observe(s));
+}
+
+/* FAQ Accordion */
+const faqAnswers = {
+  library: {
+    ko: '중앙도서관은 학기중 09:30–19:00, 방학중 09:30–17:00 운영되며 토·일·공휴일은 휴관합니다. 학생증으로 학부생 7권(10일) 대출 가능. 3층 대출·반납 창구 및 무인 반납함(24시간) 이용. 스터디룸은 lib.suwon.ac.kr에서 예약하세요.',
+    en: 'The library is open Mon–Fri 09:30–19:00 (semester), 09:30–17:00 (vacation), closed weekends & holidays. Undergrads can borrow up to 7 books for 10 days with your student ID. Study room bookings at lib.suwon.ac.kr.',
+    zh: '图书馆工作时间：学期中09:30–19:00，假期09:30–17:00，周末及节假日休馆。本科生凭学生证可借7册（10天）。自习室预约：lib.suwon.ac.kr。',
+    ja: '図書館：学期中09:30–19:00、休暇中09:30–17:00（土日・祝日休館）。学生証で学部生7冊10日間貸出可。スタディルーム予約はlib.suwon.ac.krで。',
+    vi: 'Thư viện mở 09:30–19:00 (học kỳ), 09:30–17:00 (nghỉ hè), đóng T7, CN và ngày lễ. SV đại học mượn tối đa 7 cuốn/10 ngày. Đặt phòng học: lib.suwon.ac.kr.',
+    th: 'ห้องสมุดเปิด 09:30–19:00 (ภาคเรียน), 09:30–17:00 (ปิดภาค), ปิดเสาร์-อาทิตย์-วันหยุด นักศึกษาป.ตรียืมได้ 7 เล่ม 10 วัน จองห้องที่ lib.suwon.ac.kr'
+  },
+  shuttle: {
+    ko: '셔틀버스는 평일만 운행됩니다. 수원역 출발: 06:50–19:30, 캠퍼스 출발: 07:40–20:00 (노선별 상이). 주말·공휴일은 운행하지 않습니다. 앱의 셔틀버스 메뉴에서 실시간 시간표를 확인하세요.',
+    en: 'Shuttle buses run on weekdays only between Suwon Station and campus. Suwon Station: 06:50–19:30, Campus: 07:40–20:00 (varies by route). No service weekends or holidays.',
+    zh: '校车仅工作日运行。水原站出发：06:50–19:30，校园出发：07:40–20:00（各路线不同）。周末及节假日停运。',
+    ja: 'シャトルバスは平日のみ運行。水原駅発：06:50–19:30、キャンパス発：07:40–20:00（路線により異なる）。週末・祝日は運休。',
+    vi: 'Xe buýt con thoi chỉ chạy ngày thường. Ga Suwon: 06:50–19:30, Khuôn viên: 07:40–20:00 (tùy tuyến). Không chạy cuối tuần và ngày lễ.',
+    th: 'รถรับส่งวิ่งเฉพาะวันจันทร์–ศุกร์ สถานีซูวอน: 06:50–19:30 มหาวิทยาลัย: 07:40–20:00 (แล้วแต่สาย) ไม่วิ่งวันหยุด'
+  },
+  registration: {
+    ko: '수강신청은 학사포털(portal.suwon.ac.kr)에서 진행합니다. 국제학생은 지도교수 상담 후 신청 가능하며, 매 학기 초 국제협력처의 별도 안내를 확인하세요. 수강 변경 기간은 개강 후 1주일입니다.',
+    en: 'Course registration is done through the academic portal (portal.suwon.ac.kr). International students should consult their advisor beforehand. Course add/drop is allowed in the first week of semester.',
+    zh: '课程注册通过学术门户(portal.suwon.ac.kr)进行。国际学生须先咨询导师。开学后一周内可进行课程变更。',
+    ja: '履修登録は学術ポータル(portal.suwon.ac.kr)で行います。留学生は指導教員相談後に登録可能。変更期間は開講後1週間。',
+    vi: 'Đăng ký môn học qua portal.suwon.ac.kr. Sinh viên quốc tế cần tư vấn giáo viên hướng dẫn. Thay đổi môn học trong tuần đầu học kỳ.',
+    th: 'ลงทะเบียนเรียนที่ portal.suwon.ac.kr นักศึกษาต่างชาติต้องปรึกษาอาจารย์ที่ปรึกษาก่อน เปลี่ยนวิชาได้ในสัปดาห์แรกของเทอม'
+  },
+  printer: {
+    ko: '프린터는 도서관 1층과 학생회관에 있습니다. 학생증을 태그하여 출력하세요. 흑백 50원/장, 컬러 150원/장. 충전은 도서관 서비스 데스크에서 가능합니다.',
+    en: 'Printers are in the library (1F) and student union building. Tag your student ID to print. B&W ₩50/page, Color ₩150/page. Top up at the library service desk.',
+    zh: '图书馆1楼和学生会大楼有打印机。刷学生证打印。黑白50韩元/页，彩色150韩元/页。图书馆服务台可充值。',
+    ja: 'プリンターは図書館1階と学生会館にあります。学生証をタッチして印刷。モノクロ50ウォン/枚、カラー150ウォン/枚。チャージは図書館サービスデスクで。',
+    vi: 'Máy in có tại tầng 1 thư viện và tòa hội sinh viên. Chạm thẻ để in. Đen trắng ₩50/trang, màu ₩150/trang. Nạp tiền tại quầy dịch vụ thư viện.',
+    th: 'เครื่องพิมพ์อยู่ที่ชั้น 1 ห้องสมุดและอาคารสหภาพนักศึกษา แตะบัตรเพื่อพิมพ์ ขาวดำ 50 วอน/หน้า สี 150 วอน/หน้า ชาร์จเงินที่เคาน์เตอร์บริการ'
+  },
+  health: {
+    ko: '보건실은 학생회관 2층에 있으며 평일 09:00–17:00 운영합니다. 기본 의약품 무료 제공, 혈압·체온 측정 가능. 응급 상황 시 031-220-2114로 연락하세요.',
+    en: 'Health center is on the 2nd floor of the student union, open weekdays 09:00–17:00. Free basic medications available. Emergency: 031-220-2114.',
+    zh: '保健室位于学生会大楼2楼，平日09:00–17:00开放，提供基本药品（免费）。紧急情况：031-220-2114。',
+    ja: '保健室は学生会館2階。平日09:00–17:00。基本薬品無料。緊急時：031-220-2114。',
+    vi: 'Phòng y tế ở tầng 2 tòa hội sinh viên, 09:00–17:00 các ngày thường. Cung cấp thuốc miễn phí. Khẩn cấp: 031-220-2114.',
+    th: 'ห้องพยาบาลชั้น 2 อาคารสหภาพนักศึกษา เปิด 09:00–17:00 วันธรรมดา ยาพื้นฐานฟรี ฉุกเฉิน: 031-220-2114'
+  },
+  dormitory: {
+    ko: '기숙사 신청은 학기 시작 2개월 전부터 학사포털에서 가능합니다. 국제학생 우선 배정 제도 있음. 월 기숙사비는 방 유형에 따라 30–50만원. 자세한 내용은 국제협력처에 문의하세요.',
+    en: 'Dormitory applications open 2 months before semester start via the portal. International students receive priority placement. Monthly fees ₩300,000–₩500,000 depending on room type.',
+    zh: '宿舍申请在学期开始前2个月通过门户网站开放。国际学生享有优先分配。月费30–50万韩元（视房型）。',
+    ja: '寮の申請は学期開始2か月前からポータルで可能。留学生優先配置あり。月額30–50万ウォン（部屋タイプによる）。',
+    vi: 'Đăng ký ký túc xá mở 2 tháng trước học kỳ qua cổng thông tin. Ưu tiên sinh viên quốc tế. Phí 300.000–500.000₩/tháng tùy loại phòng.',
+    th: 'สมัครหอพักได้ 2 เดือนก่อนเปิดเทอมผ่านพอร์ทัล นักศึกษาต่างชาติได้รับสิทธิ์ก่อน ค่าห้อง 300,000–500,000 วอน/เดือน'
+  }
+};
+
+function initFaqAccordion() {
+  const lang = window.currentLang || 'ko';
+  document.querySelectorAll('.accordion-item').forEach(item => {
+    const topic = item.dataset.topic;
+    const trigger = item.querySelector('.accordion-trigger');
+    const content = item.querySelector('.accordion-content');
+    if (!trigger || !content || !topic || !faqAnswers[topic]) return;
+
+    const answer = faqAnswers[topic][lang] || faqAnswers[topic].ko;
+    content.innerHTML = `<div class="accordion-answer">${answer}</div>`;
+
+    if (!item.dataset.accordionBound) {
+      item.dataset.accordionBound = '1';
+      trigger.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item.open').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-trigger')?.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
+  });
 }
 
 /* ─── Init ─── */
@@ -1501,6 +1639,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initMessagesScreen();
   initChatbot();
   initMapModal();
+  initMainNav();
   initHeaderScroll();
   updateNotices();
   await loadCafeteriaData();
@@ -1508,6 +1647,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateCampusChips();
   updateNavLangButtons(window.currentLang);
   startShuttleTimer();
+
+  /* Re-populate FAQ answers when language changes */
+  window.onLanguageChange = () => {
+    updateNotices();
+    initFaqAccordion();
+  };
+
   initLoading();
 
   /* Start on loading screen */

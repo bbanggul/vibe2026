@@ -96,17 +96,28 @@
 
 
 <!-- ══════════════════════════════════════
-     SCREEN 3 — HOME
+     SCREEN 3 — HOME (Visual Redesign)
 ══════════════════════════════════════ -->
 <div id="screen-home" class="screen screen-home screen-hidden">
 
-  <!-- ── HEADER ── -->
+  <!-- ── HEADER (Navy) ── -->
   <header class="header" id="mainHeader">
     <div class="header-inner">
-      <div class="header-logo" role="banner">
+      <a class="header-logo" href="#hero-section" data-scroll-to="hero-section" role="banner">
         <img src="assets/suwon_logo.png" class="header-logo-img" alt="수원대학교">
         <span class="header-portal-label">International Portal</span>
-      </div>
+      </a>
+
+      <!-- Desktop center navigation -->
+      <nav class="main-nav" aria-label="주요 메뉴">
+        <a href="#" class="main-nav-item" data-scroll-to="hero-section" data-i18n="nav_home">홈</a>
+        <a href="#" class="main-nav-item" data-to-screen="screen-shuttle" data-i18n="nav_shuttle">셔틀버스</a>
+        <a href="#" class="main-nav-item" data-to-screen="screen-cafeteria" data-i18n="nav_cafeteria">학식</a>
+        <a href="#" class="main-nav-item" data-to-screen="screen-library" data-i18n="nav_library">도서관</a>
+        <a href="#" class="main-nav-item" id="headerMapBtn" data-i18n="link_map">캠퍼스맵</a>
+        <a href="#" class="main-nav-item" data-scroll-to="faq-section">FAQ</a>
+      </nav>
+
       <div class="header-actions">
         <div class="lang-toggle-wrapper">
           <button class="lang-toggle-btn" id="langToggleBtn" aria-label="언어 변경" aria-expanded="false">
@@ -131,147 +142,200 @@
     </div>
   </header>
 
-  <!-- ── MAIN CONTENT ── -->
-  <main class="main-content" role="main">
+  <!-- ── HERO — Full Screen ── -->
+  <section class="hero-full" id="hero-section" aria-label="메인 히어로">
+    <div class="hero-full-bg" aria-hidden="true"></div>
+    <div class="hero-full-overlay" aria-hidden="true"></div>
+    <div class="hero-full-content">
+      <p class="hero-eyebrow">University of Suwon</p>
+      <h1 class="hero-main-title" data-i18n="welcome_sub">수원대학교 국제학생 포털</h1>
+      <p class="hero-tagline">Everything you need, in one place.</p>
+      <div class="hero-info-strip">
+        <div class="hero-date-pill" id="heroDate"></div>
+        <div class="hero-shuttle-pill">
+          <svg class="hero-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 19v2M18 19v2M6 10V5M18 10V5"/></svg>
+          <span data-i18n="next_shuttle">다음 셔틀</span>
+          <strong id="nextShuttleTime">--:--</strong>
+          <em id="shuttleEta"></em>
+        </div>
+      </div>
+    </div>
+    <button class="hero-scroll-btn" id="heroScrollBtn" aria-label="아래로 스크롤">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+  </section>
 
-    <!-- HERO -->
-    <section class="hero-section" aria-label="현황 정보">
-      <div class="hero-bg">
-        <p class="hero-subtitle" data-i18n="welcome_sub">수원대학교 국제학생 포털</p>
-        <div class="hero-date" id="heroDate"></div>
-        <div class="hero-shuttle-row">
-          <svg viewBox="0 0 24 24" class="hero-shuttle-icon"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 19v2M18 19v2M6 10V5M18 10V5"/></svg>
-          <span class="hero-shuttle-label" data-i18n="next_shuttle">다음 셔틀</span>
-          <span class="hero-shuttle-time" id="nextShuttleTime">--:--</span>
-          <span class="hero-shuttle-eta" id="shuttleEta"></span>
+  <!-- ── FEATURE CARDS — 2×2 Photo Grid ── -->
+  <section class="feature-section reveal-section">
+    <div class="feature-grid">
+
+      <div class="feature-card" data-to-screen="screen-shuttle" role="button" tabindex="0" aria-label="셔틀버스">
+        <div class="feature-card-img" style="background-image:url('https://www.suwon.ac.kr/usr/upload/board/zboardphotogallery188/20200619015918515_9885.0.jpg')" aria-hidden="true"></div>
+        <div class="feature-card-overlay" aria-hidden="true"></div>
+        <div class="feature-card-body">
+          <p class="feature-card-en">Shuttle Bus</p>
+          <h3 class="feature-card-title" data-i18n="nav_shuttle">셔틀버스</h3>
+          <p class="feature-card-desc">교내 순환 및 통학버스 시간표 안내</p>
+          <span class="feature-card-cta">View Schedule
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
         </div>
       </div>
 
-      <div class="quick-info-cards">
-        <div class="menu-card" id="menuCard" role="button" tabindex="0" aria-label="오늘의 학식">
-          <div class="menu-card-header">
-            <div class="quick-card-icon-wrap menu-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-            </div>
-            <span class="menu-card-title" data-i18n="todays_menu">오늘의 학식</span>
-          </div>
-          <div class="menu-item-list" id="todayMenuMain">--</div>
+      <div class="feature-card" data-to-screen="screen-cafeteria" id="menuCard" role="button" tabindex="0" aria-label="학식당">
+        <div class="feature-card-img" style="background-image:url('https://www.suwon.ac.kr/usr/upload/board/zboardphotogallery188/20200619015833009_7845.0.JPG')" aria-hidden="true"></div>
+        <div class="feature-card-overlay" aria-hidden="true"></div>
+        <div class="feature-card-body">
+          <p class="feature-card-en">Cafeteria</p>
+          <h3 class="feature-card-title" data-i18n="nav_cafeteria">학식당</h3>
+          <p class="feature-card-desc">학생회관 1층 · 중식 11:00~14:00</p>
+          <div class="feature-card-menu" id="todayMenuMain"></div>
+          <span class="feature-card-cta">Today's Menu
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
         </div>
       </div>
-    </section>
 
-    <!-- NOTICES -->
-    <section class="section notices-section" aria-label="공지사항">
-      <div class="section-badge">
-        <span class="section-badge-dot"></span>
-        <span class="section-badge-text">Updates</span>
+      <div class="feature-card" data-to-screen="screen-library" role="button" tabindex="0" aria-label="중앙도서관">
+        <div class="feature-card-img" style="background-image:url('https://www.suwon.ac.kr/usr/upload/board/zboardphotogallery188/20201027023350053_1310.0.JPG')" aria-hidden="true"></div>
+        <div class="feature-card-overlay" aria-hidden="true"></div>
+        <div class="feature-card-body">
+          <p class="feature-card-en">Library</p>
+          <h3 class="feature-card-title" data-i18n="nav_library">중앙도서관</h3>
+          <p class="feature-card-desc">도서 대출, 열람실, 스터디룸 예약</p>
+          <span class="feature-card-cta">Visit Library
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </div>
       </div>
-      <div class="section-header">
-        <h2 class="section-title" data-i18n="notices_title">공지사항</h2>
-        <a href="#" class="section-view-all" data-i18n="view_all">전체보기</a>
-      </div>
-      <div class="notices-scroll-wrapper">
-        <div class="notices-scroll" id="noticesScroll" role="list"></div>
-      </div>
-    </section>
 
-    <!-- FAQ -->
-    <section class="section faq-section" aria-label="자주 묻는 질문">
-      <div class="section-badge">
-        <span class="section-badge-dot"></span>
-        <span class="section-badge-text">Support</span>
-      </div>
-      <div class="section-header">
-        <h2 class="section-title" data-i18n="faq_title">자주 묻는 질문</h2>
-      </div>
-      <div class="faq-grid" id="faqGrid">
-        <div class="faq-card" data-topic="library" role="button" tabindex="0">
-          <div class="faq-icon-wrap" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          </div>
-          <div class="faq-text" data-i18n="faq_library">도서관 이용방법</div>
-          <div class="faq-arrow" aria-hidden="true">→</div>
-        </div>
-        <div class="faq-card" data-topic="shuttle" role="button" tabindex="0">
-          <div class="faq-icon-wrap" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 19v2M18 19v2M6 10V5M18 10V5"/></svg>
-          </div>
-          <div class="faq-text" data-i18n="faq_shuttle">셔틀버스 시간표</div>
-          <div class="faq-arrow" aria-hidden="true">→</div>
-        </div>
-        <div class="faq-card" data-topic="registration" role="button" tabindex="0">
-          <div class="faq-icon-wrap" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
-          </div>
-          <div class="faq-text" data-i18n="faq_register">수강신청 방법</div>
-          <div class="faq-arrow" aria-hidden="true">→</div>
-        </div>
-        <div class="faq-card" data-topic="printer" role="button" tabindex="0">
-          <div class="faq-icon-wrap" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-          </div>
-          <div class="faq-text" data-i18n="faq_printer">프린터 위치·사용법</div>
-          <div class="faq-arrow" aria-hidden="true">→</div>
-        </div>
-        <div class="faq-card" data-topic="health" role="button" tabindex="0">
-          <div class="faq-icon-wrap" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <div class="faq-text" data-i18n="faq_health">보건실·병원 안내</div>
-          <div class="faq-arrow" aria-hidden="true">→</div>
-        </div>
-        <div class="faq-card" data-topic="dormitory" role="button" tabindex="0">
-          <div class="faq-icon-wrap" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <div class="faq-text" data-i18n="faq_dormitory">기숙사 신청</div>
-          <div class="faq-arrow" aria-hidden="true">→</div>
+      <div class="feature-card" id="campusMapBtn" role="button" tabindex="0" aria-label="캠퍼스 지도">
+        <div class="feature-card-img" style="background-image:url('https://www.suwon.ac.kr/usr/upload/board/zboardphotogallery188/20200619015742915_7691.0.jpg')" aria-hidden="true"></div>
+        <div class="feature-card-overlay" aria-hidden="true"></div>
+        <div class="feature-card-body">
+          <p class="feature-card-en">Campus Map</p>
+          <h3 class="feature-card-title" data-i18n="link_map">캠퍼스 지도</h3>
+          <p class="feature-card-desc">건물 위치, 편의시설, 시설 안내</p>
+          <span class="feature-card-cta">Explore Campus
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
         </div>
       </div>
-    </section>
 
-    <!-- QUICK LINKS -->
-    <section class="section links-section" aria-label="바로가기">
-      <div class="section-badge">
-        <span class="section-badge-dot"></span>
-        <span class="section-badge-text">Links</span>
-      </div>
-      <div class="section-header">
-        <h2 class="section-title" data-i18n="quick_links">바로가기</h2>
-      </div>
-      <div class="links-grid">
-        <a href="https://www.suwon.ac.kr" target="_blank" rel="noopener" class="link-card">
-          <div class="link-icon-wrap" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <div class="link-text" data-i18n="link_official">공식 홈페이지</div>
-        </a>
-        <a href="https://canvas.suwon.ac.kr" target="_blank" rel="noopener" class="link-card">
-          <div class="link-icon-wrap" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-          </div>
-          <div class="link-text" data-i18n="link_canvas">Canvas LMS</div>
-        </a>
-        <a href="#" class="link-card" id="campusMapBtn">
-          <div class="link-icon-wrap" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div class="link-text" data-i18n="link_map">캠퍼스 지도</div>
-        </a>
-        <a href="#" class="link-card" id="quickBoardBtn">
-          <div class="link-icon-wrap" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <div class="link-text" data-i18n="link_anonymous">익명게시판</div>
-        </a>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <footer class="main-footer">
-      <p data-i18n="footer_text">© 2026 수원대학교 국제학생 포털</p>
-    </footer>
+  <!-- ── NOTICES ── -->
+  <section class="home-section reveal-section" aria-label="공지사항">
+    <div class="home-section-inner">
+      <div class="home-section-head">
+        <h2 class="home-section-title" data-i18n="notices_title">공지사항</h2>
+        <a href="#" class="home-section-link" id="quickBoardBtn" data-i18n="view_all">전체보기</a>
+      </div>
+      <div class="notice-list" id="noticesScroll" role="list"></div>
+    </div>
+  </section>
 
-  </main>
+  <!-- ── FAQ ACCORDION ── -->
+  <section class="home-section home-section-alt reveal-section" id="faq-section" aria-label="자주 묻는 질문">
+    <div class="home-section-inner">
+      <div class="home-section-head">
+        <h2 class="home-section-title" data-i18n="faq_title">자주 묻는 질문</h2>
+      </div>
+      <div class="accordion" id="faqGrid">
+
+        <div class="accordion-item" data-topic="library">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span class="accordion-q">
+              <svg class="accordion-q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              <span data-i18n="faq_library">도서관 이용방법</span>
+            </span>
+            <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="accordion-content" data-faq-topic="library"></div>
+        </div>
+
+        <div class="accordion-item" data-topic="shuttle">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span class="accordion-q">
+              <svg class="accordion-q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 19v2M18 19v2M6 10V5M18 10V5"/></svg>
+              <span data-i18n="faq_shuttle">셔틀버스 시간표</span>
+            </span>
+            <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="accordion-content" data-faq-topic="shuttle"></div>
+        </div>
+
+        <div class="accordion-item" data-topic="registration">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span class="accordion-q">
+              <svg class="accordion-q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span data-i18n="faq_register">수강신청 방법</span>
+            </span>
+            <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="accordion-content" data-faq-topic="registration"></div>
+        </div>
+
+        <div class="accordion-item" data-topic="printer">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span class="accordion-q">
+              <svg class="accordion-q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              <span data-i18n="faq_printer">프린터 위치·사용법</span>
+            </span>
+            <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="accordion-content" data-faq-topic="printer"></div>
+        </div>
+
+        <div class="accordion-item" data-topic="health">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span class="accordion-q">
+              <svg class="accordion-q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              <span data-i18n="faq_health">보건실·병원 안내</span>
+            </span>
+            <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="accordion-content" data-faq-topic="health"></div>
+        </div>
+
+        <div class="accordion-item" data-topic="dormitory">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span class="accordion-q">
+              <svg class="accordion-q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span data-i18n="faq_dormitory">기숙사 신청</span>
+            </span>
+            <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="accordion-content" data-faq-topic="dormitory"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── QUICK LINKS FOOTER ROW ── -->
+  <section class="quick-links-bar reveal-section" aria-label="바로가기">
+    <div class="home-section-inner">
+      <a href="https://www.suwon.ac.kr" target="_blank" rel="noopener" class="ql-item">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span data-i18n="link_official">공식 홈페이지</span>
+      </a>
+      <a href="https://canvas.suwon.ac.kr" target="_blank" rel="noopener" class="ql-item">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        <span data-i18n="link_canvas">Canvas LMS</span>
+      </a>
+      <a href="#" class="ql-item" id="quickBoardBtn2">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span data-i18n="link_anonymous">익명게시판</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="main-footer">
+    <p data-i18n="footer_text">© 2026 수원대학교 국제학생 포털</p>
+  </footer>
+
 </div>
 
 
