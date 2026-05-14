@@ -565,7 +565,7 @@ function initShuttleScreen() {
   /* hero shuttle pill → shuttle screen */
   document.querySelector('.hero-shuttle-pill')?.addEventListener('click', () => showScreen('screen-shuttle'));
   /* hero menu bar → cafeteria screen */
-  document.getElementById('heroMenuBar')?.addEventListener('click', () => showScreen('screen-cafeteria'));
+  document.getElementById('heroMenuBar')?.addEventListener('click', openCafeteriaScreen);
   const shuttleRow = document.querySelector('.hero-shuttle-row');
   if (shuttleRow) {
     shuttleRow.style.cursor = 'pointer';
