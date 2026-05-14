@@ -398,40 +398,26 @@ function updateShuttle() {
 /* Menu display */
 function updateMenu() {
   const menu = getTodayMenu();
-  const mainEl = document.getElementById('todayMenuMain');
   const heroEl = document.getElementById('heroMenuItems');
-  const noMenu = `<span class="menu-item-empty">${t('menu_none')}</span>`;
+  if (!heroEl) return;
 
   if (!menu || !menu.items || menu.items.length === 0) {
-    if (mainEl) mainEl.innerHTML = noMenu;
-    if (heroEl) heroEl.textContent = t('menu_none');
+    heroEl.innerHTML = `<div class="hero-menu-empty-text">${t('menu_none')}</div>`;
     return;
   }
 
   const lang = window.currentLang || 'ko';
-  const rendered = menu.items.map(item => {
+  heroEl.innerHTML = menu.items.map(item => {
     const ko = item.ko || item;
     if (lang === 'ko' || typeof item === 'string') {
-      return `<div class="menu-item">${ko}</div>`;
+      return `<div class="hero-menu-item">${ko}</div>`;
     }
     const translated = item[lang];
     if (!translated || translated === ko) {
-      return `<div class="menu-item">${ko}</div>`;
+      return `<div class="hero-menu-item">${ko}</div>`;
     }
-    return `<div class="menu-item">${translated} <span class="menu-item-ko">(${ko})</span></div>`;
+    return `<div class="hero-menu-item">${translated} <span class="hero-menu-item-ko">(${ko})</span></div>`;
   }).join('');
-
-  if (mainEl) mainEl.innerHTML = rendered;
-
-  /* hero bar: show first 3 items joined with · */
-  if (heroEl) {
-    const names = menu.items.slice(0, 4).map(item => {
-      const ko = item.ko || item;
-      if (lang === 'ko' || typeof item === 'string') return ko;
-      return item[lang] || ko;
-    });
-    heroEl.textContent = names.join(' · ');
-  }
 }
 
 function updateHomeData() {

@@ -160,9 +160,12 @@
         </div>
       </div>
       <div class="hero-menu-bar" id="heroMenuBar">
-        <svg class="hero-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
-        <span class="hero-menu-label" data-i18n="nav_cafeteria">학식</span>
-        <span class="hero-menu-items" id="heroMenuItems">—</span>
+        <div class="hero-menu-bar-top">
+          <svg class="hero-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
+          <span class="hero-menu-label" data-i18n="todays_menu">오늘의 학식</span>
+          <span class="hero-menu-arrow">›</span>
+        </div>
+        <div class="hero-menu-items" id="heroMenuItems">—</div>
       </div>
     </div>
     <button class="hero-scroll-btn" id="heroScrollBtn" aria-label="아래로 스크롤">
@@ -194,7 +197,6 @@
           <p class="feature-card-en">Cafeteria</p>
           <h3 class="feature-card-title" data-i18n="nav_cafeteria">학식당</h3>
           <p class="feature-card-desc">학생회관 1층 · 중식 11:00~14:00</p>
-          <div class="feature-card-menu" id="todayMenuMain"></div>
           <span class="feature-card-cta">Today's Menu
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
