@@ -2053,3 +2053,23 @@ img, svg { display: block; }
   padding: 2px 8px;
   margin-bottom: 8px;
 }
+
+.board-trans-bar {
+  padding: 8px 16px 4px;
+  display: flex;
+  justify-content: flex-end;
+}
+.board-trans-bar-sm {
+  padding: 6px 0 2px;
+}
+.board-trans-toggle-btn {
+  font-size: 11px;
+  color: var(--navy, #002D72);
+  background: #eef2fb;
+  border: 1px solid #c8d4f0;
+  border-radius: 20px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.board-trans-toggle-btn:hover { background: #dde6f8; }

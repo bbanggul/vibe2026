@@ -145,6 +145,8 @@ const translations = {
     timeago_now: '방금 전',
     timeago_min: '분 전',
     timeago_hour: '시간 전',
+    board_show_original: '원본 보기',
+    board_show_translated: '번역 보기',
   },
   en: {
     uni_name: 'University of Suwon',
@@ -291,6 +293,8 @@ const translations = {
     timeago_now: 'just now',
     timeago_min: 'min ago',
     timeago_hour: 'hr ago',
+    board_show_original: 'View Original',
+    board_show_translated: 'View Translation',
   },
   zh: {
     uni_name: '水原大学',
@@ -437,6 +441,8 @@ const translations = {
     timeago_now: '刚刚',
     timeago_min: '分钟前',
     timeago_hour: '小时前',
+    board_show_original: '查看原文',
+    board_show_translated: '查看译文',
   },
   ja: {
     uni_name: '水原大学校',
@@ -583,6 +589,8 @@ const translations = {
     timeago_now: 'たった今',
     timeago_min: '分前',
     timeago_hour: '時間前',
+    board_show_original: '原文を見る',
+    board_show_translated: '翻訳を見る',
   },
   vi: {
     uni_name: 'Đại học Suwon',
@@ -729,6 +737,8 @@ const translations = {
     timeago_now: 'vừa xong',
     timeago_min: 'phút trước',
     timeago_hour: 'giờ trước',
+    board_show_original: 'Bản gốc',
+    board_show_translated: 'Bản dịch',
   },
   th: {
     uni_name: 'มหาวิทยาลัยซูวอน',
@@ -875,6 +885,8 @@ const translations = {
     timeago_now: 'เมื่อกี้',
     timeago_min: 'นาทีที่แล้ว',
     timeago_hour: 'ชั่วโมงที่แล้ว',
+    board_show_original: 'ดูต้นฉบับ',
+    board_show_translated: 'ดูคำแปล',
   },
 };
 

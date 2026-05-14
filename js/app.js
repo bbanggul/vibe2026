@@ -1067,7 +1067,40 @@ async function renderBoardList() {
         Promise.all(rawTitles.map(s => translateText(s, lang))),
         Promise.all(rawPreviews.map(s => translateText(s, lang))),
       ]);
-      paintList(transTitles, transPreviews);
+
+      let showingTrans = true;
+
+      const repaint = () => {
+        const titles   = showingTrans ? transTitles   : rawTitles;
+        const previews = showingTrans ? transPreviews : rawPreviews;
+        list.innerHTML = `
+          <div class="board-trans-bar">
+            <button class="board-trans-toggle-btn" id="boardTransToggleBtn">
+              ${showingTrans ? t('board_show_original') : t('board_show_translated')}
+            </button>
+          </div>
+        ` + posts.map((p, i) => `
+          <div class="board-post-card" data-id="${p.id}">
+            <div class="bpc-title">${escHtml(titles[i])}</div>
+            <div class="bpc-preview">${escHtml(previews[i])}</div>
+            <div class="bpc-meta">
+              <span class="bpc-anon">${t('board_anon')}</span>
+              <span class="bpc-dot">·</span>
+              <span class="bpc-time">${timeAgo(p.created_at)}</span>
+              <span class="bpc-likes">❤ ${p.likes}</span>
+            </div>
+          </div>
+        `).join('');
+        document.getElementById('boardTransToggleBtn')?.addEventListener('click', () => {
+          showingTrans = !showingTrans;
+          repaint();
+        });
+        list.querySelectorAll('.board-post-card').forEach(card => {
+          card.addEventListener('click', () => openPostDetail(card.dataset.id));
+        });
+      };
+
+      repaint();
     }
   } catch (e) {
     list.innerHTML = `<div class="board-empty">불러오기 실패: ${e.message}</div>`;
@@ -1143,8 +1176,20 @@ async function openPostDetail(id) {
         ]);
         const titleEl = contentArea.querySelector('.post-detail-title');
         const bodyEl = contentArea.querySelector('.post-detail-body');
-        if (titleEl) titleEl.textContent = transTitle;
-        if (bodyEl) bodyEl.innerHTML = escHtml(transBody).replace(/\n/g, '<br>');
+        if (!titleEl || !bodyEl) return;
+
+        let showingTrans = true;
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'board-trans-toggle-btn';
+
+        const updatePost = () => {
+          titleEl.textContent = showingTrans ? transTitle : post.title;
+          bodyEl.innerHTML = escHtml(showingTrans ? transBody : post.content).replace(/\n/g, '<br>');
+          toggleBtn.textContent = showingTrans ? t('board_show_original') : t('board_show_translated');
+        };
+        toggleBtn.addEventListener('click', () => { showingTrans = !showingTrans; updatePost(); });
+        inner?.insertBefore(toggleBtn, inner.querySelector('.post-meta-row'));
+        updatePost();
       } finally {
         badge.remove();
       }
@@ -1164,17 +1209,47 @@ async function renderComments(postId) {
       return;
     }
     const lang = window.currentLang;
-    let contents = comments.map(c => c.content);
+    const rawContents = comments.map(c => c.content);
+
+    const paintComments = (contents) => {
+      area.innerHTML = comments.map((c, i) => `
+        <div class="comment-card">
+          <div class="comment-anon">${t('board_anon')}</div>
+          <div class="comment-text">${escHtml(contents[i]).replace(/\n/g, '<br>')}</div>
+          <div class="comment-time">${timeAgo(c.created_at)}</div>
+        </div>
+      `).join('');
+    };
+
+    paintComments(rawContents);
+
     if (lang !== 'ko') {
-      contents = await Promise.all(contents.map(c => translateText(c, lang)));
+      const transContents = await Promise.all(rawContents.map(c => translateText(c, lang)));
+      let showingTrans = true;
+
+      const repaintComments = () => {
+        const contents = showingTrans ? transContents : rawContents;
+        const toggleBar = `
+          <div class="board-trans-bar board-trans-bar-sm">
+            <button class="board-trans-toggle-btn" id="commentTransToggleBtn">
+              ${showingTrans ? t('board_show_original') : t('board_show_translated')}
+            </button>
+          </div>`;
+        area.innerHTML = toggleBar + comments.map((c, i) => `
+          <div class="comment-card">
+            <div class="comment-anon">${t('board_anon')}</div>
+            <div class="comment-text">${escHtml(contents[i]).replace(/\n/g, '<br>')}</div>
+            <div class="comment-time">${timeAgo(c.created_at)}</div>
+          </div>
+        `).join('');
+        document.getElementById('commentTransToggleBtn')?.addEventListener('click', () => {
+          showingTrans = !showingTrans;
+          repaintComments();
+        });
+      };
+
+      repaintComments();
     }
-    area.innerHTML = comments.map((c, i) => `
-      <div class="comment-card">
-        <div class="comment-anon">${t('board_anon')}</div>
-        <div class="comment-text">${escHtml(contents[i]).replace(/\n/g, '<br>')}</div>
-        <div class="comment-time">${timeAgo(c.created_at)}</div>
-      </div>
-    `).join('');
   } catch (e) {}
 }
 
