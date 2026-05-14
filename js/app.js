@@ -519,11 +519,6 @@ function initNav() {
         arrow?.classList.toggle('nav-sub-arrow-open');
         return;
       }
-      if (item.id === 'mobilePhoneBtn') {
-        closeNav();
-        setTimeout(() => openSchoolPane('schoolPhones'), 360);
-        return;
-      }
       const target = item.dataset.screen;
       closeNav();
       if (target) setTimeout(() => showScreen(target), 360);
@@ -1619,7 +1614,6 @@ function initMainNav() {
     card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') showScreen(card.dataset.toScreen); });
   });
 
-  document.getElementById('headerPhoneBtn')?.addEventListener('click', e => { e.preventDefault(); openSchoolPane('schoolPhones'); });
   document.getElementById('quickBoardBtn')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-board'); });
   document.getElementById('quickBoardBtn2')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-board'); });
 
