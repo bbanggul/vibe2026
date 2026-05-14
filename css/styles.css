@@ -2105,6 +2105,7 @@ img, svg { display: block; }
   padding: 3px 0;
   border-bottom: 1px solid rgba(255,255,255,0.07);
   line-height: 1.4;
+  text-align: center;
 }
 .hero-menu-item:last-child { border-bottom: none; }
 .hero-menu-item-ko {
