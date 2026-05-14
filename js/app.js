@@ -14,6 +14,10 @@ function showScreen(id) {
   });
   if (id === 'screen-board') renderBoardList();
   if (id === 'screen-messages') renderMessages();
+
+  const boardScreens = ['screen-board', 'screen-post', 'screen-messages'];
+  const chatbot = document.getElementById('chatbot-container');
+  if (chatbot) chatbot.style.display = boardScreens.includes(id) ? 'none' : '';
 }
 
 /* Header scroll shadow */
@@ -1031,15 +1035,22 @@ async function openPostDetail(id) {
     } else {
       msgBtn?.classList.add('hidden');
     }
+    const isOwner = user && post.user_id && user.id === post.user_id;
     contentArea.innerHTML = `
       <div class="post-detail-inner">
         <div class="post-meta-row">익명 · ${timeAgo(post.created_at)}</div>
         <h2 class="post-detail-title">${escHtml(post.title)}</h2>
         <div class="post-detail-body">${escHtml(post.content).replace(/\n/g, '<br>')}</div>
-        <button class="post-like-btn" id="postLikeBtn">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          <span id="postLikeCount">${post.likes}</span>
-        </button>
+        <div class="post-actions-row">
+          <button class="post-like-btn" id="postLikeBtn">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span id="postLikeCount">${post.likes}</span>
+          </button>
+          ${isOwner ? `
+          <button class="post-edit-btn" id="postEditBtn">수정</button>
+          <button class="post-delete-btn" id="postDeleteBtn">삭제</button>
+          ` : ''}
+        </div>
       </div>
       <div class="post-comments-header">댓글</div>
     `;
@@ -1049,6 +1060,17 @@ async function openPostDetail(id) {
       const el = document.getElementById('postLikeCount');
       if (el) el.textContent = post.likes;
     });
+
+    document.getElementById('postEditBtn')?.addEventListener('click', () => openEditModal(post));
+
+    document.getElementById('postDeleteBtn')?.addEventListener('click', async () => {
+      if (!confirm('게시글을 삭제하시겠습니까?')) return;
+      try {
+        await deletePost(post.id);
+        showScreen('screen-board');
+      } catch (e) { alert(e.message); }
+    });
+
     await renderComments(id);
   } catch (e) {
     contentArea.innerHTML = `<div class="board-empty">${e.message}</div>`;
@@ -1113,7 +1135,28 @@ function initPostScreen() {
   });
 }
 
+let writeEditMode = false;
+
+function openEditModal(post) {
+  writeEditMode = true;
+  document.getElementById('writeTitle').value = post.title;
+  document.getElementById('writeContent').value = post.content;
+  document.querySelector('#writeModal .auth-modal-title').textContent = '글 수정';
+  document.querySelector('#writeModal .auth-submit').textContent = '수정';
+  openModal('writeModal');
+}
+
+function resetWriteModal() {
+  writeEditMode = false;
+  document.querySelector('#writeModal .auth-modal-title').textContent = '글쓰기';
+  document.querySelector('#writeModal .auth-submit').textContent = '등록';
+}
+
 function initWriteModal() {
+  document.querySelectorAll('[data-close="writeModal"]').forEach(el => {
+    el.addEventListener('click', resetWriteModal, { capture: true });
+  });
+
   document.getElementById('writeForm')?.addEventListener('submit', async e => {
     e.preventDefault();
     const title = document.getElementById('writeTitle').value.trim();
@@ -1122,15 +1165,28 @@ function initWriteModal() {
     const btn = e.target.querySelector('.auth-submit');
     errEl.classList.add('hidden');
     if (!title || !content) { errEl.textContent = '제목과 내용을 입력해주세요.'; errEl.classList.remove('hidden'); return; }
-    btn.disabled = true; btn.textContent = '등록 중...';
+    btn.disabled = true; btn.textContent = writeEditMode ? '수정 중...' : '등록 중...';
     try {
-      await createPost(title, content);
-      closeModal('writeModal');
-      e.target.reset();
-      await renderBoardList();
+      if (writeEditMode && currentPost) {
+        await updatePost(currentPost.id, title, content);
+        currentPost.title = title;
+        currentPost.content = content;
+        closeModal('writeModal');
+        e.target.reset();
+        resetWriteModal();
+        await openPostDetail(currentPost.id);
+      } else {
+        await createPost(title, content);
+        closeModal('writeModal');
+        e.target.reset();
+        await renderBoardList();
+      }
     } catch (e) {
       errEl.textContent = e.message; errEl.classList.remove('hidden');
-    } finally { btn.disabled = false; btn.textContent = '등록'; }
+    } finally {
+      btn.disabled = false;
+      btn.textContent = writeEditMode ? '수정' : '등록';
+    }
   });
 }
 

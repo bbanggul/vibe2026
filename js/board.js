@@ -56,6 +56,28 @@ async function likePost(id, currentLikes) {
   if (error) throw error;
 }
 
+async function updatePost(id, title, content) {
+  const user = await getUser();
+  if (!user) throw new Error('로그인이 필요합니다.');
+  const { error } = await sb
+    .from('posts')
+    .update({ title, content })
+    .eq('id', id)
+    .eq('user_id', user.id);
+  if (error) throw error;
+}
+
+async function deletePost(id) {
+  const user = await getUser();
+  if (!user) throw new Error('로그인이 필요합니다.');
+  const { error } = await sb
+    .from('posts')
+    .delete()
+    .eq('id', id)
+    .eq('user_id', user.id);
+  if (error) throw error;
+}
+
 /* Comments */
 async function fetchComments(postId) {
   const { data, error } = await sb

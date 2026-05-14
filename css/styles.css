@@ -2025,3 +2025,13 @@ img, svg { display: block; }
 .write-textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
 .auth-input-static { color: var(--text-3, #888); font-size: 0.9rem; }
 .nav-menu-badge { background: #e74c3c; color: #fff; font-size: 0.65rem; font-weight: 700; border-radius: 99px; padding: 1px 6px; margin-left: 4px; }
+
+/* ── Post owner actions ── */
+.post-actions-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.post-edit-btn, .post-delete-btn {
+  border: none; border-radius: 99px; padding: 7px 16px;
+  font-size: 0.84rem; font-weight: 700; cursor: pointer; transition: opacity .15s;
+}
+.post-edit-btn { background: #e8eef8; color: var(--navy, #002D72); }
+.post-delete-btn { background: #fdecea; color: #e74c3c; }
+.post-edit-btn:hover, .post-delete-btn:hover { opacity: .8; }
