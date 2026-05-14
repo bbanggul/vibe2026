@@ -451,6 +451,16 @@ function updateNotices() {
 }
 
 /* Hamburger Nav */
+function closeNav() {
+  const navOverlay = document.getElementById('navOverlay');
+  if (!navOverlay) return;
+  navOverlay.classList.remove('nav-open');
+  document.body.style.overflow = '';
+  document.querySelectorAll('.nav-sub-menu').forEach(m => m.classList.add('hidden'));
+  document.querySelectorAll('.nav-sub-arrow').forEach(a => a.classList.remove('nav-sub-arrow-open'));
+  setTimeout(() => navOverlay.classList.add('hidden'), 350);
+}
+
 function initNav() {
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const navOverlay = document.getElementById('navOverlay');
@@ -461,13 +471,6 @@ function initNav() {
     navOverlay.classList.add('nav-open');
     navOverlay.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
-  }
-  function closeNav() {
-    navOverlay.classList.remove('nav-open');
-    document.body.style.overflow = '';
-    document.querySelectorAll('.nav-sub-menu').forEach(m => m.classList.add('hidden'));
-    document.querySelectorAll('.nav-sub-arrow').forEach(a => a.classList.remove('nav-sub-arrow-open'));
-    setTimeout(() => navOverlay.classList.add('hidden'), 350);
   }
 
   hamburgerBtn?.addEventListener('click', openNav);
