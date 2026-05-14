@@ -2059,6 +2059,40 @@ img, svg { display: block; }
 .hero-shuttle-pill strong { color: #fff; font-weight: 700; }
 .hero-shuttle-pill em { color: rgba(255,255,255,0.65); font-style: normal; font-size: 0.8rem; }
 .hero-pill-icon { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.75; }
+.hero-menu-bar {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.13);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 100px;
+  padding: 10px 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  max-width: 480px;
+  cursor: pointer;
+  transition: background var(--trans), border-color var(--trans);
+}
+.hero-menu-bar:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.45);
+}
+.hero-menu-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--yellow);
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+.hero-menu-items {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.82);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .hero-scroll-btn {
   position: absolute;
   bottom: 28px;

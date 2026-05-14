@@ -398,15 +398,17 @@ function updateShuttle() {
 function updateMenu() {
   const menu = getTodayMenu();
   const mainEl = document.getElementById('todayMenuMain');
-  if (!mainEl) return;
+  const heroEl = document.getElementById('heroMenuItems');
+  const noMenu = `<span class="menu-item-empty">${t('menu_none')}</span>`;
 
   if (!menu || !menu.items || menu.items.length === 0) {
-    mainEl.innerHTML = `<span class="menu-item-empty">${t('menu_none')}</span>`;
+    if (mainEl) mainEl.innerHTML = noMenu;
+    if (heroEl) heroEl.textContent = t('menu_none');
     return;
   }
 
   const lang = window.currentLang || 'ko';
-  mainEl.innerHTML = menu.items.map(item => {
+  const rendered = menu.items.map(item => {
     const ko = item.ko || item;
     if (lang === 'ko' || typeof item === 'string') {
       return `<div class="menu-item">${ko}</div>`;
@@ -417,6 +419,18 @@ function updateMenu() {
     }
     return `<div class="menu-item">${translated} <span class="menu-item-ko">(${ko})</span></div>`;
   }).join('');
+
+  if (mainEl) mainEl.innerHTML = rendered;
+
+  /* hero bar: show first 3 items joined with · */
+  if (heroEl) {
+    const names = menu.items.slice(0, 4).map(item => {
+      const ko = item.ko || item;
+      if (lang === 'ko' || typeof item === 'string') return ko;
+      return item[lang] || ko;
+    });
+    heroEl.textContent = names.join(' · ');
+  }
 }
 
 function updateHomeData() {
@@ -555,8 +569,10 @@ function openShuttleSection(pane) {
 
 function initShuttleScreen() {
   document.getElementById('shuttleBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
-  /* hero shuttle pill (new) + legacy shuttle row (old) */
+  /* hero shuttle pill → shuttle screen */
   document.querySelector('.hero-shuttle-pill')?.addEventListener('click', () => showScreen('screen-shuttle'));
+  /* hero menu bar → cafeteria screen */
+  document.getElementById('heroMenuBar')?.addEventListener('click', () => showScreen('screen-cafeteria'));
   const shuttleRow = document.querySelector('.hero-shuttle-row');
   if (shuttleRow) {
     shuttleRow.style.cursor = 'pointer';
