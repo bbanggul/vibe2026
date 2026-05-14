@@ -519,6 +519,11 @@ function initNav() {
         arrow?.classList.toggle('nav-sub-arrow-open');
         return;
       }
+      if (item.id === 'mobilePhoneBtn') {
+        closeNav();
+        setTimeout(() => openSchoolPane('schoolPhones'), 360);
+        return;
+      }
       const target = item.dataset.screen;
       closeNav();
       if (target) setTimeout(() => showScreen(target), 360);
