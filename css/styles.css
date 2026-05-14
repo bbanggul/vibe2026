@@ -1719,8 +1719,9 @@ img, svg { display: block; }
 .campus-map-img-wrap {
   width: 100%; background: #f0f0f0;
   border-bottom: 1px solid var(--border);
+  max-height: 60vw; overflow: hidden;
 }
-.campus-map-img { width: 100%; display: block; object-fit: contain; }
+.campus-map-img { width: 100%; display: block; object-fit: contain; max-height: 60vw; }
 .campus-building-list {
   padding: 14px 14px 8px;
   display: grid;
