@@ -889,6 +889,8 @@ function initLangCards() {
     card.addEventListener('click', () => {
       setLanguage(card.dataset.lang);
       showScreen('screen-home');
+      initFaqAccordion();
+      initScrollReveal();
     });
   });
 }
@@ -996,19 +998,14 @@ function startShuttleTimer() {
 function initLoading() {
   const savedLang = localStorage.getItem('uos_lang');
 
-  if (!savedLang) {
-    const code = (navigator.language || 'ko').split('-')[0].toLowerCase();
-    const supported = { ko: 'ko', en: 'en', zh: 'zh', ja: 'ja', vi: 'vi', th: 'th' };
-    window.currentLang = supported[code] || 'ko';
-    localStorage.setItem('uos_lang', window.currentLang);
-    applyTranslations();
-    updateHeaderLang(window.currentLang);
-  }
-
   setTimeout(() => {
-    showScreen('screen-home');
-    initFaqAccordion();
-    initScrollReveal();
+    if (savedLang) {
+      showScreen('screen-home');
+      initFaqAccordion();
+      initScrollReveal();
+    } else {
+      showScreen('screen-language');
+    }
   }, 1800);
 }
 
