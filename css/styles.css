@@ -1795,6 +1795,36 @@ img, svg { display: block; }
 }
 .bldg-modal-name-ko { font-size: 0.8rem; color: var(--text-3); margin: 0 0 12px; }
 
+/* ── Campus Map Lightbox ── */
+.map-lightbox {
+  position: fixed; inset: 0; z-index: 9500;
+  display: flex; align-items: center; justify-content: center;
+}
+.map-lightbox.hidden { display: none; }
+.map-lightbox-bg {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.88);
+  cursor: zoom-out;
+}
+.map-lightbox-close {
+  position: absolute; top: 14px; right: 14px; z-index: 1;
+  background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.3);
+  color: #fff; font-size: 1.1rem;
+  width: 36px; height: 36px; border-radius: 50%;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.map-lightbox-close:hover { background: rgba(255,255,255,.3); }
+.map-lightbox-img {
+  position: relative; z-index: 1;
+  max-width: 96vw; max-height: 92vh;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 8px 48px rgba(0,0,0,.6);
+  animation: lbFadeIn 0.2s ease;
+}
+@keyframes lbFadeIn { from { opacity:0; transform:scale(.97); } to { opacity:1; transform:scale(1); } }
+
 /* ── Auth Modals ── */
 .auth-modal { position: fixed; inset: 0; z-index: 9100; display: flex; align-items: flex-end; justify-content: center; }
 .auth-modal.hidden { display: none; }

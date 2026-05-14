@@ -1014,10 +1014,18 @@
   <div class="map-screen-body">
     <div class="campus-map-img-wrap">
       <img src="https://www.suwon.ac.kr/usr/images/suwon/campusmap_img_2024.jpg"
-           alt="수원대학교 캠퍼스 안내도" class="campus-map-img" loading="lazy">
+           alt="수원대학교 캠퍼스 안내도" class="campus-map-img" id="campusMapImg" loading="lazy">
     </div>
     <div class="campus-building-list" id="campusBuildingList"></div>
   </div>
+</div>
+
+<!-- CAMPUS MAP LIGHTBOX -->
+<div id="mapLightbox" class="map-lightbox hidden">
+  <div class="map-lightbox-bg" id="mapLightboxBg"></div>
+  <button class="map-lightbox-close" id="mapLightboxClose" aria-label="닫기">✕</button>
+  <img src="https://www.suwon.ac.kr/usr/images/suwon/campusmap_img_2024.jpg"
+       class="map-lightbox-img" alt="수원대학교 캠퍼스 안내도">
 </div>
 
 <!-- BUILDING DETAIL MODAL -->

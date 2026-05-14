@@ -1711,7 +1711,29 @@ function closeBuildingModal() {
 function initCampusMap() {
   document.getElementById('mapBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
   document.getElementById('buildingModalBg')?.addEventListener('click', closeBuildingModal);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBuildingModal(); });
+
+  /* Campus map image lightbox */
+  const campusImg = document.getElementById('campusMapImg');
+  const lightbox  = document.getElementById('mapLightbox');
+  const lbClose   = document.getElementById('mapLightboxClose');
+  const lbBg      = document.getElementById('mapLightboxBg');
+  if (campusImg && lightbox) {
+    campusImg.style.cursor = 'zoom-in';
+    campusImg.addEventListener('click', () => {
+      lightbox.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+    function closeLightbox() {
+      lightbox.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    lbClose?.addEventListener('click', closeLightbox);
+    lbBg?.addEventListener('click', closeLightbox);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeBuildingModal(); document.getElementById('mapLightbox')?.classList.add('hidden'); document.body.style.overflow = ''; }
+  });
   renderCampusBuildingList();
 }
 
