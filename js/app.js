@@ -1719,11 +1719,6 @@ async function openBuildingModal(id) {
       <div class="bldg-modal-num">건물 ${b.id}</div>
       <h2 class="bldg-modal-name">${name}</h2>
       ${lang !== 'ko' ? `<p class="bldg-modal-name-ko">${b.ko}</p>` : ''}
-      ${floors.length ? `
-        <div id="bldgFloorWrap" class="bldg-floor-wrap">
-          <div class="bldg-floor-loading"><span class="bldg-floor-spinner"></span> 층별 정보 로딩 중…</div>
-        </div>
-      ` : `<p class="bldg-no-info">층별 안내 정보가 없습니다.</p>`}
     </div>`;
 
   const photoEl = document.getElementById('bldgPhotoImg');
@@ -1732,58 +1727,6 @@ async function openBuildingModal(id) {
 
   document.getElementById('buildingModal').classList.remove('hidden');
   document.body.style.overflow = 'hidden';
-
-  if (buldCd && floors.length) {
-    await loadAndRenderFloors(buldCd, floors);
-  }
-}
-
-async function loadAndRenderFloors(buldCd, floors) {
-  let floorFacilities = null;
-  try {
-    const firstFloor = floors.find(f => !f.startsWith('B')) || floors[0];
-    const res = await fetch('https://www.suwon.ac.kr/mainHp/campusGuide/buldAndRoomInfo.html', {
-      method: 'POST', mode: 'cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `buldCd=${buldCd}&florCd=${firstFloor}`
-    });
-    if (res.ok) {
-      const data = await res.json();
-      if (data.resultListRoom?.length) {
-        floorFacilities = {};
-        data.resultListRoom.forEach(r => {
-          if (!floorFacilities[r.FLOR_CD]) floorFacilities[r.FLOR_CD] = new Set();
-          floorFacilities[r.FLOR_CD].add(r.ROOM_NM.trim());
-        });
-      }
-    }
-  } catch { /* CORS blocked — render without facility column */ }
-
-  renderFloorTable(buldCd, floors, floorFacilities);
-}
-
-function renderFloorTable(buldCd, floors, floorFacilities) {
-  const wrap = document.getElementById('bldgFloorWrap');
-  if (!wrap) return;
-  const hasFac = !!floorFacilities;
-  const rows = [...floors].reverse().map(florCd => {
-    const lbl = floorLabel(florCd);
-    const fac = hasFac && floorFacilities[florCd]
-      ? [...floorFacilities[florCd]].slice(0, 4).join(', ') : '';
-    return `<tr>
-      <td class="ft-num"><span class="ft-floor-tag">${lbl}</span></td>
-      ${hasFac ? `<td class="ft-fac">${fac || '—'}</td>` : ''}
-    </tr>`;
-  }).join('');
-
-  wrap.innerHTML = `
-    <table class="bldg-floor-table">
-      <thead><tr>
-        <th>층수</th>
-        ${hasFac ? '<th>주요시설</th>' : ''}
-      </tr></thead>
-      <tbody>${rows}</tbody>
-    </table>`;
 }
 
 function closeBuildingModal() {

@@ -1722,6 +1722,10 @@ img, svg { display: block; }
   max-height: 60vw; overflow: hidden;
 }
 .campus-map-img { width: 100%; display: block; object-fit: contain; max-height: 60vw; }
+@media (min-width: 640px) {
+  .campus-map-img-wrap { max-height: 30vw; }
+  .campus-map-img { max-height: 30vw; }
+}
 .campus-building-list {
   padding: 14px 14px 8px;
   display: grid;
