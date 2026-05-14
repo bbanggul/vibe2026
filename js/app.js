@@ -1723,11 +1723,6 @@ async function openBuildingModal(id) {
         <div id="bldgFloorWrap" class="bldg-floor-wrap">
           <div class="bldg-floor-loading"><span class="bldg-floor-spinner"></span> 층별 정보 로딩 중…</div>
         </div>
-        <div id="bldgFloorPlanWrap" class="bldg-floorplan-wrap hidden">
-          <div class="bldg-floorplan-header" id="bldgFloorPlanHeader"></div>
-          <img class="bldg-floorplan-img" id="bldgFloorPlanImg" src="" alt="">
-          <div class="bldg-floorplan-noimg hidden" id="bldgFloorPlanEmpty">안내도를 준비 중입니다.</div>
-        </div>
       ` : `<p class="bldg-no-info">층별 안내 정보가 없습니다.</p>`}
     </div>`;
 
@@ -1778,9 +1773,6 @@ function renderFloorTable(buldCd, floors, floorFacilities) {
     return `<tr>
       <td class="ft-num"><span class="ft-floor-tag">${lbl}</span></td>
       ${hasFac ? `<td class="ft-fac">${fac || '—'}</td>` : ''}
-      <td class="ft-btn">
-        <button class="ft-plan-btn" data-buldcd="${buldCd}" data-florcd="${florCd}" data-lbl="${lbl}">도면보기</button>
-      </td>
     </tr>`;
   }).join('');
 
@@ -1789,44 +1781,9 @@ function renderFloorTable(buldCd, floors, floorFacilities) {
       <thead><tr>
         <th>층수</th>
         ${hasFac ? '<th>주요시설</th>' : ''}
-        <th>안내도</th>
       </tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
-
-  wrap.querySelectorAll('.ft-plan-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      wrap.querySelectorAll('.ft-plan-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      showFloorPlan(btn.dataset.buldcd, btn.dataset.florcd, btn.dataset.lbl);
-    });
-  });
-}
-
-function showFloorPlan(buldCd, florCd, label) {
-  const planWrap = document.getElementById('bldgFloorPlanWrap');
-  const planImg  = document.getElementById('bldgFloorPlanImg');
-  const planEmpty = document.getElementById('bldgFloorPlanEmpty');
-  const planHeader = document.getElementById('bldgFloorPlanHeader');
-  if (!planWrap) return;
-
-  planWrap.classList.remove('hidden');
-  planImg.style.display = 'block';
-  planEmpty.classList.add('hidden');
-  planHeader.textContent = `${label} 안내도`;
-
-  const urls = [
-    `${CAMPUSMAP_IMG_BASE}${buldCd}_${florCd}_new.png`,
-    `${CAMPUSMAP_IMG_BASE}${buldCd}_${florCd}.png`,
-  ];
-  let idx = 0;
-  planImg.onerror = () => {
-    idx++;
-    if (idx < urls.length) { planImg.src = urls[idx]; }
-    else { planImg.style.display = 'none'; planEmpty.classList.remove('hidden'); }
-  };
-  planImg.src = urls[0];
-  setTimeout(() => planWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 120);
 }
 
 function closeBuildingModal() {

@@ -1719,9 +1719,8 @@ img, svg { display: block; }
 .campus-map-img-wrap {
   width: 100%; background: #f0f0f0;
   border-bottom: 1px solid var(--border);
-  max-height: 240px; overflow: hidden;
 }
-.campus-map-img { width: 100%; display: block; object-fit: cover; object-position: center; max-height: 240px; }
+.campus-map-img { width: 100%; display: block; object-fit: contain; }
 .campus-building-list {
   padding: 14px 14px 8px;
   display: grid;
@@ -1825,34 +1824,6 @@ img, svg { display: block; }
   padding: 2px 7px; letter-spacing: 0.03em;
 }
 .ft-fac { color: var(--text-2); font-size: 0.78rem; line-height: 1.4; }
-.ft-btn { width: 72px; text-align: right; }
-.ft-plan-btn {
-  background: var(--white); border: 1.5px solid var(--border);
-  border-radius: var(--radius); padding: 4px 8px;
-  font-size: 0.72rem; font-weight: 700; color: var(--text-2);
-  cursor: pointer; transition: all var(--trans); white-space: nowrap;
-}
-.ft-plan-btn:hover, .ft-plan-btn.active {
-  background: var(--navy); border-color: var(--navy); color: #fff;
-}
-
-/* Floor plan viewer */
-.bldg-floorplan-wrap {
-  margin-top: 12px; border: 1.5px solid var(--border);
-  border-radius: var(--radius); overflow: hidden;
-}
-.bldg-floorplan-wrap.hidden { display: none; }
-.bldg-floorplan-header {
-  background: var(--navy); color: #fff;
-  font-size: 0.78rem; font-weight: 800;
-  padding: 7px 12px; letter-spacing: 0.02em;
-}
-.bldg-floorplan-img { width: 100%; display: block; object-fit: contain; background: #f8f8f8; }
-.bldg-floorplan-noimg {
-  padding: 24px; text-align: center;
-  font-size: 0.82rem; color: var(--text-3); background: var(--bg);
-}
-.bldg-floorplan-noimg.hidden { display: none; }
 
 /* ── Auth Modals ── */
 .auth-modal { position: fixed; inset: 0; z-index: 9100; display: flex; align-items: flex-end; justify-content: center; }
