@@ -135,3 +135,8 @@ async function replyMessage(originalMsg, content) {
 async function markRead(id) {
   await sb.from('messages').update({ is_read: true }).eq('id', id);
 }
+
+async function deleteMessage(id) {
+  const { error } = await sb.from('messages').delete().eq('id', id);
+  if (error) throw error;
+}

@@ -1262,7 +1262,16 @@ function openMsgDetail(msg, user) {
   body.innerHTML = `
     <div class="msg-detail-meta">${isMine ? '내가 보낸 쪽지' : '받은 쪽지'} · ${timeAgo(msg.created_at)}</div>
     <div class="msg-detail-content">${escHtml(msg.content)}</div>
+    <button class="msg-delete-btn" id="msgDeleteBtn">쪽지 삭제</button>
   `;
+  document.getElementById('msgDeleteBtn')?.addEventListener('click', async () => {
+    if (!confirm('쪽지를 삭제하시겠습니까?')) return;
+    try {
+      await deleteMessage(msg.id);
+      closeModal('msgDetailModal');
+      await renderMessages();
+    } catch (e) { alert(e.message); }
+  });
   const replyForm = document.getElementById('replyForm');
   if (replyForm) replyForm.style.display = isMine ? 'none' : '';
   openModal('msgDetailModal');

@@ -2035,3 +2035,10 @@ img, svg { display: block; }
 .post-edit-btn { background: #e8eef8; color: var(--navy, #002D72); }
 .post-delete-btn { background: #fdecea; color: #e74c3c; }
 .post-edit-btn:hover, .post-delete-btn:hover { opacity: .8; }
+
+.msg-delete-btn {
+  margin-top: 14px; width: 100%; background: #fdecea; color: #e74c3c;
+  border: none; border-radius: 10px; padding: 11px; font-size: 0.88rem;
+  font-weight: 700; cursor: pointer; transition: opacity .15s;
+}
+.msg-delete-btn:hover { opacity: .8; }
