@@ -986,17 +986,20 @@ function updateAuthUI(user) {
   const signupBtn = document.querySelector('.btn-signup');
   const logoutBtn = document.getElementById('logoutBtn');
   const userLabel = document.getElementById('navUserLabel');
+  const msgNavItem = document.getElementById('msgNavItem');
 
   if (user) {
     if (loginBtn) loginBtn.style.display = 'none';
     if (signupBtn) signupBtn.style.display = 'none';
     if (logoutBtn) logoutBtn.style.display = '';
     if (userLabel) { userLabel.style.display = ''; userLabel.textContent = user.user_metadata?.name || user.email; }
+    if (msgNavItem) msgNavItem.style.display = '';
   } else {
     if (loginBtn) loginBtn.style.display = '';
     if (signupBtn) signupBtn.style.display = '';
     if (logoutBtn) logoutBtn.style.display = 'none';
     if (userLabel) userLabel.style.display = 'none';
+    if (msgNavItem) msgNavItem.style.display = 'none';
   }
 }
 
