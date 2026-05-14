@@ -1002,7 +1002,8 @@ img, svg { display: block; }
   flex-shrink: 0;
 }
 .nav-contact-info { font-size: 0.75rem; color: var(--text-2); line-height: 1.9; margin-bottom: 14px; }
-.nav-login-section { display: flex; gap: 8px; }
+.nav-login-section { display: flex; flex-direction: column; gap: 8px; }
+.nav-login-section .btn-login, .nav-login-section .btn-signup { flex: unset; }
 .btn-login, .btn-signup {
   flex: 1;
   padding: 11px;
