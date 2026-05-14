@@ -1911,3 +1911,34 @@ img, svg { display: block; }
 .map-modal-content { position: relative; z-index: 1; max-width: 95vw; max-height: 90vh; display: flex; flex-direction: column; align-items: flex-end; }
 .map-modal-close { background: rgba(255,255,255,.9); border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1rem; cursor: pointer; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; }
 .map-modal-img { max-width: 95vw; max-height: 82vh; border-radius: 10px; object-fit: contain; box-shadow: 0 8px 40px rgba(0,0,0,.5); }
+
+/* ── Auth Modals ── */
+.auth-modal { position: fixed; inset: 0; z-index: 9100; display: flex; align-items: flex-end; justify-content: center; }
+.auth-modal.hidden { display: none; }
+.auth-modal-bg { position: absolute; inset: 0; background: rgba(0,0,0,.5); }
+.auth-modal-sheet {
+  position: relative; z-index: 1; width: 100%; max-width: 480px;
+  background: var(--surface, #fff); border-radius: 20px 20px 0 0;
+  padding: 28px 24px 40px; box-shadow: 0 -4px 32px rgba(0,0,0,.12);
+}
+.auth-modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.auth-modal-title { font-size: 1.15rem; font-weight: 700; color: var(--text-1, #111); }
+.auth-modal-close { background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-3, #888); padding: 4px; }
+.auth-form { display: flex; flex-direction: column; gap: 16px; }
+.auth-field { display: flex; flex-direction: column; gap: 6px; }
+.auth-label { font-size: 0.78rem; font-weight: 600; color: var(--text-2, #555); }
+.auth-input {
+  border: 1.5px solid var(--border, #e5e7eb); border-radius: 10px;
+  padding: 12px 14px; font-size: 0.95rem; outline: none;
+  transition: border-color .15s;
+}
+.auth-input:focus { border-color: var(--navy, #002D72); }
+.auth-error { font-size: 0.82rem; color: #e74c3c; margin-top: -4px; }
+.auth-submit {
+  margin-top: 4px; background: var(--navy, #002D72); color: #fff;
+  border: none; border-radius: 12px; padding: 14px; font-size: 1rem;
+  font-weight: 700; cursor: pointer; transition: opacity .15s;
+}
+.auth-submit:hover { opacity: .88; }
+.auth-switch { margin-top: 16px; text-align: center; font-size: 0.85rem; color: var(--text-3, #888); }
+.auth-switch-btn { background: none; border: none; color: var(--navy, #002D72); font-weight: 700; cursor: pointer; font-size: 0.85rem; padding: 0 2px; }

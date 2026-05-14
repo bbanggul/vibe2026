@@ -875,6 +875,64 @@ function initLoading() {
   }, loadingDuration);
 }
 
+/* ─── Auth Modals ─── */
+function openModal(id) {
+  document.getElementById(id)?.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id)?.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+function initAuthModals() {
+  /* open buttons */
+  document.querySelector('.btn-login')?.addEventListener('click', () => { closeNav(); openModal('loginModal'); });
+  document.querySelector('.btn-signup')?.addEventListener('click', () => { closeNav(); openModal('signupModal'); });
+
+  /* close via bg click or ✕ button */
+  document.querySelectorAll('[data-close]').forEach(el => {
+    el.addEventListener('click', () => closeModal(el.dataset.close));
+  });
+
+  /* switch between modals */
+  document.getElementById('goToSignup')?.addEventListener('click', () => { closeModal('loginModal'); openModal('signupModal'); });
+  document.getElementById('goToLogin')?.addEventListener('click', () => { closeModal('signupModal'); openModal('loginModal'); });
+
+  /* ESC */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal('loginModal'); closeModal('signupModal'); }
+  });
+
+  /* login form — TODO: 백엔드 연결 */
+  document.getElementById('loginForm')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim();
+    const pw = document.getElementById('loginPassword').value;
+    const errEl = document.getElementById('loginError');
+    errEl.classList.add('hidden');
+    if (!email || !pw) { errEl.textContent = '이메일과 비밀번호를 입력해주세요.'; errEl.classList.remove('hidden'); return; }
+    /* TODO: await authLogin(email, pw) */
+    console.log('login:', email);
+  });
+
+  /* signup form — TODO: 백엔드 연결 */
+  document.getElementById('signupForm')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = document.getElementById('signupName').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const pw = document.getElementById('signupPassword').value;
+    const pw2 = document.getElementById('signupPasswordConfirm').value;
+    const errEl = document.getElementById('signupError');
+    errEl.classList.add('hidden');
+    if (!name || !email || !pw) { errEl.textContent = '모든 항목을 입력해주세요.'; errEl.classList.remove('hidden'); return; }
+    if (pw !== pw2) { errEl.textContent = '비밀번호가 일치하지 않습니다.'; errEl.classList.remove('hidden'); return; }
+    if (pw.length < 8) { errEl.textContent = '비밀번호는 8자 이상이어야 합니다.'; errEl.classList.remove('hidden'); return; }
+    /* TODO: await authSignup(name, email, pw) */
+    console.log('signup:', name, email);
+  });
+}
+
 /* Campus Map Modal */
 function initMapModal() {
   const btn = document.getElementById('campusMapBtn');
@@ -912,6 +970,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initCafeteriaScreen();
   initLibraryScreen();
   initSchoolScreen();
+  initAuthModals();
   initChatbot();
   initMapModal();
   initHeaderScroll();

@@ -759,6 +759,68 @@
 </div>
 
 
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="auth-modal hidden" role="dialog" aria-label="로그인">
+  <div class="auth-modal-bg" data-close="loginModal"></div>
+  <div class="auth-modal-sheet">
+    <div class="auth-modal-header">
+      <span class="auth-modal-title" data-i18n="login">로그인</span>
+      <button class="auth-modal-close" data-close="loginModal" aria-label="닫기">✕</button>
+    </div>
+    <form class="auth-form" id="loginForm" novalidate>
+      <div class="auth-field">
+        <label class="auth-label" for="loginEmail">이메일</label>
+        <input class="auth-input" id="loginEmail" type="email" placeholder="example@suwon.ac.kr" autocomplete="email" required>
+      </div>
+      <div class="auth-field">
+        <label class="auth-label" for="loginPassword">비밀번호</label>
+        <input class="auth-input" id="loginPassword" type="password" placeholder="비밀번호 입력" autocomplete="current-password" required>
+      </div>
+      <p class="auth-error hidden" id="loginError"></p>
+      <button class="auth-submit" type="submit">로그인</button>
+    </form>
+    <div class="auth-switch">
+      계정이 없으신가요?
+      <button class="auth-switch-btn" id="goToSignup">회원가입</button>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNUP MODAL -->
+<div id="signupModal" class="auth-modal hidden" role="dialog" aria-label="회원가입">
+  <div class="auth-modal-bg" data-close="signupModal"></div>
+  <div class="auth-modal-sheet">
+    <div class="auth-modal-header">
+      <span class="auth-modal-title" data-i18n="signup">회원가입</span>
+      <button class="auth-modal-close" data-close="signupModal" aria-label="닫기">✕</button>
+    </div>
+    <form class="auth-form" id="signupForm" novalidate>
+      <div class="auth-field">
+        <label class="auth-label" for="signupName">이름</label>
+        <input class="auth-input" id="signupName" type="text" placeholder="이름 입력" autocomplete="name" required>
+      </div>
+      <div class="auth-field">
+        <label class="auth-label" for="signupEmail">이메일</label>
+        <input class="auth-input" id="signupEmail" type="email" placeholder="example@suwon.ac.kr" autocomplete="email" required>
+      </div>
+      <div class="auth-field">
+        <label class="auth-label" for="signupPassword">비밀번호</label>
+        <input class="auth-input" id="signupPassword" type="password" placeholder="8자 이상" autocomplete="new-password" required>
+      </div>
+      <div class="auth-field">
+        <label class="auth-label" for="signupPasswordConfirm">비밀번호 확인</label>
+        <input class="auth-input" id="signupPasswordConfirm" type="password" placeholder="비밀번호 재입력" autocomplete="new-password" required>
+      </div>
+      <p class="auth-error hidden" id="signupError"></p>
+      <button class="auth-submit" type="submit">회원가입</button>
+    </form>
+    <div class="auth-switch">
+      이미 계정이 있으신가요?
+      <button class="auth-switch-btn" id="goToLogin">로그인</button>
+    </div>
+  </div>
+</div>
+
 <!-- MAP MODAL -->
 <div id="mapModal" class="map-modal hidden" role="dialog" aria-label="캠퍼스 지도">
   <div class="map-modal-bg" id="mapModalBg"></div>
