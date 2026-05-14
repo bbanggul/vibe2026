@@ -991,37 +991,16 @@ function startShuttleTimer() {
 
 /* Loading → Home (language splash removed) */
 function initLoading() {
-  const alreadyPicked = sessionStorage.getItem('lang_picked');
+  const savedLang = localStorage.getItem('uos_lang');
   setTimeout(() => {
-    showScreen('screen-home');
-    initFaqAccordion();
-    initScrollReveal();
-    if (!alreadyPicked) {
-      document.getElementById('langPicker')?.classList.remove('hidden');
+    if (savedLang) {
+      showScreen('screen-home');
+      initFaqAccordion();
+      initScrollReveal();
+    } else {
+      showScreen('screen-language');
     }
   }, 1800);
-}
-
-function initLangPicker() {
-  const picker = document.getElementById('langPicker');
-  if (!picker) return;
-
-  function dismissPicker() {
-    picker.classList.add('hidden');
-    sessionStorage.setItem('lang_picked', '1');
-  }
-
-  picker.querySelectorAll('.lang-picker-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      setLanguage(btn.dataset.lang);
-      dismissPicker();
-    });
-  });
-
-  document.getElementById('langPickerClose')?.addEventListener('click', () => {
-    if (!localStorage.getItem('uos_lang')) setLanguage('ko');
-    dismissPicker();
-  });
 }
 
 /* ─── Auth Modals ─── */
@@ -1757,7 +1736,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   initChatbot();
   initMapModal();
   initMainNav();
-  initLangPicker();
   initHeaderScroll();
   updateNotices();
   await loadCafeteriaData();
