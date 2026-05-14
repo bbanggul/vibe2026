@@ -1003,17 +1003,39 @@ function updateAuthUI(user) {
   }
 }
 
+/* ─── Translation ─── */
+const translationCache = {};
+async function translateText(text, targetLang) {
+  if (!text || targetLang === 'ko') return text;
+  const langMap = { en: 'en', zh: 'zh-CN', ja: 'ja', vi: 'vi', th: 'th' };
+  const tl = langMap[targetLang];
+  if (!tl) return text;
+  const key = `${tl}||${text}`;
+  if (translationCache[key]) return translationCache[key];
+  try {
+    const resp = await fetch(
+      `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=ko|${tl}`
+    );
+    const json = await resp.json();
+    const result = json?.responseData?.translatedText || text;
+    translationCache[key] = result;
+    return result;
+  } catch {
+    return text;
+  }
+}
+
 /* ─── Board ─── */
 let currentPost = null;
 
 async function renderBoardList() {
   const list = document.getElementById('boardList');
   if (!list) return;
-  list.innerHTML = '<div class="board-loading">불러오는 중...</div>';
+  list.innerHTML = `<div class="board-loading">${t('board_loading')}</div>`;
   try {
     const posts = await fetchPosts();
     if (posts.length === 0) {
-      list.innerHTML = '<div class="board-empty">첫 글을 작성해보세요!</div>';
+      list.innerHTML = `<div class="board-empty">${t('board_empty')}</div>`;
       return;
     }
     list.innerHTML = posts.map(p => `
@@ -1021,7 +1043,7 @@ async function renderBoardList() {
         <div class="bpc-title">${escHtml(p.title)}</div>
         <div class="bpc-preview">${escHtml(p.content)}</div>
         <div class="bpc-meta">
-          <span class="bpc-anon">익명</span>
+          <span class="bpc-anon">${t('board_anon')}</span>
           <span class="bpc-dot">·</span>
           <span class="bpc-time">${timeAgo(p.created_at)}</span>
           <span class="bpc-likes">❤ ${p.likes}</span>
@@ -1040,7 +1062,7 @@ async function openPostDetail(id) {
   showScreen('screen-post');
   const contentArea = document.getElementById('postContentArea');
   const commentsArea = document.getElementById('postCommentsArea');
-  contentArea.innerHTML = '<div class="board-loading">불러오는 중...</div>';
+  contentArea.innerHTML = `<div class="board-loading">${t('board_loading')}</div>`;
   commentsArea.innerHTML = '';
   try {
     const post = await fetchPost(id);
@@ -1055,7 +1077,7 @@ async function openPostDetail(id) {
     const isOwner = user && post.user_id && user.id === post.user_id;
     contentArea.innerHTML = `
       <div class="post-detail-inner">
-        <div class="post-meta-row">익명 · ${timeAgo(post.created_at)}</div>
+        <div class="post-meta-row">${t('board_anon')} · ${timeAgo(post.created_at)}</div>
         <h2 class="post-detail-title">${escHtml(post.title)}</h2>
         <div class="post-detail-body">${escHtml(post.content).replace(/\n/g, '<br>')}</div>
         <div class="post-actions-row">
@@ -1064,12 +1086,12 @@ async function openPostDetail(id) {
             <span id="postLikeCount">${post.likes}</span>
           </button>
           ${isOwner ? `
-          <button class="post-edit-btn" id="postEditBtn">수정</button>
-          <button class="post-delete-btn" id="postDeleteBtn">삭제</button>
+          <button class="post-edit-btn" id="postEditBtn">${t('board_edit')}</button>
+          <button class="post-delete-btn" id="postDeleteBtn">${t('board_delete')}</button>
           ` : ''}
         </div>
       </div>
-      <div class="post-comments-header">댓글</div>
+      <div class="post-comments-header">${t('board_comments')}</div>
     `;
     document.getElementById('postLikeBtn')?.addEventListener('click', async () => {
       await likePost(post.id, post.likes);
@@ -1081,7 +1103,7 @@ async function openPostDetail(id) {
     document.getElementById('postEditBtn')?.addEventListener('click', () => openEditModal(post));
 
     document.getElementById('postDeleteBtn')?.addEventListener('click', async () => {
-      if (!confirm('게시글을 삭제하시겠습니까?')) return;
+      if (!confirm(t('board_confirm_delete_post'))) return;
       try {
         await deletePost(post.id);
         showScreen('screen-board');
@@ -1089,6 +1111,28 @@ async function openPostDetail(id) {
     });
 
     await renderComments(id);
+
+    /* Auto-translate post if non-Korean */
+    const lang = window.currentLang;
+    if (lang !== 'ko') {
+      const inner = contentArea.querySelector('.post-detail-inner');
+      const badge = document.createElement('div');
+      badge.className = 'board-trans-badge';
+      badge.textContent = t('board_translating');
+      inner?.prepend(badge);
+      try {
+        const [transTitle, transBody] = await Promise.all([
+          translateText(post.title, lang),
+          translateText(post.content, lang),
+        ]);
+        const titleEl = contentArea.querySelector('.post-detail-title');
+        const bodyEl = contentArea.querySelector('.post-detail-body');
+        if (titleEl) titleEl.textContent = transTitle;
+        if (bodyEl) bodyEl.innerHTML = escHtml(transBody).replace(/\n/g, '<br>');
+      } finally {
+        badge.remove();
+      }
+    }
   } catch (e) {
     contentArea.innerHTML = `<div class="board-empty">${e.message}</div>`;
   }
@@ -1100,13 +1144,18 @@ async function renderComments(postId) {
   try {
     const comments = await fetchComments(postId);
     if (comments.length === 0) {
-      area.innerHTML = '<div class="comments-empty">첫 댓글을 남겨보세요</div>';
+      area.innerHTML = `<div class="comments-empty">${t('board_comments_empty')}</div>`;
       return;
     }
-    area.innerHTML = comments.map(c => `
+    const lang = window.currentLang;
+    let contents = comments.map(c => c.content);
+    if (lang !== 'ko') {
+      contents = await Promise.all(contents.map(c => translateText(c, lang)));
+    }
+    area.innerHTML = comments.map((c, i) => `
       <div class="comment-card">
-        <div class="comment-anon">익명</div>
-        <div class="comment-text">${escHtml(c.content)}</div>
+        <div class="comment-anon">${t('board_anon')}</div>
+        <div class="comment-text">${escHtml(contents[i]).replace(/\n/g, '<br>')}</div>
         <div class="comment-time">${timeAgo(c.created_at)}</div>
       </div>
     `).join('');
@@ -1158,15 +1207,15 @@ function openEditModal(post) {
   writeEditMode = true;
   document.getElementById('writeTitle').value = post.title;
   document.getElementById('writeContent').value = post.content;
-  document.querySelector('#writeModal .auth-modal-title').textContent = '글 수정';
-  document.querySelector('#writeModal .auth-submit').textContent = '수정';
+  document.querySelector('#writeModal .auth-modal-title').textContent = t('board_edit');
+  document.querySelector('#writeModal .auth-submit').textContent = t('board_edit');
   openModal('writeModal');
 }
 
 function resetWriteModal() {
   writeEditMode = false;
-  document.querySelector('#writeModal .auth-modal-title').textContent = '글쓰기';
-  document.querySelector('#writeModal .auth-submit').textContent = '등록';
+  document.querySelector('#writeModal .auth-modal-title').textContent = t('board_write_title');
+  document.querySelector('#writeModal .auth-submit').textContent = t('board_submit');
 }
 
 function initWriteModal() {
@@ -1182,7 +1231,7 @@ function initWriteModal() {
     const btn = e.target.querySelector('.auth-submit');
     errEl.classList.add('hidden');
     if (!title || !content) { errEl.textContent = '제목과 내용을 입력해주세요.'; errEl.classList.remove('hidden'); return; }
-    btn.disabled = true; btn.textContent = writeEditMode ? '수정 중...' : '등록 중...';
+    btn.disabled = true; btn.textContent = writeEditMode ? `${t('board_edit')}...` : `${t('board_submit')}...`;
     try {
       if (writeEditMode && currentPost) {
         await updatePost(currentPost.id, title, content);
@@ -1202,7 +1251,7 @@ function initWriteModal() {
       errEl.textContent = e.message; errEl.classList.remove('hidden');
     } finally {
       btn.disabled = false;
-      btn.textContent = writeEditMode ? '수정' : '등록';
+      btn.textContent = writeEditMode ? t('board_edit') : t('board_submit');
     }
   });
 }
@@ -1221,10 +1270,10 @@ function initSendMsgModal() {
       await sendMessage(currentPost.user_id, currentPost.id, content);
       closeModal('sendMsgModal');
       e.target.reset();
-      alert('쪽지를 보냈습니다.');
+      alert(t('board_alert_msg_sent'));
     } catch (e) {
       errEl.textContent = e.message; errEl.classList.remove('hidden');
-    } finally { btn.disabled = false; btn.textContent = '보내기'; }
+    } finally { btn.disabled = false; btn.textContent = t('board_send'); }
   });
 }
 
@@ -1234,19 +1283,19 @@ let currentViewMsg = null;
 async function renderMessages() {
   const list = document.getElementById('msgList');
   if (!list) return;
-  list.innerHTML = '<div class="board-loading">불러오는 중...</div>';
+  list.innerHTML = `<div class="board-loading">${t('board_loading')}</div>`;
   const user = await getUser();
-  if (!user) { list.innerHTML = '<div class="board-empty">로그인이 필요합니다.</div>'; return; }
+  if (!user) { list.innerHTML = `<div class="board-empty">${t('board_login_required')}</div>`; return; }
   try {
     const msgs = await fetchMessages();
-    if (msgs.length === 0) { list.innerHTML = '<div class="board-empty">쪽지가 없습니다.</div>'; return; }
+    if (msgs.length === 0) { list.innerHTML = `<div class="board-empty">${t('board_no_msg')}</div>`; return; }
     list.innerHTML = msgs.map(m => {
       const isMine = m.sender_id === user.id;
       const unread = !m.is_read && !isMine;
       return `
         <div class="msg-card${unread ? ' msg-unread' : ''}" data-id="${m.id}">
           <div class="msg-card-top">
-            <span class="msg-from">${isMine ? '보낸 쪽지' : '익명'}</span>
+            <span class="msg-from">${isMine ? t('board_msg_sent_label') : t('board_anon')}</span>
             ${unread ? '<span class="msg-new-dot"></span>' : ''}
             <span class="msg-time">${timeAgo(m.created_at)}</span>
           </div>
@@ -1277,12 +1326,12 @@ function openMsgDetail(msg, user) {
   if (!body) return;
   const isMine = msg.sender_id === user.id;
   body.innerHTML = `
-    <div class="msg-detail-meta">${isMine ? '내가 보낸 쪽지' : '받은 쪽지'} · ${timeAgo(msg.created_at)}</div>
+    <div class="msg-detail-meta">${isMine ? t('board_msg_sent_me') : t('board_msg_received_label')} · ${timeAgo(msg.created_at)}</div>
     <div class="msg-detail-content">${escHtml(msg.content)}</div>
-    <button class="msg-delete-btn" id="msgDeleteBtn">쪽지 삭제</button>
+    <button class="msg-delete-btn" id="msgDeleteBtn">${t('board_delete_msg')}</button>
   `;
   document.getElementById('msgDeleteBtn')?.addEventListener('click', async () => {
-    if (!confirm('쪽지를 삭제하시겠습니까?')) return;
+    if (!confirm(t('board_confirm_delete_msg'))) return;
     try {
       await deleteMessage(msg.id);
       closeModal('msgDetailModal');
@@ -1309,10 +1358,10 @@ function initMessagesScreen() {
       await replyMessage(currentViewMsg, content);
       closeModal('msgDetailModal');
       e.target.reset();
-      alert('답장을 보냈습니다.');
+      alert(t('board_alert_reply_sent'));
     } catch (e) {
       errEl.textContent = e.message; errEl.classList.remove('hidden');
-    } finally { btn.disabled = false; btn.textContent = '답장 보내기'; }
+    } finally { btn.disabled = false; btn.textContent = t('board_reply'); }
   });
 }
 

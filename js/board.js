@@ -2,11 +2,14 @@
 
 function timeAgo(dateStr) {
   const diff = (Date.now() - new Date(dateStr)) / 1000;
-  if (diff < 60) return '방금 전';
-  if (diff < 3600) return `${Math.floor(diff / 60)}분 전`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)}시간 전`;
+  const tFn = typeof t === 'function' ? t : k => k;
+  const lang = typeof window !== 'undefined' ? (window.currentLang || 'ko') : 'ko';
+  const sep = (lang === 'ko' || lang === 'ja') ? '' : ' ';
+  if (diff < 60) return tFn('timeago_now');
+  if (diff < 3600) return `${Math.floor(diff / 60)}${sep}${tFn('timeago_min')}`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}${sep}${tFn('timeago_hour')}`;
   const d = new Date(dateStr);
-  return `${d.getMonth() + 1}월 ${d.getDate()}일`;
+  return `${d.getMonth() + 1}/${d.getDate()}`;
 }
 
 function escHtml(str) {
