@@ -1617,6 +1617,7 @@ function initMainNav() {
     card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') showScreen(card.dataset.toScreen); });
   });
 
+  document.getElementById('headerPhoneBtn')?.addEventListener('click', e => { e.preventDefault(); openSchoolPane('schoolPhones'); });
   document.getElementById('quickBoardBtn')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-board'); });
   document.getElementById('quickBoardBtn2')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-board'); });
 
