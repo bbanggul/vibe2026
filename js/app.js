@@ -340,6 +340,7 @@ function onLanguageChange(lang) {
   renderSchoolFacilities();
   renderSchoolDepts();
   renderSchoolPhones();
+  renderCampusBuildingList();
 }
 
 function updateHeaderLang(lang) {
@@ -1566,30 +1567,134 @@ function initMessagesScreen() {
   });
 }
 
-/* Campus Map Modal */
-function initMapModal() {
-  const btn = document.getElementById('campusMapBtn');
-  const headerBtn = document.getElementById('headerMapBtn');
-  const modal = document.getElementById('mapModal');
-  const bg = document.getElementById('mapModalBg');
-  const closeBtn = document.getElementById('mapModalClose');
-  if (!modal) return;
+/* ── Campus Map ── */
+const FACILITY_NAMES = {
+  classroom:       { ko:'강의실',      en:'Classrooms',           zh:'教室',       ja:'講義室',       vi:'Phòng học',              th:'ห้องเรียน' },
+  lab:             { ko:'실험실',      en:'Laboratory',           zh:'实验室',     ja:'実験室',       vi:'Phòng thí nghiệm',       th:'ห้องแล็บ' },
+  faculty_office:  { ko:'교수연구실',  en:'Faculty Offices',      zh:'教授研究室', ja:'研究室',       vi:'VP giáo sư',             th:'ห้องอาจารย์' },
+  admin_office:    { ko:'행정실',      en:'Admin Office',         zh:'行政室',     ja:'事務室',       vi:'VP hành chính',          th:'สำนักงาน' },
+  seminar:         { ko:'세미나실',    en:'Seminar Rooms',        zh:'研讨室',     ja:'セミナー室',   vi:'Phòng hội thảo',         th:'ห้องสัมมนา' },
+  computer_lab:    { ko:'컴퓨터실',   en:'Computer Lab',         zh:'电脑室',     ja:'コンピュータ室',vi:'Phòng máy tính',        th:'ห้องคอมพิวเตอร์' },
+  workshop:        { ko:'공작실',      en:'Workshop',             zh:'工作室',     ja:'工作室',       vi:'Xưởng thực hành',        th:'ห้องปฏิบัติการ' },
+  study_room:      { ko:'스터디룸',    en:'Study Rooms',          zh:'自习室',     ja:'スタディルーム',vi:'Phòng tự học',          th:'ห้องศึกษา' },
+  cafe:            { ko:'카페테리아',  en:'Cafeteria',            zh:'餐厅',       ja:'カフェテリア', vi:'Căng-tin',               th:'โรงอาหาร' },
+  convenience:     { ko:'편의점',      en:'Convenience Store',    zh:'便利店',     ja:'コンビニ',     vi:'Cửa hàng tiện lợi',      th:'ร้านสะดวกซื้อ' },
+  student_org:     { ko:'동아리실',    en:'Club Rooms',           zh:'社团室',     ja:'サークル室',   vi:'Phòng câu lạc bộ',       th:'ห้องชมรม' },
+  fitness:         { ko:'헬스장',      en:'Fitness Center',       zh:'健身房',     ja:'フィットネス', vi:'Phòng gym',              th:'ห้องฟิตเนส' },
+  shower:          { ko:'샤워실',      en:'Shower Rooms',         zh:'淋浴间',     ja:'シャワー室',   vi:'Phòng tắm',              th:'ห้องอาบน้ำ' },
+  table_tennis:    { ko:'탁구장',      en:'Table Tennis',         zh:'乒乓球室',   ja:'卓球場',       vi:'Bàn bóng bàn',           th:'โต๊ะปิงปอง' },
+  reading_room:    { ko:'열람실',      en:'Reading Room',         zh:'阅览室',     ja:'閲覧室',       vi:'Phòng đọc sách',         th:'ห้องอ่านหนังสือ' },
+  archive:         { ko:'자료실',      en:'Archive',              zh:'资料室',     ja:'資料室',       vi:'Phòng lưu trữ',          th:'ห้องเก็บเอกสาร' },
+  studio:          { ko:'스튜디오',    en:'Studio',               zh:'工作室',     ja:'スタジオ',     vi:'Phòng thu',              th:'สตูดิโอ' },
+  workshop_art:    { ko:'작업실',      en:'Art Workshop',         zh:'创作室',     ja:'制作室',       vi:'Xưởng mỹ thuật',         th:'ห้องสร้างสรรค์' },
+  exhibition:      { ko:'전시실',      en:'Exhibition Hall',      zh:'展厅',       ja:'展示室',       vi:'Phòng triển lãm',        th:'ห้องนิทรรศการ' },
+  performance:     { ko:'공연장',      en:'Performance Hall',     zh:'演出厅',     ja:'演奏ホール',   vi:'Sân khấu biểu diễn',     th:'ห้องแสดง' },
+  practice_room:   { ko:'연습실',      en:'Practice Room',        zh:'练习室',     ja:'練習室',       vi:'Phòng luyện tập',        th:'ห้องซ้อม' },
+  recording:       { ko:'녹음실',      en:'Recording Studio',     zh:'录音室',     ja:'録音室',       vi:'Phòng thu âm',           th:'ห้องบันทึกเสียง' },
+  dormitory_room:  { ko:'기숙사실',    en:'Dormitory Rooms',      zh:'宿舍',       ja:'寮室',         vi:'Phòng ký túc xá',        th:'ห้องหอพัก' },
+  laundry:         { ko:'세탁실',      en:'Laundry',              zh:'洗衣室',     ja:'洗濯室',       vi:'Phòng giặt đồ',          th:'ห้องซักผ้า' },
+  lounge:          { ko:'휴게실',      en:'Lounge',               zh:'休息室',     ja:'ラウンジ',     vi:'Phòng giải trí',         th:'ห้องพักผ่อน' },
+  language_lab:    { ko:'어학실',      en:'Language Lab',         zh:'语言实验室', ja:'語学室',       vi:'Phòng ngôn ngữ',         th:'ห้องภาษา' },
+  intl_office:     { ko:'국제교류실',  en:'Int\'l Exchange Office',zh:'国际交流室',ja:'国際交流室',   vi:'VP trao đổi quốc tế',    th:'สำนักงานแลกเปลี่ยน' },
+  tutoring:        { ko:'튜터링실',    en:'Tutoring Center',      zh:'辅导室',     ja:'チューター室', vi:'Phòng hỗ trợ học tập',   th:'ห้องติวเตอร์' },
+  president_office:{ ko:'총장실',      en:'President\'s Office',  zh:'校长室',     ja:'学長室',       vi:'VP hiệu trưởng',         th:'ห้องอธิการบดี' },
+  student_affairs: { ko:'학생처',      en:'Student Affairs',      zh:'学生处',     ja:'学生部',       vi:'Phòng công tác sinh viên',th:'กิจการนักศึกษา' },
+  admissions:      { ko:'입학처',      en:'Admissions Office',    zh:'招生办',     ja:'入試室',       vi:'Phòng tuyển sinh',       th:'สำนักงานรับนักศึกษา' },
+  outdoor_stage:   { ko:'야외공연장',  en:'Outdoor Stage',        zh:'户外舞台',   ja:'野外ステージ', vi:'Sân khấu ngoài trời',    th:'เวทีกลางแจ้ง' },
+  makeup_room:     { ko:'분장실',      en:'Makeup Room',          zh:'化妆室',     ja:'メイク室',     vi:'Phòng hóa trang',        th:'ห้องแต่งหน้า' },
+  props_room:      { ko:'소품실',      en:'Props Room',           zh:'道具室',     ja:'小道具室',     vi:'Phòng đạo cụ',           th:'ห้องอุปกรณ์' },
+  research_inst:   { ko:'연구소',      en:'Research Institute',   zh:'研究院',     ja:'研究院',       vi:'Viện nghiên cứu',        th:'สถาบันวิจัย' },
+  meeting_room:    { ko:'회의실',      en:'Meeting Rooms',        zh:'会议室',     ja:'会議室',       vi:'Phòng họp',              th:'ห้องประชุม' },
+  training_room:   { ko:'훈련실',      en:'Training Room',        zh:'训练室',     ja:'訓練室',       vi:'Phòng huấn luyện',       th:'ห้องฝึก' },
+  rotc_office:     { ko:'ROTC 행정실', en:'ROTC Office',          zh:'ROTC行政室', ja:'ROTC事務室',   vi:'VP ROTC',                th:'สำนักงาน ROTC' },
+  armory:          { ko:'무기고',      en:'Armory',               zh:'武器库',     ja:'武器庫',       vi:'Kho vũ khí',             th:'คลังอาวุธ' },
+  practice_field:  { ko:'실습실',      en:'Practice Lab',         zh:'实习室',     ja:'実習室',       vi:'Phòng thực hành',        th:'ห้องปฏิบัติการ' },
+  gym:             { ko:'체육관',      en:'Indoor Gymnasium',     zh:'室内体育馆', ja:'体育館',       vi:'Nhà thi đấu',            th:'โรงยิมในร่ม' },
+};
 
-  function openMap(e) {
-    e.preventDefault();
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMap() {
-    modal.classList.add('hidden');
-    document.body.style.overflow = '';
-  }
+const campusBuildings = [
+  { id:'01', ko:'인문사회융합대학',         names:{ en:'Humanities & Social Sciences', zh:'人文社会融合学院', ja:'人文社会融合大学', vi:'Trường Nhân văn & Xã hội', th:'วิทยาลัยมนุษยศาสตร์' }, facilities:['classroom','faculty_office','admin_office','seminar','language_lab'] },
+  { id:'02', ko:'미래혁신관',               names:{ en:'Future Innovation Hall', zh:'未来创新馆', ja:'未来イノベーション館', vi:'Tòa Đổi mới Tương lai', th:'อาคารนวัตกรรมอนาคต' }, facilities:['classroom','research_inst','meeting_room','cafe'] },
+  { id:'03', ko:'혁신공과대학',             names:{ en:'Innovation Engineering College', zh:'创新工科学院', ja:'イノベーション工科大学', vi:'Trường Kỹ thuật Sáng tạo', th:'วิทยาลัยวิศวกรรมนวัตกรรม' }, facilities:['classroom','lab','faculty_office','workshop'] },
+  { id:'04', ko:'고운첨단과학기술연구원',   names:{ en:'Goun Advanced S&T Institute', zh:'高云尖端科技研究院', ja:'高運先端科学技術研究院', vi:'Viện KH&KT Tiên tiến Goun', th:'สถาบันวิทยาศาสตร์ Goun' }, facilities:['research_inst','lab','seminar','meeting_room'] },
+  { id:'05', ko:'제1공학관',                names:{ en:'Engineering Building 1', zh:'第1工学馆', ja:'第1工学館', vi:'Tòa Kỹ thuật 1', th:'อาคารวิศวกรรม 1' }, facilities:['classroom','lab','faculty_office','computer_lab'] },
+  { id:'06', ko:'제2공학관',                names:{ en:'Engineering Building 2', zh:'第2工学馆', ja:'第2工学館', vi:'Tòa Kỹ thuật 2', th:'อาคารวิศวกรรม 2' }, facilities:['classroom','lab','faculty_office','seminar'] },
+  { id:'07', ko:'제3공학관',                names:{ en:'Engineering Building 3', zh:'第3工学馆', ja:'第3工学館', vi:'Tòa Kỹ thuật 3', th:'อาคารวิศวกรรม 3' }, facilities:['classroom','lab','faculty_office','computer_lab'] },
+  { id:'08', ko:'ACE교육관',                names:{ en:'ACE Education Hall', zh:'ACE教育馆', ja:'ACE教育館', vi:'Tòa Giáo dục ACE', th:'อาคารการศึกษา ACE' }, facilities:['classroom','tutoring','study_room','admin_office'] },
+  { id:'09', ko:'제4공학관',                names:{ en:'Engineering Building 4', zh:'第4工学馆', ja:'第4工学館', vi:'Tòa Kỹ thuật 4', th:'อาคารวิศวกรรม 4' }, facilities:['classroom','lab','faculty_office','workshop'] },
+  { id:'10', ko:'조형관',                   names:{ en:'Sculpture & Design Hall', zh:'造型馆', ja:'造形館', vi:'Tòa Điêu khắc & TK', th:'อาคารศิลปะและการออกแบบ' }, facilities:['studio','workshop_art','exhibition','classroom'] },
+  { id:'11', ko:'디자인앤아트대학',         names:{ en:'College of Design & Art', zh:'设计与艺术学院', ja:'デザイン＆アート大学', vi:'Trường Thiết kế & NT', th:'วิทยาลัยการออกแบบและศิลปะ' }, facilities:['studio','workshop_art','exhibition','classroom','faculty_office'] },
+  { id:'12', ko:'글로벌인재대학',           names:{ en:'Global Talent College', zh:'全球人才学院', ja:'グローバル人材大学', vi:'Trường Nhân tài Toàn cầu', th:'วิทยาลัยบุคลากรระดับโลก' }, facilities:['classroom','faculty_office','language_lab','intl_office','seminar'] },
+  { id:'13', ko:'대학본부',                 names:{ en:'Main Administration Building', zh:'大学本部', ja:'大学本部', vi:'Tòa Hành chính Trung tâm', th:'อาคารบริหารหลัก' }, facilities:['president_office','admin_office','student_affairs','admissions','intl_office'] },
+  { id:'14', ko:'학생회관',                 names:{ en:'Student Union', zh:'学生会馆', ja:'学生会館', vi:'Nhà Sinh viên', th:'อาคารสหภาพนักศึกษา' }, facilities:['cafe','convenience','student_org','meeting_room','study_room'] },
+  { id:'15', ko:'체육관',                   names:{ en:'Gymnasium', zh:'体育馆', ja:'体育館', vi:'Nhà thi đấu', th:'โรงยิมนาสติก' }, facilities:['gym','fitness','shower','table_tennis'] },
+  { id:'16', ko:'중앙도서관',               names:{ en:'Central Library', zh:'中央图书馆', ja:'中央図書館', vi:'Thư viện Trung tâm', th:'ห้องสมุดกลาง' }, facilities:['reading_room','archive','seminar','study_room','cafe'] },
+  { id:'17', ko:'라이프케어사이언스대학',   names:{ en:'Life Care Science College', zh:'生命关怀科学学院', ja:'ライフケアサイエンス大学', vi:'Trường KH Chăm sóc Sức khỏe', th:'วิทยาลัยวิทยาศาสตร์สุขภาพ' }, facilities:['classroom','lab','faculty_office','practice_field'] },
+  { id:'18', ko:'사회관',                   names:{ en:'Social Sciences Building', zh:'社会馆', ja:'社会館', vi:'Tòa Khoa học Xã hội', th:'อาคารสังคมศาสตร์' }, facilities:['classroom','faculty_office','seminar','admin_office'] },
+  { id:'19', ko:'지능형SW융합대학',         names:{ en:'Intelligent SW Convergence', zh:'智能软件融合学院', ja:'知能型SW融合大学', vi:'Trường Tích hợp PM Thông minh', th:'วิทยาลัยซอฟต์แวร์อัจฉริยะ' }, facilities:['classroom','computer_lab','research_inst','seminar','lab'] },
+  { id:'20', ko:'벨칸토아트센터',           names:{ en:'Belcanto Art Center', zh:'贝尔坎托艺术中心', ja:'ベルカントアートセンター', vi:'TT Nghệ thuật Belcanto', th:'ศูนย์ศิลปะ Belcanto' }, facilities:['performance','practice_room','makeup_room','props_room'] },
+  { id:'21', ko:'야외음악당',               names:{ en:'Outdoor Music Pavilion', zh:'户外音乐厅', ja:'野外音楽堂', vi:'Nhà nhạc Ngoài trời', th:'ศาลาดนตรีกลางแจ้ง' }, facilities:['outdoor_stage','makeup_room'] },
+  { id:'22', ko:'음악테크놀로지대학',       names:{ en:'Music Technology College', zh:'音乐技术学院', ja:'音楽テクノロジー大学', vi:'Trường Công nghệ Âm nhạc', th:'วิทยาลัยเทคโนโลยีดนตรี' }, facilities:['classroom','practice_room','recording','faculty_office'] },
+  { id:'23', ko:'문화예술융합대학(아마랜스홀)',names:{ en:'Culture & Arts College (Amaranth Hall)', zh:'文化艺术融合学院（阿玛兰斯厅）', ja:'文化芸術融合大学（アマランスホール）', vi:'Trường VH & NT (Amaranth Hall)', th:'วิทยาลัยวัฒนธรรมฯ (Amaranth Hall)' }, facilities:['performance','classroom','practice_room','exhibition'] },
+  { id:'24', ko:'기숙사',                   names:{ en:'Dormitory', zh:'宿舍', ja:'寮', vi:'Ký túc xá', th:'หอพัก' }, facilities:['dormitory_room','laundry','lounge','convenience'] },
+  { id:'25', ko:'경영공학대학',             names:{ en:'Business Engineering College', zh:'经营工程学院', ja:'経営工学大学', vi:'Trường KT Kinh doanh', th:'วิทยาลัยวิศวกรรมธุรกิจ' }, facilities:['classroom','seminar','faculty_office','computer_lab'] },
+  { id:'26', ko:'ROTC',                     names:{ en:'ROTC', zh:'ROTC', ja:'ROTC', vi:'ROTC', th:'ROTC' }, facilities:['training_room','rotc_office','armory'] },
+];
 
-  btn?.addEventListener('click', openMap);
-  headerBtn?.addEventListener('click', openMap);
-  bg?.addEventListener('click', closeMap);
-  closeBtn?.addEventListener('click', closeMap);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMap(); });
+const CAMPUS_PLACEHOLDER = 'https://www.suwon.ac.kr/usr/upload/board/zboardphotogallery188/20200619015742915_7691.0.jpg';
+
+function renderCampusBuildingList() {
+  const lang = window.currentLang;
+  const list = document.getElementById('campusBuildingList');
+  if (!list) return;
+  list.innerHTML = campusBuildings.map(b => {
+    const name = lang === 'ko' ? b.ko : (b.names[lang] || b.names.en || b.ko);
+    const showKo = lang !== 'ko';
+    return `<button class="campus-bldg-item" data-bldg-id="${b.id}">
+      <span class="campus-bldg-num">${b.id}</span>
+      <span class="campus-bldg-info">
+        <span class="campus-bldg-name">${name}</span>
+        ${showKo ? `<span class="campus-bldg-ko">${b.ko}</span>` : ''}
+      </span>
+      <span class="campus-bldg-arrow">›</span>
+    </button>`;
+  }).join('');
+  list.querySelectorAll('.campus-bldg-item').forEach(btn => {
+    btn.addEventListener('click', () => openBuildingModal(btn.dataset.bldgId));
+  });
+}
+
+function openBuildingModal(id) {
+  const b = campusBuildings.find(x => x.id === id);
+  if (!b) return;
+  const lang = window.currentLang;
+  const name = lang === 'ko' ? b.ko : (b.names[lang] || b.names.en || b.ko);
+  document.getElementById('bldgModalNum').textContent = `건물 ${b.id}`;
+  document.getElementById('bldgModalName').textContent = name;
+  const koEl = document.getElementById('bldgModalNameKo');
+  if (lang !== 'ko') { koEl.textContent = b.ko; koEl.style.display = ''; }
+  else { koEl.style.display = 'none'; }
+  document.getElementById('bldgModalFacilities').innerHTML = b.facilities.map(key => {
+    const f = FACILITY_NAMES[key];
+    return `<li class="bldg-facility-tag">${f ? (f[lang] || f.en) : key}</li>`;
+  }).join('');
+  document.getElementById('bldgModalImg').src = CAMPUS_PLACEHOLDER;
+  document.getElementById('bldgModalImg').alt = name;
+  document.getElementById('buildingModal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBuildingModal() {
+  document.getElementById('buildingModal')?.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+function initCampusMap() {
+  document.getElementById('mapBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
+  document.getElementById('buildingModalBg')?.addEventListener('click', closeBuildingModal);
+  document.getElementById('buildingModalClose')?.addEventListener('click', closeBuildingModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBuildingModal(); });
+  renderCampusBuildingList();
 }
 
 /* Main Nav (desktop) */
@@ -1739,7 +1844,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initSendMsgModal();
   initMessagesScreen();
   initChatbot();
-  initMapModal();
+  initCampusMap();
   initMainNav();
   initHeaderScroll();
   updateNotices();

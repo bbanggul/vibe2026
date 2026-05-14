@@ -82,7 +82,7 @@
         <a href="#" class="main-nav-item" data-to-screen="screen-shuttle" data-i18n="nav_shuttle">셔틀버스</a>
         <a href="#" class="main-nav-item" data-to-screen="screen-cafeteria" data-i18n="nav_cafeteria">학식</a>
         <a href="#" class="main-nav-item" data-to-screen="screen-library" data-i18n="nav_library">도서관</a>
-        <a href="#" class="main-nav-item" id="headerMapBtn" data-i18n="link_map">캠퍼스맵</a>
+        <a href="#" class="main-nav-item" data-to-screen="screen-map" id="headerMapBtn" data-i18n="link_map">캠퍼스맵</a>
         <a href="#" class="main-nav-item" data-scroll-to="faq-section">FAQ</a>
       </nav>
 
@@ -184,7 +184,7 @@
         </div>
       </div>
 
-      <div class="feature-card" id="campusMapBtn" role="button" tabindex="0" aria-label="캠퍼스 지도">
+      <div class="feature-card" id="campusMapBtn" data-to-screen="screen-map" role="button" tabindex="0" aria-label="캠퍼스 지도">
         <div class="feature-card-img" style="background-image:url('https://www.suwon.ac.kr/usr/upload/board/zboardphotogallery188/20200619015742915_7691.0.jpg')" aria-hidden="true"></div>
         <div class="feature-card-overlay" aria-hidden="true"></div>
         <div class="feature-card-body">
@@ -719,6 +719,13 @@
         <span class="nav-menu-text" data-i18n="nav_library">중앙도서관</span>
         <span class="nav-menu-arrow" aria-hidden="true">›</span>
       </a>
+      <a href="#" class="nav-menu-item" data-screen="screen-map">
+        <div class="nav-menu-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+        </div>
+        <span class="nav-menu-text" data-i18n="link_map">캠퍼스맵</span>
+        <span class="nav-menu-arrow" aria-hidden="true">›</span>
+      </a>
       <a href="#" class="nav-menu-item" data-screen="screen-board">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -996,12 +1003,35 @@
   </div>
 </div>
 
-<!-- MAP MODAL -->
-<div id="mapModal" class="map-modal hidden" role="dialog" aria-label="캠퍼스 지도">
-  <div class="map-modal-bg" id="mapModalBg"></div>
-  <div class="map-modal-content">
-    <button class="map-modal-close" id="mapModalClose" aria-label="닫기">✕</button>
-    <img src="assets/suwon_map.jpg" alt="수원대학교 캠퍼스 지도" class="map-modal-img">
+<!-- ══════════════════════════════════════
+     CAMPUS MAP SCREEN
+══════════════════════════════════════ -->
+<div id="screen-map" class="screen screen-map screen-hidden">
+  <div class="map-screen-header">
+    <button class="map-back-btn" id="mapBackBtn" aria-label="뒤로가기">‹</button>
+    <span data-i18n="link_map">캠퍼스 지도</span>
+  </div>
+  <div class="map-screen-body">
+    <div class="campus-map-img-wrap">
+      <img src="https://www.suwon.ac.kr/usr/images/suwon/campusmap_img_2024.jpg"
+           alt="수원대학교 캠퍼스 안내도" class="campus-map-img" loading="lazy">
+    </div>
+    <div class="campus-building-list" id="campusBuildingList"></div>
+  </div>
+</div>
+
+<!-- BUILDING DETAIL MODAL -->
+<div id="buildingModal" class="bldg-modal hidden" role="dialog" aria-modal="true">
+  <div class="bldg-modal-bg" id="buildingModalBg"></div>
+  <div class="bldg-modal-sheet">
+    <img id="bldgModalImg" class="bldg-modal-img" src="" alt="">
+    <button class="bldg-modal-close" id="buildingModalClose" aria-label="닫기">✕</button>
+    <div class="bldg-modal-body">
+      <div class="bldg-modal-num" id="bldgModalNum"></div>
+      <h2 class="bldg-modal-name" id="bldgModalName"></h2>
+      <p class="bldg-modal-name-ko" id="bldgModalNameKo"></p>
+      <ul class="bldg-modal-facilities" id="bldgModalFacilities"></ul>
+    </div>
   </div>
 </div>
 
