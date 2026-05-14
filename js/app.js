@@ -339,6 +339,7 @@ function onLanguageChange(lang) {
   renderLibrary();
   renderSchoolFacilities();
   renderSchoolDepts();
+  renderSchoolPhones();
 }
 
 function updateHeaderLang(lang) {
@@ -709,6 +710,98 @@ function openSchoolPane(pane) {
   });
 }
 
+/* ─── Phone Directory Data ─── */
+const phoneDirectory = [
+  {
+    groupKey: 'phone_group_intl',
+    entries: [
+      { name: '외국인유학생지원센터', phone: '031-229-8186' },
+      { name: '국제협력처 국제협력과', phone: '031-220-2562' },
+      { name: '국제어학원', phone: '031-220-2401' },
+      { name: '한국어·문화 교육원', phone: '031-229-8270' },
+    ]
+  },
+  {
+    groupKey: 'phone_group_admin',
+    entries: [
+      { name: '교무처 교무과', phone: '031-220-2352' },
+      { name: '학적과', phone: '031-220-2342' },
+      { name: '학생지원처', phone: '031-220-2414' },
+      { name: '취업지원처', phone: '031-220-2413' },
+      { name: '입학처', phone: '031-229-8420' },
+      { name: '비서실', phone: '031-220-2201' },
+      { name: '대외협력처', phone: '031-229-8299' },
+    ]
+  },
+  {
+    groupKey: 'phone_group_campus',
+    entries: [
+      { name: '중앙도서관', phone: '031-220-2393' },
+      { name: '보건실', phone: '031-220-2416' },
+      { name: '기숙사', phone: '031-229-8202' },
+      { name: '학생생활상담연구소', phone: '031-220-2415' },
+      { name: '장애학생지원센터', phone: '031-229-8394' },
+      { name: '인권센터', phone: '031-220-2382' },
+      { name: '사회봉사센터', phone: '031-229-8429' },
+      { name: '정보전산원', phone: '031-220-2278' },
+      { name: '방송국', phone: '031-220-2400' },
+      { name: '환경안전원', phone: '031-229-8471' },
+    ]
+  },
+  {
+    groupKey: 'phone_group_college',
+    entries: [
+      { name: '인성교양대학', phone: '031-229-8489' },
+      { name: '인문사회융합대학 국어국문학', phone: '031-220-2502' },
+      { name: '인문사회융합대학 영어영문학', phone: '031-220-2503' },
+      { name: '인문사회융합대학 중어중문학', phone: '031-220-2506' },
+      { name: '인문사회융합대학 일어일문학', phone: '031-220-2507' },
+      { name: '인문사회융합대학 법학', phone: '031-220-2508' },
+      { name: '인문사회융합대학 행정학', phone: '031-220-2509' },
+      { name: '경영공학대학 경제금융', phone: '031-220-2511' },
+      { name: '경영공학대학 경영학', phone: '031-220-2512' },
+      { name: '경영공학대학 글로벌비즈니스', phone: '031-220-2514' },
+      { name: '경영공학대학 호텔관광', phone: '031-220-2617' },
+      { name: '혁신공과대학 건축학', phone: '031-220-2523' },
+      { name: '혁신공과대학 기계공학', phone: '031-220-2527' },
+      { name: '혁신공과대학 전기공학', phone: '031-220-2530' },
+      { name: '혁신공과대학 전자공학', phone: '031-220-2531' },
+      { name: '지능형SW융합대학 컴퓨터SW', phone: '031-220-2516' },
+      { name: '지능형SW융합대학 정보통신', phone: '031-220-2532' },
+      { name: '라이프케어사이언스대학 간호학', phone: '031-229-8304' },
+      { name: '라이프케어사이언스대학 식품영양', phone: '031-220-2536' },
+      { name: '디자인앤아트대학 커뮤니케이션디자인', phone: '031-220-2309' },
+      { name: '음악테크놀로지대학 피아노', phone: '031-220-2578' },
+      { name: '글로벌인재대학 자유전공', phone: '031-220-2633' },
+      { name: '대학원 교학과', phone: '031-220-2251' },
+    ]
+  },
+  {
+    groupKey: 'phone_group_etc',
+    entries: [
+      { name: '창업지원단', phone: '031-229-8714' },
+      { name: '미래융합교육원', phone: '031-220-2275' },
+      { name: '고운학원 출판부', phone: '031-229-8334' },
+      { name: '박물관', phone: '031-220-2341' },
+      { name: '고운미술관', phone: '031-220-2158' },
+    ]
+  }
+];
+
+function renderSchoolPhones() {
+  const container = document.getElementById('schoolPhones');
+  if (!container) return;
+  container.innerHTML = phoneDirectory.map(group => `
+    <div class="phone-group">
+      <div class="phone-group-title">${t(group.groupKey)}</div>
+      ${group.entries.map(e => `
+        <a href="tel:${e.phone}" class="phone-entry">
+          <span class="phone-entry-name">${e.name}</span>
+          <span class="phone-entry-num">${e.phone}</span>
+        </a>`).join('')}
+    </div>`).join('');
+}
+
 function renderSchoolFacilities() {
   const lang = window.currentLang || 'ko';
   const container = document.getElementById('schoolFacilities');
@@ -762,9 +855,11 @@ function initSchoolScreen() {
   });
   renderSchoolFacilities();
   renderSchoolDepts();
+  renderSchoolPhones();
 }
 
 /* Language Toggle (header dropdown) */
+
 function initLangToggle() {
   const btn = document.getElementById('langToggleBtn');
   const dropdown = document.getElementById('langDropdown');
