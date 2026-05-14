@@ -332,6 +332,7 @@ function onLanguageChange(lang) {
   updateHeaderLang(lang);
   updateHomeData();
   updateNotices();
+  initFaqAccordion();
   updateNavLangButtons(lang);
   const activeTab = document.querySelector('.caf-day-tab.active');
   if (activeTab) renderCafeteriaDay(parseInt(activeTab.dataset.day));
@@ -1665,12 +1666,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateCampusChips();
   updateNavLangButtons(window.currentLang);
   startShuttleTimer();
-
-  /* Re-populate FAQ answers when language changes */
-  window.onLanguageChange = () => {
-    updateNotices();
-    initFaqAccordion();
-  };
 
   initLoading();
 
