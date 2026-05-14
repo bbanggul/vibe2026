@@ -1038,21 +1038,37 @@ async function renderBoardList() {
       list.innerHTML = `<div class="board-empty">${t('board_empty')}</div>`;
       return;
     }
-    list.innerHTML = posts.map(p => `
-      <div class="board-post-card" data-id="${p.id}">
-        <div class="bpc-title">${escHtml(p.title)}</div>
-        <div class="bpc-preview">${escHtml(p.content)}</div>
-        <div class="bpc-meta">
-          <span class="bpc-anon">${t('board_anon')}</span>
-          <span class="bpc-dot">·</span>
-          <span class="bpc-time">${timeAgo(p.created_at)}</span>
-          <span class="bpc-likes">❤ ${p.likes}</span>
+
+    const paintList = (titles, previews) => {
+      list.innerHTML = posts.map((p, i) => `
+        <div class="board-post-card" data-id="${p.id}">
+          <div class="bpc-title">${escHtml(titles[i])}</div>
+          <div class="bpc-preview">${escHtml(previews[i])}</div>
+          <div class="bpc-meta">
+            <span class="bpc-anon">${t('board_anon')}</span>
+            <span class="bpc-dot">·</span>
+            <span class="bpc-time">${timeAgo(p.created_at)}</span>
+            <span class="bpc-likes">❤ ${p.likes}</span>
+          </div>
         </div>
-      </div>
-    `).join('');
-    list.querySelectorAll('.board-post-card').forEach(card => {
-      card.addEventListener('click', () => openPostDetail(card.dataset.id));
-    });
+      `).join('');
+      list.querySelectorAll('.board-post-card').forEach(card => {
+        card.addEventListener('click', () => openPostDetail(card.dataset.id));
+      });
+    };
+
+    const rawTitles = posts.map(p => p.title);
+    const rawPreviews = posts.map(p => p.content);
+    paintList(rawTitles, rawPreviews);
+
+    const lang = window.currentLang;
+    if (lang !== 'ko') {
+      const [transTitles, transPreviews] = await Promise.all([
+        Promise.all(rawTitles.map(s => translateText(s, lang))),
+        Promise.all(rawPreviews.map(s => translateText(s, lang))),
+      ]);
+      paintList(transTitles, transPreviews);
+    }
   } catch (e) {
     list.innerHTML = `<div class="board-empty">불러오기 실패: ${e.message}</div>`;
   }
