@@ -440,7 +440,7 @@ img, svg { display: block; }
 }
 /* Decorative large letter watermark */
 .hero-bg::before {
-  content: 'UOS';
+  content: 'USW';;
   position: absolute;
   right: -10px;
   bottom: -20px;
