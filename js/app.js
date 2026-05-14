@@ -968,7 +968,7 @@ function initAuthModals() {
       await authSignup(name, email, pw);
       closeModal('signupModal');
       e.target.reset();
-      alert('가입 완료! 이메일을 확인해 인증을 완료해주세요.');
+      alert('회원가입이 완료되었습니다.');
     } catch (err) {
       errEl.textContent = err.message;
       errEl.classList.remove('hidden');
