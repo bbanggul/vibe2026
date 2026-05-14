@@ -880,12 +880,16 @@ function initLangToggle() {
 
 /* Language selection screen */
 function initLangCards() {
-  document.querySelectorAll('.lang-card').forEach(card => {
-    card.addEventListener('click', () => {
-      setLanguage(card.dataset.lang);
-      showScreen('screen-home');
-      initFaqAccordion();
-      initScrollReveal();
+  document.querySelectorAll('.splash-lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setLanguage(btn.dataset.lang);
+      const splash = document.getElementById('screen-language');
+      splash?.classList.add('splash-out');
+      setTimeout(() => {
+        showScreen('screen-home');
+        initFaqAccordion();
+        initScrollReveal();
+      }, 480);
     });
   });
 }
