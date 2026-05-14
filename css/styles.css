@@ -1719,18 +1719,19 @@ img, svg { display: block; }
 .campus-map-img-wrap {
   width: 100%; background: #f0f0f0;
   border-bottom: 1px solid var(--border);
+  max-height: 240px; overflow: hidden;
 }
-.campus-map-img { width: 100%; display: block; object-fit: contain; }
+.campus-map-img { width: 100%; display: block; object-fit: cover; object-position: center; max-height: 240px; }
 .campus-building-list {
-  padding: 12px 14px 8px;
+  padding: 14px 14px 8px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 10px;
 }
 @media (min-width: 520px) { .campus-building-list { grid-template-columns: 1fr 1fr 1fr; } }
 .campus-bldg-item {
-  display: flex; align-items: flex-start; gap: 8px;
-  padding: 10px 8px; width: 100%; text-align: left;
+  display: flex; align-items: flex-start; gap: 9px;
+  padding: 12px 10px; width: 100%; text-align: left;
   background: var(--white); border: 1.5px solid var(--border);
   border-radius: var(--radius); cursor: pointer;
   transition: border-color var(--trans), background var(--trans);
@@ -1738,20 +1739,20 @@ img, svg { display: block; }
 .campus-bldg-item:hover { border-color: var(--navy); background: #f0f4ff; }
 .campus-bldg-num {
   background: var(--navy); color: var(--white);
-  font-size: 0.65rem; font-weight: 800;
-  border-radius: 5px; padding: 2px 5px;
+  font-size: 0.72rem; font-weight: 800;
+  border-radius: 5px; padding: 2px 6px;
   flex-shrink: 0; margin-top: 2px; letter-spacing: 0.03em;
 }
 .campus-bldg-info { flex: 1; min-width: 0; }
 .campus-bldg-name {
-  display: block; font-size: 0.78rem; font-weight: 700;
+  display: block; font-size: 0.9rem; font-weight: 700;
   color: var(--text-1); line-height: 1.35; word-break: keep-all;
 }
 .campus-bldg-ko {
-  display: block; font-size: 0.66rem; color: var(--text-3);
+  display: block; font-size: 0.75rem; color: var(--text-3);
   margin-top: 2px; line-height: 1.2;
 }
-.campus-bldg-arrow { color: var(--text-3); font-size: 1rem; flex-shrink: 0; align-self: center; margin-left: auto; }
+.campus-bldg-arrow { color: var(--text-3); font-size: 1.1rem; flex-shrink: 0; align-self: center; margin-left: auto; }
 
 /* ── Building Detail Modal ── */
 .bldg-modal {
