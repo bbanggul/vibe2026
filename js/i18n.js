@@ -163,6 +163,7 @@ const translations = {
     nearby_bank: '은행·ATM',
     nearby_cafe: '카페',
     nearby_restaurant: '식당',
+    contact_notice: '아래 이메일로 문의해 주세요.',
   },
   en: {
     uni_name: 'University of Suwon',
@@ -327,6 +328,7 @@ const translations = {
     nearby_bank: 'Bank & ATM',
     nearby_cafe: 'Cafe',
     nearby_restaurant: 'Restaurant',
+    contact_notice: 'Please send your inquiry to the email below.',
   },
   zh: {
     uni_name: '水原大学',
@@ -491,6 +493,7 @@ const translations = {
     nearby_bank: '银行·ATM',
     nearby_cafe: '咖啡厅',
     nearby_restaurant: '餐厅',
+    contact_notice: '请通过以下邮箱联系我们。',
   },
   ja: {
     uni_name: '水原大学校',
@@ -655,6 +658,7 @@ const translations = {
     nearby_bank: '銀行·ATM',
     nearby_cafe: 'カフェ',
     nearby_restaurant: 'レストラン',
+    contact_notice: '下記のメールアドレスまでお問い合わせください。',
   },
   vi: {
     uni_name: 'Đại học Suwon',
@@ -819,6 +823,7 @@ const translations = {
     nearby_bank: 'Ngân hàng·ATM',
     nearby_cafe: 'Quán cà phê',
     nearby_restaurant: 'Nhà hàng',
+    contact_notice: 'Vui lòng liên hệ qua email bên dưới.',
   },
   th: {
     uni_name: 'มหาวิทยาลัยซูวอน',
@@ -983,6 +988,7 @@ const translations = {
     nearby_bank: 'ธนาคาร·ATM',
     nearby_cafe: 'คาเฟ่',
     nearby_restaurant: 'ร้านอาหาร',
+    contact_notice: 'กรุณาติดต่อผ่านอีเมลด้านล่าง',
   },
 };
 

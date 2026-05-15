@@ -903,6 +903,11 @@ function initNavLangButtons() {
 }
 
 
+/* Contact */
+function initContact() {
+  document.getElementById('contactBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
+}
+
 /* Nearby */
 function initNearby() {
   document.getElementById('nearbyBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
@@ -1813,6 +1818,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initMessagesScreen();
   initCampusMap();
   initNearby();
+  initContact();
   initMainNav();
   initHeaderScroll();
   updateNotices();

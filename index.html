@@ -752,7 +752,7 @@
         <span class="nav-menu-text" data-i18n="nav_messages">쪽지함</span>
         <span class="nav-menu-arrow" aria-hidden="true">›</span>
       </a>
-      <a href="#" class="nav-menu-item">
+      <a href="#" class="nav-menu-item" data-screen="screen-contact">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l1.28-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </div>
@@ -1046,6 +1046,41 @@
         <div class="nearby-card-icon">🍽️</div>
         <div class="nearby-card-name" data-i18n="nearby_restaurant">식당</div>
         <div class="nearby-card-sub" data-i18n="nearby_open_map">지도에서 보기</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     CONTACT SCREEN
+══════════════════════════════════════ -->
+<div id="screen-contact" class="screen screen-contact screen-hidden">
+  <div class="map-screen-header">
+    <button class="map-back-btn" id="contactBackBtn" aria-label="뒤로가기">‹</button>
+    <span data-i18n="nav_contact">문의</span>
+  </div>
+  <div class="contact-screen-body">
+    <p class="contact-notice" data-i18n="contact_notice">아래 이메일로 문의해 주세요.</p>
+    <div class="contact-email-list">
+      <a class="contact-email-card" href="mailto:kmkkmgs@gmail.com">
+        <div class="contact-email-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-email-info">
+          <div class="contact-email-label">Gmail</div>
+          <div class="contact-email-addr">kmkkmgs@gmail.com</div>
+        </div>
+        <div class="contact-email-arrow">›</div>
+      </a>
+      <a class="contact-email-card" href="mailto:kmkkmgs@naver.com">
+        <div class="contact-email-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-email-info">
+          <div class="contact-email-label">Naver</div>
+          <div class="contact-email-addr">kmkkmgs@naver.com</div>
+        </div>
+        <div class="contact-email-arrow">›</div>
       </a>
     </div>
   </div>
