@@ -1570,17 +1570,22 @@ img, svg { display: block; }
 .map-back-btn:hover { color: var(--navy); }
 .map-screen-body { flex: 1; overflow-y: auto; overflow-x: hidden; padding-bottom: 40px; }
 .campus-map-img-wrap {
-  width: 100%; max-width: 100%; background: #f0f0f0;
+  width: 100%;
+  height: clamp(220px, 70vw, 420px);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  background: #f0f0f0;
   border-bottom: 1px solid var(--border);
-  overflow: hidden;
 }
 .campus-map-img {
-  width: 100%; max-width: 100%; height: auto;
-  display: block; object-fit: contain;
-  max-height: calc(100vh - 56px);
+  height: 100%;
+  width: auto;
+  max-width: none;
+  display: block;
 }
 @media (min-width: 640px) {
-  .campus-map-img { max-height: 50vh; }
+  .campus-map-img-wrap { height: clamp(300px, 45vw, 520px); }
 }
 .campus-building-list {
   padding: 14px 14px 8px;
