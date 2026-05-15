@@ -1060,6 +1060,9 @@ img, svg { display: block; }
   border: 1px solid var(--border);
 }
 .shuttle-times-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.shuttle-map-wrap { margin-top: 20px; }
+.shuttle-map-label { font-size: 0.8rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.shuttle-map-img { width: 100%; border-radius: var(--radius-sm); display: block; }
 .shuttle-time-chip {
   background: var(--navy);
   color: var(--white);
