@@ -18,8 +18,6 @@ function showScreenInternal(id) {
   if (id === 'screen-messages') renderMessages();
 
   const boardScreens = ['screen-board', 'screen-post', 'screen-messages'];
-  const chatbot = document.getElementById('chatbot-container');
-  if (chatbot) chatbot.style.display = boardScreens.includes(id) ? 'none' : '';
 }
 
 function showScreen(id) {
@@ -904,82 +902,6 @@ function initNavLangButtons() {
   });
 }
 
-/* Chatbot */
-function initChatbot() {
-  const fab = document.getElementById('chatFab');
-  const chatWindow = document.getElementById('chatWindow');
-  const closeBtn = document.getElementById('chatCloseBtn');
-  const input = document.getElementById('chatInput');
-  const sendBtn = document.getElementById('chatSendBtn');
-  const messages = document.getElementById('chatMessages');
-
-  if (!fab || !chatWindow || !messages) return;
-
-  function openChat() {
-    chatWindow.classList.remove('hidden');
-    fab.classList.add('fab-hidden');
-    if (messages.children.length === 0) addBotMessage(t('chatbot_greeting'));
-    input?.focus();
-  }
-  function closeChat() {
-    chatWindow.classList.add('hidden');
-    fab.classList.remove('fab-hidden');
-  }
-
-  fab.addEventListener('click', openChat);
-  closeBtn?.addEventListener('click', closeChat);
-
-  function addBotMessage(text) {
-    const msg = document.createElement('div');
-    msg.className = 'chat-msg chat-msg-bot';
-    msg.innerHTML = `<div class="chat-bubble chat-bubble-bot">${text.replace(/\n/g, '<br>')}</div>`;
-    messages.appendChild(msg);
-    messages.scrollTop = messages.scrollHeight;
-  }
-  function addUserMessage(text) {
-    const msg = document.createElement('div');
-    msg.className = 'chat-msg chat-msg-user';
-    msg.innerHTML = `<div class="chat-bubble chat-bubble-user">${text}</div>`;
-    messages.appendChild(msg);
-    messages.scrollTop = messages.scrollHeight;
-  }
-
-  function handleSend() {
-    const val = input?.value.trim();
-    if (!val) return;
-    addUserMessage(val);
-    input.value = '';
-    setTimeout(() => addBotMessage(getChatbotResponse(val)), 400);
-  }
-
-  sendBtn?.addEventListener('click', handleSend);
-  input?.addEventListener('keydown', e => { if (e.key === 'Enter') handleSend(); });
-
-  /* FAQ card / accordion → open chatbot with pre-filled question */
-  document.querySelectorAll('.faq-card, .accordion-item[data-topic]').forEach(card => {
-    card.addEventListener('click', () => {
-      const topic = card.dataset.topic;
-      const questionMap = {
-        ko: { library: '도서관 이용방법', shuttle: '셔틀버스 시간표', registration: '수강신청', printer: '프린터', health: '보건실', dormitory: '기숙사 신청' },
-        en: { library: 'library hours', shuttle: 'shuttle bus schedule', registration: 'course registration', printer: 'printer', health: 'health center', dormitory: 'dormitory application' },
-        zh: { library: '图书馆', shuttle: '校车', registration: '选课', printer: '打印机', health: '医务室', dormitory: '宿舍' },
-        ja: { library: '図書館', shuttle: 'シャトル', registration: '履修登録', printer: 'プリンター', health: '保健室', dormitory: '寮' },
-        vi: { library: 'thư viện', shuttle: 'xe buýt', registration: 'đăng ký môn học', printer: 'máy in', health: 'y tế', dormitory: 'ký túc xá' },
-        th: { library: 'ห้องสมุด', shuttle: 'รถรับส่ง', registration: 'ลงทะเบียน', printer: 'เครื่องพิมพ์', health: 'สุขภาพ', dormitory: 'หอพัก' },
-      };
-      const lang = window.currentLang;
-      const q = (questionMap[lang] || questionMap.ko)[topic] || topic;
-      openChat();
-      setTimeout(() => {
-        addUserMessage(q);
-        setTimeout(() => addBotMessage(getChatbotResponse(q)), 400);
-      }, 200);
-    });
-  });
-
-  /* expose openChat for external use */
-  window._openChatbot = openChat;
-}
 
 /* Auto-update shuttle every minute */
 function updateCampusChips() {
@@ -1883,7 +1805,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   initWriteModal();
   initSendMsgModal();
   initMessagesScreen();
-  initChatbot();
   initCampusMap();
   initMainNav();
   initHeaderScroll();
