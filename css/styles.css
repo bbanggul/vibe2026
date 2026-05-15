@@ -1675,6 +1675,49 @@ img, svg { display: block; }
 }
 @keyframes lbFadeIn { from { opacity:0; transform:scale(.97); } to { opacity:1; transform:scale(1); } }
 
+/* ════════════════════════════════════
+   NEARBY SCREEN
+   ════════════════════════════════════ */
+.nearby-screen-body {
+  padding: 20px 16px 40px;
+  overflow-y: auto;
+  flex: 1;
+}
+.nearby-notice {
+  font-size: 0.8rem;
+  color: var(--text-3);
+  text-align: center;
+  margin: 0 0 20px;
+  padding: 10px 16px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.nearby-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.nearby-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: all var(--trans);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+.nearby-card:hover { border-color: var(--navy); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.nearby-card:active { transform: scale(0.97); box-shadow: var(--shadow-sm); }
+.nearby-card-icon { font-size: 2rem; line-height: 1; }
+.nearby-card-name { font-size: 0.95rem; font-weight: 700; color: var(--text-1); }
+.nearby-card-sub { font-size: 0.72rem; color: var(--text-3); }
+
 /* ── Auth Modals ── */
 .auth-modal { position: fixed; inset: 0; z-index: 9100; display: flex; align-items: flex-end; justify-content: center; }
 .auth-modal.hidden { display: none; }

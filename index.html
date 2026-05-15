@@ -304,6 +304,10 @@
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         <span data-i18n="link_anonymous">익명게시판</span>
       </a>
+      <a href="#" class="ql-item" id="quickNearbyBtn">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span data-i18n="nav_nearby">주변 시설</span>
+      </a>
     </div>
   </section>
 
@@ -726,6 +730,13 @@
         <span class="nav-menu-text" data-i18n="link_map">캠퍼스맵</span>
         <span class="nav-menu-arrow" aria-hidden="true">›</span>
       </a>
+      <a href="#" class="nav-menu-item" data-screen="screen-nearby">
+        <div class="nav-menu-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <span class="nav-menu-text" data-i18n="nav_nearby">주변 시설</span>
+        <span class="nav-menu-arrow" aria-hidden="true">›</span>
+      </a>
       <a href="#" class="nav-menu-item" data-screen="screen-board">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -992,6 +1003,51 @@
 <div id="buildingModal" class="bldg-modal hidden" role="dialog" aria-modal="true">
   <div class="bldg-modal-bg" id="buildingModalBg"></div>
   <div class="bldg-modal-sheet" id="bldgModalSheet"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     NEARBY SCREEN
+══════════════════════════════════════ -->
+<div id="screen-nearby" class="screen screen-nearby screen-hidden">
+  <div class="map-screen-header">
+    <button class="map-back-btn" id="nearbyBackBtn" aria-label="뒤로가기">‹</button>
+    <span data-i18n="nearby_title">주변 시설</span>
+  </div>
+  <div class="nearby-screen-body">
+    <p class="nearby-notice" data-i18n="nearby_notice">버튼을 누르면 네이버 지도로 이동합니다.</p>
+    <div class="nearby-grid">
+      <a class="nearby-card" href="https://map.naver.com/p/search/수원대학교 근처 병원" target="_blank" rel="noopener">
+        <div class="nearby-card-icon">🏥</div>
+        <div class="nearby-card-name" data-i18n="nearby_hospital">병원</div>
+        <div class="nearby-card-sub" data-i18n="nearby_open_map">지도에서 보기</div>
+      </a>
+      <a class="nearby-card" href="https://map.naver.com/p/search/수원대학교 근처 편의점" target="_blank" rel="noopener">
+        <div class="nearby-card-icon">🏪</div>
+        <div class="nearby-card-name" data-i18n="nearby_cvs">편의점</div>
+        <div class="nearby-card-sub" data-i18n="nearby_open_map">지도에서 보기</div>
+      </a>
+      <a class="nearby-card" href="https://map.naver.com/p/search/수원대학교 근처 약국" target="_blank" rel="noopener">
+        <div class="nearby-card-icon">💊</div>
+        <div class="nearby-card-name" data-i18n="nearby_pharmacy">약국</div>
+        <div class="nearby-card-sub" data-i18n="nearby_open_map">지도에서 보기</div>
+      </a>
+      <a class="nearby-card" href="https://map.naver.com/p/search/수원대학교 근처 은행 ATM" target="_blank" rel="noopener">
+        <div class="nearby-card-icon">🏦</div>
+        <div class="nearby-card-name" data-i18n="nearby_bank">은행·ATM</div>
+        <div class="nearby-card-sub" data-i18n="nearby_open_map">지도에서 보기</div>
+      </a>
+      <a class="nearby-card" href="https://map.naver.com/p/search/수원대학교 근처 카페" target="_blank" rel="noopener">
+        <div class="nearby-card-icon">☕</div>
+        <div class="nearby-card-name" data-i18n="nearby_cafe">카페</div>
+        <div class="nearby-card-sub" data-i18n="nearby_open_map">지도에서 보기</div>
+      </a>
+      <a class="nearby-card" href="https://map.naver.com/p/search/수원대학교 근처 식당" target="_blank" rel="noopener">
+        <div class="nearby-card-icon">🍽️</div>
+        <div class="nearby-card-name" data-i18n="nearby_restaurant">식당</div>
+        <div class="nearby-card-sub" data-i18n="nearby_open_map">지도에서 보기</div>
+      </a>
+    </div>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>

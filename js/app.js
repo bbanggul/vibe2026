@@ -903,6 +903,11 @@ function initNavLangButtons() {
 }
 
 
+/* Nearby */
+function initNearby() {
+  document.getElementById('nearbyBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
+}
+
 /* Auto-update shuttle every minute */
 function updateCampusChips() {
   const now = new Date();
@@ -1687,6 +1692,7 @@ function initMainNav() {
 
   document.getElementById('quickBoardBtn')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-board'); });
   document.getElementById('quickBoardBtn2')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-board'); });
+  document.getElementById('quickNearbyBtn')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-nearby'); });
 
   setTimeout(() => document.querySelector('.hero-full')?.classList.add('hero-loaded'), 100);
 }
@@ -1806,6 +1812,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initSendMsgModal();
   initMessagesScreen();
   initCampusMap();
+  initNearby();
   initMainNav();
   initHeaderScroll();
   updateNotices();
