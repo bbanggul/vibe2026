@@ -1599,7 +1599,7 @@ img, svg { display: block; }
 @media (min-width: 520px) { .campus-building-list { grid-template-columns: 1fr 1fr 1fr; } }
 .campus-bldg-item {
   display: flex; align-items: flex-start; gap: 9px;
-  padding: 12px 10px; width: 100%; text-align: left;
+  padding: 12px 10px; width: 100%; min-width: 0; text-align: left;
   background: var(--white); border: 1.5px solid var(--border);
   border-radius: var(--radius); cursor: pointer;
   transition: border-color var(--trans), background var(--trans);
@@ -1613,8 +1613,9 @@ img, svg { display: block; }
 }
 .campus-bldg-info { flex: 1; min-width: 0; }
 .campus-bldg-name {
-  display: block; font-size: 0.9rem; font-weight: 700;
-  color: var(--text-1); line-height: 1.35; word-break: keep-all;
+  display: block; font-size: 0.85rem; font-weight: 700;
+  color: var(--text-1); line-height: 1.35;
+  word-break: keep-all; overflow-wrap: break-word;
 }
 .campus-bldg-ko {
   display: block; font-size: 0.75rem; color: var(--text-3);
