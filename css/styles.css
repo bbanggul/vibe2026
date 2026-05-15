@@ -1554,7 +1554,7 @@ img, svg { display: block; }
 .lib-guide-dot   { color: var(--yellow-dark); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
 
 /* ── Campus Map Screen ── */
-.screen-map { display: flex; flex-direction: column; background: var(--bg); }
+.screen-map { display: flex; flex-direction: column; background: var(--bg); overflow-x: hidden; }
 .map-screen-header {
   display: flex; align-items: center; gap: 8px;
   padding: 0 16px; height: 56px;
@@ -1568,16 +1568,19 @@ img, svg { display: block; }
   transition: color var(--trans);
 }
 .map-back-btn:hover { color: var(--navy); }
-.map-screen-body { flex: 1; overflow-y: auto; padding-bottom: 40px; }
+.map-screen-body { flex: 1; overflow-y: auto; overflow-x: hidden; padding-bottom: 40px; }
 .campus-map-img-wrap {
-  width: 100%; background: #f0f0f0;
+  width: 100%; max-width: 100%; background: #f0f0f0;
   border-bottom: 1px solid var(--border);
-  max-height: 60vw; overflow: hidden;
+  overflow: hidden;
 }
-.campus-map-img { width: 100%; display: block; object-fit: contain; max-height: 60vw; }
+.campus-map-img {
+  width: 100%; max-width: 100%; height: auto;
+  display: block; object-fit: contain;
+  max-height: calc(100vh - 56px);
+}
 @media (min-width: 640px) {
-  .campus-map-img-wrap { max-height: 30vw; }
-  .campus-map-img { max-height: 30vw; }
+  .campus-map-img { max-height: 50vh; }
 }
 .campus-building-list {
   padding: 14px 14px 8px;
