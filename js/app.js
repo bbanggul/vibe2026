@@ -47,8 +47,8 @@ function initHeaderScroll() {
 const libraryContent = {
   ko: {
     infoTitle: '기본 정보',
-    hoursLabel: '운영시간', hours: '학기중 09:30~19:00 · 방학중 09:30~17:00',
-    closedLabel: '휴관일', closed: '(대체)공휴일·개교기념일·장서점검일 휴관\n토·일: 열람실 개방, 대출 불가\n※ 자세한 내용은 총학생회 홈페이지 참고',
+    hoursLabel: '자료열람/대출/반납', hours: '토/일, (대체)공휴일, 개교기념일, 장서점검일 휴관\n학기중 09:30 ~ 19:00\n방학중 09:30 ~ 17:00',
+    readingRoomLabel: '일반열람실', readingRoomHours: '08:00 ~ 24:00',
     locLabel: '위치', loc: '학관동 (학생회관 옆)',
     phoneLabel: '이용문의', phone: '031-220-2393',
     websiteLabel: '홈페이지', website: 'lib.suwon.ac.kr',
@@ -91,8 +91,8 @@ const libraryContent = {
   },
   en: {
     infoTitle: 'Basic Info',
-    hoursLabel: 'Hours', hours: 'Semester 09:30~19:00 · Vacation 09:30~17:00',
-    closedLabel: 'Closed', closed: 'Public holidays, Foundation Day, inventory days\nSat·Sun: reading room open, no borrowing\n※ Check student council website for details',
+    hoursLabel: 'Lending/Returns', hours: 'Closed: Sat/Sun, public holidays, Foundation Day, inventory days\nSemester 09:30 ~ 19:00\nVacation 09:30 ~ 17:00',
+    readingRoomLabel: 'Reading Room', readingRoomHours: '08:00 ~ 24:00',
     locLabel: 'Location', loc: 'Hakgwan Bldg (next to Student Hall)',
     phoneLabel: 'Inquiry', phone: '031-220-2393',
     websiteLabel: 'Website', website: 'lib.suwon.ac.kr',
@@ -135,8 +135,8 @@ const libraryContent = {
   },
   zh: {
     infoTitle: '基本信息',
-    hoursLabel: '开放时间', hours: '学期中 09:30~19:00 · 假期 09:30~17:00',
-    closedLabel: '休馆', closed: '（替代）公休日·建校纪念日·藏书清点日休馆\n周六·周日：阅览室开放，不可借阅\n※ 详情请参考总学生会主页',
+    hoursLabel: '资料阅览/借还书', hours: '周六/日、（替代）公休日、建校纪念日、藏书清点日休馆\n学期中 09:30 ~ 19:00\n假期 09:30 ~ 17:00',
+    readingRoomLabel: '一般阅览室', readingRoomHours: '08:00 ~ 24:00',
     locLabel: '位置', loc: '学馆栋（学生会馆旁）',
     phoneLabel: '咨询电话', phone: '031-220-2393',
     websiteLabel: '官方网站', website: 'lib.suwon.ac.kr',
@@ -179,8 +179,8 @@ const libraryContent = {
   },
   ja: {
     infoTitle: '基本情報',
-    hoursLabel: '開館時間', hours: '学期中 09:30~19:00 · 休暇中 09:30~17:00',
-    closedLabel: '休館', closed: '（代替）祝日·開校記念日·蔵書点検日休館\n土·日：閲覧室開放、貸出不可\n※ 詳細は総学生会HPを参照',
+    hoursLabel: '資料閲覧/貸出/返却', hours: '土/日、（代替）祝日、開校記念日、蔵書点検日休館\n学期中 09:30 ~ 19:00\n休暇中 09:30 ~ 17:00',
+    readingRoomLabel: '一般閲覧室', readingRoomHours: '08:00 ~ 24:00',
     locLabel: '場所', loc: '学館棟（学生会館の隣）',
     phoneLabel: 'お問い合わせ', phone: '031-220-2393',
     websiteLabel: 'ウェブサイト', website: 'lib.suwon.ac.kr',
@@ -223,8 +223,8 @@ const libraryContent = {
   },
   vi: {
     infoTitle: 'Thông tin cơ bản',
-    hoursLabel: 'Giờ mở cửa', hours: 'Học kỳ 09:30~19:00 · Nghỉ hè 09:30~17:00',
-    closedLabel: 'Đóng cửa', closed: 'Ngày lễ (bù), ngày kỷ niệm, ngày kiểm kê: đóng cửa\nT7·CN: phòng đọc mở, không mượn sách\n※ Chi tiết xem trang hội sinh viên',
+    hoursLabel: 'Mượn/Trả sách', hours: 'Đóng: T7/CN, ngày lễ (bù), ngày kỷ niệm, ngày kiểm kê\nHọc kỳ 09:30 ~ 19:00\nNghỉ hè 09:30 ~ 17:00',
+    readingRoomLabel: 'Phòng đọc', readingRoomHours: '08:00 ~ 24:00',
     locLabel: 'Địa điểm', loc: 'Tòa Hakgwan (cạnh Nhà SV)',
     phoneLabel: 'Liên hệ', phone: '031-220-2393',
     websiteLabel: 'Website', website: 'lib.suwon.ac.kr',
@@ -267,8 +267,8 @@ const libraryContent = {
   },
   th: {
     infoTitle: 'ข้อมูลทั่วไป',
-    hoursLabel: 'เวลาทำการ', hours: 'ภาคเรียน 09:30~19:00 · ปิดภาค 09:30~17:00',
-    closedLabel: 'ปิดทำการ', closed: 'วันหยุดนักขัตฤกษ์·วันก่อตั้ง·วันตรวจนับหนังสือ: ปิด\nเสาร์·อาทิตย์: ห้องอ่านเปิด ยืมหนังสือไม่ได้\n※ ดูรายละเอียดที่เว็บสภานักศึกษา',
+    hoursLabel: 'ยืม/คืนหนังสือ', hours: 'ปิด: เสาร์/อาทิตย์, วันหยุด, วันก่อตั้ง, วันตรวจนับ\nภาคเรียน 09:30 ~ 19:00\nปิดภาค 09:30 ~ 17:00',
+    readingRoomLabel: 'ห้องอ่านหนังสือ', readingRoomHours: '08:00 ~ 24:00',
     locLabel: 'ที่ตั้ง', loc: 'อาคารฮักกวาน (ข้างอาคารนักศึกษา)',
     phoneLabel: 'สอบถาม', phone: '031-220-2393',
     websiteLabel: 'เว็บไซต์', website: 'lib.suwon.ac.kr',
@@ -820,8 +820,8 @@ function renderLibrary() {
     <div class="lib-section">
       <div class="lib-section-title">${d.infoTitle}</div>
       <div class="lib-info-table">
-        <div class="lib-info-row"><span class="lib-info-label">${d.hoursLabel}</span><span class="lib-info-value">${d.hours}</span></div>
-        <div class="lib-info-row"><span class="lib-info-label">${d.closedLabel}</span><span class="lib-info-value lib-info-closed" style="white-space:pre-line">${d.closed}</span></div>
+        <div class="lib-info-row"><span class="lib-info-label">${d.hoursLabel}</span><span class="lib-info-value" style="white-space:pre-line">${d.hours}</span></div>
+        <div class="lib-info-row"><span class="lib-info-label">${d.readingRoomLabel}</span><span class="lib-info-value">${d.readingRoomHours}</span></div>
         <div class="lib-info-row"><span class="lib-info-label">${d.locLabel}</span><span class="lib-info-value">${d.loc}</span></div>
         <div class="lib-info-row"><span class="lib-info-label">${d.websiteLabel}</span><span class="lib-info-value"><a href="https://lib.suwon.ac.kr/#/" target="_blank" rel="noopener" class="lib-phone-link">${d.website}</a></span></div>
         <div class="lib-info-row"><span class="lib-info-label">${d.phoneLabel}</span><span class="lib-info-value"><a href="tel:${d.phone}" class="lib-phone-link">${d.phone}</a></span></div>
