@@ -52,11 +52,29 @@ async function createPost(title, content) {
 }
 
 async function likePost(id, currentLikes) {
+  const user = await getUser();
+  if (!user) throw new Error('login_required');
+
+  const key = `liked_posts_${user.id}`;
+  const liked = JSON.parse(localStorage.getItem(key) || '[]');
+  if (liked.includes(String(id))) throw new Error('already_liked');
+
   const { error } = await sb
     .from('posts')
     .update({ likes: currentLikes + 1 })
     .eq('id', id);
   if (error) throw error;
+
+  liked.push(String(id));
+  localStorage.setItem(key, JSON.stringify(liked));
+}
+
+async function hasLikedPost(id) {
+  const user = await getUser();
+  if (!user) return false;
+  const key = `liked_posts_${user.id}`;
+  const liked = JSON.parse(localStorage.getItem(key) || '[]');
+  return liked.includes(String(id));
 }
 
 async function updatePost(id, title, content) {
