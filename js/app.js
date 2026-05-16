@@ -1828,7 +1828,7 @@ function initMainNav() {
   document.getElementById('campusMapBtn')?.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openSchoolPane('schoolCampusMap'); });
 
   document.getElementById('quickBoardBtn')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-notices'); renderNoticesScreen(1); });
-  document.getElementById('quickBoardBtn2')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-notices'); renderNoticesScreen(1); });
+  document.getElementById('quickBoardBtn2')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-board'); });
   document.getElementById('noticesBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
   document.getElementById('quickNearbyBtn')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-nearby'); });
 
