@@ -184,7 +184,7 @@
         </div>
       </div>
 
-      <div class="feature-card" id="campusMapBtn" data-to-screen="screen-map" role="button" tabindex="0" aria-label="캠퍼스 지도">
+      <div class="feature-card" id="campusMapBtn" role="button" tabindex="0" aria-label="캠퍼스 지도">
         <div class="feature-card-img" style="background-image:url('https://www.suwon.ac.kr/usr/upload/board/zboardphotogallery188/20200619015742915_7691.0.jpg')" aria-hidden="true"></div>
         <div class="feature-card-overlay" aria-hidden="true"></div>
         <div class="feature-card-body">
@@ -554,6 +554,7 @@
     <div class="school-tabs">
       <button class="school-tab active" data-pane="schoolFacilities" data-i18n="school_tab_facilities">학교시설</button>
       <button class="school-tab" data-pane="schoolDepts" data-i18n="school_tab_depts">학과정보</button>
+      <button class="school-tab" data-pane="schoolCampusMap" data-i18n="link_map">캠퍼스 지도</button>
       <button class="school-tab" data-pane="schoolPhones" data-i18n="school_tab_phones">전화번호</button>
     </div>
 
@@ -562,6 +563,15 @@
 
     <!-- Departments pane (JS-filled) -->
     <div id="schoolDepts" class="school-tab-pane school-dept-grid hidden"></div>
+
+    <!-- Campus Map pane -->
+    <div id="schoolCampusMap" class="school-tab-pane hidden">
+      <div class="campus-map-img-wrap">
+        <img src="https://www.suwon.ac.kr/usr/images/suwon/campusmap_img_2024.jpg"
+             alt="수원대학교 캠퍼스 안내도" class="campus-map-img" id="campusMapImg" loading="lazy">
+      </div>
+      <div class="campus-building-list" id="campusBuildingList"></div>
+    </div>
 
     <!-- Phone directory pane (JS-filled) -->
     <div id="schoolPhones" class="school-tab-pane school-phone-list hidden"></div>
@@ -691,7 +701,7 @@
           <span class="nav-sub-dot">›</span>
           <span data-i18n="school_tab_depts">학과정보</span>
         </a>
-        <a href="#" class="nav-sub-item" id="navCampusMapBtn">
+        <a href="#" class="nav-sub-item" data-school-pane="schoolCampusMap">
           <span class="nav-sub-dot">›</span>
           <span data-i18n="link_map">캠퍼스 지도</span>
         </a>
@@ -1001,22 +1011,6 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     CAMPUS MAP SCREEN
-══════════════════════════════════════ -->
-<div id="screen-map" class="screen screen-map screen-hidden">
-  <div class="map-screen-header">
-    <button class="map-back-btn" id="mapBackBtn" aria-label="뒤로가기">‹</button>
-    <span data-i18n="link_map">캠퍼스 지도</span>
-  </div>
-  <div class="map-screen-body">
-    <div class="campus-map-img-wrap">
-      <img src="https://www.suwon.ac.kr/usr/images/suwon/campusmap_img_2024.jpg"
-           alt="수원대학교 캠퍼스 안내도" class="campus-map-img" id="campusMapImg" loading="lazy">
-    </div>
-    <div class="campus-building-list" id="campusBuildingList"></div>
-  </div>
-</div>
 
 <!-- CAMPUS MAP LIGHTBOX -->
 <div id="mapLightbox" class="map-lightbox hidden">

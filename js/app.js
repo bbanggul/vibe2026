@@ -1771,12 +1771,6 @@ function closeBuildingModal() {
 }
 
 function initCampusMap() {
-  document.getElementById('mapBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
-  document.getElementById('navCampusMapBtn')?.addEventListener('click', e => {
-    e.preventDefault();
-    closeNav();
-    showScreen('screen-map');
-  });
   document.getElementById('buildingModalBg')?.addEventListener('click', closeBuildingModal);
 
   /* Campus map image lightbox */
@@ -1829,6 +1823,9 @@ function initMainNav() {
     card.addEventListener('click', () => showScreen(card.dataset.toScreen));
     card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') showScreen(card.dataset.toScreen); });
   });
+
+  document.getElementById('campusMapBtn')?.addEventListener('click', () => openSchoolPane('schoolCampusMap'));
+  document.getElementById('campusMapBtn')?.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openSchoolPane('schoolCampusMap'); });
 
   document.getElementById('quickBoardBtn')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-notices'); renderNoticesScreen(1); });
   document.getElementById('quickBoardBtn2')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-notices'); renderNoticesScreen(1); });
