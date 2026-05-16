@@ -48,9 +48,17 @@ const libraryContent = {
   ko: {
     infoTitle: '기본 정보',
     hoursLabel: '운영시간', hours: '학기중 09:30~19:00 · 방학중 09:30~17:00',
-    closedLabel: '휴관일', closed: '토·일, (대체)공휴일, 개교기념일, 장서점검일',
+    closedLabel: '휴관일', closed: '(대체)공휴일·개교기념일·장서점검일 휴관\n토·일: 열람실 개방, 대출 불가\n※ 자세한 내용은 총학생회 홈페이지 참고',
     locLabel: '위치', loc: '학관동 (학생회관 옆)',
-    phoneLabel: '전화', phone: '031-220-2393',
+    phoneLabel: '이용문의', phone: '031-220-2393',
+    websiteLabel: '홈페이지', website: 'lib.suwon.ac.kr',
+    accessTitle: '도서관 출입방법',
+    access: [
+      '수원대학교 도서관 앱을 다운로드 후 QR코드를 찍으면 입장 가능',
+      '앱 설치: 앱스토어 / 플레이스토어에서 「수원대학교 도서관」 검색',
+      '앱 또는 홈페이지에서 좌석 예약, 도서 검색, 스터디룸 예약 가능',
+    ],
+    accessLinkLabel: '도서관 홈페이지 바로가기 →',
     borrowTitle: '도서 대출',
     borrow: [
       '대출/반납: 3층 대출·반납 창구 (무인 반납함 24시간 운영)',
@@ -84,9 +92,17 @@ const libraryContent = {
   en: {
     infoTitle: 'Basic Info',
     hoursLabel: 'Hours', hours: 'Semester 09:30~19:00 · Vacation 09:30~17:00',
-    closedLabel: 'Closed', closed: 'Sat·Sun, public holidays, Foundation Day, inventory days',
+    closedLabel: 'Closed', closed: 'Public holidays, Foundation Day, inventory days\nSat·Sun: reading room open, no borrowing\n※ Check student council website for details',
     locLabel: 'Location', loc: 'Hakgwan Bldg (next to Student Hall)',
-    phoneLabel: 'Phone', phone: '031-220-2393',
+    phoneLabel: 'Inquiry', phone: '031-220-2393',
+    websiteLabel: 'Website', website: 'lib.suwon.ac.kr',
+    accessTitle: 'Library Entry',
+    access: [
+      'Download the USW Library app and scan the QR code to enter',
+      'Search "수원대학교 도서관" on the App Store or Play Store',
+      'Seat reservation, book search & study room booking available via app',
+    ],
+    accessLinkLabel: 'Library Website →',
     borrowTitle: 'Book Borrowing',
     borrow: [
       'Borrow & return at 3F counter (24-hr drop box also available)',
@@ -120,9 +136,17 @@ const libraryContent = {
   zh: {
     infoTitle: '基本信息',
     hoursLabel: '开放时间', hours: '学期中 09:30~19:00 · 假期 09:30~17:00',
-    closedLabel: '休馆', closed: '周六·周日、（替代）公休日、建校纪念日、藏书清点日',
+    closedLabel: '休馆', closed: '（替代）公休日·建校纪念日·藏书清点日休馆\n周六·周日：阅览室开放，不可借阅\n※ 详情请参考总学生会主页',
     locLabel: '位置', loc: '学馆栋（学生会馆旁）',
-    phoneLabel: '电话', phone: '031-220-2393',
+    phoneLabel: '咨询电话', phone: '031-220-2393',
+    websiteLabel: '官方网站', website: 'lib.suwon.ac.kr',
+    accessTitle: '图书馆入馆方法',
+    access: [
+      '下载水原大学图书馆APP，扫描QR码后可入馆',
+      '在App Store / Play Store搜索「수원대학교 도서관」安装',
+      '可通过APP进行座位预约、图书检索、自习室预约',
+    ],
+    accessLinkLabel: '图书馆官网 →',
     borrowTitle: '图书借阅',
     borrow: [
       '借还书：3楼借还书窗口（24小时无人还书箱亦可）',
@@ -156,9 +180,17 @@ const libraryContent = {
   ja: {
     infoTitle: '基本情報',
     hoursLabel: '開館時間', hours: '学期中 09:30~19:00 · 休暇中 09:30~17:00',
-    closedLabel: '休館', closed: '土·日、（代替）祝日、開校記念日、蔵書点検日',
+    closedLabel: '休館', closed: '（代替）祝日·開校記念日·蔵書点検日休館\n土·日：閲覧室開放、貸出不可\n※ 詳細は総学生会HPを参照',
     locLabel: '場所', loc: '学館棟（学生会館の隣）',
-    phoneLabel: '電話', phone: '031-220-2393',
+    phoneLabel: 'お問い合わせ', phone: '031-220-2393',
+    websiteLabel: 'ウェブサイト', website: 'lib.suwon.ac.kr',
+    accessTitle: '図書館入館方法',
+    access: [
+      '水原大学図書館アプリをダウンロードし、QRコードをスキャンして入館可能',
+      'App Store / Play Storeで「수원대학교 도서관」を検索してインストール',
+      'アプリで座席予約、図書検索、スタディルーム予約が可能',
+    ],
+    accessLinkLabel: '図書館HP →',
     borrowTitle: '図書貸出',
     borrow: [
       '貸出·返却：3F窓口（24時間無人返却ボックスも利用可）',
@@ -192,9 +224,17 @@ const libraryContent = {
   vi: {
     infoTitle: 'Thông tin cơ bản',
     hoursLabel: 'Giờ mở cửa', hours: 'Học kỳ 09:30~19:00 · Nghỉ hè 09:30~17:00',
-    closedLabel: 'Đóng cửa', closed: 'T7·CN, ngày lễ (bù), ngày kỷ niệm, ngày kiểm kê',
+    closedLabel: 'Đóng cửa', closed: 'Ngày lễ (bù), ngày kỷ niệm, ngày kiểm kê: đóng cửa\nT7·CN: phòng đọc mở, không mượn sách\n※ Chi tiết xem trang hội sinh viên',
     locLabel: 'Địa điểm', loc: 'Tòa Hakgwan (cạnh Nhà SV)',
-    phoneLabel: 'Điện thoại', phone: '031-220-2393',
+    phoneLabel: 'Liên hệ', phone: '031-220-2393',
+    websiteLabel: 'Website', website: 'lib.suwon.ac.kr',
+    accessTitle: 'Cách vào thư viện',
+    access: [
+      'Tải app Thư viện USW và quét QR code để vào',
+      'Tìm「수원대학교 도서관」trên App Store / Play Store',
+      'Đặt chỗ ngồi, tìm sách, đặt phòng học nhóm qua app',
+    ],
+    accessLinkLabel: 'Website thư viện →',
     borrowTitle: 'Mượn sách',
     borrow: [
       'Mượn & trả tại quầy tầng 3 (hộp trả 24/7 cũng có sẵn)',
@@ -228,9 +268,17 @@ const libraryContent = {
   th: {
     infoTitle: 'ข้อมูลทั่วไป',
     hoursLabel: 'เวลาทำการ', hours: 'ภาคเรียน 09:30~19:00 · ปิดภาค 09:30~17:00',
-    closedLabel: 'ปิดทำการ', closed: 'เสาร์·อาทิตย์, วันหยุดนักขัตฤกษ์, วันก่อตั้ง, วันตรวจนับหนังสือ',
+    closedLabel: 'ปิดทำการ', closed: 'วันหยุดนักขัตฤกษ์·วันก่อตั้ง·วันตรวจนับหนังสือ: ปิด\nเสาร์·อาทิตย์: ห้องอ่านเปิด ยืมหนังสือไม่ได้\n※ ดูรายละเอียดที่เว็บสภานักศึกษา',
     locLabel: 'ที่ตั้ง', loc: 'อาคารฮักกวาน (ข้างอาคารนักศึกษา)',
-    phoneLabel: 'โทรศัพท์', phone: '031-220-2393',
+    phoneLabel: 'สอบถาม', phone: '031-220-2393',
+    websiteLabel: 'เว็บไซต์', website: 'lib.suwon.ac.kr',
+    accessTitle: 'วิธีเข้าห้องสมุด',
+    access: [
+      'ดาวน์โหลดแอปห้องสมุด USW แล้วสแกน QR code เพื่อเข้า',
+      'ค้นหา「수원대학교 도서관」ใน App Store / Play Store',
+      'จองที่นั่ง ค้นหาหนังสือ จองห้องกลุ่มผ่านแอปได้',
+    ],
+    accessLinkLabel: 'เว็บไซต์ห้องสมุด →',
     borrowTitle: 'การยืมหนังสือ',
     borrow: [
       'ยืม-คืนที่เคาน์เตอร์ชั้น 3 (ตู้คืนอัตโนมัติ 24 ชม. ก็ได้)',
@@ -773,10 +821,17 @@ function renderLibrary() {
       <div class="lib-section-title">${d.infoTitle}</div>
       <div class="lib-info-table">
         <div class="lib-info-row"><span class="lib-info-label">${d.hoursLabel}</span><span class="lib-info-value">${d.hours}</span></div>
-        <div class="lib-info-row"><span class="lib-info-label">${d.closedLabel}</span><span class="lib-info-value lib-info-closed">${d.closed}</span></div>
+        <div class="lib-info-row"><span class="lib-info-label">${d.closedLabel}</span><span class="lib-info-value lib-info-closed" style="white-space:pre-line">${d.closed}</span></div>
         <div class="lib-info-row"><span class="lib-info-label">${d.locLabel}</span><span class="lib-info-value">${d.loc}</span></div>
+        <div class="lib-info-row"><span class="lib-info-label">${d.websiteLabel}</span><span class="lib-info-value"><a href="https://lib.suwon.ac.kr/#/" target="_blank" rel="noopener" class="lib-phone-link">${d.website}</a></span></div>
         <div class="lib-info-row"><span class="lib-info-label">${d.phoneLabel}</span><span class="lib-info-value"><a href="tel:${d.phone}" class="lib-phone-link">${d.phone}</a></span></div>
       </div>
+    </div>
+
+    <div class="lib-section">
+      <div class="lib-section-title">${d.accessTitle}</div>
+      <div class="lib-guide-list">${d.access.map(guideItem).join('')}</div>
+      <a href="https://lib.suwon.ac.kr/#/" target="_blank" rel="noopener" class="lib-access-link">${d.accessLinkLabel}</a>
     </div>
 
     <div class="lib-section">

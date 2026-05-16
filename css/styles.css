@@ -1550,6 +1550,8 @@ img, svg { display: block; }
 .lib-info-closed { color: #e74c3c; }
 .lib-phone-link  { color: var(--navy); text-decoration: none; }
 .lib-phone-link:hover { text-decoration: underline; }
+.lib-access-link { display: inline-block; margin-top: 10px; font-size: 0.82rem; font-weight: 600; color: var(--navy); text-decoration: none; padding: 6px 12px; border: 1.5px solid var(--navy); border-radius: var(--radius-sm); }
+.lib-access-link:hover { background: var(--navy); color: #fff; }
 .lib-guide-list  { display: flex; flex-direction: column; gap: 8px; }
 .lib-guide-item  { display: flex; gap: 8px; font-size: 0.84rem; color: var(--text-2); line-height: 1.5; }
 .lib-guide-dot   { color: var(--yellow-dark); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
