@@ -22,21 +22,29 @@ async function translateText(text: string, targetLang: string): Promise<string> 
 function parseNotices(html: string) {
   const results: Array<{ id: string; title: string; date: string; url: string }> = []
 
-  // Match each <tr> that contains a submitForm onclick
-  const trRegex = /<tr[\s\S]*?<\/tr>/gi
-  let trMatch
-  while ((trMatch = trRegex.exec(html)) !== null) {
-    const row = trMatch[0]
-    const onclickMatch = /submitForm\(this,'view',(\d+)\)/.exec(row)
-    const titleMatch = /title='([^']+)'/.exec(row)
-    const dateMatch = /(\d{4}-\d{2}-\d{2})/.exec(row)
-    if (!onclickMatch || !titleMatch) continue
+  // Extract notice IDs and titles from <a onclick="submitForm(this,'view',ID);" title='TITLE'>
+  const linkRegex = /submitForm\(this,'view',(\d+)\);" title='([^']+)'/g
+  const ids: string[] = []
+  const titles: string[] = []
+  let m
+  while ((m = linkRegex.exec(html)) !== null) {
+    ids.push(m[1])
+    titles.push(m[2])
+  }
 
+  // Extract dates from <span class="date">YYYY-MM-DD</span>
+  const dateRegex = /<span class="date">(\d{4}-\d{2}-\d{2})<\/span>/g
+  const dates: string[] = []
+  while ((m = dateRegex.exec(html)) !== null) {
+    dates.push(m[1])
+  }
+
+  for (let i = 0; i < ids.length; i++) {
     results.push({
-      id: onclickMatch[1],
-      title: titleMatch[1],
-      date: dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0],
-      url: `${NOTICE_DETAIL_BASE}${onclickMatch[1]}`,
+      id: ids[i],
+      title: titles[i],
+      date: dates[i] ?? new Date().toISOString().split('T')[0],
+      url: `${NOTICE_DETAIL_BASE}${ids[i]}`,
     })
   }
   return results
