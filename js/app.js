@@ -451,30 +451,73 @@ function updateHeroDate() {
 }
 
 /* Notices vertical list */
-function updateNotices() {
+async function updateNotices() {
   const container = document.getElementById('noticesScroll');
   if (!container) return;
   const lang = window.currentLang;
-  container.innerHTML = '';
-  notices.forEach(notice => {
-    const n = notice[lang] || notice.ko;
-    const item = document.createElement('div');
-    item.className = 'notice-item';
-    item.setAttribute('role', 'listitem');
-    item.innerHTML = `
-      <div class="notice-item-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-        </svg>
-      </div>
-      <div class="notice-item-body">
-        <div class="notice-item-category">${n.category}</div>
-        <div class="notice-item-title">${n.title}</div>
-      </div>
-      <span class="notice-item-date">${n.date}</span>
-    `;
-    container.appendChild(item);
-  });
+
+  container.innerHTML = `<div class="board-loading" style="padding:16px;text-align:center;font-size:0.85rem;color:var(--text-3);">불러오는 중...</div>`;
+
+  try {
+    const { data, error } = await sb
+      .from('notices')
+      .select('*')
+      .order('published_at', { ascending: false })
+      .limit(10);
+
+    if (error) throw error;
+
+    const titleKey = `title_${lang}`;
+    container.innerHTML = '';
+    (data || []).forEach(notice => {
+      const title = notice[titleKey] || notice.title_ko;
+      const date = notice.published_at ? notice.published_at.slice(0, 10).replace(/-/g, '.') : '';
+      const item = document.createElement('a');
+      item.className = 'notice-item';
+      item.href = notice.url;
+      item.target = '_blank';
+      item.rel = 'noopener';
+      item.setAttribute('role', 'listitem');
+      item.innerHTML = `
+        <div class="notice-item-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <div class="notice-item-body">
+          <div class="notice-item-title">${escHtml(title)}</div>
+        </div>
+        <span class="notice-item-date">${date}</span>
+      `;
+      container.appendChild(item);
+    });
+
+    if (!data || data.length === 0) {
+      container.innerHTML = `<div class="board-empty" style="padding:16px;">공지사항이 없습니다.</div>`;
+    }
+  } catch {
+    // DB 실패 시 하드코딩 데이터로 폴백
+    container.innerHTML = '';
+    notices.forEach(notice => {
+      const n = notice[lang] || notice.ko;
+      const item = document.createElement('div');
+      item.className = 'notice-item';
+      item.setAttribute('role', 'listitem');
+      item.innerHTML = `
+        <div class="notice-item-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <div class="notice-item-body">
+          <div class="notice-item-category">${n.category}</div>
+          <div class="notice-item-title">${n.title}</div>
+        </div>
+        <span class="notice-item-date">${n.date}</span>
+      `;
+      container.appendChild(item);
+    });
+  }
 }
 
 /* Hamburger Nav */
