@@ -1424,10 +1424,6 @@ function initBoardScreen() {
     if (!user) { openModal('loginModal'); return; }
     openModal('writeModal');
   });
-  document.getElementById('quickBoardBtn')?.addEventListener('click', e => {
-    e.preventDefault();
-    showScreen('screen-board');
-  });
 }
 
 function initPostScreen() {
