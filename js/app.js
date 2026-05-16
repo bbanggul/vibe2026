@@ -1772,6 +1772,11 @@ function closeBuildingModal() {
 
 function initCampusMap() {
   document.getElementById('mapBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
+  document.getElementById('navCampusMapBtn')?.addEventListener('click', e => {
+    e.preventDefault();
+    closeNav();
+    showScreen('screen-map');
+  });
   document.getElementById('buildingModalBg')?.addEventListener('click', closeBuildingModal);
 
   /* Campus map image lightbox */
