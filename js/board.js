@@ -51,22 +51,28 @@ async function createPost(title, content) {
   return data;
 }
 
-async function likePost(id, currentLikes) {
+async function toggleLikePost(id, currentLikes) {
   const user = await getUser();
   if (!user) throw new Error('login_required');
 
   const key = `liked_posts_${user.id}`;
   const liked = JSON.parse(localStorage.getItem(key) || '[]');
-  if (liked.includes(String(id))) throw new Error('already_liked');
+  const alreadyLiked = liked.includes(String(id));
 
+  const newLikes = alreadyLiked ? currentLikes - 1 : currentLikes + 1;
   const { error } = await sb
     .from('posts')
-    .update({ likes: currentLikes + 1 })
+    .update({ likes: newLikes })
     .eq('id', id);
   if (error) throw error;
 
-  liked.push(String(id));
-  localStorage.setItem(key, JSON.stringify(liked));
+  if (alreadyLiked) {
+    localStorage.setItem(key, JSON.stringify(liked.filter(x => x !== String(id))));
+  } else {
+    liked.push(String(id));
+    localStorage.setItem(key, JSON.stringify(liked));
+  }
+  return { likes: newLikes, liked: !alreadyLiked };
 }
 
 async function hasLikedPost(id) {

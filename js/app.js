@@ -1175,7 +1175,7 @@ async function openPostDetail(id) {
         <h2 class="post-detail-title">${escHtml(post.title)}</h2>
         <div class="post-detail-body">${escHtml(post.content).replace(/\n/g, '<br>')}</div>
         <div class="post-actions-row">
-          <button class="${likeBtnClass}" id="postLikeBtn"${alreadyLiked ? ' disabled' : ''}>
+          <button class="${likeBtnClass}" id="postLikeBtn">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             <span id="postLikeCount">${post.likes}</span>
           </button>
@@ -1189,17 +1189,15 @@ async function openPostDetail(id) {
     `;
     document.getElementById('postLikeBtn')?.addEventListener('click', async () => {
       try {
-        await likePost(post.id, post.likes);
-        post.likes++;
+        const result = await toggleLikePost(post.id, post.likes);
+        post.likes = result.likes;
         const el = document.getElementById('postLikeCount');
         if (el) el.textContent = post.likes;
         const btn = document.getElementById('postLikeBtn');
-        if (btn) { btn.classList.add('liked'); btn.disabled = true; }
+        if (btn) btn.classList.toggle('liked', result.liked);
       } catch (e) {
         if (e.message === 'login_required') {
           alert(t('like_login_required') || '로그인 후 좋아요를 누를 수 있습니다.');
-        } else if (e.message === 'already_liked') {
-          alert(t('like_already') || '이미 좋아요를 눌렀습니다.');
         } else {
           alert(e.message);
         }
