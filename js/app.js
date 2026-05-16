@@ -1779,12 +1779,12 @@ const faqAnswers = {
     th: 'ห้องพยาบาลชั้น 2 อาคารสหภาพนักศึกษา เปิด 09:00–17:00 วันธรรมดา ยาพื้นฐานฟรี ฉุกเฉิน: 031-220-2114'
   },
   dormitory: {
-    ko: '기숙사 신청은 학기 시작 2개월 전부터 학사포털에서 가능합니다. 국제학생 우선 배정 제도 있음. 기숙사비(학기): 고운학사 2인실 95만원 · 4인실 75만원, 경상관 2인실 150만원. 시설보증금 20만원(퇴사 시 환불). 자세한 내용은 국제협력처에 문의하세요.',
-    en: 'Dormitory applications open 2 months before semester start via the portal. International students receive priority placement. Fees per semester: Goun Hall 2-person ₩950,000 · 4-person ₩750,000, Gyeongsan Hall 2-person ₩1,500,000. Facility deposit ₩200,000 (refundable).',
-    zh: '宿舍申请在学期开始前2个月通过门户网站开放。国际学生享有优先分配。每学期费用：高云学舍2人间95万韩元·4人间75万韩元，庆尚馆2人间150万韩元。设施保证金20万韩元（退宿时退还）。',
-    ja: '寮の申請は学期開始2か月前からポータルで可能。留学生優先配置あり。学期費用：高雲学舎2人部屋95万ウォン·4人部屋75万ウォン、慶尚館2人部屋150万ウォン。施設保証金20万ウォン（退寮時返還）。',
-    vi: 'Đăng ký ký túc xá mở 2 tháng trước học kỳ qua cổng thông tin. Ưu tiên sinh viên quốc tế. Phí/học kỳ: Goun Hall 2 người ₩950,000 · 4 người ₩750,000, Gyeongsan Hall 2 người ₩1,500,000. Đặt cọc ₩200,000 (hoàn trả khi rời đi).',
-    th: 'สมัครหอพักได้ 2 เดือนก่อนเปิดเทอมผ่านพอร์ทัล นักศึกษาต่างชาติได้รับสิทธิ์ก่อน ค่าธรรมเนียม/เทอม: Goun Hall 2 คน ₩950,000 · 4 คน ₩750,000, Gyeongsan Hall 2 คน ₩1,500,000 เงินมัดจำ ₩200,000 (คืนเมื่อออก)'
+    ko: '기숙사 신청은 학기 시작 2개월 전부터 학사포털에서 가능합니다. 국제학생 우선 배정 제도 있음. 기숙사비(학기): 고운학사 2인실 95만원 · 4인실 75만원, 경상관 2인실 150만원. 시설보증금 20만원(퇴사 시 환불). 자세한 내용은 국제협력처에 문의하세요. <a href="https://swudorm.suwon.ac.kr/index.html?menuno=422" target="_blank" rel="noopener" style="color:var(--navy);text-decoration:underline;">기숙사 공식 홈페이지 →</a>',
+    en: 'Dormitory applications open 2 months before semester start via the portal. International students receive priority placement. Fees per semester: Goun Hall 2-person ₩950,000 · 4-person ₩750,000, Gyeongsan Hall 2-person ₩1,500,000. Facility deposit ₩200,000 (refundable). <a href="https://swudorm.suwon.ac.kr/index.html?menuno=422" target="_blank" rel="noopener" style="color:var(--navy);text-decoration:underline;">Official Dormitory Website →</a>',
+    zh: '宿舍申请在学期开始前2个月通过门户网站开放。国际学生享有优先分配。每学期费用：高云学舍2人间95万韩元·4人间75万韩元，庆尚馆2人间150万韩元。设施保证金20万韩元（退宿时退还）。<a href="https://swudorm.suwon.ac.kr/index.html?menuno=422" target="_blank" rel="noopener" style="color:var(--navy);text-decoration:underline;">宿舍官网 →</a>',
+    ja: '寮の申請は学期開始2か月前からポータルで可能。留学生優先配置あり。学期費用：高雲学舎2人部屋95万ウォン·4人部屋75万ウォン、慶尚館2人部屋150万ウォン。施設保証金20万ウォン（退寮時返還）。<a href="https://swudorm.suwon.ac.kr/index.html?menuno=422" target="_blank" rel="noopener" style="color:var(--navy);text-decoration:underline;">寮公式サイト →</a>',
+    vi: 'Đăng ký ký túc xá mở 2 tháng trước học kỳ qua cổng thông tin. Ưu tiên sinh viên quốc tế. Phí/học kỳ: Goun Hall 2 người ₩950,000 · 4 người ₩750,000, Gyeongsan Hall 2 người ₩1,500,000. Đặt cọc ₩200,000 (hoàn trả khi rời đi). <a href="https://swudorm.suwon.ac.kr/index.html?menuno=422" target="_blank" rel="noopener" style="color:var(--navy);text-decoration:underline;">Website chính thức →</a>',
+    th: 'สมัครหอพักได้ 2 เดือนก่อนเปิดเทอมผ่านพอร์ทัล นักศึกษาต่างชาติได้รับสิทธิ์ก่อน ค่าธรรมเนียม/เทอม: Goun Hall 2 คน ₩950,000 · 4 คน ₩750,000, Gyeongsan Hall 2 คน ₩1,500,000 เงินมัดจำ ₩200,000 (คืนเมื่อออก) <a href="https://swudorm.suwon.ac.kr/index.html?menuno=422" target="_blank" rel="noopener" style="color:var(--navy);text-decoration:underline;">เว็บไซต์หอพักอย่างเป็นทางการ →</a>'
   }
 };
 
