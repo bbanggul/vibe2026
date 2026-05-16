@@ -15,6 +15,7 @@ function showScreenInternal(id) {
     requestAnimationFrame(() => target.classList.add('screen-visible'));
   });
   if (id === 'screen-board') renderBoardList();
+  if (id === 'screen-notices') renderNoticesScreen(1);
   if (id === 'screen-messages') renderMessages();
 
   const boardScreens = ['screen-board', 'screen-post', 'screen-messages'];
@@ -517,6 +518,71 @@ async function updateNotices() {
       `;
       container.appendChild(item);
     });
+  }
+}
+
+/* Notices Screen */
+const NOTICES_PER_PAGE = 10;
+
+async function renderNoticesScreen(page = 1) {
+  const list = document.getElementById('noticesList');
+  const pagination = document.getElementById('noticesPagination');
+  if (!list) return;
+  const lang = window.currentLang;
+
+  list.innerHTML = `<div class="board-loading">불러오는 중...</div>`;
+  if (pagination) pagination.innerHTML = '';
+
+  try {
+    const from = (page - 1) * NOTICES_PER_PAGE;
+    const to = from + NOTICES_PER_PAGE - 1;
+
+    const { data, error, count } = await sb
+      .from('notices')
+      .select('*', { count: 'exact' })
+      .order('published_at', { ascending: false })
+      .range(from, to);
+
+    if (error) throw error;
+
+    const titleKey = `title_${lang}`;
+    list.innerHTML = '';
+    (data || []).forEach(notice => {
+      const title = notice[titleKey] || notice.title_ko;
+      const date = notice.published_at ? notice.published_at.slice(0, 10).replace(/-/g, '.') : '';
+      const item = document.createElement('a');
+      item.className = 'notice-item';
+      item.href = notice.url;
+      item.target = '_blank';
+      item.rel = 'noopener';
+      item.style.cssText = 'padding: 16px; display:flex; align-items:center; gap:14px; border-bottom:1px solid var(--border); text-decoration:none; color:inherit;';
+      item.innerHTML = `
+        <div class="notice-item-body" style="flex:1;min-width:0;">
+          <div class="notice-item-title" style="font-size:0.9rem;font-weight:500;color:var(--text-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escHtml(title)}</div>
+        </div>
+        <span class="notice-item-date" style="font-size:0.75rem;color:var(--text-3);flex-shrink:0;">${date}</span>
+      `;
+      list.appendChild(item);
+    });
+
+    if (!data || data.length === 0) {
+      list.innerHTML = `<div class="board-empty" style="padding:32px;text-align:center;">공지사항이 없습니다.</div>`;
+    }
+
+    // 페이지네이션
+    const totalPages = Math.ceil((count || 0) / NOTICES_PER_PAGE);
+    if (pagination && totalPages > 1) {
+      pagination.innerHTML = '';
+      for (let p = 1; p <= totalPages; p++) {
+        const btn = document.createElement('button');
+        btn.textContent = p;
+        btn.className = 'notices-page-btn' + (p === page ? ' active' : '');
+        btn.addEventListener('click', () => renderNoticesScreen(p));
+        pagination.appendChild(btn);
+      }
+    }
+  } catch {
+    list.innerHTML = `<div class="board-empty" style="padding:32px;text-align:center;">불러오기 실패</div>`;
   }
 }
 
@@ -1757,8 +1823,9 @@ function initMainNav() {
     card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') showScreen(card.dataset.toScreen); });
   });
 
-  document.getElementById('quickBoardBtn')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-board'); });
-  document.getElementById('quickBoardBtn2')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-board'); });
+  document.getElementById('quickBoardBtn')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-notices'); renderNoticesScreen(1); });
+  document.getElementById('quickBoardBtn2')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-notices'); renderNoticesScreen(1); });
+  document.getElementById('noticesBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
   document.getElementById('quickNearbyBtn')?.addEventListener('click', e => { e.preventDefault(); showScreen('screen-nearby'); });
 
   setTimeout(() => document.querySelector('.hero-full')?.classList.add('hero-loaded'), 100);

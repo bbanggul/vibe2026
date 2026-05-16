@@ -742,6 +742,13 @@
         <span class="nav-menu-text" data-i18n="nav_nearby">주변 시설</span>
         <span class="nav-menu-arrow" aria-hidden="true">›</span>
       </a>
+      <a href="#" class="nav-menu-item" data-screen="screen-notices">
+        <div class="nav-menu-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <span class="nav-menu-text" data-i18n="nav_notices">공지사항</span>
+        <span class="nav-menu-arrow" aria-hidden="true">›</span>
+      </a>
       <a href="#" class="nav-menu-item" data-screen="screen-board">
         <div class="nav-menu-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -787,6 +794,20 @@
      CHATBOT — 천마 도우미
 ══════════════════════════════════════ -->
 
+
+<!-- ══════════════════════════════════════
+     NOTICES SCREEN
+══════════════════════════════════════ -->
+<div id="screen-notices" class="screen screen-board screen-hidden">
+  <div class="board-header">
+    <button class="board-back-btn" id="noticesBackBtn" aria-label="뒤로가기">‹</button>
+    <span class="board-header-title" data-i18n="nav_notices">공지사항</span>
+  </div>
+  <div class="board-list" id="noticesList">
+    <div class="board-loading">불러오는 중...</div>
+  </div>
+  <div class="notices-pagination" id="noticesPagination"></div>
+</div>
 
 <!-- ══════════════════════════════════════
      BOARD SCREEN
