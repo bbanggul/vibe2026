@@ -1063,6 +1063,7 @@ img, svg { display: block; }
 .shuttle-map-wrap { margin-top: 20px; }
 .shuttle-map-label { font-size: 0.8rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
 .shuttle-map-img { width: 100%; border-radius: var(--radius-sm); display: block; }
+.shuttle-map-caption { font-size: 0.72rem; color: var(--text-1); margin-top: 6px; text-align: right; }
 .shuttle-time-chip {
   background: var(--navy);
   color: var(--white);
