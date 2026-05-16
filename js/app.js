@@ -1592,7 +1592,7 @@ const CAMPUS_CUSTOM_PHOTO = {
   '20': 'https://www.suwon.ac.kr/usr/upload/board_thumb/zboardphotogallery251/20200108100907045_8464.0.jpg',
   '21': 'https://www.suwon.ac.kr/usr/upload/board_thumb/zboardphotogallery271/20250908025440037_1173.0.jpg',
   '22': 'https://www.suwon.ac.kr/usr/upload/board_thumb/zboardphotogallery271/20250908025440037_1173.0.jpg',
-  '24': 'assets/22.jpg',
+  '24': 'assets/기숙사.jpg',
   '25': 'https://www.suwon.ac.kr/usr/images/suwon/introduce_img_ksd.jpg',
 };
 
