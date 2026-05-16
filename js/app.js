@@ -1356,6 +1356,8 @@ async function openPostDetail(id) {
       <div class="post-comments-header">${t('board_comments')}</div>
     `;
     document.getElementById('postLikeBtn')?.addEventListener('click', async () => {
+      const user = await getUser();
+      if (!user) { openModal('loginModal'); return; }
       try {
         const result = await toggleLikePost(post.id, post.likes);
         post.likes = result.likes;
@@ -1364,11 +1366,7 @@ async function openPostDetail(id) {
         const btn = document.getElementById('postLikeBtn');
         if (btn) btn.classList.toggle('liked', result.liked);
       } catch (e) {
-        if (e.message === 'login_required') {
-          alert(t('like_login_required') || '로그인 후 좋아요를 누를 수 있습니다.');
-        } else {
-          alert(e.message);
-        }
+        alert(e.message);
       }
     });
 
