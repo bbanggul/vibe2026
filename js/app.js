@@ -1180,20 +1180,37 @@ async function translateText(text, targetLang) {
 /* ─── Board ─── */
 let currentPost = null;
 
-async function renderBoardList() {
+let boardCurrentTab = 'all';
+let boardCurrentPage = 1;
+const BOARD_PER_PAGE = 10;
+
+async function renderBoardList(page = 1, tab = boardCurrentTab) {
+  boardCurrentPage = page;
+  boardCurrentTab = tab;
+
   const list = document.getElementById('boardList');
+  const pagination = document.getElementById('boardPagination');
   if (!list) return;
+
+  // 탭 버튼 상태
+  document.getElementById('boardTabAll')?.classList.toggle('active', tab === 'all');
+  document.getElementById('boardTabHot')?.classList.toggle('active', tab === 'hot');
+
   list.innerHTML = `<div class="board-loading">${t('board_loading')}</div>`;
+  if (pagination) pagination.innerHTML = '';
+
   try {
-    const posts = await fetchPosts();
+    const { posts, total } = await fetchPosts({ page, perPage: BOARD_PER_PAGE, hotOnly: tab === 'hot' });
+
     if (posts.length === 0) {
-      list.innerHTML = `<div class="board-empty">${t('board_empty')}</div>`;
+      list.innerHTML = `<div class="board-empty">${tab === 'hot' ? t('board_empty_hot') || '인기글이 없습니다. (좋아요 10개 이상)' : t('board_empty')}</div>`;
       return;
     }
 
-    const paintList = (titles, previews) => {
-      list.innerHTML = posts.map((p, i) => `
-        <div class="board-post-card" data-id="${p.id}">
+    const paintList = (titles, previews, transBar = '') => {
+      list.innerHTML = transBar + posts.map((p, i) => `
+        <div class="board-post-card${p.likes >= 10 ? ' board-post-hot' : ''}" data-id="${p.id}">
+          ${p.likes >= 10 ? '<span class="bpc-hot-badge">🔥</span>' : ''}
           <div class="bpc-title">${escHtml(titles[i])}</div>
           <div class="bpc-preview">${escHtml(previews[i])}</div>
           <div class="bpc-meta">
@@ -1219,40 +1236,28 @@ async function renderBoardList() {
         Promise.all(rawTitles.map(s => translateText(s, lang))),
         Promise.all(rawPreviews.map(s => translateText(s, lang))),
       ]);
-
       let showingTrans = true;
-
       const repaint = () => {
         const titles   = showingTrans ? transTitles   : rawTitles;
         const previews = showingTrans ? transPreviews : rawPreviews;
-        list.innerHTML = `
-          <div class="board-trans-bar">
-            <button class="board-trans-toggle-btn" id="boardTransToggleBtn">
-              ${showingTrans ? t('board_show_original') : t('board_show_translated')}
-            </button>
-          </div>
-        ` + posts.map((p, i) => `
-          <div class="board-post-card" data-id="${p.id}">
-            <div class="bpc-title">${escHtml(titles[i])}</div>
-            <div class="bpc-preview">${escHtml(previews[i])}</div>
-            <div class="bpc-meta">
-              <span class="bpc-anon">${t('board_anon')}</span>
-              <span class="bpc-dot">·</span>
-              <span class="bpc-time">${timeAgo(p.created_at)}</span>
-              <span class="bpc-likes">❤ ${p.likes}</span>
-            </div>
-          </div>
-        `).join('');
-        document.getElementById('boardTransToggleBtn')?.addEventListener('click', () => {
-          showingTrans = !showingTrans;
-          repaint();
-        });
-        list.querySelectorAll('.board-post-card').forEach(card => {
-          card.addEventListener('click', () => openPostDetail(card.dataset.id));
-        });
+        const bar = `<div class="board-trans-bar"><button class="board-trans-toggle-btn" id="boardTransToggleBtn">${showingTrans ? t('board_show_original') : t('board_show_translated')}</button></div>`;
+        paintList(titles, previews, bar);
+        document.getElementById('boardTransToggleBtn')?.addEventListener('click', () => { showingTrans = !showingTrans; repaint(); });
       };
-
       repaint();
+    }
+
+    // 페이지네이션
+    const totalPages = Math.ceil(total / BOARD_PER_PAGE);
+    if (pagination && totalPages > 1) {
+      pagination.innerHTML = '';
+      for (let p = 1; p <= totalPages; p++) {
+        const btn = document.createElement('button');
+        btn.textContent = p;
+        btn.className = 'notices-page-btn' + (p === page ? ' active' : '');
+        btn.addEventListener('click', () => renderBoardList(p, boardCurrentTab));
+        pagination.appendChild(btn);
+      }
     }
   } catch (e) {
     list.innerHTML = `<div class="board-empty">불러오기 실패: ${e.message}</div>`;
@@ -1419,6 +1424,8 @@ async function renderComments(postId) {
 
 function initBoardScreen() {
   document.getElementById('boardBackBtn')?.addEventListener('click', () => showScreen('screen-home'));
+  document.getElementById('boardTabAll')?.addEventListener('click', () => renderBoardList(1, 'all'));
+  document.getElementById('boardTabHot')?.addEventListener('click', () => renderBoardList(1, 'hot'));
   document.getElementById('boardWriteBtn')?.addEventListener('click', async () => {
     const user = await getUser();
     if (!user) { openModal('loginModal'); return; }

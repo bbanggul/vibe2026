@@ -2595,3 +2595,22 @@ img, svg { display: block; }
 }
 .notices-page-btn:hover { border-color: var(--navy); color: var(--navy); }
 .notices-page-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+/* ── Board Tabs ── */
+.board-tabs {
+  display: flex; border-bottom: 2px solid var(--border);
+  background: var(--white);
+}
+.board-tab {
+  flex: 1; padding: 12px 0; font-size: 0.88rem; font-weight: 700;
+  background: none; border: none; cursor: pointer;
+  color: var(--text-3); transition: color var(--trans);
+  border-bottom: 2px solid transparent; margin-bottom: -2px;
+}
+.board-tab.active { color: var(--navy); border-bottom-color: var(--navy); }
+
+/* ── Hot post badge ── */
+.board-post-card.board-post-hot { background: #fffbf0; }
+.bpc-hot-badge {
+  display: inline-block; font-size: 0.72rem; margin-bottom: 4px;
+}

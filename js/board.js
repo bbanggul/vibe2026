@@ -20,13 +20,20 @@ function escHtml(str) {
 }
 
 /* Posts */
-async function fetchPosts() {
-  const { data, error } = await sb
+async function fetchPosts({ page = 1, perPage = 10, hotOnly = false } = {}) {
+  const from = (page - 1) * perPage;
+  const to = from + perPage - 1;
+  let query = sb
     .from('posts')
-    .select('id, title, content, likes, created_at')
-    .order('created_at', { ascending: false });
+    .select('id, title, content, likes, created_at', { count: 'exact' });
+  if (hotOnly) {
+    query = query.gte('likes', 10).order('likes', { ascending: false });
+  } else {
+    query = query.order('created_at', { ascending: false });
+  }
+  const { data, error, count } = await query.range(from, to);
   if (error) throw error;
-  return data;
+  return { posts: data, total: count ?? 0 };
 }
 
 async function fetchPost(id) {
