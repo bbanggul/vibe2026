@@ -102,6 +102,19 @@ Deno.serve(async () => {
       if (!error) inserted++
     }
 
+    // 100개 초과 시 오래된 것부터 삭제
+    const { count } = await sb.from('notices').select('*', { count: 'exact', head: true })
+    if ((count ?? 0) > 100) {
+      const { data: oldest } = await sb
+        .from('notices')
+        .select('id')
+        .order('published_at', { ascending: true })
+        .limit((count ?? 0) - 100)
+      if (oldest && oldest.length > 0) {
+        await sb.from('notices').delete().in('id', oldest.map(r => r.id))
+      }
+    }
+
     return new Response(
       JSON.stringify({ success: true, found: notices.length, inserted }),
       { headers: { 'Content-Type': 'application/json' } },
