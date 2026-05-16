@@ -1210,7 +1210,6 @@ async function renderBoardList(page = 1, tab = boardCurrentTab) {
     const paintList = (titles, previews, transBar = '') => {
       list.innerHTML = transBar + posts.map((p, i) => `
         <div class="board-post-card${p.likes >= 10 ? ' board-post-hot' : ''}" data-id="${p.id}">
-          ${p.likes >= 10 ? '<span class="bpc-hot-badge">🔥</span>' : ''}
           <div class="bpc-title">${escHtml(titles[i])}</div>
           <div class="bpc-preview">${escHtml(previews[i])}</div>
           <div class="bpc-meta">
