@@ -2329,7 +2329,7 @@ img, svg { display: block; }
 .feature-card:hover .feature-card-cta { color: var(--yellow); }
 .feature-card-wrap { display: flex; flex-direction: column; }
 .feature-card-wrap .feature-card { flex: 1; }
-.feature-card-caption { font-size: 0.7rem; color: var(--text-3); margin-top: 5px; text-align: right; padding-right: 2px; }
+.feature-card-caption { font-size: 0.7rem; color: var(--text-1); margin-top: 5px; text-align: right; padding-right: 2px; }
 .feature-card-menu {
   font-size: 0.75rem;
   color: rgba(255,255,255,0.7);
