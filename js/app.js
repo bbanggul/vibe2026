@@ -285,12 +285,12 @@ const facilityList = [
   {
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
     link: 'https://swudorm.suwon.ac.kr',
-    ko: { name: '기숙사', loc: '캠퍼스 내', hours: null, closed: null, extra: '외국인 유학생 우선 배정', phone: '031-229-8202' },
-    en: { name: 'Dormitory', loc: 'On Campus', hours: null, closed: null, extra: 'International students have priority', phone: '031-229-8202' },
-    zh: { name: '宿舍', loc: '校园内', hours: null, closed: null, extra: '留学生优先分配', phone: '031-229-8202' },
-    ja: { name: '寮', loc: 'キャンパス内', hours: null, closed: null, extra: '留学生優先入寮', phone: '031-229-8202' },
-    vi: { name: 'Ký túc xá', loc: 'Trong khuôn viên', hours: null, closed: null, extra: 'Ưu tiên sinh viên quốc tế', phone: '031-229-8202' },
-    th: { name: 'หอพัก', loc: 'ในมหาวิทยาลัย', hours: null, closed: null, extra: 'นักศึกษาต่างชาติได้รับสิทธิ์พิเศษ', phone: '031-229-8202' },
+    ko: { name: '기숙사', loc: '캠퍼스 내', hours: null, closed: null, extra: '외국인 유학생 우선 배정', phone: '031-220-8203' },
+    en: { name: 'Dormitory', loc: 'On Campus', hours: null, closed: null, extra: 'International students have priority', phone: '031-220-8203' },
+    zh: { name: '宿舍', loc: '校园内', hours: null, closed: null, extra: '留学生优先分配', phone: '031-220-8203' },
+    ja: { name: '寮', loc: 'キャンパス内', hours: null, closed: null, extra: '留学生優先入寮', phone: '031-220-8203' },
+    vi: { name: 'Ký túc xá', loc: 'Trong khuôn viên', hours: null, closed: null, extra: 'Ưu tiên sinh viên quốc tế', phone: '031-220-8203' },
+    th: { name: 'หอพัก', loc: 'ในมหาวิทยาลัย', hours: null, closed: null, extra: 'นักศึกษาต่างชาติได้รับสิทธิ์พิเศษ', phone: '031-220-8203' },
   },
   {
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>`,
@@ -737,7 +737,7 @@ const phoneDirectory = [
     entries: [
       { name: '중앙도서관', phone: '031-220-2393' },
       { name: '보건실', phone: '031-220-2416' },
-      { name: '기숙사', phone: '031-229-8202' },
+      { name: '기숙사', phone: '031-220-8203' },
       { name: '학생생활상담연구소', phone: '031-220-2415' },
       { name: '장애학생지원센터', phone: '031-229-8394' },
       { name: '인권센터', phone: '031-220-2382' },
