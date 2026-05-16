@@ -1588,6 +1588,14 @@ const campusBuildings = [
 const CAMPUS_PLACEHOLDER = 'https://www.suwon.ac.kr/usr/upload/board/zboardphotogallery188/20200619015742915_7691.0.jpg';
 const CAMPUSMAP_IMG_BASE = 'https://www.suwon.ac.kr/usr/images/suwon/campusmap/';
 
+const CAMPUS_CUSTOM_PHOTO = {
+  '20': 'https://www.suwon.ac.kr/usr/upload/board_thumb/zboardphotogallery251/20200108100907045_8464.0.jpg',
+  '21': 'https://www.suwon.ac.kr/usr/upload/board_thumb/zboardphotogallery271/20250908025440037_1173.0.jpg',
+  '22': 'https://www.suwon.ac.kr/usr/upload/board_thumb/zboardphotogallery271/20250908025440037_1173.0.jpg',
+  '24': 'assets/22.jpg',
+  '25': 'https://www.suwon.ac.kr/usr/images/suwon/introduce_img_ksd.jpg',
+};
+
 /* Maps our building id (01-26) → university BULD_CD for building photo */
 const CAMPUS_BULD_DATA = {
   '01':'02', '02':'37', '03':'08', '04':'19', '05':'09', '06':'10',
@@ -1625,9 +1633,8 @@ function openBuildingModal(id) {
   const lang = window.currentLang;
   const name = lang === 'ko' ? b.ko : (b.names[lang] || b.names.en || b.ko);
 
-  const photoUrl = buldCd
-    ? `${CAMPUSMAP_IMG_BASE}${buldCd}_00.png`
-    : CAMPUS_PLACEHOLDER;
+  const photoUrl = CAMPUS_CUSTOM_PHOTO[id]
+    ?? (buldCd ? `${CAMPUSMAP_IMG_BASE}${buldCd}_00.png` : CAMPUS_PLACEHOLDER);
 
   const sheet = document.getElementById('bldgModalSheet');
   sheet.innerHTML = `
