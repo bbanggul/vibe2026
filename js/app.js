@@ -343,12 +343,12 @@ const facilityList = [
   },
   {
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>`,
-    ko: { name: '프린터', loc: '중앙도서관 1층 · 학생회관 1층 · 각 단과대 행정실', hours: null, closed: null, extra: '흑백 50원/장 · 컬러 200원/장 · 학생증 충전 후 사용', phone: null },
-    en: { name: 'Printers', loc: 'Library 1F · Student Hall 1F · College admin offices', hours: null, closed: null, extra: 'B&W ₩50/page · Color ₩200/page · Student ID required', phone: null },
-    zh: { name: '打印机', loc: '图书馆1楼 · 学生会馆1楼 · 各学院行政室', hours: null, closed: null, extra: '黑白50₩/张 · 彩色200₩/张 · 学生证充值后使用', phone: null },
-    ja: { name: 'プリンター', loc: '図書館1F · 学生会館1F · 各学部事務室', hours: null, closed: null, extra: '白黒50₩/枚 · カラー200₩/枚 · 学生証チャージ後使用', phone: null },
-    vi: { name: 'Máy in', loc: 'TV T.1 · Nhà SV T.1 · VP các khoa', hours: null, closed: null, extra: 'Trắng đen ₩50 · Màu ₩200/trang · Thẻ SV', phone: null },
-    th: { name: 'เครื่องพิมพ์', loc: 'ห้องสมุด ชั้น 1 · อาคารนักศึกษา ชั้น 1 · สนง.คณะ', hours: null, closed: null, extra: 'ขาวดำ ₩50 · สี ₩200/แผ่น · ใช้บัตรนักศึกษา', phone: null },
+    ko: { name: '무인복사기', loc: '음악대학 1층 · 글로벌경상관 3층 · ICT융합대학 2층 · 미술대학 1층 · ACE교육관 3층 · 제2공학관 1층 · 중앙도서관 3층 · 인문사회대 1층', hours: '평일 09:00~18:00', closed: null, extra: '흑백 50원/장 · 컬러 100원/장', phone: '031-239-0767' },
+    en: { name: 'Copy Machines', loc: 'Music 1F · Global Bldg 3F · ICT 2F · Fine Arts 1F · ACE 3F · Eng.2 1F · Library 3F · Humanities 1F', hours: 'Weekdays 09:00~18:00', closed: null, extra: 'B&W ₩50/page · Color ₩100/page', phone: '031-239-0767' },
+    zh: { name: '无人复印机', loc: '音乐学院1楼 · 全球经商馆3楼 · ICT融合大学2楼 · 美术学院1楼 · ACE教育馆3楼 · 第2工学馆1楼 · 中央图书馆3楼 · 人文社会大学1楼', hours: '平日 09:00~18:00', closed: null, extra: '黑白₩50/张 · 彩色₩100/张', phone: '031-239-0767' },
+    ja: { name: '無人コピー機', loc: '音楽大学1F · グローバル経商館3F · ICT融合大学2F · 美術大学1F · ACE教育館3F · 第2工学館1F · 中央図書館3F · 人文社会大学1F', hours: '平日 09:00~18:00', closed: null, extra: '白黒₩50/枚 · カラー₩100/枚', phone: '031-239-0767' },
+    vi: { name: 'Máy photocopy', loc: 'Âm nhạc T.1 · Kinh doanh T.3 · ICT T.2 · Mỹ thuật T.1 · ACE T.3 · Kỹ thuật 2 T.1 · TV T.3 · Nhân văn T.1', hours: 'T2~6: 09:00~18:00', closed: null, extra: 'Trắng đen ₩50 · Màu ₩100/trang', phone: '031-239-0767' },
+    th: { name: 'เครื่องถ่ายเอกสาร', loc: 'ดนตรี ชั้น1 · พาณิชย์ ชั้น3 · ICT ชั้น2 · ศิลปะ ชั้น1 · ACE ชั้น3 · วิศวะ2 ชั้น1 · ห้องสมุด ชั้น3 · มนุษย์ ชั้น1', hours: 'จ-ศ 09:00~18:00', closed: null, extra: 'ขาวดำ ₩50 · สี ₩100/แผ่น', phone: '031-239-0767' },
   },
   {
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
@@ -1930,12 +1930,12 @@ const faqAnswers = {
     th: 'ลงทะเบียนเรียนที่ portal.suwon.ac.kr นักศึกษาต่างชาติต้องปรึกษาอาจารย์ที่ปรึกษาก่อน เปลี่ยนวิชาได้ในสัปดาห์แรกของเทอม'
   },
   printer: {
-    ko: '프린터는 도서관 1층과 학생회관에 있습니다. 학생증을 태그하여 출력하세요. 흑백 50원/장, 컬러 150원/장. 충전은 도서관 서비스 데스크에서 가능합니다.',
-    en: 'Printers are in the library (1F) and student union building. Tag your student ID to print. B&W ₩50/page, Color ₩150/page. Top up at the library service desk.',
-    zh: '图书馆1楼和学生会大楼有打印机。刷学生证打印。黑白50韩元/页，彩色150韩元/页。图书馆服务台可充值。',
-    ja: 'プリンターは図書館1階と学生会館にあります。学生証をタッチして印刷。モノクロ50ウォン/枚、カラー150ウォン/枚。チャージは図書館サービスデスクで。',
-    vi: 'Máy in có tại tầng 1 thư viện và tòa hội sinh viên. Chạm thẻ để in. Đen trắng ₩50/trang, màu ₩150/trang. Nạp tiền tại quầy dịch vụ thư viện.',
-    th: 'เครื่องพิมพ์อยู่ที่ชั้น 1 ห้องสมุดและอาคารสหภาพนักศึกษา แตะบัตรเพื่อพิมพ์ ขาวดำ 50 วอน/หน้า สี 150 วอน/หน้า ชาร์จเงินที่เคาน์เตอร์บริการ'
+    ko: '무인 복사기는 캠퍼스 8곳에 설치되어 있습니다.<br>📍 음악대학 1층(후문 방향) · 글로벌경상관 3층 · ICT융합대학 2층 · 미술대학 1층 · ACE교육관 3층 · 제2공학관 1층 · 중앙도서관 3층 내부 · 인문사회대 1층<br><br>💰 흑백 50원/장 · 컬러 100원/장<br>🕘 운영시간: 평일 09:00~18:00 (공휴일 제외)<br>📞 고장 문의: 031-239-0767 (신한오엔씨) / 담당기사 010-8377-8139',
+    en: 'Self-service copy machines are available at 8 locations on campus.<br>📍 Music 1F · Global Bldg 3F · ICT 2F · Fine Arts 1F · ACE 3F · Engineering 2 1F · Library 3F · Humanities 1F<br><br>💰 B&W ₩50/page · Color ₩100/page<br>🕘 Hours: Weekdays 09:00~18:00 (excl. holidays)<br>📞 Inquiries: 031-239-0767',
+    zh: '校园内8处设有无人复印机。<br>📍 音乐学院1楼(后门方向) · 全球经商馆3楼 · ICT融合大学2楼 · 美术学院1楼 · ACE教育馆3楼 · 第2工学馆1楼 · 中央图书馆3楼 · 人文社会大学1楼<br><br>💰 黑白₩50/张 · 彩色₩100/张<br>🕘 平日 09:00~18:00（节假日除外）<br>📞 故障咨询：031-239-0767',
+    ja: 'キャンパス内8か所に無人コピー機があります。<br>📍 音楽大学1F(後門方向) · グローバル経商館3F · ICT融合大学2F · 美術大学1F · ACE教育館3F · 第2工学館1F · 中央図書館3F · 人文社会大学1F<br><br>💰 白黒₩50/枚 · カラー₩100/枚<br>🕘 平日 09:00~18:00（祝日除く）<br>📞 故障問合せ：031-239-0767',
+    vi: 'Máy photocopy tự động có tại 8 địa điểm trên campus.<br>📍 Âm nhạc T.1 · Kinh doanh T.3 · ICT T.2 · Mỹ thuật T.1 · ACE T.3 · Kỹ thuật 2 T.1 · Thư viện T.3 · Nhân văn T.1<br><br>💰 Trắng đen ₩50 · Màu ₩100/trang<br>🕘 T2~6: 09:00~18:00 (trừ ngày lễ)<br>📞 Hỏi hỏng: 031-239-0767',
+    th: 'เครื่องถ่ายเอกสารอัตโนมัติมีให้บริการ 8 จุดในมหาวิทยาลัย<br>📍 ดนตรี ชั้น1 · พาณิชย์ ชั้น3 · ICT ชั้น2 · ศิลปะ ชั้น1 · ACE ชั้น3 · วิศวะ2 ชั้น1 · ห้องสมุด ชั้น3 · มนุษย์ ชั้น1<br><br>💰 ขาวดำ ₩50 · สี ₩100/แผ่น<br>🕘 จ-ศ 09:00~18:00 (ยกเว้นวันหยุด)<br>📞 แจ้งซ่อม: 031-239-0767'
   },
   health: {
     ko: '보건실은 학생회관 2층에 있으며 평일 09:00–17:00 운영합니다. 기본 의약품 무료 제공, 혈압·체온 측정 가능. 응급 상황 시 031-220-2114로 연락하세요.',
