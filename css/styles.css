@@ -2147,6 +2147,7 @@ img, svg { display: block; }
 }
 .hero-shuttle-pill strong { color: #fff; font-weight: 700; }
 .hero-shuttle-pill em { color: rgba(255,255,255,0.65); font-style: normal; font-size: 0.8rem; }
+.hero-shuttle-basis { color: rgba(255,255,255,0.5); font-size: 0.72rem; }
 .hero-pill-icon { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.75; }
 .hero-menu-bar {
   margin: 16px auto 0;
