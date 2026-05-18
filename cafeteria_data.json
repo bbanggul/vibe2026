@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16",
+  "updated": "2026-05-18",
   "weekRange": "2026-05-18(월) ~ 2026-05-22(금)",
   "menu": {
     "1": [
@@ -8,106 +8,36 @@
         "corner": "Little Kitchen",
         "items": [
           {
-            "ko": "고기짬뽕(한그릇)",
-            "en": "Meat Jjamppong (one bowl)",
-            "zh": "肉Jjamppong（一碗）",
-            "ja": "肉ちゃんぽん（一杯）",
-            "vi": "Thịt Jjamppong (một tô)",
-            "th": "จัมปงเนื้อ (หนึ่งชาม)"
+            "ko": "마파두부덮밥",
+            "en": "Mapo tofu rice bowl",
+            "zh": "麻婆豆腐盖饭",
+            "ja": "麻婆豆腐丼",
+            "vi": "Cơm đậu hũ Mapo",
+            "th": "ข้าวหน้าเต้าหู้มาโป"
           },
           {
-            "ko": "계란대파볶음밥",
-            "en": "Egg and green onion fried rice",
-            "zh": "鸡蛋葱炒饭",
-            "ja": "卵大破チャーハン",
-            "vi": "Cơm chiên trứng và hành lá",
-            "th": "ข้าวผัดไข่และหัวหอม"
+            "ko": "오렌지탕수육",
+            "en": "Orange sweet and sour pork",
+            "zh": "橙子糖醋肉",
+            "ja": "オレンジ湯",
+            "vi": "Thịt lợn chua ngọt cam",
+            "th": "หมูเปรี้ยวหวานส้ม"
           },
           {
-            "ko": "(미니찐빵*새우칩)튀김",
-            "en": "(Mini steamed buns*shrimp chips) fried food",
-            "zh": "(小馒头*虾片)油炸食品",
-            "ja": "（ミニ蒸しパン*エビチップ）揚げ",
-            "vi": "(Bánh hấp mini*tôm chiên) đồ chiên",
-            "th": "(ซาลาเปาจิ๋ว*กุ้งทอด) อาหารทอด"
+            "ko": "짜사이채무침",
+            "en": "Jjasai Salad Salad",
+            "zh": "Jjasai 沙拉 沙拉",
+            "ja": "チャサイ債務針",
+            "vi": "Salad Jjasai Salad",
+            "th": "สลัดจ่าไซ สลัด"
           },
           {
-            "ko": "단무지&양파",
-            "en": "Pickled radish & onion",
-            "zh": "腌萝卜和洋葱",
-            "ja": "ダンムジ＆玉ねぎ",
-            "vi": "Củ cải muối & hành tây",
-            "th": "หัวไชเท้าดองและหัวหอม"
-          },
-          {
-            "ko": "건강샐러드",
-            "en": "healthy salad",
-            "zh": "健康沙拉",
-            "ja": "健康サラダ",
-            "vi": "xà lách khỏe mạnh",
-            "th": "สลัดเพื่อสุขภาพ"
-          },
-          {
-            "ko": "맛김치",
-            "en": "Flavored Kimchi",
-            "zh": "风味泡菜",
-            "ja": "味キムチ",
-            "vi": "Hương vị kim chi",
-            "th": "กิมจิปรุงรส"
-          },
-          {
-            "ko": "떠먹는요거트",
-            "en": "Yogurt to eat",
-            "zh": "酸奶可以吃",
-            "ja": "食べるヨーグルト",
-            "vi": "Sữa chua để ăn",
-            "th": "โยเกิร์ตน่ากิน"
-          }
-        ]
-      },
-      {
-        "type": "중식",
-        "corner": "교직원식당",
-        "items": [
-          "돈육콩나물불고기",
-          "감자고로케",
-          "그린빈어묵볶음",
-          "시금치된장국",
-          "흑미밥/백미밥",
-          "건강샐러드",
-          "김치2종",
-          "후식차"
-        ]
-      }
-    ],
-    "2": [
-      {
-        "type": "중식",
-        "corner": "Little Kitchen",
-        "items": [
-          {
-            "ko": "부대찌개&라면사리(한그릇)",
-            "en": "Budae Jjigae & Ramen Sari (one bowl)",
-            "zh": "Budae Jjigae & 拉面纱丽（一碗）",
-            "ja": "部隊チゲ＆ラーメンサリ（ハンボウル）",
-            "vi": "Budae Jjigae & Ramen Sari (một tô)",
-            "th": "Budae Jjigae & Ramen Sari (ชามเดียว)"
-          },
-          {
-            "ko": "칠리만두강정",
-            "en": "Chili dumpling gangjeong",
-            "zh": "辣椒饺子姜丁",
-            "ja": "チリ餃子カンジョン",
-            "vi": "Bánh bao ớt Gangjeong",
-            "th": "เกี๊ยวพริกคังจอง"
-          },
-          {
-            "ko": "청경채겉절이",
-            "en": "Bok choy and geotjeori",
-            "zh": "白菜和geotjeori",
-            "ja": "清慶菜",
-            "vi": "Bok choy và geotjeori",
-            "th": "บกฉ่อยและกอตจอรี"
+            "ko": "시금치된장국",
+            "en": "Spinach miso soup",
+            "zh": "菠菜味噌汤",
+            "ja": "ほうれん草の味噌汁",
+            "vi": "Súp miso rau bina",
+            "th": "ซุปมิโซะผักโขม"
           },
           {
             "ko": "백미밥",
@@ -126,74 +56,68 @@
             "th": "สลัดเพื่อสุขภาพ"
           },
           {
-            "ko": "깍두기",
-            "en": "Kkakdugi",
-            "zh": "卡克杜吉",
-            "ja": "刈る",
-            "vi": "Kkakdugi",
-            "th": "กักดูกี"
+            "ko": "맛김치",
+            "en": "Flavored Kimchi",
+            "zh": "风味泡菜",
+            "ja": "味キムチ",
+            "vi": "Hương vị kim chi",
+            "th": "กิมจิปรุงรส"
           },
           {
-            "ko": "얼음동동레몬에이드",
-            "en": "Ice Dongdong Lemonade",
-            "zh": "冰东东柠檬水",
-            "ja": "アイスドンドンレモンエイド",
-            "vi": "Nước chanh Đông Đông",
-            "th": "ไอซ์ดงดงเลมอนเนด"
+            "ko": "망고오렌지쥬스",
+            "en": "Mango Orange Juice",
+            "zh": "芒果橙汁",
+            "ja": "マンゴーオレンジジュース",
+            "vi": "Nước Cam Xoài",
+            "th": "น้ำส้มมะม่วง"
           }
-        ]
-      },
-      {
-        "type": "중식",
-        "corner": "교직원식당",
-        "items": [
-          "치즈떡순살찜닭",
-          "미니돈까스강정",
-          "연두부",
-          "쇠고기미역국",
-          "흑미밥/백미밥",
-          "건강샐러드",
-          "김치2종",
-          "후식차"
         ]
       }
     ],
-    "3": [
+    "2": [
       {
         "type": "중식",
         "corner": "Little Kitchen",
         "items": [
           {
-            "ko": "돈육김치두루치기덮밥",
-            "en": "Pork Kimchi Duruchi Rice Bowl",
-            "zh": "猪肉泡菜杜鲁奇盖饭",
-            "ja": "お金の肉キムチドゥルチギ丼",
-            "vi": "Cơm thịt heo Kimchi Duruchi",
-            "th": "ข้าวหน้าหมูกิมจิดูรุจิ"
+            "ko": "유니짜장(한그릇)",
+            "en": "Unijjajang (one bowl)",
+            "zh": "Unijjajang（一碗）",
+            "ja": "ユニチャジャン（ハンボウル）",
+            "vi": "Unijjajang (một bát)",
+            "th": "อุนจาจัง (ชามเดียว)"
           },
           {
-            "ko": "설탕핫도그",
-            "en": "Sugar hot dog",
-            "zh": "糖热狗",
-            "ja": "砂糖ホットドッグ",
-            "vi": "Xúc xích đường",
-            "th": "ฮอทด็อกน้ำตาล"
+            "ko": "군만두튀김*초간장",
+            "en": "Fried dumplings * vinegared soy sauce",
+            "zh": "煎饺*醋酱油",
+            "ja": "軍団頭揚げ",
+            "vi": "Bánh bao chiên * nước tương giấm",
+            "th": "เกี๊ยวทอด*ซีอิ๊วขาว"
           },
           {
-            "ko": "콘마카로니샐러드",
-            "en": "Corn Macaroni Salad",
-            "zh": "玉米通心粉沙拉",
-            "ja": "コンマカロニサラダ",
-            "vi": "Salad mì ống ngô",
-            "th": "สลัดมักกะโรนีข้าวโพด"
+            "ko": "단무지&양파",
+            "en": "Pickled radish & onion",
+            "zh": "腌萝卜和洋葱",
+            "ja": "ダンムジ＆玉ねぎ",
+            "vi": "Củ cải muối & hành tây",
+            "th": "หัวไชเท้าดองและหัวหอม"
           },
           {
-            "ko": "콩나물국",
-            "en": "Bean sprout soup",
-            "zh": "豆芽汤",
-            "ja": "もやし局",
-            "vi": "Súp giá đỗ",
-            "th": "ซุปถั่วงอก"
+            "ko": "짬뽕국",
+            "en": "Jjamppong soup",
+            "zh": "炸鸡汤",
+            "ja": "チャンポン国",
+            "vi": "Súp Jjamppong",
+            "th": "ซุปจัมปง"
+          },
+          {
+            "ko": "미니밥",
+            "en": "mini rice",
+            "zh": "迷你米饭",
+            "ja": "ミニボブ",
+            "vi": "cơm nhỏ",
+            "th": "ข้าวมินิ"
           },
           {
             "ko": "건강샐러드",
@@ -212,27 +136,77 @@
             "th": "กิมจิปรุงรส"
           },
           {
-            "ko": "비피더스음료",
-            "en": "Bifidus Beverage",
-            "zh": "双歧杆菌饮料",
-            "ja": "ビフィズスドリンク",
-            "vi": "Nước giải khát Bifidus",
-            "th": "เครื่องดื่มบิฟิดัส"
+            "ko": "시원한유자차",
+            "en": "Refreshing citron tea",
+            "zh": "清爽的柚子茶",
+            "ja": "クールなゆず茶",
+            "vi": "Trà chanh giải khát",
+            "th": "ชามะนาวให้ความสดชื่น"
           }
         ]
-      },
+      }
+    ],
+    "3": [
       {
         "type": "중식",
-        "corner": "교직원식당",
+        "corner": "Little Kitchen",
         "items": [
-          "돈육김치찜",
-          "우불한식잡채",
-          "후랑크소세지볶음",
-          "우렁된장찌개",
-          "흑미밥/백미밥",
-          "건강샐러드",
-          "김치2종",
-          "후식차"
+          {
+            "ko": "쇠고기마랑탕(한그릇)",
+            "en": "Beef Marantang (one bowl)",
+            "zh": "马兰唐牛肉（一碗）",
+            "ja": "牛肉マランタン（ハンボウル）",
+            "vi": "Thịt bò Marantang (một tô)",
+            "th": "เนื้อ Marantang (หนึ่งชาม)"
+          },
+          {
+            "ko": "연유꽃빵튀김",
+            "en": "Fried condensed milk flower bread",
+            "zh": "炸炼乳花面包",
+            "ja": "軟乳花パン揚げ",
+            "vi": "Bánh mì hoa sữa đặc chiên",
+            "th": "ขนมปังดอกนมข้นทอด"
+          },
+          {
+            "ko": "오복채무침",
+            "en": "Obokchae seasoned salad",
+            "zh": "小福菜调味沙拉",
+            "ja": "オーブン債務針",
+            "vi": "Salad gia vị obokchae",
+            "th": "สลัดปรุงรสโอบกแช"
+          },
+          {
+            "ko": "백미밥",
+            "en": "white rice",
+            "zh": "白米饭",
+            "ja": "白米ご飯",
+            "vi": "cơm trắng",
+            "th": "ข้าวขาว"
+          },
+          {
+            "ko": "건강샐러드",
+            "en": "healthy salad",
+            "zh": "健康沙拉",
+            "ja": "健康サラダ",
+            "vi": "xà lách khỏe mạnh",
+            "th": "สลัดเพื่อสุขภาพ"
+          },
+          {
+            "ko": "맛김치",
+            "en": "Flavored Kimchi",
+            "zh": "风味泡菜",
+            "ja": "味キムチ",
+            "vi": "Hương vị kim chi",
+            "th": "กิมจิปรุงรส"
+          },
+          {
+            "ko": "복숭맛쥬시쿨",
+            "en": "Peach Juicy Cool",
+            "zh": "桃子 多汁 凉爽",
+            "ja": "桃味ジュシクール",
+            "vi": "Đào ngon ngọt mát lạnh",
+            "th": "พีช จูซซี่ คูล"
+          }
         ]
       }
     ],
@@ -242,36 +216,28 @@
         "corner": "Little Kitchen",
         "items": [
           {
-            "ko": "치킨까스*데미소스",
-            "en": "Chicken Cutlet*Demi Sauce",
-            "zh": "炸鸡排*半酱",
-            "ja": "チキンカス*デミソース",
-            "vi": "Thịt gà cốt lết*Sốt Demi",
-            "th": "ไก่ทอด*ซอสเดมิ"
+            "ko": "돈육순대국(뚝배기)",
+            "en": "Pork sundae soup (ttukbaegi)",
+            "zh": "猪肉圣代汤（ttukbaegi）",
+            "ja": "ドンユクスン大国（トーク排気）",
+            "vi": "Súp sundae thịt lợn (ttukbaegi)",
+            "th": "ซุปซันเดย์หมู (ตุ๊กแบกี)"
           },
           {
-            "ko": "야채비빔국수",
-            "en": "Vegetable Bibim Noodles",
-            "zh": "蔬菜拌饭面",
-            "ja": "野菜ビビン麺",
-            "vi": "Mì Bibim rau củ",
-            "th": "บะหมี่บิบิมผัก"
+            "ko": "고기산적조림",
+            "en": "stewed meat",
+            "zh": "炖肉",
+            "ja": "肉産煮込み",
+            "vi": "thịt hầm",
+            "th": "เนื้อตุ๋น"
           },
           {
-            "ko": "콩나물무침",
-            "en": "Seasoned bean sprouts",
-            "zh": "调味豆芽",
-            "ja": "もやし無針",
-            "vi": "Giá đỗ tẩm gia vị",
-            "th": "ถั่วงอกปรุงรส"
-          },
-          {
-            "ko": "아욱국",
-            "en": "mallow soup",
-            "zh": "锦葵汤",
-            "ja": "アウクク",
-            "vi": "súp cẩm quỳ",
-            "th": "ซุปชบา"
+            "ko": "부추겉절이",
+            "en": "Chive geotjeori",
+            "zh": "韭菜",
+            "ja": "ニラ",
+            "vi": "lá hẹ geotjeori",
+            "th": "ชิเว คอตจอรี"
           },
           {
             "ko": "백미밥",
@@ -306,20 +272,6 @@
             "th": "ชาบ๊วยดงดงเย็น"
           }
         ]
-      },
-      {
-        "type": "중식",
-        "corner": "교직원식당",
-        "items": [
-          "알감자닭볶음탕",
-          "피쉬앤칩스",
-          "건파래볶음",
-          "콩나물국",
-          "흑미밥/백미밥",
-          "건강샐러드",
-          "김치2종",
-          "후식차"
-        ]
       }
     ],
     "5": [
@@ -328,36 +280,44 @@
         "corner": "Little Kitchen",
         "items": [
           {
-            "ko": "카츠네우동",
-            "en": "Katsune Udon",
-            "zh": "胜根乌冬面",
-            "ja": "勝根うどん",
-            "vi": "Udon Katsune",
-            "th": "คัตสึเนะอุด้ง"
+            "ko": "미트볼토마토스파게티",
+            "en": "Meatball Tomato Spaghetti",
+            "zh": "肉丸番茄意大利面",
+            "ja": "ミートボルトマトスパゲッティ",
+            "vi": "Spaghetti thịt viên cà chua",
+            "th": "สปาเก็ตตี้มะเขือเทศลูกชิ้น"
           },
           {
-            "ko": "후리카게밥",
-            "en": "furikage rice",
-            "zh": "风影大米",
-            "ja": "フリカゲバブ",
-            "vi": "cơm furikage",
-            "th": "ข้าวฟูริคาเกะ"
+            "ko": "갈릭바게트",
+            "en": "Garlic Baguette",
+            "zh": "大蒜法棍面包",
+            "ja": "ガリクバゲット",
+            "vi": "Bánh mì tỏi",
+            "th": "บาแก็ตกระเทียม"
           },
           {
-            "ko": "새우볼꼬치",
-            "en": "Shrimp cheek skewers",
-            "zh": "虾颊肉串",
-            "ja": "エビボール串",
-            "vi": "xiên má tôm",
-            "th": "แก้มกุ้งเสียบไม้"
+            "ko": "청양마요감자튀김",
+            "en": "Cheongyang Mayo French Fries",
+            "zh": "青阳蛋黄酱炸薯条",
+            "ja": "清陽マヨポテトフライ",
+            "vi": "Khoai tây chiên Cheongyang Mayo",
+            "th": "ชองยังมาโยเฟรนช์ฟรายส์"
           },
           {
-            "ko": "오이지무침",
-            "en": "Seasoned cucumber",
-            "zh": "调味黄瓜",
-            "ja": "キュウリ無針",
-            "vi": "dưa chuột tẩm gia vị",
-            "th": "แตงกวาปรุงรส"
+            "ko": "치커리겉절이",
+            "en": "Chicory pancake",
+            "zh": "菊苣煎饼",
+            "ja": "チコリ",
+            "vi": "Bánh xèo rau diếp xoăn",
+            "th": "แพนเค้กชิโครี"
+          },
+          {
+            "ko": "가스오장국",
+            "en": "Gasojang Soup",
+            "zh": "嘎苏酱汤",
+            "ja": "ガス五蔵国",
+            "vi": "Súp gasojang",
+            "th": "ซุปกาโซจัง"
           },
           {
             "ko": "건강샐러드",
@@ -376,27 +336,13 @@
             "th": "กิมจิปรุงรส"
           },
           {
-            "ko": "디카페인캔커피",
-            "en": "Decaffeinated canned coffee",
-            "zh": "脱咖啡因罐装咖啡",
-            "ja": "デカフェイン缶コーヒー",
-            "vi": "Cà phê đóng hộp đã khử caffein",
-            "th": "กาแฟกระป๋องไม่มีคาเฟอีน"
+            "ko": "비피더스음료",
+            "en": "Bifidus Beverage",
+            "zh": "双歧杆菌饮料",
+            "ja": "ビフィズスドリンク",
+            "vi": "Nước giải khát Bifidus",
+            "th": "เครื่องดื่มบิฟิดัส"
           }
-        ]
-      },
-      {
-        "type": "중식",
-        "corner": "교직원식당",
-        "items": [
-          "대파육개장(뚝배기)",
-          "꿔바로우",
-          "꽈리고추계란장조림",
-          "도라지무생채",
-          "흑미밥/백미밥",
-          "건강샐러드",
-          "김치2종",
-          "후식차"
         ]
       }
     ]
