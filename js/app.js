@@ -781,6 +781,51 @@ function renderCafeteriaDay(dayNum) {
     const rangeEl = document.getElementById('cafWeekRange');
     if (rangeEl) rangeEl.textContent = cafeteriaData.weekRange;
   }
+
+  renderFacultyMenuDay(dayNum);
+}
+
+function renderFacultyMenuDay(dayNum) {
+  const container = document.getElementById('facultyMenuContent');
+  if (!container) return;
+  const lang = window.currentLang || 'ko';
+
+  if (!cafeteriaData || !cafeteriaData.facultyMenu) {
+    container.innerHTML = '';
+    return;
+  }
+  const entries = cafeteriaData.facultyMenu[String(dayNum)];
+  if (!entries || entries.length === 0) {
+    container.innerHTML = `<div class="caf-empty">${t('caf_no_menu')}</div>`;
+    return;
+  }
+
+  const typeOrder = ['중식', '석식'];
+  const grouped = {};
+  entries.forEach(e => { if (!grouped[e.type]) grouped[e.type] = []; grouped[e.type].push(e); });
+  const sortedTypes = typeOrder.filter(tp => grouped[tp])
+    .concat(Object.keys(grouped).filter(tp => !typeOrder.includes(tp)));
+
+  container.innerHTML = sortedTypes.map(type => {
+    const label = (mealTypeLabels[type] && mealTypeLabels[type][lang]) || type;
+    return `
+      <div class="caf-meal-section">
+        <div class="caf-meal-type-label">${label}</div>
+        ${grouped[type].map(entry => `
+          <div class="caf-corner-card">
+            <div class="caf-items">
+              ${entry.items.map(item => {
+                const ko = item.ko || item;
+                if (lang === 'ko' || typeof item === 'string') return `<div class="caf-item">${ko}</div>`;
+                const tr = item[lang];
+                if (!tr || tr === ko) return `<div class="caf-item">${ko}</div>`;
+                return `<div class="caf-item">${tr} <span class="caf-item-ko">(${ko})</span></div>`;
+              }).join('')}
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
+  }).join('');
 }
 
 function openCafeteriaScreen() {

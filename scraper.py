@@ -7,10 +7,10 @@ import requests
 from bs4 import BeautifulSoup
 from deep_translator import GoogleTranslator
 
-URL = "https://www.suwon.ac.kr/index.html?menuno=1792"
+STUDENT_URL = "https://www.suwon.ac.kr/index.html?menuno=1792"
+FACULTY_URL = "https://www.suwon.ac.kr/index.html?menuno=1793"
 OUTPUT = "cafeteria_data.json"
 
-# deep-translator 언어 코드 매핑
 LANG_MAP = {
     "en": "en",
     "zh": "zh-CN",
@@ -20,9 +20,9 @@ LANG_MAP = {
 }
 
 
-def scrape_menu():
+def scrape_student_menu():
     headers = {"User-Agent": "Mozilla/5.0 (compatible; SuwonPortal/1.0)"}
-    resp = requests.get(URL, headers=headers, timeout=15)
+    resp = requests.get(STUDENT_URL, headers=headers, timeout=15)
     resp.encoding = "utf-8"
     soup = BeautifulSoup(resp.text, "html.parser")
 
@@ -63,10 +63,53 @@ def scrape_menu():
     return week_range, menu
 
 
+def scrape_faculty_menu():
+    """교직원식당 메뉴 스크래핑
+    테이블 구조: 구분(colspan=2) | 월 | 화 | 수 | 목 | 금
+    데이터 행:   식사타입 | Mom's Cook | 월메뉴 | 화메뉴 | 수메뉴 | 목메뉴 | 금메뉴
+    """
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; SuwonPortal/1.0)"}
+    resp = requests.get(FACULTY_URL, headers=headers, timeout=15)
+    resp.encoding = "utf-8"
+    soup = BeautifulSoup(resp.text, "html.parser")
+
+    table = soup.find("table")
+    menu = {}
+
+    if table:
+        for row in table.find_all("tr"):
+            cells = row.find_all(["th", "td"])
+            if len(cells) < 3:
+                continue
+            meal_type = cells[0].get_text(strip=True)
+            if meal_type not in ("중식", "석식"):
+                continue
+
+            # cells[1] = 식당명(Mom's Cook), cells[2~6] = 월~금
+            for day_idx in range(5):
+                cell_idx = day_idx + 2
+                if cell_idx >= len(cells):
+                    continue
+                items_ko = [
+                    s.strip()
+                    for s in cells[cell_idx].get_text(separator="\n").splitlines()
+                    if s.strip()
+                ]
+                day_key = str(day_idx + 1)
+                if day_key not in menu:
+                    menu[day_key] = []
+                if items_ko:
+                    menu[day_key].append({
+                        "type": meal_type,
+                        "items_ko": items_ko,
+                    })
+
+    return menu
+
+
 def translate_all(all_ko: list) -> dict:
-    """각 언어로 번역. 반환: {ko_text: {en: ..., zh: ..., ...}}"""
     result = {ko: {} for ko in all_ko}
-    joined = "\n".join(all_ko)  # 한번에 묶어서 번역 (API 호출 최소화)
+    joined = "\n".join(all_ko)
 
     for lang, gt_code in LANG_MAP.items():
         try:
@@ -77,12 +120,12 @@ def translate_all(all_ko: list) -> dict:
         except Exception as e:
             print(f"  [{lang}] 번역 실패: {e}")
             for ko in all_ko:
-                result[ko][lang] = ko  # 실패 시 한국어 그대로
+                result[ko][lang] = ko
 
     return result
 
 
-def build_menu(raw_menu: dict) -> dict:
+def build_menu(raw_menu: dict, has_corner: bool = True) -> dict:
     all_ko = list({
         item
         for entries in raw_menu.values()
@@ -102,22 +145,27 @@ def build_menu(raw_menu: dict) -> dict:
                 item_obj = {"ko": ko}
                 item_obj.update(translations.get(ko, {}))
                 items.append(item_obj)
-            result[day_key].append({
-                "type": entry["type"],
-                "corner": entry["corner"],
-                "items": items,
-            })
+            row = {"type": entry["type"], "items": items}
+            if has_corner:
+                row["corner"] = entry["corner"]
+            result[day_key].append(row)
     return result
 
 
 def scrape():
-    week_range, raw_menu = scrape_menu()
-    menu = build_menu(raw_menu)
+    print("=== 학생식당 ===")
+    week_range, raw_student = scrape_student_menu()
+    student_menu = build_menu(raw_student, has_corner=True)
+
+    print("\n=== 교직원식당 ===")
+    raw_faculty = scrape_faculty_menu()
+    faculty_menu = build_menu(raw_faculty, has_corner=False)
 
     result = {
         "updated": str(date.today()),
         "weekRange": week_range,
-        "menu": menu,
+        "menu": student_menu,
+        "facultyMenu": faculty_menu,
     }
 
     with open(OUTPUT, "w", encoding="utf-8") as f:
@@ -129,7 +177,12 @@ def scrape():
         if not entries:
             continue
         s = entries[0]["items"][0]
-        print(f"  {day_names[int(day_key)]}: {s['ko']} / {s.get('en', '')} / {s.get('zh', '')}")
+        print(f"  학생 {day_names[int(day_key)]}: {s['ko']} / {s.get('en', '')}")
+    for day_key, entries in sorted(result["facultyMenu"].items()):
+        if not entries:
+            continue
+        s = entries[0]["items"][0]
+        print(f"  교직원 {day_names[int(day_key)]}: {s['ko']} / {s.get('en', '')}")
 
 
 if __name__ == "__main__":

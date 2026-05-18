@@ -5,7 +5,6 @@
     "1": [
       {
         "type": "중식",
-        "corner": "Little Kitchen",
         "items": [
           {
             "ko": "마파두부덮밥",
@@ -36,7 +35,7 @@
             "en": "Spinach miso soup",
             "zh": "菠菜味噌汤",
             "ja": "ほうれん草の味噌汁",
-            "vi": "Súp miso rau bina",
+            "vi": "Súp miso rau chân vịt",
             "th": "ซุปมิโซะผักโขม"
           },
           {
@@ -71,13 +70,13 @@
             "vi": "Nước Cam Xoài",
             "th": "น้ำส้มมะม่วง"
           }
-        ]
+        ],
+        "corner": "Little Kitchen"
       }
     ],
     "2": [
       {
         "type": "중식",
-        "corner": "Little Kitchen",
         "items": [
           {
             "ko": "유니짜장(한그릇)",
@@ -143,13 +142,13 @@
             "vi": "Trà chanh giải khát",
             "th": "ชามะนาวให้ความสดชื่น"
           }
-        ]
+        ],
+        "corner": "Little Kitchen"
       }
     ],
     "3": [
       {
         "type": "중식",
-        "corner": "Little Kitchen",
         "items": [
           {
             "ko": "쇠고기마랑탕(한그릇)",
@@ -207,13 +206,13 @@
             "vi": "Đào ngon ngọt mát lạnh",
             "th": "พีช จูซซี่ คูล"
           }
-        ]
+        ],
+        "corner": "Little Kitchen"
       }
     ],
     "4": [
       {
         "type": "중식",
-        "corner": "Little Kitchen",
         "items": [
           {
             "ko": "돈육순대국(뚝배기)",
@@ -271,13 +270,13 @@
             "vi": "Trà mận Đông Đông đá",
             "th": "ชาบ๊วยดงดงเย็น"
           }
-        ]
+        ],
+        "corner": "Little Kitchen"
       }
     ],
     "5": [
       {
         "type": "중식",
-        "corner": "Little Kitchen",
         "items": [
           {
             "ko": "미트볼토마토스파게티",
@@ -342,6 +341,496 @@
             "ja": "ビフィズスドリンク",
             "vi": "Nước giải khát Bifidus",
             "th": "เครื่องดื่มบิฟิดัส"
+          }
+        ],
+        "corner": "Little Kitchen"
+      }
+    ]
+  },
+  "facultyMenu": {
+    "1": [
+      {
+        "type": "석식",
+        "items": [
+          {
+            "ko": "해물된장지개",
+            "en": "Seafood soybean paste stew",
+            "zh": "海鲜大酱炖菜",
+            "ja": "海鮮味噌",
+            "vi": "Hầm tương đậu nành hải sản",
+            "th": "สตูว์เต้าเจี้ยวทะเล"
+          },
+          {
+            "ko": "백미밥",
+            "en": "white rice",
+            "zh": "白米饭",
+            "ja": "白米ご飯",
+            "vi": "cơm trắng",
+            "th": "ข้าวขาว"
+          },
+          {
+            "ko": "제육김치볶음",
+            "en": "Stir-fried pork kimchi",
+            "zh": "炒猪肉泡菜",
+            "ja": "育てキムチ炒め",
+            "vi": "Thịt heo xào kim chi",
+            "th": "ผัดกิมจิหมู"
+          },
+          {
+            "ko": "명엽채무침",
+            "en": "Myeongyeopchae salad",
+            "zh": "明叶菜沙拉",
+            "ja": "名葉債務針",
+            "vi": "Salad Myeongyeopchae",
+            "th": "สลัดมยองยอบแช"
+          },
+          {
+            "ko": "양념깻잎지",
+            "en": "Seasoned perilla leaf paper",
+            "zh": "调味紫苏叶纸",
+            "ja": "調味料の葉",
+            "vi": "Giấy lá tía tô tẩm gia vị",
+            "th": "กระดาษใบเพริลล่าปรุงรส"
+          },
+          {
+            "ko": "배추김치",
+            "en": "cabbage kimchi",
+            "zh": "白菜泡菜",
+            "ja": "白菜キムチ",
+            "vi": "kim chi bắp cải",
+            "th": "กิมจิกะหล่ำปลี"
+          }
+        ]
+      },
+      {
+        "type": "중식",
+        "items": [
+          {
+            "ko": "(선택식) 제육볶음덮밥",
+            "en": "(Optional meal) Jeyuk Bokkeum Rice Bowl",
+            "zh": "(自选餐) Jeyuk Bokkeum盖饭",
+            "ja": "（オプション）製肉炒め丼",
+            "vi": "(Bữa ăn tự chọn) Cơm Jeyuk Bokkeum",
+            "th": "(อาหารเสริม) ข้าวหน้าเจยุกบกึม"
+          },
+          {
+            "ko": "얼큰순대국",
+            "en": "Spicy sundae soup",
+            "zh": "辣味圣代汤",
+            "ja": "オルクンスンデク",
+            "vi": "Súp kem cay",
+            "th": "ซุปซันเดย์รสเผ็ด"
+          },
+          {
+            "ko": "오므라이스 (공통찬) 비엔나야채볶음",
+            "en": "Omurice (common side dish) Vienna vegetable stir-fry",
+            "zh": "蛋包饭（常见配菜） 维也纳蔬菜炒菜",
+            "ja": "オムライス（コムチャン）ウィーン野菜炒め",
+            "vi": "Omurice (món ăn kèm thông thường) Rau xào Vienna",
+            "th": "ข้าวห่อไข่ (เครื่องเคียงทั่วไป) ผัดผักเวียนนา"
+          },
+          {
+            "ko": "그린샐러드&드레싱",
+            "en": "Green salad & dressing",
+            "zh": "绿色沙拉和调料",
+            "ja": "グリーンサラダ＆ドレッシング",
+            "vi": "Salad xanh và nước sốt",
+            "th": "สลัดผักสดและน้ำสลัด"
+          },
+          {
+            "ko": "배추김치",
+            "en": "cabbage kimchi",
+            "zh": "白菜泡菜",
+            "ja": "白菜キムチ",
+            "vi": "kim chi bắp cải",
+            "th": "กิมจิกะหล่ำปลี"
+          },
+          {
+            "ko": "우동장국",
+            "en": "Udon Soup",
+            "zh": "乌冬面汤",
+            "ja": "うどん長国",
+            "vi": "Súp udon",
+            "th": "ซุปอุด้ง"
+          }
+        ]
+      }
+    ],
+    "2": [
+      {
+        "type": "석식",
+        "items": [
+          {
+            "ko": "순두부찌개",
+            "en": "Soft tofu stew",
+            "zh": "软豆腐炖菜",
+            "ja": "スンドゥブチゲ",
+            "vi": "Đậu phụ hầm mềm",
+            "th": "สตูว์เต้าหู้อ่อน"
+          },
+          {
+            "ko": "새우야채볶음",
+            "en": "Stir-fried Shrimp Vegetables",
+            "zh": "炒虾菜",
+            "ja": "エビ野菜炒め",
+            "vi": "Tôm xào rau củ",
+            "th": "ผัดผักกุ้ง"
+          },
+          {
+            "ko": "멘치까스",
+            "en": "Menchi Cutlet",
+            "zh": "炸肉排",
+            "ja": "メンチカス",
+            "vi": "cốt lết Menchi",
+            "th": "เมนจิ คัทเลท"
+          },
+          {
+            "ko": "어묵맛살볶음",
+            "en": "Stir-fried fish cake seasoning",
+            "zh": "炒鱼饼调味料",
+            "ja": "おまけ味わい炒め",
+            "vi": "Gia vị chả cá xào",
+            "th": "เครื่องปรุงรสทอดมันปลากราย"
+          },
+          {
+            "ko": "미역줄기볶음",
+            "en": "Stir-fried seaweed stems",
+            "zh": "炒海带茎",
+            "ja": "わかめ茎炒め",
+            "vi": "Thân rong biển xào",
+            "th": "ก้านสาหร่ายผัด"
+          },
+          {
+            "ko": "배추김치",
+            "en": "cabbage kimchi",
+            "zh": "白菜泡菜",
+            "ja": "白菜キムチ",
+            "vi": "kim chi bắp cải",
+            "th": "กิมจิกะหล่ำปลี"
+          }
+        ]
+      },
+      {
+        "type": "중식",
+        "items": [
+          {
+            "ko": "(선택식) 얼큰순대국",
+            "en": "(Optional meal) Spicy sundae soup",
+            "zh": "(自选餐) 辣味圣代汤",
+            "ja": "（オプション）オルクンスンデ局",
+            "vi": "(Bữa ăn tùy chọn) Súp kem cay",
+            "th": "(อาหารเสริม) ซุปซันเดย์รสเผ็ด"
+          },
+          {
+            "ko": "쭈꾸미볶음덮밥",
+            "en": "Fried octopus rice bowl",
+            "zh": "炸章鱼盖饭",
+            "ja": "炒め炒め",
+            "vi": "Cơm bạch tuộc chiên",
+            "th": "ข้าวหน้าปลาหมึกทอด"
+          },
+          {
+            "ko": "스팸마요덮밥 (공통찬) 죠리퐁고구마맛탕",
+            "en": "Spam mayo rice bowl (common side dish) Joripong sweet potato soup",
+            "zh": "Spam蛋黄酱盖饭（普通配菜） Joripong红薯汤",
+            "ja": "スパムマヨ丼（共通チャン）ジョリフォンサツマイモ",
+            "vi": "Cơm mayo thư rác (món ăn kèm phổ biến) Súp khoai lang Joripong",
+            "th": "ข้าวหน้ามายองเนสสแปม (กับข้าวทั่วไป) ซุปมันเทศจริพงศ์"
+          },
+          {
+            "ko": "그린샐러드&드레싱",
+            "en": "Green salad & dressing",
+            "zh": "绿色沙拉和调料",
+            "ja": "グリーンサラダ＆ドレッシング",
+            "vi": "Salad xanh và nước sốt",
+            "th": "สลัดผักสดและน้ำสลัด"
+          },
+          {
+            "ko": "배추김치",
+            "en": "cabbage kimchi",
+            "zh": "白菜泡菜",
+            "ja": "白菜キムチ",
+            "vi": "kim chi bắp cải",
+            "th": "กิมจิกะหล่ำปลี"
+          },
+          {
+            "ko": "우동장국",
+            "en": "Udon Soup",
+            "zh": "乌冬面汤",
+            "ja": "うどん長国",
+            "vi": "Súp udon",
+            "th": "ซุปอุด้ง"
+          }
+        ]
+      }
+    ],
+    "3": [
+      {
+        "type": "석식",
+        "items": [
+          {
+            "ko": "유부우동장국",
+            "en": "Tofu Udon Soup",
+            "zh": "豆腐乌冬面汤",
+            "ja": "ユブウドンジャングク",
+            "vi": "Súp đậu phụ Udon",
+            "th": "ซุปอุด้งเต้าหู้"
+          },
+          {
+            "ko": "봉그스밥버거",
+            "en": "Bong's Bob Burger",
+            "zh": "奉俊昊的鲍勃汉堡",
+            "ja": "ボングスバブバーガー",
+            "vi": "Bong's Bob Burger",
+            "th": "บ็อบเบอร์เกอร์"
+          },
+          {
+            "ko": "만두튀김",
+            "en": "Fried dumplings",
+            "zh": "煎饺",
+            "ja": "餃子揚げ",
+            "vi": "Bánh bao chiên",
+            "th": "เกี๊ยวทอด"
+          },
+          {
+            "ko": "양상추샐러드",
+            "en": "Lettuce Salad",
+            "zh": "生菜沙拉",
+            "ja": "レタスサラダ",
+            "vi": "Salad xà lách",
+            "th": "สลัดผักกาดหอม"
+          },
+          {
+            "ko": "단무지",
+            "en": "Pickled radish",
+            "zh": "腌萝卜",
+            "ja": "ダンムジ",
+            "vi": "củ cải muối",
+            "th": "หัวไชเท้าดอง"
+          },
+          {
+            "ko": "배추김치",
+            "en": "cabbage kimchi",
+            "zh": "白菜泡菜",
+            "ja": "白菜キムチ",
+            "vi": "kim chi bắp cải",
+            "th": "กิมจิกะหล่ำปลี"
+          }
+        ]
+      },
+      {
+        "type": "중식",
+        "items": [
+          {
+            "ko": "(선택식) 돈육김치찌개",
+            "en": "(Optional meal) Pork kimchi stew",
+            "zh": "(自选餐) 猪肉泡菜炖肉",
+            "ja": "（オプション）お金のキムチチゲ",
+            "vi": "(Bữa ăn tùy chọn) Thịt heo hầm kim chi",
+            "th": "(อาหารเสริม) สตูว์กิมจิหมู"
+          },
+          {
+            "ko": "불닭볶음",
+            "en": "Stir-fried spicy chicken",
+            "zh": "辣子鸡",
+            "ja": "焼き焼き",
+            "vi": "Gà xào cay",
+            "th": "ผัดเผ็ดไก่"
+          },
+          {
+            "ko": "햄김치볶음밥&계란후라이",
+            "en": "Ham Kimchi Fried Rice & Fried Egg",
+            "zh": "火腿泡菜炒饭和煎蛋",
+            "ja": "ハムキムチチャーハン＆卵フライ",
+            "vi": "Cơm Chiên Giăm Bông Kim Chi & Trứng Chiên",
+            "th": "ข้าวผัดกิมจิแฮมและไข่ดาว"
+          },
+          {
+            "ko": "(공통찬)파래자반",
+            "en": "(Common side dish) Green seaweed salad",
+            "zh": "(常见配菜) 青海苔沙拉",
+            "ja": "（共通チャン）パラザバン",
+            "vi": "(Món ăn kèm thông thường) Salad rong biển xanh",
+            "th": "(เครื่องเคียงทั่วไป) ยำสาหร่ายเขียว"
+          },
+          {
+            "ko": "양배추샐러드",
+            "en": "Cabbage Salad",
+            "zh": "卷心菜沙拉",
+            "ja": "キャベツサラダ",
+            "vi": "Salad bắp cải",
+            "th": "สลัดกะหล่ำปลี"
+          },
+          {
+            "ko": "배추김치",
+            "en": "cabbage kimchi",
+            "zh": "白菜泡菜",
+            "ja": "白菜キムチ",
+            "vi": "kim chi bắp cải",
+            "th": "กิมจิกะหล่ำปลี"
+          },
+          {
+            "ko": "우동장국",
+            "en": "Udon Soup",
+            "zh": "乌冬面汤",
+            "ja": "うどん長国",
+            "vi": "Súp udon",
+            "th": "ซุปอุด้ง"
+          }
+        ]
+      }
+    ],
+    "4": [
+      {
+        "type": "석식",
+        "items": [
+          {
+            "ko": "햄부대찌개",
+            "en": "Ham bag stew",
+            "zh": "火腿袋炖肉",
+            "ja": "ハム部隊チゲ",
+            "vi": "Thịt giăm bông hầm",
+            "th": "สตูว์ถุงแฮม"
+          },
+          {
+            "ko": "순대야채볶음",
+            "en": "Stir-fried Sundae Vegetables",
+            "zh": "炒圣代蔬菜",
+            "ja": "スンデ野菜炒め",
+            "vi": "Rau Sundae xào",
+            "th": "ผัดผักซันเดย์"
+          },
+          {
+            "ko": "치커리무침",
+            "en": "Chicory seasoned",
+            "zh": "菊苣调味",
+            "ja": "チカリ無針",
+            "vi": "rau diếp xoăn dày dạn",
+            "th": "ชิโครี่ปรุงรส"
+          },
+          {
+            "ko": "김구이",
+            "en": "Grilled Seaweed",
+            "zh": "烤海苔",
+            "ja": "キム・グイ",
+            "vi": "Rong biển nướng",
+            "th": "สาหร่ายย่าง"
+          },
+          {
+            "ko": "배추김치",
+            "en": "cabbage kimchi",
+            "zh": "白菜泡菜",
+            "ja": "白菜キムチ",
+            "vi": "kim chi bắp cải",
+            "th": "กิมจิกะหล่ำปลี"
+          }
+        ]
+      },
+      {
+        "type": "중식",
+        "items": [
+          {
+            "ko": "(선택식) 돈육김치찌개",
+            "en": "(Optional meal) Pork kimchi stew",
+            "zh": "(自选餐) 猪肉泡菜炖肉",
+            "ja": "（オプション）お金のキムチチゲ",
+            "vi": "(Bữa ăn tùy chọn) Thịt heo hầm kim chi",
+            "th": "(อาหารเสริม) สตูว์กิมจิหมู"
+          },
+          {
+            "ko": "낙지볶음덮밥",
+            "en": "Octopus stir-fried rice bowl",
+            "zh": "章鱼炒饭",
+            "ja": "タコ炒め丼",
+            "vi": "Cơm xào bạch tuộc",
+            "th": "ข้าวผัดปลาหมึกยักษ์"
+          },
+          {
+            "ko": "아비코카레덮밥 (공통찬) 돈육곤약장조림",
+            "en": "Abiko curry rice bowl (common side dish) Pork braised in konjac sauce",
+            "zh": "我孙子咖喱盖饭（普通配菜） 魔芋红烧肉",
+            "ja": "アビコカレー丼（コムチャン）",
+            "vi": "Cơm cà ri Abiko (món ăn kèm phổ biến) Thịt lợn om sốt konjac",
+            "th": "ข้าวแกงกะหรี่อาบิโกะ (เครื่องเคียงทั่วไป) หมูตุ๋นในซอสบุก"
+          },
+          {
+            "ko": "양배추샐러드",
+            "en": "Cabbage Salad",
+            "zh": "卷心菜沙拉",
+            "ja": "キャベツサラダ",
+            "vi": "Salad bắp cải",
+            "th": "สลัดกะหล่ำปลี"
+          },
+          {
+            "ko": "배추김치",
+            "en": "cabbage kimchi",
+            "zh": "白菜泡菜",
+            "ja": "白菜キムチ",
+            "vi": "kim chi bắp cải",
+            "th": "กิมจิกะหล่ำปลี"
+          },
+          {
+            "ko": "우동장국",
+            "en": "Udon Soup",
+            "zh": "乌冬面汤",
+            "ja": "うどん長国",
+            "vi": "Súp udon",
+            "th": "ซุปอุด้ง"
+          }
+        ]
+      }
+    ],
+    "5": [
+      {
+        "type": "중식",
+        "items": [
+          {
+            "ko": "(선택식) 짜글이찌개",
+            "en": "(Optional) Jjageuli stew",
+            "zh": "（可选）Jjageuli 炖菜",
+            "ja": "（オプション）チャングイチゲ",
+            "vi": "(Tùy chọn) Jjageuli hầm",
+            "th": "(ไม่บังคับ) สตูว์จาเกอลี"
+          },
+          {
+            "ko": "제육덮밥",
+            "en": "Jeyuk Rice Bowl",
+            "zh": "杰玉盖饭",
+            "ja": "肉丼",
+            "vi": "Bát cơm Jeyuk",
+            "th": "ข้าวหน้าเจยุก"
+          },
+          {
+            "ko": "치킨마요덮밥 (공통찬) 무말랭이무침",
+            "en": "Chicken mayo rice bowl (common side dish) seasoned dried radish",
+            "zh": "鸡肉蛋黄酱盖饭（普通配菜） 调味萝卜干",
+            "ja": "チキンマヨ丼（コムチャン）ムマレンチムチン",
+            "vi": "Cơm gà mayo (món ăn kèm) củ cải khô tẩm gia vị",
+            "th": "ข้าวหน้าไก่มายองเนส (กับข้าวทั่วไป) หัวไชเท้าแห้งปรุงรส"
+          },
+          {
+            "ko": "콘샐러드",
+            "en": "Corn Salad",
+            "zh": "玉米沙拉",
+            "ja": "コーンサラダ",
+            "vi": "Salad ngô",
+            "th": "สลัดข้าวโพด"
+          },
+          {
+            "ko": "배추김치",
+            "en": "cabbage kimchi",
+            "zh": "白菜泡菜",
+            "ja": "白菜キムチ",
+            "vi": "kim chi bắp cải",
+            "th": "กิมจิกะหล่ำปลี"
+          },
+          {
+            "ko": "우동장국",
+            "en": "Udon Soup",
+            "zh": "乌冬面汤",
+            "ja": "うどん長国",
+            "vi": "Súp udon",
+            "th": "ซุปอุด้ง"
           }
         ]
       }
