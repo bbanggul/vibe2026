@@ -398,6 +398,7 @@ function updateHeaderLang(lang) {
 
 function updateNavLangButtons(activeLang) {
   document.querySelectorAll('[data-lang]').forEach(btn => {
+    if (btn.classList.contains('splash-lang-btn')) return;
     btn.classList.toggle('lang-btn-active', btn.dataset.lang === activeLang);
   });
 }
