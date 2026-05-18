@@ -602,12 +602,9 @@
       <button class="caf-day-tab" data-day="5"><span data-i18n="fri">금</span></button>
     </div>
 
-    <!-- Menu content (JS-filled) -->
-    <div id="cafeteriaMenuContent" class="caf-menu-content"></div>
-
-    <!-- Cafeteria info -->
+    <!-- 학생식당 메뉴 -->
     <div class="caf-section">
-      <div class="caf-section-badge">Info</div>
+      <div class="caf-section-badge" data-i18n="caf_student_badge">학생식당</div>
       <h2 class="caf-section-title" data-i18n="caf_info_title">식당 정보</h2>
       <div class="caf-info-table">
         <div class="caf-info-row">
@@ -631,27 +628,14 @@
           <span class="caf-info-value" data-i18n="caf_info_payment">학생증 · 현금 · 카드</span>
         </div>
       </div>
+      <div id="cafeteriaMenuContent" class="caf-menu-content"></div>
     </div>
 
-    <!-- Faculty cafeteria menu (JS-filled) -->
+    <!-- 교직원식당 메뉴 -->
     <div class="caf-section">
-      <div class="caf-section-badge">교직원</div>
+      <div class="caf-section-badge" data-i18n="fac_caf_title">교직원식당</div>
       <h2 class="caf-section-title" data-i18n="fac_caf_title">교직원식당</h2>
-      <div id="facultyMenuContent" class="caf-menu-content"></div>
-    </div>
-
-    <!-- Faculty cafeteria info -->
-    <div class="caf-section">
-      <div class="caf-section-badge" style="visibility:hidden">교직원</div>
-      <h2 class="caf-section-title" style="display:none">교직원식당</h2>
       <div class="caf-info-table">
-        <div class="caf-info-row">
-          <span class="caf-info-label" data-i18n="caf_info_price_label">가격</span>
-          <div class="caf-info-value">
-            <div data-i18n="fac_caf_price">한식과 직화 일품뚝배기  9,000원</div>
-            <div class="caf-info-sub" data-i18n="fac_caf_style">요일별 코너 세미 뷔페식</div>
-          </div>
-        </div>
         <div class="caf-info-row">
           <span class="caf-info-label" data-i18n="caf_info_hours_label">운영시간</span>
           <div class="caf-info-value">
@@ -659,7 +643,15 @@
             <div class="caf-info-closed" data-i18n="caf_info_closed">토·일·공휴일 휴무</div>
           </div>
         </div>
+        <div class="caf-info-row">
+          <span class="caf-info-label" data-i18n="caf_info_price_label">가격</span>
+          <div class="caf-info-value">
+            <div data-i18n="fac_caf_price">한식과 직화 일품뚝배기  9,000원</div>
+            <div class="caf-info-sub" data-i18n="fac_caf_style">요일별 코너 세미 뷔페식</div>
+          </div>
+        </div>
       </div>
+      <div id="facultyMenuContent" class="caf-menu-content"></div>
     </div>
 
     <!-- Usage guide -->
